@@ -1,0 +1,29 @@
+title: Wetter
+url: https://wetter.app.5ls.de
+
+collections:
+  location:
+    output: true
+    permalink: /:title/
+  klein:
+    output: true
+    permalink: /klein/:title/
+
+
+defaults:
+  - scope:
+      path: ""
+      type: "location"
+    values:
+      layout: "location"
+  - scope:
+      path: ""
+      type: "klein"
+    values:
+      layout: "klein"
+ 
+
+exclude:
+  - CNAME
+
+timezone: Europe/Berlin
