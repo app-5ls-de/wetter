@@ -90,6 +90,15 @@
             content: ""; /* clears default height */
             margin-top: 0.15rem;
         }
+        .links{
+            padding-top: 15rem;
+            display: flex;
+            justify-content:space-around;
+            flex-wrap: wrap;
+        }
+        .links > a {
+            margin: 0.5rem;
+        }
     </style>
     </head>
     <body>
@@ -99,5 +108,9 @@
         </div>
   
         {{content}}
+        <div class="links">
+            <a href="/">Übersicht aller Orte</a>
+            <a href="http://wetterstationen.meteomedia.de/">Quelle: http://wetterstationen.meteomedia.de/</a>
+        </div>
     </body>
 </html>
