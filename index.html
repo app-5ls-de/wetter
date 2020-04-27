@@ -4,7 +4,8 @@ title: Übersicht
 ---
 
 <div class="liste">
-{% for ort in site.ort %}
+{% assign sorted = site.ort | sort: 'reihenfolge' | reverse %}
+{% for ort in sorted %}
     <h2><a href="{{ort.url}}">{{ort.title}}</a></h2>
         <div class="indent">
             <a href="{{ort.url}}">4-Tage Prognose</a>

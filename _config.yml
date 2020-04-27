@@ -5,9 +5,6 @@ collections:
   ort:
     output: true
     permalink: /:title/
-    order:
-      - muenchen.md
-      - stoetten.md
   aktuell:
     output: true
     permalink: /:title/aktuell/
