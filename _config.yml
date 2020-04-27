@@ -2,25 +2,28 @@ title: Wetter
 url: https://wetter.app.5ls.de
 
 collections:
-  location:
+  ort:
     output: true
     permalink: /:title/
-  klein:
+    order:
+      - muenchen.md
+      - stoetten.md
+  aktuell:
     output: true
-    permalink: /klein/:title/
+    permalink: /:title/aktuell/
 
 
 defaults:
   - scope:
       path: ""
-      type: "location"
+      type: "ort"
     values:
-      layout: "location"
+      layout: "ort"
   - scope:
       path: ""
-      type: "klein"
+      type: "aktuell"
     values:
-      layout: "klein"
+      layout: "aktuell"
  
 
 exclude:
