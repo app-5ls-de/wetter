@@ -1,7 +1,10 @@
 ---
 layout: main
 ---
-<div class="wetter">
-    <!-- <img src="https://via.placeholder.com/120x180" alt=""> -->
+<div class="wetter schmall">
+    {% if jekyll.environment == "development" %}
+    <img src="https://via.placeholder.com/120x180" alt="">
+    {% else %}
     <img src="http://wetterstationen.meteomedia.de/messnetz/wettergrafik/{{ page.location-id }}.png?ver=1587913805" alt="">
+    {% endif %}
 </div>
