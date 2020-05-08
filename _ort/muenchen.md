@@ -1,6 +1,6 @@
 ---
 title: München
-location-id: 098620
+location-id: 098670
 kurz: muenchen
 reihenfolge: 9
 ---
