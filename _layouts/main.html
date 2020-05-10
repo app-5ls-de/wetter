@@ -1,74 +1,92 @@
 <!DOCTYPE html>
 <html lang="de">
-    <head>
-        <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
-        <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
-        <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
-        <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link rel="manifest" href="/site.webmanifest">
-        <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-        <meta name="msapplication-TileColor" content="#2b5797">
-        <meta name="theme-color" content="#ffffff">
-        <title>Wetter {{page.title}}</title>
+
+<head>
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#2b5797">
+    <meta name="theme-color" content="#ffffff">
+    <title>Wetter {{page.title}}</title>
 
     <style>
-        body{
+        body {
             font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            margin: 0;
-            padding: 0;
             font-size: 2rem;
+            margin: 0;
+            padding: 0 3rem;
+            width: fit-content;
         }
-        h1{
+
+        h1 {
             margin: 0;
         }
-        .kopf{
+
+        .kopf {
             padding-top: 1rem;
             padding-bottom: 1rem;
             display: flex;
             width: min-content;
-            margin: auto;
-            align-items: center;
         }
-        .kopf > img {
+
+        .links,
+        .kopf {
+            margin: 0 auto;
+            align-items: center;
+            min-width: min-content;
+        }
+
+        .kopf>img {
             height: 9rem;
             margin-right: 2rem;
         }
-        .wetter{
+
+        .wetter {
             width: min-content;
             margin: auto;
         }
-        .wetter.breit > img{
+
+        .wetter.breit>img {
             min-width: 90vw;
         }
-        .wetter.schmall > img{
+
+        .wetter.schmall>img {
             min-height: 70vh;
         }
-        .wetter > img{
-            margin: 3rem;
+
+        .wetter>img {
             margin-top: 0;
         }
-        .indent{
+
+        .indent {
             margin-left: 10rem;
         }
-        .liste{
+
+        .liste {
             margin-left: 10vw;
             margin-right: 10vw;
             padding-left: 1rem;
             padding-right: 1rem;
             min-width: max-content;
         }
+
         hr {
             margin-top: 3rem;
         }
+
         a {
             text-decoration: none;
             color: #111111;
             position: relative;
             white-space: nowrap;
         }
+
         a::after {
             content: "";
             position: absolute;
@@ -78,40 +96,54 @@
             left: -0.05em;
             right: -0.05em;
             transition: top 180ms cubic-bezier(0, .8, .1, 1);
-            background-color: rgba(65,80,230,0.5);
+            background-color: rgba(65, 80, 230, 0.5);
         }
+
         a:hover::after {
             top: 0%;
         }
-        a.invisible::after, h1>a::after, h2>a::after, h3>a::after, h4>a::after, h5>a::after, h6>a::after{
+
+        a.invisible::after,
+        h1>a::after,
+        h2>a::after,
+        h3>a::after,
+        h4>a::after,
+        h5>a::after,
+        h6>a::after {
             display: none;
         }
+
         br {
-            display: block; /* makes it have a width */
-            content: ""; /* clears default height */
+            display: block;
+            /* makes it have a width */
+            content: "";
+            /* clears default height */
             margin-top: 0.15rem;
         }
-        .links{
+
+        .links {
             padding-top: 15rem;
             display: flex;
-            justify-content:space-around;
+            justify-content: space-around;
             flex-wrap: wrap;
         }
-        .links > a {
+
+        .links>a {
             margin: 0.5rem;
         }
     </style>
-    </head>
-    <body>
-        <div class="kopf">
-            <img src="/icon.svg" alt="">
-            <h1><a href="/#{{page.kurz}}">{{page.title}}</a></h1>
-        </div>
-  
-        {{content}}
-        <div class="links">
-            <a href="/">Übersicht aller Orte</a>
-            <a href="http://wetterstationen.meteomedia.de/">Quelle: http://wetterstationen.meteomedia.de/</a>
-        </div>
-    </body>
+</head>
+
+<body>
+    <div class="kopf">
+        <img src="/icon.svg" alt="">
+        <h1><a href="/#{{page.kurz}}">{{page.title}}</a></h1>
+    </div>
+    {{content}}
+    <div class="links">
+        <a href="/">Übersicht aller Orte</a>
+        <a href="http://wetterstationen.meteomedia.de/">Quelle: http://wetterstationen.meteomedia.de/</a>
+    </div>
+</body>
+
 </html>
