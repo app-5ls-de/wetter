@@ -5,6 +5,19 @@ layout: main
     {% if jekyll.environment == "development" %}
     <img src="https://via.placeholder.com/850x524" alt="">
     {% else %}
-    <img src="http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/{{ page.location-id }}.png" alt="4-Tage Prognose">
+    <img src="http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/{{ page.location-id }}.png"
+        alt="4-Tage Prognose">
+    {% endif %}
+    {% if page.location-name %}
+    <div>
+        <script type="text/javascript"
+            src="https://www.windfinder.com/widget/forecast/js/{{page.location-name}}?unit_wave=m&unit_rain=mm&unit_temperature=c&unit_wind=m_s&days=4&show_day=0&show_waves=0"></script>
+        <noscript>
+            <a rel='nofollow'
+                href='https://www.windfinder.com/forecast/{{page.location-name}}?utm_source=forecast&utm_medium=web&utm_campaign=homepageweather&utm_content=noscript-forecast'>Wind
+                forecast for undefined</a> provided by <a rel='nofollow'
+                href='https://www.windfinder.com?utm_source=forecast&utm_medium=web&utm_campaign=homepageweather&utm_content=noscript-logo'>windfinder.com</a>
+        </noscript>
+    </div>
     {% endif %}
 </div>

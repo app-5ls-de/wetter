@@ -76,6 +76,11 @@
             min-width: max-content;
         }
 
+        .wetterlage {
+            padding-top: 10rem;
+
+        }
+
         hr {
             margin-top: 3rem;
         }
@@ -118,7 +123,7 @@
             /* makes it have a width */
             content: "";
             /* clears default height */
-            margin-top: 0.15rem;
+            margin-top: 0.25rem;
         }
 
         .links {
@@ -131,6 +136,13 @@
         .links>a {
             margin: 0.5rem;
         }
+
+        .liste li {
+            max-width: 70vw;
+        }
+        .wetter > div {
+            margin-top: 3rem;
+        }
     </style>
 </head>
 
@@ -142,7 +154,7 @@
     {{content}}
     <div class="links">
         <a href="/">Übersicht aller Orte</a>
-        <a href="http://wetterstationen.meteomedia.de/">Quelle: http://wetterstationen.meteomedia.de/</a>
+        <a href="/quellen">Quellen</a>
     </div>
 </body>
 

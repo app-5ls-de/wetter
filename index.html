@@ -2,17 +2,12 @@
 layout: main
 title: Übersicht
 ---
-
 <div class="liste">
-{% assign sorted = site.ort | sort: 'reihenfolge' | reverse %}
-{% for ort in sorted %}
-    <h2><a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a></h2>
-        <div class="indent">
-            <a href="{{ort.url}}">4-Tage Prognose</a>
-            <br>
-            <a href="{{ort.url}}aktuell/">Aktuelle Stationsmesswerte</a>
-        </div>
-    <hr>
-{% endfor %}
+    {% assign sorted = site.ort | sort: 'reihenfolge' | reverse %}
+    {% for ort in sorted %}
+    <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
+    {% endfor %}
+    <div class="wetterlage">
+        <img src="http://www.unwetterzentrale.de/images/icons/UWZ_ISO_00.jpg" alt="">
+    </div>
 </div>
-
