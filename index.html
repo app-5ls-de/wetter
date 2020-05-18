@@ -8,6 +8,10 @@ title: Übersicht
     <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
     {% endfor %}
     <div class="wetterlage">
+        {% if jekyll.environment == "development" %}
+        <img src="https://via.placeholder.com/474x358">
+        {% else %}
         <img src="http://www.unwetterzentrale.de/images/icons/UWZ_ISO_00.jpg" alt="">
+        {% endif %}
     </div>
 </div>
