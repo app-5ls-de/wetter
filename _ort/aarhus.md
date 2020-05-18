@@ -1,0 +1,4 @@
+---
+title: Aarhus
+windfinder: aarhus
+---
