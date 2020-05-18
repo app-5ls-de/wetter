@@ -1,6 +1,5 @@
 ---
 title: Ulm
-location-id: 108400
-kurz: ulm
-location-name: ulm-maehringen
+meteomedia: 108400
+windfinder: ulm-maehringen
 ---

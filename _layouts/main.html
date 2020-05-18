@@ -59,17 +59,10 @@
         .wetter {
             width: min-content;
             margin: auto;
-        }
-
-        .wetter.breit>img {
             min-width: 90vw;
         }
 
-        .wetter.schmall>img {
-            min-height: 70vh;
-        }
-
-        .wetter>img {
+        .meteomedia>img {
             margin-top: 0;
         }
 
@@ -166,7 +159,7 @@
 <body>
     <div class="kopf">
         <img src="/icon.svg" alt="">
-        <h1><a href="/#{{page.kurz}}">{{page.title}}</a></h1>
+        <h1><a href="/#{{page.url | slugify}}">{{page.title}}</a></h1>
     </div>
     <div class="main">
         {{content}}

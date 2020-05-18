@@ -1,6 +1,5 @@
 ---
 title: Ammersee
-location-id: 109660
-kurz: ammersee
-location-name: ammersee
+meteomedia: 109660
+windfinder: ammersee
 ---

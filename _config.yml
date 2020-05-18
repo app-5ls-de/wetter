@@ -5,9 +5,6 @@ collections:
   ort:
     output: true
     permalink: /:title/
-  aktuell:
-    output: true
-    permalink: /:title/aktuell/
 
 
 defaults:
@@ -16,11 +13,6 @@ defaults:
       type: "ort"
     values:
       layout: "ort"
-  - scope:
-      path: ""
-      type: "aktuell"
-    values:
-      layout: "aktuell"
  
 
 exclude:

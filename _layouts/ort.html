@@ -1,23 +1,28 @@
 ---
 layout: main
 ---
-<div class="wetter breit">
-    {% if jekyll.environment == "development" %}
-    <img src="https://via.placeholder.com/850x524">
-    {% else %}
-    <img src="http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/{{page.location-id}}.png"
-        alt="4-Tage Prognose">
+<div class="wetter">
+    {% if page.meteomedia %}
+    <div class="meteomedia">
+        {% if jekyll.environment == "development" %}
+        <img src="https://via.placeholder.com/850x524">
+        {% else %}
+        <img src="http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/{{page.meteomedia}}.png"
+            alt="4-Tage Prognose">
+        {% endif %}
+    </div>
     {% endif %}
-    {% if page.location-name %}
-    <div>
+
+    {% if page.windfinder %}
+    <div class="windfinder">
         {% if jekyll.environment == "development" %}
         <img style="width: 1px; min-width: 100%; height: 377px;" src="https://via.placeholder.com/700x377">
         {% else %}
         <script type="text/javascript"
-            src="https://www.windfinder.com/widget/forecast/js/{{page.location-name}}?unit_wave=m&unit_rain=mm&unit_temperature=c&unit_wind=m_s&days=4&show_day=0&show_waves=0"></script>
+            src="https://www.windfinder.com/widget/forecast/js/{{page.windfinder}}?unit_wave=m&unit_rain=mm&unit_temperature=c&unit_wind=m_s&days=4&show_day=0&show_waves=0"></script>
         <noscript>
             <a rel='nofollow'
-                href='https://www.windfinder.com/forecast/{{page.location-name}}?utm_source=forecast&utm_medium=web&utm_campaign=homepageweather&utm_content=noscript-forecast'>Wind
+                href='https://www.windfinder.com/forecast/{{page.windfinder}}?utm_source=forecast&utm_medium=web&utm_campaign=homepageweather&utm_content=noscript-forecast'>Wind
                 forecast for undefined</a> provided by <a rel='nofollow'
                 href='https://www.windfinder.com?utm_source=forecast&utm_medium=web&utm_campaign=homepageweather&utm_content=noscript-logo'>windfinder.com</a>
         </noscript>
