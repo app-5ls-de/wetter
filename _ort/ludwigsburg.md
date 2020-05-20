@@ -1,5 +1,6 @@
 ---
 title: Ludwigsburg
 meteomedia: 097200
-windfinder: hoheneck
+lat: 48.9029894
+lon: 9.2249205
 ---
