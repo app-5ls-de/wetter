@@ -12,6 +12,23 @@ layout: main
     </div>
     {% endif %}
     
+    {% if page.title == "Ammersee"%}
+    <script id="wg_fwdg_243_3_1589997765794">
+        (function (window, document) {
+            var loader = function () {
+                var arg = ["s=243","m=3","uid=wg_fwdg_243_3_1589997765794","wj=knots","tj=c","odh=0","doh=24","fhours=240","vt=fcst_graph","lng=de"];
+                var script = document.createElement("script");
+                var tag = document.getElementsByTagName("script")[0];
+                script.src = "https://www.windguru.cz/js/widget.php?"+(arg.join("&"));
+                tag.parentNode.insertBefore(script, tag);
+            };
+        window.addEventListener ? window.addEventListener("load", loader, false) : window.attachEvent("onload", loader);
+        })(window, document);
+    </script>
+    {% endif %}
+
+
+    
     {% if page.lat and page.lon %}
     <div class="vorhersage">
         <a href="https://windy.com/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:3,""}}/{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:3,""}}/meteogram?clouds,{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:3,""}},{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:3,""}},7">10 Tage Vorhersage</a>
