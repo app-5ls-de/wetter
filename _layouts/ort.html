@@ -14,6 +14,7 @@ layout: main
     {% endif %}
 
     {% if page.windfinder %}
+    <hr>
     <div class="windfinder">
         {% if jekyll.environment == "development" %}
         <img style="width: 1px; min-width: 100%; height: 377px;" src="https://via.placeholder.com/700x377">
@@ -28,9 +29,11 @@ layout: main
         </noscript>
         {% endif %}
     </div>
+    <a href="https://www.windfinder.com/forecast/{{page.windfinder}}">10 Tage Vorhersage</a>
     {% endif %}
-
+    
     {% if page.lat and page.lon %}
+    <hr>
     <div class="windy">
         {% if jekyll.environment == "development" %}
         <img style="width: 100%; height: 800px;" src="https://via.placeholder.com/800">
