@@ -34,7 +34,7 @@ layout: main
         {% else %}
         <a href="https://clearoutside.com/forecast/{{page.lat}}/{{page.lon}}"><img src="https://clearoutside.com/forecast_image_medium/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last}}/{{page.lon}}/forecast.png" /></a>
         {% endif %}
-        <p>{{page.lat|split:"."|first}}.<br>{{page.lat|split:"."|last}}</p>
+        <p>{{page.lat|split:"."|last}}.<br>{{page.lat|split:"."|last| truncate: 2, ""}}</p>
     </div>
     {% endif %}
     
