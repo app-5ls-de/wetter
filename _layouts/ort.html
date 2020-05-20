@@ -11,10 +11,21 @@ layout: main
             alt="4-Tage Prognose">
         {% endif %}
     </div>
+    <hr>
+    {% endif %}
+    
+    {% if page.meteoblue %}
+    <div class="meteoblue">
+        {% if jekyll.environment == "development" %}
+        <img src="https://via.placeholder.com/850x524">
+        {% else %}
+        {{page.meteoblue}}
+        {% endif %}
+    </div>
+    <hr>
     {% endif %}
 
     {% if page.windfinder %}
-    <hr>
     <div class="windfinder">
         {% if jekyll.environment == "development" %}
         <img style="width: 1px; min-width: 100%; height: 377px;" src="https://via.placeholder.com/700x377">
@@ -30,10 +41,10 @@ layout: main
         {% endif %}
     </div>
     <a href="https://www.windfinder.com/forecast/{{page.windfinder}}">10 Tage Vorhersage</a>
+    <hr>
     {% endif %}
     
     {% if page.lat and page.lon %}
-    <hr>
     <div class="windy">
         {% if jekyll.environment == "development" %}
         <img style="width: 100%; height: 800px;" src="https://via.placeholder.com/800">
@@ -44,6 +55,7 @@ layout: main
         {% endif %}
     </div>
     <a href="https://windy.com/{{page.lat}}/{{page.lon}}/meteogram?clouds,{{page.lat}},{{page.lon}},7">Meteogramm</a>
+    <hr>
     {% endif %}
 
 </div>
