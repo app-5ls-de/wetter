@@ -32,7 +32,7 @@ layout: main
         {% if jekyll.environment == "development" %}
         <img src="https://via.placeholder.com/672x352">
         {% else %}
-        <a href="https://clearoutside.com/forecast/48.62/9.83"><img src="https://clearoutside.com/forecast_image_medium/48.62/9.83/forecast.png" /></a>
+        <a href="https://clearoutside.com/forecast/{{page.lat}}/{{page.lon}}"><img src="https://clearoutside.com/forecast_image_medium/{{page.lat}}/{{page.lon}}/forecast.png" /></a>
         {% endif %}
     </div>
     {% endif %}
