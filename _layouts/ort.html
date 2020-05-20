@@ -13,29 +13,24 @@ layout: main
     {% endif %}
     
     {% if page.lat and page.lon %}
+    <div class="vorhersage">
+        <a href="https://windy.com/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:3,""}}/{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:3,""}}/meteogram?clouds,{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:3,""}},{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:3,""}},7">10 Tage Vorhersage</a>
+    </div>
+    {% endif %}
+    
+    {% if page.lat and page.lon %}
     <div class="windy">
         {% if jekyll.environment == "development" %}
         <img style="width: 100%; height: 800px;" src="https://via.placeholder.com/800">
         {% else %}
         <iframe style="width: 100%; height: 800px;"
-            src="https://embed.windy.com/embed2.html?lat={{page.lat}}&lon={{page.lon}}&zoom=7&level=surface&overlay=clouds&menu=&message=true&marker=true&calendar=&pressure=true&type=map&location=coordinates&detail=&detailLat={{page.lat}}&detailLon={{page.lon}}&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+            src="https://embed.windy.com/embed2.html?lat={{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:3,""}}&lon={{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:3,""}}&zoom=7&level=surface&overlay=clouds&menu=&message=true&marker=true&calendar=&pressure=true&type=map&location=coordinates&detail=&detailLat={{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:3,""}}&detailLon={{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:3,""}}&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
             frameborder="0"></iframe>
         {% endif %}
     </div>
-    <a href="https://windy.com/{{page.lat}}/{{page.lon}}/meteogram?clouds,{{page.lat}},{{page.lon}},7">Meteogramm</a>
     {% endif %}
     
     <hr class="divider">
-
-    {% if page.lat and page.lon %}
-    <div class="clearoutside">
-        {% if jekyll.environment == "development" %}
-        <img src="https://via.placeholder.com/672x352">
-        {% else %}
-        <a href="https://clearoutside.com/forecast/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:2,""}}/{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:2,""}}"><img src="https://clearoutside.com/forecast_image_medium/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:2,""}}/{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:2,""}}/forecast.png" /></a>
-        {% endif %}
-    </div>
-    {% endif %}
     
     {% if page.meteomedia %}
     <div class="meteomedia">
