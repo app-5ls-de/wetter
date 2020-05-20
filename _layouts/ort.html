@@ -23,24 +23,16 @@ layout: main
     </div>
     {% endif %}
     
-    <hr style="margin: 15vh 0;">
+    <hr class="divider">
 
-    {% if page.windfinder %}
-    <div class="windfinder">
+    {% if page.lat and page.lon %}
+    <div class="clearoutside">
         {% if jekyll.environment == "development" %}
-        <img style="width: 1px; min-width: 100%; height: 377px;" src="https://via.placeholder.com/700x377">
+        <img src="https://via.placeholder.com/672x352">
         {% else %}
-        <script type="text/javascript"
-            src="https://www.windfinder.com/widget/forecast/js/{{page.windfinder}}?unit_wave=m&unit_rain=mm&unit_temperature=c&unit_wind=kmh&days=4&show_day=0&show_waves=0"></script>
-        <noscript>
-            <a rel='nofollow'
-                href='https://www.windfinder.com/forecast/{{page.windfinder}}?utm_source=forecast&utm_medium=web&utm_campaign=homepageweather&utm_content=noscript-forecast'>Wind
-                forecast for {{page.title}}</a> provided by <a rel='nofollow'
-                href='https://www.windfinder.com?utm_source=forecast&utm_medium=web&utm_campaign=homepageweather&utm_content=noscript-logo'>windfinder.com</a>
-        </noscript>
+        <a href="https://clearoutside.com/forecast/48.62/9.83"><img src="https://clearoutside.com/forecast_image_medium/48.62/9.83/forecast.png" /></a>
         {% endif %}
     </div>
-    <a href="https://www.windfinder.com/forecast/{{page.windfinder}}">10 Tage Vorhersage</a>
     {% endif %}
     
     {% if page.lat and page.lon %}
