@@ -2,35 +2,12 @@
 layout: main
 ---
 <div class="wetter">
-    {% if page.meteomedia %}
-    <div class="meteomedia">
-        {% if jekyll.environment == "development" %}
-        <img src="https://via.placeholder.com/850x524">
-        {% else %}
-        <img src="http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/{{page.meteomedia}}.png"
-            alt="4-Tage Prognose">
-        {% endif %}
-    </div>
-    {% endif %}
-    
     {% if page.meteoblue %}
     <div class="meteoblue">
         {% if jekyll.environment == "development" %}
         <img src="https://via.placeholder.com/740x490">
         {% else %}
         {{content}}
-        {% endif %}
-    </div>
-    {% endif %}
-    
-    <hr class="divider">
-
-    {% if page.lat and page.lon %}
-    <div class="clearoutside">
-        {% if jekyll.environment == "development" %}
-        <img src="https://via.placeholder.com/672x352">
-        {% else %}
-        <a href="https://clearoutside.com/forecast/48.62/9.83"><img src="https://clearoutside.com/forecast_image_medium/48.62/9.83/forecast.png" /></a>
         {% endif %}
     </div>
     {% endif %}
@@ -46,6 +23,29 @@ layout: main
         {% endif %}
     </div>
     <a href="https://windy.com/{{page.lat}}/{{page.lon}}/meteogram?clouds,{{page.lat}},{{page.lon}},7">Meteogramm</a>
+    {% endif %}
+    
+    <hr class="divider">
+
+    {% if page.lat and page.lon %}
+    <div class="clearoutside">
+        {% if jekyll.environment == "development" %}
+        <img src="https://via.placeholder.com/672x352">
+        {% else %}
+        <a href="https://clearoutside.com/forecast/48.62/9.83"><img src="https://clearoutside.com/forecast_image_medium/48.62/9.83/forecast.png" /></a>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    {% if page.meteomedia %}
+    <div class="meteomedia">
+        {% if jekyll.environment == "development" %}
+        <img src="https://via.placeholder.com/850x524">
+        {% else %}
+        <img src="http://wetterstationen.meteomedia.de/messnetz/vorhersagegrafik/{{page.meteomedia}}.png"
+            alt="4-Tage Prognose">
+        {% endif %}
+    </div>
     {% endif %}
 
 </div>
