@@ -32,9 +32,8 @@ layout: main
         {% if jekyll.environment == "development" %}
         <img src="https://via.placeholder.com/672x352">
         {% else %}
-        <a href="https://clearoutside.com/forecast/{{page.lat}}/{{page.lon}}"><img src="https://clearoutside.com/forecast_image_medium/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last}}/{{page.lon}}/forecast.png" /></a>
+        <a href="https://clearoutside.com/forecast/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:2,""}}/{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:2,""}}"><img src="https://clearoutside.com/forecast_image_medium/{{page.lat|split:"."|first}}.{{page.lat|split:"."|last|truncate:2,""}}/{{page.lon|split:"."|first}}.{{page.lon|split:"."|last|truncate:2,""}}/forecast.png" /></a>
         {% endif %}
-        <p>{{page.lat|split:"."|last|truncate: 2,""}}<br>{{page.lat|split:"."|last|truncate:2,""}}</p>
     </div>
     {% endif %}
     
