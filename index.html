@@ -8,10 +8,19 @@ title: Übersicht
     <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
     {% endfor %}
     <div class="wetterlage">
-        {% if jekyll.environment == "development" %}
-        <img src="https://via.placeholder.com/474x358">
-        {% else %}
-        <img src="http://www.unwetterzentrale.de/images/icons/UWZ_ISO_00.jpg" alt="">
-        {% endif %}
+        <div class="dtn">
+            {% if jekyll.environment == "development" %}
+            <img src="https://via.placeholder.com/474x358">
+            {% else %}
+            <img src="http://www.unwetterzentrale.de/images/icons/UWZ_ISO_00.jpg" alt="">
+            {% endif %}
+        </div>
+        <div class="sat24">
+            {% if jekyll.environment == "development" %}
+            <img src="https://via.placeholder.com/400x291">
+            {% else %}
+            <a href='http://en.sat24.com/en' target='sat24'><image src='https://api.sat24.com/animated/DE/visual/1/Central%20European%20Standard%20Time/4158298' width=400 height=291></a>
+            {% endif %}
+        </div>
     </div>
 </div>
