@@ -1,5 +1,6 @@
 ---
 title: Ulm
 meteomedia: 108400
-windfinder: ulm-maehringen
+lat: 48.387589
+lon: 9.9424448
 ---
