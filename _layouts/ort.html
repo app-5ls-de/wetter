@@ -11,7 +11,6 @@ layout: main
             alt="4-Tage Prognose">
         {% endif %}
     </div>
-    <hr>
     {% endif %}
     
     {% if page.meteoblue %}
@@ -22,8 +21,9 @@ layout: main
         {{content}}
         {% endif %}
     </div>
-    <hr>
     {% endif %}
+    
+    <hr style="margin: 15vh 0;">
 
     {% if page.windfinder %}
     <div class="windfinder">
@@ -41,7 +41,6 @@ layout: main
         {% endif %}
     </div>
     <a href="https://www.windfinder.com/forecast/{{page.windfinder}}">10 Tage Vorhersage</a>
-    <hr>
     {% endif %}
     
     {% if page.lat and page.lon %}
@@ -55,7 +54,6 @@ layout: main
         {% endif %}
     </div>
     <a href="https://windy.com/{{page.lat}}/{{page.lon}}/meteogram?clouds,{{page.lat}},{{page.lon}},7">Meteogramm</a>
-    <hr>
     {% endif %}
 
 </div>
