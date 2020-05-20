@@ -1,5 +1,6 @@
 ---
 title: Stuttgart
 meteomedia: 107400
-windfinder: stuttgart-schnarrenberg
+lat: 48.779209
+lon: 9.1772152
 ---
