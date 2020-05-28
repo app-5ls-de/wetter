@@ -1,4 +1,5 @@
 ---
+layout: ort-segeln
 title: Spitzingsee
 coordinates:
     lat: 47.6651296
