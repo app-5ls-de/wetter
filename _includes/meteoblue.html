@@ -1,0 +1,9 @@
+{% if page.meteoblue != "disabled" %}
+<div class="meteoblue">
+    {% if jekyll.environment == "development" %}
+    <img src="https://via.placeholder.com/740x490?text=meteoblue">
+    {% else %}
+    {{content}}
+    {% endif %}
+</div>
+{% endif %}

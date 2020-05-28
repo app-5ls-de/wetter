@@ -1,0 +1,11 @@
+{% if page.coordinates %}
+<div class="windy">
+    {% if jekyll.environment == "development" %}
+    <img style="width: 100%; height: 800px;" src="https://via.placeholder.com/800?text=windy">
+    {% else %}
+    <iframe style="width: 100%; height: 800px;"
+        src="https://embed.windy.com/embed2.html?lat={% include trunc coord=page.coordinates.lat n=3 %}&lon={% include trunc coord=page.coordinates.lon n=3 %}&zoom=7&level=surface&overlay=clouds&menu=&message=true&marker=true&calendar=&pressure=true&type=map&location=coordinates&detail=&detailLat={% include trunc coord=page.coordinates.lat n=3 %}&detailLon={% include trunc coord=page.coordinates.lon n=3 %}&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+        frameborder="0"></iframe>
+    {% endif %}
+</div>
+{% endif %}
