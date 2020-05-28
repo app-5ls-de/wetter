@@ -1,19 +1,17 @@
 ---
 layout: ort
 ---
-<div class="wetter">
-
-    {% if page.meteoblue != "disabled" %}
+{% if page.meteoblue != "disabled" %}
     {% include meteoblue.html %}
-    {% else if page.meteomedia %}
+{% else if page.meteomedia %}
     {% include meteomedia.html %}
-    {% endif %}
+    {% include clearoutside.html %}
+{% endif %}
 
-    {% if page.windguru %}
+{% if page.windguru %}
     {% include windguru.html %}
     {% include windy-link.html %}
-    {% else %}
+{% else %}
     {% include windy-link.html %}
     {% include windy.html %}
-    {% endif %}
-</div>
+{% endif %}
