@@ -68,7 +68,7 @@
             margin-top: 0;
             width: 100%;
         }
-        
+
         .meteoblue a {
             display: unset !important;
         }
@@ -87,16 +87,26 @@
         }
 
         .wetterlage {
+            display: flex;
+            /* flex-wrap: wrap; */
+            justify-content: space-between;
+        }
+
+        .wetterlage > div {
+            padding: 5px;
+            width: 50%;
+            height: fit-content;
         }
 
         .wetterlage img {
-            min-width: 35rem;
+            max-width: 100%;
+            height: 100%;
         }
 
         hr {
             margin-top: 3rem;
         }
-        
+
         hr.divider {
             margin: 15vh 0;
         }
@@ -139,13 +149,13 @@
         .meteoblue a::after {
             display: none;
         }
-        
+
         .sat24>a,
         .clearoutside>a,
         .meteoblue a {
             font-size: 1rem;
         }
-        
+
         br {
             display: block;
             /* makes it have a width */
@@ -177,9 +187,9 @@
         .wetter>div {
             margin-top: 3rem;
         }
-        
+
         .windy-link {
-            margin: 3rem auto; 
+            margin: 3rem auto;
             text-align: center;
             width: fit-content;
         }
