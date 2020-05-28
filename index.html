@@ -7,8 +7,5 @@ title: Übersicht
     {% for ort in sorted %}
     <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
     {% endfor %}
-    <div class="wetterlage">
-        {% include dtn.html %}
-        {% include sat24.html %}
-    </div>
+    {% include wetterlage.html %}
 </div>
