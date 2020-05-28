@@ -1,4 +1,5 @@
 ---
+layout: ort-segeln
 title: Ammersee
 coordinates:
     lat: 48.0018848
