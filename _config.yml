@@ -12,7 +12,7 @@ defaults:
       path: ""
       type: "ort"
     values:
-      layout: "ort"
+      layout: "ort-default"
  
 
 exclude:

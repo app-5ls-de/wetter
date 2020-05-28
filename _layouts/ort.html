@@ -2,18 +2,5 @@
 layout: main
 ---
 <div class="wetter">
-
-    {% if page.meteoblue != "disabled" %}
-    {% include meteoblue.html %}
-    {% else if page.meteomedia %}
-    {% include meteomedia.html %}
-    {% endif %}
-
-    {% if page.windguru %}
-    {% include windguru.html %}
-    {% include windy-link.html %}
-    {% else %}
-    {% include windy-link.html %}
-    {% include windy.html %}
-    {% endif %}
+    {{content}}
 </div>
