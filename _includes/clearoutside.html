@@ -3,8 +3,8 @@
     {% if jekyll.environment == "development" %}
     <img style="width: 100%; height: 455px;" src="https://via.placeholder.com/800x455?text=clearoutside">
     {% else %}
-    <a href="http://clearoutside.com/forecast/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}">
-        <img src="http://clearoutside.com/forecast_image_medium/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}/forecast.png" />
+    <a href="https://clearoutside.com/forecast/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}">
+        <img src="https://clearoutside.com/forecast_image_medium/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}/forecast.png" />
     </a>
     {% endif %}
 </div>
