@@ -3,7 +3,7 @@ layout: main
 title: Übersicht
 ---
 <div class="liste">
-    {% assign sorted = site.ort | sort: 'reihenfolge' | reverse %}
+    {% assign sorted = site.ort %}
     {% for ort in sorted %}
     <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
     {% endfor %}
