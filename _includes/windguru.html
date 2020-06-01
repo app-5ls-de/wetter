@@ -6,7 +6,7 @@
     <script id="{{page.windguru}}">
         (function (window, document) {
             var loader = function () {
-                var arg = ["s=243", "m=3", "uid={{page.windguru}}", "wj=knots", "tj=c", "odh=0", "doh=24", "fhours=240", "vt=fcst_graph", "lng=de"];
+                var arg = ["s={{page.windguru.s}}", "m=3", "uid={{page.windguru.uid}}", "wj=knots", "tj=c", "odh=0", "doh=24", "fhours=240", "vt=fcst_graph", "lng=de"];
                 var script = document.createElement("script");
                 var tag = document.getElementsByTagName("script")[0];
                 script.src = "https://www.windguru.cz/js/widget.php?" + (arg.join("&"));
