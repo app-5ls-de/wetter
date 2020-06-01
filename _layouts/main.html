@@ -42,19 +42,32 @@
             padding-top: 1rem;
             padding-bottom: 1rem;
             display: flex;
+        }
+
+        .kopf>.mitte {
+            display: flex;
             width: min-content;
         }
 
         .links,
-        .kopf {
+        .kopf>.mitte {
             margin: 0 auto;
             align-items: center;
             min-width: min-content;
         }
 
-        .kopf>img {
+        .kopf>.mitte>img {
             height: 9rem;
             margin-right: 2rem;
+        }
+
+        .back {
+            margin: auto 0;
+            padding: 1rem 2rem;
+        }
+
+        .back img {
+            height: 3.5rem;
         }
 
         .wetter {
@@ -210,8 +223,15 @@
 
 <body>
     <div class="kopf">
-        <img src="/icon.svg" alt="">
-        <h1><a href="/{% if page.layout == "ort" %}#{{page.url | slugify}}{% endif %}">{{page.title}}</a></h1>
+        {% if page.collection == "ort" %}
+        <div class="back">
+            <a class="normal" href="/"><img src="/back.svg" alt=""></a>
+        </div>
+        {% endif %}
+        <div class="mitte">
+            <img src="/icon.svg" alt="">
+            <h1><a href="/{% if page.collection == "ort" %}#{{page.url | slugify}}{% endif %}">{{page.title}}</a></h1>
+        </div>
     </div>
     <div class="main">
         {{content}}
