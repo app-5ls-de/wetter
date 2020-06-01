@@ -3,7 +3,7 @@
     {% if jekyll.environment == "development" %}
     <img style="width: 100%; height: 455px;" src="https://via.placeholder.com/800x455?text=windguru">
     {% else %}
-    <script id="{{page.windguru}}">
+    <script id="{{page.windguru.uid}}">
         (function (window, document) {
             var loader = function () {
                 var arg = ["s={{page.windguru.s}}", "m=3", "uid={{page.windguru.uid}}", "wj=knots", "tj=c", "odh=0", "doh=24", "fhours=240", "vt=fcst_graph", "lng=de"];
