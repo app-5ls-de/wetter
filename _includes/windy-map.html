@@ -7,5 +7,9 @@
         src="https://embed.windy.com/embed2.html?lat={% include trunc coord=page.coordinates.lat n=3 %}&lon={% include trunc coord=page.coordinates.lon n=3 %}&zoom=7&level=surface&overlay=rain&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat={% include trunc coord=page.coordinates.lat n=3 %}&detailLon={% include trunc coord=page.coordinates.lon n=3 %}&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
         frameborder="0"></iframe>
     {% endif %}
+    <div class="info">
+        <a href="https://community.windy.com/topic/3361/description-of-weather-overlays"><img src="/info.svg"></a>
+        <a href="https://community.windy.com/topic/12/what-source-of-weather-data-windy-use"><img src="/info.svg"></a>
+    </div>
 </div>
 {% endif %}
