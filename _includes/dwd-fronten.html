@@ -1,0 +1,40 @@
+<div id="dwd-fronten" class="dwd-fronten">
+    {% if jekyll.environment == "development" %}
+    <img style="width: 100%; height: 455px;" src="https://via.placeholder.com/800x455?text=dwd-fronten">
+    {% else %}
+    <img id="animation" src="https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/ico_tkboden_na_024.png">
+    <script>
+        var img_animation = document.getElementById("animation")
+        var baseurl = "https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/ico_tkboden_na_"
+        var frameids = ["024", "V36", "036", "048", "060", "084", "108"]
+        var index = frameids.length - 1
+        var loaded = false
+
+        function completed_loading() {
+            loaded = true
+        }
+
+        img_animation.addEventListener('load', completed_loading)
+
+        function nextframe() {
+            if (loaded) {
+
+                if (index == frameids.length - 1) {
+                    index = 0
+                } else {
+                    index += 1
+                }
+
+                loaded = false
+                img_animation.src = baseurl + frameids[index] + ".png"
+
+            }
+            if (img_animation.complete) {
+                completed_loading();
+            }
+        }
+
+        setInterval(nextframe, 1000)
+    </script>
+    {% endif %}
+</div>
