@@ -179,6 +179,14 @@ br {
     display: unset !important;
 }
 
+.meteoblue>p {
+    margin: 0;
+}
+
+.meteoblue>.info {
+    margin-top: -1.75rem;
+}
+
 .clearoutside>a::after,
 .meteoblue a::after {
     display: none;
@@ -190,7 +198,7 @@ br {
 }
 
 .windy-link {
-    margin: 3rem auto;
+    margin: 0 auto;
     text-align: center;
     width: fit-content;
 }
