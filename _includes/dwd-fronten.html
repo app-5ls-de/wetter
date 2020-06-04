@@ -5,7 +5,12 @@
     <img id="animation" src="https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/ico_tkboden_na_024.png">
     <script>
         var img_animation = document.getElementById("animation")
+        {% if jekyll.environment == "development" %}
+        var baseurl = "https://via.placeholder.com/800x653?text="
+        {% else %}
         var baseurl = "https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/ico_tkboden_na_"
+        {% endif %}
+
         var frameids = ["024", "V36", "036", "048", "060", "084", "108"]
         var index = frameids.length - 1
         var loaded = false
