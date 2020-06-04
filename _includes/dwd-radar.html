@@ -1,0 +1,19 @@
+{% if page.bundesland %}
+<div id="dwd-radar" class="dwd-radar">
+    {% if jekyll.environment == "development" %}
+    <img style="width: 100%; height: 455px;" src="https://via.placeholder.com/800x455?text=dwd-radar">
+    {% else %}
+
+    {% if page.bundesland == 'by' %} {% assign id = 'bay' %}
+    {% elsif page.bundesland == 'bw' %} {% assign id = 'baw' %}
+    {% elsif page.bundesland == 'rp' %} {% assign id = 'rps' %}
+    {% endif %}
+
+    {% if id %}
+    <img src="https://www.dwd.de/DWD/wetter/radar/radfilm_{{id}}_akt.gif">
+    <img src="https://www.dwd.de/DE/leistungen/radarbild_film/legende_radar_wx.png?__blob=normal&v=8">
+    {% endif %}
+    
+    {% endif %}
+</div>
+{% endif %}
