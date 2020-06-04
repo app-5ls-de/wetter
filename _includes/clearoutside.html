@@ -1,7 +1,7 @@
 {% if page.coordinates %}
 <div id="clearoutside" class="clearoutside">
     {% if jekyll.environment == "development" %}
-    <img style="width: 100%; height: 455px;" src="https://via.placeholder.com/800x455?text=clearoutside">
+    <img src="https://via.placeholder.com/672x225?text=clearoutside">
     {% else %}
     <a href="https://clearoutside.com/forecast/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}">
         <img src="https://clearoutside.com/forecast_image_medium/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}/forecast.png" />
