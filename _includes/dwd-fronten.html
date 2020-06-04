@@ -3,6 +3,7 @@
     <img id="animation" src="https://via.placeholder.com/800x653?text=dwd-fronten">
     {% else %}
     <img id="animation" src="https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/ico_tkboden_na_024.png">
+    {% endif %}
     <script>
         var img_animation = document.getElementById("animation")
         {% if jekyll.environment == "development" %}
@@ -41,5 +42,4 @@
 
         setInterval(nextframe, 1000)
     </script>
-    {% endif %}
 </div>
