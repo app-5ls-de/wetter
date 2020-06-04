@@ -1,3 +1,5 @@
+/* General */
+
 html,
 body {
     width: 100%;
@@ -58,16 +60,6 @@ h1 {
     min-width: 90vw;
 }
 
-.clearoutside>img,
-.meteoblue img {
-    margin-top: 0;
-    width: 100%;
-}
-
-.meteoblue a {
-    display: unset !important;
-}
-
 .indent {
     margin-left: 10rem;
 }
@@ -122,16 +114,6 @@ h6>a::after {
     display: none;
 }
 
-.clearoutside>a::after,
-.meteoblue a::after {
-    display: none;
-}
-
-.clearoutside>a,
-.meteoblue a {
-    font-size: 1rem;
-}
-
 br {
     display: block;
     /* makes it have a width */
@@ -162,6 +144,29 @@ br {
 
 .wetter>div {
     margin-top: 3rem;
+}
+
+
+/* Includes */
+
+.clearoutside>img,
+.meteoblue img {
+    margin-top: 0;
+    width: 100%;
+}
+
+.meteoblue a {
+    display: unset !important;
+}
+
+.clearoutside>a::after,
+.meteoblue a::after {
+    display: none;
+}
+
+.clearoutside>a,
+.meteoblue a {
+    font-size: 1rem;
 }
 
 .windy-link {
