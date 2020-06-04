@@ -12,11 +12,14 @@ layout: ort
     {% include windguru.html %}
 {% endif %}
 
-{% include windy-map.html %}
-{% include windy-link.html %}
-
 <div class="row">
     {% include dwd-radar.html %}
     {% include dwd-trend.html %}
 </div>
-{% include dwd-front.html %}
+<div class="row">
+    {% include dwd-front.html %}
+    {% include dwd-fronten.html %}
+</div>
+
+{% include windy-map.html %}
+{% include windy-link.html %}
