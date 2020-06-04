@@ -11,9 +11,13 @@
 
     {% if id %}
     <img src="https://www.dwd.de/DWD/wetter/radar/radfilm_{{id}}_akt.gif">
-    <img src="https://www.dwd.de/DE/leistungen/radarbild_film/legende_radar_wx.png?__blob=normal&v=8">
     {% endif %}
-    
+
     {% endif %}
+    <div class="info">
+        <a href="https://www.dwd.de/DE/leistungen/radarbild_film/legende_radar_wx.png?__blob=normal&v=8"><img
+                src="/info.svg"></a>
+
+    </div>
 </div>
 {% endif %}
