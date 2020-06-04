@@ -1,4 +1,11 @@
 <div id="dwd-fronten" class="dwd-fronten">
+    <div class="indicator-info">
+        <p>4 days</p>
+    </div>
+    <div class="indicator">
+        <div class="filler"></div>
+        <div class="dot"></div>
+    </div>
     {% if jekyll.environment == "development" %}
     <img id="animation" src="https://via.placeholder.com/800x653?text=dwd-fronten">
     {% else %}
@@ -14,6 +21,11 @@
     </div>
     <script>
         var img_animation = document.getElementById("animation")
+        document.getElementById("dwd-fronten").getElementsByClassName("indicator-info")[0].style.display = "inherit"
+        var indicator = document.getElementById("dwd-fronten").getElementsByClassName("indicator")[0]
+        indicator.style.display = "flex"
+        var filler = indicator.getElementsByClassName("filler")[0]
+
         {% if jekyll.environment == "development" %}
         var baseurl = "https://via.placeholder.com/800x653?text="
         {% else %}
@@ -41,7 +53,8 @@
 
                 loaded = false
                 img_animation.src = baseurl + frameids[index] + ".png"
-
+                let percent = index / (frameids.length - 1) * 100
+                filler.style.width = percent.toString() + "%"
             }
             if (img_animation.complete) {
                 completed_loading();

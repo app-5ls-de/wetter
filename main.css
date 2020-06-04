@@ -259,3 +259,31 @@ br {
     padding-left: 2rem;
     padding-bottom: 1rem;
 }
+
+.dwd-fronten>.indicator{
+    display: flex;
+    display: none; /* acivated with javascript */
+    margin-top: -15px;
+    width: 100%; 
+    height: min-content; 
+}
+.dwd-fronten>.indicator>.filler{
+    width: 0%; 
+    height: 100%; 
+}
+.dwd-fronten>.indicator>.dot{
+    width: 15px; 
+    height: 15px; 
+    background:red;
+    border-radius: 50%;
+}
+.dwd-fronten>.indicator-info{
+    display: none; /* acivated with javascript */
+    margin-top: -15px;
+    text-align: center;
+}
+.dwd-fronten>.indicator-info>p{
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
