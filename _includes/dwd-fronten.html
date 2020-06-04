@@ -4,6 +4,14 @@
     {% else %}
     <img id="animation" src="https://www.dwd.de/DWD/wetter/wv_spez/hobbymet/wetterkarten/ico_tkboden_na_024.png">
     {% endif %}
+    <div class="info">
+        <a
+            href="https://www.dwd.de/DE/fachnutzer/hobbymet/wetter_europa/allgemeines_analyse_prognosekarten_europa_neu.html?nn=16102&lsbId=378468"><img
+                src="/info.svg"></a>
+        <a
+            href="https://www.dwd.de/DE/fachnutzer/hobbymet/wetter_europa/allgemeines_mehrfach_prognosesekarten.html?nn=16102&lsbId=378468"><img
+                src="/info.svg"></a>
+    </div>
     <script>
         var img_animation = document.getElementById("animation")
         {% if jekyll.environment == "development" %}

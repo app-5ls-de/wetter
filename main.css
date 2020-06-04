@@ -148,6 +148,25 @@ br {
 }
 
 
+.info>a::after {
+    display: none;
+}
+
+.info {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.info>a {
+    width: 1.7rem;
+    margin-left: 0.5rem;
+}
+
+.info>a>img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 /* Includes */
 
 .clearoutside>img,
