@@ -195,10 +195,13 @@ br {
     }
 }
 
-.windguru {
+.loading {
     background-color: lightgray;
+}
+
+.windguru>.loading {
     width: 100%;
-    min-height: 400px;
+    min-height: 300px;
 }
 
 .legal>a {
