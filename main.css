@@ -147,6 +147,25 @@ br {
     margin-top: 3rem;
 }
 
+.row {
+    display: flex;
+}
+
+.row>div:not(:last-child) {
+    margin-right: 2%;
+}
+
+.row>div {
+    flex-basis:  49%;
+}
+
+.row.two>div {
+    flex-basis:  49%;
+}
+
+.row.three>div {
+    flex-basis:  32%;
+}
 
 .info>a::after {
     display: none;
