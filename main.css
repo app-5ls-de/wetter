@@ -170,7 +170,11 @@ br {
 /* Includes */
 
 .clearoutside>img,
-.meteoblue img {
+.meteoblue img,
+.dwd-front>img,
+.dwd-fronten>img,
+.dwd-radar>img,
+.dwd-trend>img {
     margin-top: 0;
     width: 100%;
 }
