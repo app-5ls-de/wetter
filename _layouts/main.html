@@ -14,7 +14,7 @@
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#ffffff">
     <title>{% if page.layout == "ort" %}Wetter {% endif %}{{page.title}}</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/main.css">
 </head>
 
 <body>
@@ -26,7 +26,7 @@
         {% endif %}
         <div class="mitte">
             <img src="/icon.svg" alt="">
-            <h1><a href="/{% if page.collection == "ort" %}#{{page.url | slugify}}{% endif %}">{{page.title}}</a></h1>
+            <h1><a href="/{% if page.collection == " ort " %}#{{page.url | slugify}}{% endif %}">{{page.title}}</a></h1>
         </div>
     </div>
     <div class="main">
