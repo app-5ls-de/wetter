@@ -243,6 +243,10 @@ br {
         transform: scale(2.5);
         transform-origin: 0 0;
     }
+
+    .windy-map>.info{
+        margin-top: 480px; /* 800px-320px */
+    }
 }
 
 .loading {
