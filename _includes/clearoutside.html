@@ -4,7 +4,7 @@
     <img src="https://via.placeholder.com/672x225?text=clearoutside">
     {% else %}
     <a href="https://clearoutside.com/forecast/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}">
-        <img src="https://clearoutside.com/forecast_image_medium/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}/forecast.png" />
+        <img src="https://clearoutside.com/forecast_image_medium/{% include trunc coord=page.coordinates.lat n=2 %}/{% include trunc coord=page.coordinates.lon n=2 %}/forecast.png" importance="high"/>
     </a>
     {% endif %}
 </div>
