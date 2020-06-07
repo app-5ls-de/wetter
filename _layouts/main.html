@@ -40,6 +40,55 @@
         <a class="normal" href="/impressum">Impressum</a>
         <a class="normal" href="/datenschutz">Datenschutz</a>
     </div>
+    <script>
+        var loader = function () {
+            var loaderLow = function () {
+                let asyncImagesLow = document.getElementsByClassName('asyncImageLow');
+                Array.from(asyncImagesLow).map((item) => {
+                    let img = document.createElement("img")
+                    img.src = item.getAttribute("data-src");
+                    img.setAttribute("importance", "low")
+                    item.parentNode.insertBefore(img, item);
+                    item.remove();
+                });
+            }
+
+            let asyncImagesHigh = document.getElementsByClassName('asyncImageHigh');
+            var isFirstElement = true
+            var firstElement
+            Array.from(asyncImagesHigh).map((item) => {
+                let img = document.createElement("img")
+
+                if (isFirstElement) {
+                    img.addEventListener("load", loaderLow, false)
+                    firstElement = img
+                    isFirstElement = false
+                }
+
+                img.src = item.getAttribute("data-src");
+                img.setAttribute("importance", "high")
+                item.parentNode.insertBefore(img, item);
+                item.remove();
+            });
+
+
+            let asyncIframes = document.getElementsByClassName('asyncIframe');
+            Array.from(asyncIframes).map((item) => {
+                item.src = item.getAttribute("data-src");
+            });
+
+            if (isFirstElement) {
+                loaderLow()
+            } else {
+                if (firstElement.complete) {
+                    loaderLow();
+                }
+            }
+
+        };
+        /* setTimeout(loader, 1000) */
+        window.addEventListener("load", loader, false)
+    </script>
 </body>
 
 </html>
