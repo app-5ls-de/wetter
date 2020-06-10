@@ -1,4 +1,5 @@
 ---
+layout: ort-minimal
 title: Rust
 coordinates:
     lat: 48.261212
