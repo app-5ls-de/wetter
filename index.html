@@ -3,7 +3,13 @@ layout: main
 title: Übersicht
 ---
 <div class="liste">
-    {% for ort in site.ort %}
+    <h1>Deutschland</h1>
+    {% for ort in site.deutschland %}
+    <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
+    {% endfor %}
+    
+    <h1>Weltweit</h1>
+    {% for ort in site.welt %}
     <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
     {% endfor %}
 </div>

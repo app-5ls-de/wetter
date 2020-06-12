@@ -2,7 +2,10 @@ title: Wetter
 url: https://wetter.app.5ls.de
 
 collections:
-  ort:
+  deutschland:
+    output: true
+    permalink: /:title/
+  welt:
     output: true
     permalink: /:title/
 
@@ -10,7 +13,12 @@ collections:
 defaults:
   - scope:
       path: ""
-      type: "ort"
+      type: "deutschland"
+    values:
+      layout: "ort-default"
+  - scope:
+      path: ""
+      type: "welt"
     values:
       layout: "ort-default"
  
