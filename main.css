@@ -74,6 +74,18 @@ h1 {
     padding-bottom: 10rem;
 }
 
+.liste>a{
+    font-size: 1.5em;
+}
+
+.liste>h1:not(:first-of-type){
+    padding-top: 1em;
+}
+
+.liste>h1{
+    padding-bottom: 1em;
+}
+
 hr {
     margin-top: 3rem;
 }
