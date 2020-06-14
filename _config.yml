@@ -16,12 +16,14 @@ defaults:
       type: "deutschland"
     values:
       layout: "ort-default"
+      land: de
   - scope:
       path: ""
       type: "welt"
     values:
       layout: "ort-default"
- 
+      meteoblue: "disabled"
+
 
 exclude:
   - CNAME
