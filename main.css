@@ -135,6 +135,19 @@ br {
     margin-top: 0.25rem;
 }
 
+table {
+    width: 100%;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+}
+
+small {
+    font-size: 0.5em;
+}
+
 .links {
     padding-top: 15rem;
     display: flex;
