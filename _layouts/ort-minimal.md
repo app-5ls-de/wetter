@@ -1,0 +1,14 @@
+---
+layout: ort
+---
+{% if page.meteoblue != "disabled" %}
+    {% include meteoblue.html %}
+{% else if page.windfinder %}
+    {% include windfinder.html %}
+    {% include clearoutside.html %}
+{% else if page.windguru %}
+    {% include windguru.html %}
+{% endif %}
+
+{% include windy-map.html %}
+{% include windy-link.html %}
