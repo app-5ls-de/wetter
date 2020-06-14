@@ -302,7 +302,7 @@ small {
     height: 100%;
 }
 
-@media (max-width: 1120px) {
+@media (pointer: none), (pointer: coarse) {
     .windy-map>iframe {
         width: 40%;
         height: 320px;
