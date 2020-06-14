@@ -13,6 +13,7 @@ Auf dieser Webseite sind iFrames, Javascript und Bilder der nachfolgenden Seiten
 
 1. [clearoutside](https://clearoutside.com/) mit [Datenschutzerklärung](https://clearoutside.com/page/privacy_policy/)
 1. [Deutscher Wetterdienst (dwd)](https://www.dwd.de/DE/) mit [Datenschutzerklärung](https://www.dwd.de/DE/service/datenschutz/datenschutz_node.html)
+1. [KNMI](https://www.knmi.nl/) mit [Datenschutzerklärung](https://www.knmi.nl/privacy)
 1. [meteoblue](https://www.meteoblue.com/) mit [Datenschutzerklärung](https://content.meteoblue.com/de/content/view/full/2855)
 1. [windguru](https://www.windguru.cz/) mit [Datenschutzerklärung](https://www.windguru.cz/help.php?sec=privacy)
 1. [windy](https://www.windy.com/) mit [Datenschutzerklärung](https://account.windy.com/agreements/windy-privacy-policy)
