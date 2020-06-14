@@ -3,11 +3,10 @@ layout: ort
 ---
 {% if page.meteoblue != "disabled" %}
     {% include meteoblue.html %}
-{% else if page.windfinder %}
-    {% include windfinder.html %}
-    {% include clearoutside.html %}
 {% else if page.windguru %}
     {% include windguru.html %}
+{% else %}
+    {% include clearoutside.html %}
 {% endif %}
 
 {% include windy-map.html %}
