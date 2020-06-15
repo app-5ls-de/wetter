@@ -264,11 +264,17 @@ small {
     width: 100%;
 }
 
-.meteoblue a {
+.meteoblue-einfach {
+    text-align: center;
+}
+
+.meteoblue a,
+.meteoblue-einfach a {
     display: unset !important;
 }
 
-.meteoblue>p {
+.meteoblue>p,
+.meteoblue-einfach>p {
     margin: 0;
 }
 
@@ -277,12 +283,14 @@ small {
 }
 
 .clearoutside>a::after,
-.meteoblue a::after {
+.meteoblue a::after,
+.meteoblue-einfach a::after {
     display: none;
 }
 
 .clearoutside>a,
-.meteoblue a {
+.meteoblue a,
+.meteoblue-einfach a {
     font-size: 1rem;
 }
 
