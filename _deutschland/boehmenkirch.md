@@ -5,7 +5,8 @@ coordinates:
     lon: 9.8876841
 bundesland: bw
 layout: ort-einfach
-daswetter-einfach: 497448620669ce2b260dfbbde6c1558c
+daswetter-einfach: 
+    img: 6823c1e09a17c26b7fa9bce8b601e68e
 meteoblue-einfach:
     src: https://www.meteoblue.com/de/wetter/widget/three/b%c3%b6hmenkirch_deutschland_2946950?geoloc=fixed&nocurrent=0&nocurrent=1&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=monochrome
     href: https://www.meteoblue.com/de/wetter/woche/b%c3%b6hmenkirch_deutschland_2946950?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget
