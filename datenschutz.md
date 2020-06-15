@@ -12,6 +12,7 @@ Diese Webseite wird gehostet auf Servern der Github Inc., 88 Colin P Kelly Jr. S
 Auf dieser Webseite sind iFrames, Javascript und Bilder der nachfolgenden Seiten eingebunden. Mit diesen nutzt diese Seite Dienste Dritter. Einzelheiten zu den im Zusammenhang mit den Diensten erfolgenden Datenverarbeitungen können Sie in den Datenschutzerklärungen der Dienste nachlesen.
 
 1. [clearoutside](https://clearoutside.com/) mit [Datenschutzerklärung](https://clearoutside.com/page/privacy_policy/)
+1. [Daswetter](https://www.daswetter.com/) mit [Datenschutzerklärung](https://www.daswetter.com/privacy.html)
 1. [Deutscher Wetterdienst](https://www.dwd.de/DE/) mit [Datenschutzerklärung](https://www.dwd.de/DE/service/datenschutz/datenschutz_node.html)
 1. [KNMI](https://www.knmi.nl/) mit [Datenschutzerklärung](https://www.knmi.nl/privacy)
 1. [meteoblue](https://www.meteoblue.com/) mit [Datenschutzerklärung](https://content.meteoblue.com/de/content/view/full/2855)

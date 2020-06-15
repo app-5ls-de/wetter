@@ -1,0 +1,12 @@
+{% if page.daswetter-einfach %}
+<div id="daswetter-einfach" class="daswetter-einfach">
+    {% if jekyll.environment == "development" %}
+    <img src="https://via.placeholder.com/776x185?text=daswetter-einfach">
+    {% else %}
+    <div id="cont_{{page.daswetter-einfach}}">
+        <script type="text/javascript" async
+            src="https://www.daswetter.com/wid_loader/{{page.daswetter-einfach}}"></script>
+    </div>
+    {% endif %}
+</div>
+{% endif %}
