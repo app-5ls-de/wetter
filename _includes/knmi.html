@@ -123,19 +123,17 @@
                 completed_loading();
             }
         }
-        nextframe()
-        var interval = setInterval(nextframe, 1500)
 
-        var paused = false
+        var paused = true
         let dot = indicator.getElementsByClassName("dot")[0]
         function toggle() {
             if (paused) {
                 interval = setInterval(nextframe, 1500)
-                dot.style.background = "red"
+                dot.style.background = "green"
                 paused = false
             } else {
                 clearInterval(interval)
-                dot.style.background = "green"
+                dot.style.background = "red"
                 paused = true
             }
         }
