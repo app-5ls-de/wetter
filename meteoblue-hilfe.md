@@ -1,3 +1,7 @@
+---
+layout: main
+title: Meteoblue Hilfe
+---
 - Temperaturverlauf mit Wetter-Piktogrammen. Die Zeit von Sonnenaufgang bis Sonnenuntergang ist in gelb eingezeichnet.
 
 - Wolken in verschiedenen Höhenschichten: wenige Wolken (hellgrau) bis dichte Wolken (dunkelgrau). Dunkle blauen Balken zeigen den stündlichen Niederschlag, hellblaue Schauer. Ein Sternchen bedeutet Schneefall.
