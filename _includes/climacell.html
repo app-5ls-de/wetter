@@ -4,7 +4,7 @@
     <img src="https://via.placeholder.com/500x258?text=climacell">
     {% else %}
     <script type="text/javascript" src="https://widgets-viewer.climacell.co/v1/sdk.js"></script>
-    <div class="climacell-widget" data-apikey="wtEvzyGYVLdfnV0ZjlyBqv9JiJVHhSs9" data-type="hourly"
+    <div class="climacell-widget" data-apikey="wtEvzyGYVLdfnV0ZjlyBqv9JiJVHhSs9" data-type="nowcast"
         data-location-name="{{ page.title }}" data-location-lon="{% include trunc coord=page.coordinates.lon n=7 %}"
         data-location-lat="{% include trunc coord=page.coordinates.lat n=7 %}" data-size-mode="large"
         data-font-color="#000" data-background-color="#fff" data-font-family="verdana"
