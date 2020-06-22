@@ -168,6 +168,7 @@ small {
     max-width: 70vw;
 }
 
+.wetter>.row>div:not(:first-child),
 .wetter>div {
     margin-top: 3rem;
 }
