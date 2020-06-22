@@ -11,15 +11,15 @@ layout: ort
     {% include windguru.html %}
 {% endif %}
 
+<div class="row">
+    {% include climacell.html %}
+    {% include dwd-trend.html %}
+</div>
+
 {% assign eu = "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se" | split: ',' %}
 
 {% if eu contains page.land %}
-    <div class="row">
-        {% include knmi.html %}
-        {% include dwd-trend.html %}
-    </div>
-{% else %}
-    {% include dwd-trend.html %}
+    {% include knmi.html %}
 {% endif %}
 
 <div>

@@ -324,6 +324,10 @@ small {
     }
 }
 
+.climacell {
+    text-align: center;
+}
+
 .loading {
     background-color: lightgray;
 }
