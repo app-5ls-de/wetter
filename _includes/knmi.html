@@ -99,7 +99,7 @@
 
 
         var index = frameids.length - 1
-        var loaded = false
+        var loaded = true
 
         function completed_loading() {
             loaded = true
@@ -123,6 +123,7 @@
                 completed_loading();
             }
         }
+        img_animation.addEventListener('load', completed_loading)
         nextframe()//show first frame
 
         var paused = true
