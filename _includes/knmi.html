@@ -43,10 +43,10 @@
             indicator_info.append(div)
         }
 
-
+        var knmi = document.getElementById("knmi")
         var img_animation = document.getElementById("animation")
-        var indicator_info = document.getElementById("knmi").getElementsByClassName("indicator-info")[0]
-        let indicator = document.getElementById("knmi").getElementsByClassName("indicator")[0]
+        var indicator_info = knmi.getElementsByClassName("indicator-info")[0]
+        let indicator = knmi.getElementsByClassName("indicator")[0]
         indicator_info.style.display = "flex"
         indicator.style.display = "flex"
         var filler = indicator.getElementsByClassName("filler")[0]
@@ -104,8 +104,6 @@
         function completed_loading() {
             loaded = true
         }
-
-        /* img_animation.addEventListener('load', completed_loading) */
 
         function nextframe() {
             if (loaded) {
