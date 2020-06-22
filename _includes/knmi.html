@@ -124,7 +124,22 @@
             }
         }
         nextframe()
-        setInterval(nextframe, 1500)
+        var interval = setInterval(nextframe, 1500)
+
+        var paused = false
+        let dot = indicator.getElementsByClassName("dot")[0]
+        function toggle() {
+            if (paused) {
+                interval = setInterval(nextframe, 1500)
+                dot.style.background = "red"
+                paused = false
+            } else {
+                clearInterval(interval)
+                dot.style.background = "green"
+                paused = true
+            }
+        }
+        knmi.addEventListener("pointerdown", toggle)
     </script>
 
 </div>
