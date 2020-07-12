@@ -2,7 +2,10 @@
 layout: ort
 ---
 {% if page.meteoblue != "disabled" %}
-    {% include meteoblue.html %}
+    <div>
+        {% include meteoblue.html %}
+        {% include meteoblue-link.html %}
+    </div>
 {% else %}
     {% include clearoutside.html %}
 {% endif %}

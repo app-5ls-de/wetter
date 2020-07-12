@@ -292,11 +292,12 @@ small {
 
 .clearoutside>a,
 .meteoblue a,
-.meteoblue-einfach a {
+.-einfach a {
     font-size: 1rem;
 }
 
-.windy-link {
+.windy-link,
+.meteoblue-link {
     margin: 0 auto;
     text-align: center;
     width: fit-content;
