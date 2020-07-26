@@ -2,8 +2,8 @@
 title: Baabe (Rügen)
 layout: ort-waves
 coordinates:
-    lat: 54.3687151
-    lon: 13.6041155
+    lat: 54.3622423
+    lon: 13.7081716
 bundesland: mv
 meteoblue-id: ostseebad-baabe_deutschland_2856199
 ---
