@@ -1,5 +1,6 @@
 ---
 title: Baabe (Rügen)
+layout: ort-waves
 coordinates:
     lat: 54.3687151
     lon: 13.6041155
