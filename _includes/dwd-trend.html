@@ -1,24 +1,24 @@
 {% if page.bundesland %}
+
+{% if page.bundesland == 'by' %} {% assign id = '10870' %}
+{% elsif page.bundesland == 'bw' %} {% assign id = '10738' %}
+{% elsif page.bundesland == 'rp' %} {% assign id = '10708' %}
+{% endif %}
+
+{% if id %}
+
 <div id="dwd-trend" class="dwd-trend">
     {% if jekyll.environment == "development" %}
     <img src="https://via.placeholder.com/950x680?text=dwd-trend">
     {% else %}
-
-    {% if page.bundesland == 'by' %} {% assign id = '10870' %}
-    {% elsif page.bundesland == 'bw' %} {% assign id = '10738' %}
-    {% elsif page.bundesland == 'rp' %} {% assign id = '10708' %}
-    {% endif %}
-
-    {% if id %}
     <div class="asyncImageHigh"
         data-src="https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_{{id}}.png"></div>
-    {% endif %}
-
     {% endif %}
     <div class="info">
         <a href="https://www.dwd.de/DE/leistungen/trendvorhersage_regional/legende_trend_kurz.png?__blob=normal&v=5"><img
                 src="/info.svg"></a>
-
     </div>
 </div>
+
+{% endif %}
 {% endif %}
