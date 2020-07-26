@@ -1,0 +1,32 @@
+---
+layout: ort
+---
+{% if page.meteoblue != "disabled" %}
+    <div>
+        {% include meteoblue.html %}
+        {% include meteoblue-link.html %}
+    </div>
+{% else %}
+    {% include clearoutside.html %}
+{% endif %}
+
+{% if page.windguru %}
+    {% include windguru.html %}
+{% endif %}
+
+<div class="row">
+    {% include climacell.html %}
+    {% include dwd-trend.html %}
+</div>
+
+{% assign eu = "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se" | split: ',' %}
+
+{% if eu contains page.land %}
+    {% include knmi.html %}
+{% endif %}
+
+{% include windy-map-waves.html %}
+<div>
+    {% include windy-map.html %}
+    {% include windy-link.html %}
+</div>
