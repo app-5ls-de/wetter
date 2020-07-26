@@ -1,5 +1,6 @@
 ---
 title: Bostalsee
+layout: ort-waves
 coordinates:
     lat: 49.5566364
     lon: 7.0714931
