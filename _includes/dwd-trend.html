@@ -1,9 +1,40 @@
 {% if page.bundesland %}
 
-{% if page.bundesland == 'by' %} {% assign id = '10870' %}
-{% elsif page.bundesland == 'bw' %} {% assign id = '10738' %}
+
+{%    if page.bundesland == 'bw' %} {% assign id = '10738' %}
+{% elsif page.bundesland == 'by' %} {% assign id = '10870' %}
+{% elsif page.bundesland == 'be' %} {% assign id = '10382' %}
+{% elsif page.bundesland == 'bb' %} {% assign id = '10379' %}
+{% elsif page.bundesland == 'hb' %} {% assign id = '10224' %}
+{% elsif page.bundesland == 'hh' %} {% assign id = '10147' %}
+{% elsif page.bundesland == 'he' %} {% assign id = '10633' %}
+{% elsif page.bundesland == 'mv' %} {% assign id = '10162' %}
+{% elsif page.bundesland == 'ni' %} {% assign id = '10338' %}
+{% elsif page.bundesland == 'nw' %} {% assign id = '10400' %}
 {% elsif page.bundesland == 'rp' %} {% assign id = '10708' %}
+{% elsif page.bundesland == 'sl' %} {% assign id = 'K2613' %}
+{% elsif page.bundesland == 'sn' %} {% assign id = '10488' %}
+{% elsif page.bundesland == 'st' %} {% assign id = '10361' %}
+{% elsif page.bundesland == 'sh' %} {% assign id = '10046' %}
+{% elsif page.bundesland == 'th' %} {% assign id = '10554' %}
 {% endif %}
+
+bw Baden-Württemberg
+by Bayern
+be Berlin
+bb Brandenburg
+hb Bremen
+hh Hamburg
+he Hessen
+mv Mecklenburg-Vorpommern
+ni Niedersachsen
+nw Nordrhein-Westfalen
+rp Rheinland-Pfalz
+sl Saarland
+sn Sachsen
+st Sachsen-Anhalt
+sh Schleswig-Holstein
+th Thüringen
 
 {% if id %}
 
