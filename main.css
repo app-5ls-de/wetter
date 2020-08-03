@@ -297,7 +297,8 @@ small {
 }
 
 .windy-link,
-.meteoblue-link {
+.meteoblue-link,
+.accuweather-link {
     margin: 0 auto;
     text-align: center;
     width: fit-content;
