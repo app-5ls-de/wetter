@@ -168,9 +168,13 @@ small {
     max-width: 70vw;
 }
 
-.wetter>.row>div:not(:first-child),
+.wetter>.row>div,
 .wetter>div {
     margin-top: 3rem;
+}
+
+.wetter>.row {
+    margin-top: 0;
 }
 
 @media (min-width: 1120px) {
