@@ -305,6 +305,11 @@ a[target=_blank]::after{
     display: none;
 }
 
+.meteoblue a::after,
+.meteoblue-einfach a::after {
+    display: none;
+}
+
 .clearoutside>a,
 .meteoblue a,
 .-einfach a {
