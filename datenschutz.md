@@ -5,7 +5,7 @@ title: Datenschutz
 
 # Hosting mit GitHub Pages
 
-Diese Webseite wird gehostet auf Servern der Github Inc., 88 Colin P Kelly Jr. Street, San Francisco, CA 94107, USA. GitHub kann beim Aufruf dieser Webseiten technische Informationen inklusive ihrer IP Adresse aufzeichnen. Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von GitHub unter [https://help.github.com/articles/github-privacy-policy](https://help.github.com/articles/github-privacy-policy){:target="_blank"}
+Diese Webseite wird gehostet auf Servern der Github Inc., 88 Colin P Kelly Jr. Street, San Francisco, CA 94107, USA. GitHub kann beim Aufruf dieser Webseiten technische Informationen inklusive ihrer IP Adresse aufzeichnen. Weitere Informationen zum Umgang mit Nutzerdaten finden Sie in der [Datenschutzerklärung von GitHub](https://help.github.com/articles/github-privacy-policy){:target="_blank"}
 
 # Einbindung externer Seiten
 
