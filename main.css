@@ -168,6 +168,17 @@ small {
     max-width: 70vw;
 }
 
+a[target=_blank]::after{
+    display: inline-block;
+    content: ' ';
+    background-image: url('/external.svg');
+    background-size: 1rem 1rem;
+    height: 1rem;
+    width: 1rem;
+    vertical-align: super;
+    margin-left: 5px;
+}
+
 .wetter>.row>div,
 .wetter>div {
     margin-top: 3rem;
