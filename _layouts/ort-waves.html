@@ -14,16 +14,21 @@ layout: ort
     {% include windguru.html %}
 {% endif %}
 
-<div class="row">
+{% if page.accuweather %}
+    {% include accuweather-link.html %}
+{% else %}
     {% include climacell.html %}
-    {% include dwd-trend.html %}
-</div>
-
-{% assign eu = "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se" | split: ',' %}
-
-{% if eu contains page.land %}
-    {% include knmi.html %}
 {% endif %}
+
+<div class="row">
+    {% include dwd-trend.html %}
+    
+    {% assign eu = "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se" | split: ',' %}
+    
+    {% if eu contains page.land %}
+    {% include knmi.html %}
+    {% endif %}
+</div>
 
 {% include windy-map-waves.html %}
 <div>
