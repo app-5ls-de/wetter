@@ -1,5 +1,5 @@
 ---
-title: Bostalsee
+title: Gonnesweiler (Bostalsee)
 coordinates:
     lat: 49.5566364
     lon: 7.0714931
