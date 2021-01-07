@@ -29,6 +29,13 @@ Diese Dienste könnten unter anderem folgende Informationen speichern und verarb
 - verwendeter Browsertyp und ggf. das Betriebssystem Ihres Rechners sowie der Name Ihres Access-Providers
 - Sonstige ähnliche Daten
 
+
+# Statistische Auswertung - Webanalyse
+
+Auf dieser Webseite wird [Plausible](https://plausible.io/){:target="_blank"} https://plausible.io/data-policy zur anonymisieren Webanalyse verwendet. 
+Die [Datenschhutzerklärung](https://plausible.io/){:target="_blank"} von Plausible
+
+
 # SSL- bzw. TLS-Verschlüsselung
 Diese Seite und alle eingebundenen Dienste nutzen aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte eine SSL-bzw. TLS-Verschlüsselung.
 
