@@ -24,19 +24,19 @@
     <div class="kopf">
         {% if page.collection == "ort" %}
         <div class="back">
-            <a class="normal" href="/?utm_source=back"><img src="/back.svg" alt=""></a>
+            <a class="normal" href="/"><img src="/back.svg" alt=""></a>
         </div>
         {% endif %}
         <div class="mitte">
             <img src="/icon.svg" alt="">
-            <h1><a href="/{% if page.collection == " ort " %}#{{page.url | slugify}}{% endif %}?utm_source=logo">{{page.title}}</a></h1>
+            <h1><a href="/{% if page.collection == " ort " %}#{{page.url | slugify}}{% endif %}">{{page.title}}</a></h1>
         </div>
     </div>
     <div class="main">
         {{content}}
     </div>
     <div class="links">
-        <a href="/?utm_source=self&utm_medium=footer">Übersicht aller Orte</a>
+        <a href="/">Übersicht aller Orte</a>
         <a href="/quellen">Quellen</a>
     </div>
     <div class="legal">
