@@ -2,12 +2,19 @@
 ---
 <!DOCTYPE html>
 <html lang="de-de">
+<head>
   <meta charset="utf-8">
   <title>Weiterleitung&hellip;</title>
   <link rel="canonical" href="{{site.url}}">
-  <script>location="{{site.url}}"</script>
-  <meta http-equiv="refresh" content="0; url={{site.url}}">
+  <meta http-equiv="refresh" content="1; url={{site.url}}">
   <meta name="robots" content="noindex">
+  <script async defer data-domain="wetter.app.5ls.de" src="https://stats.5ls.de/js/index.js"></script>
+  <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+</head>
+<body>
+  <script>plausible("404",{ props: { path: document.location.pathname } });</script>
+  <script>setTimeout(() => { location="{{site.url}}" }, 150)</script>
   <h1>Weiterleitung&hellip;</h1>
   <a href="{{site.url}}">Bitte hier drücken falls Sie nicht weitergeleitet wurden.</a>
+</body
 </html>
