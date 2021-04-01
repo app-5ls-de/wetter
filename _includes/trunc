@@ -1,5 +1,0 @@
-{%- if include.coord -%}
-    {%- if include.n -%}
-        {{include.coord|split:"."|first}}.{{include.coord|split:"."|last|truncate:include.n,""}}
-    {%- endif -%}
-{%- endif -%}

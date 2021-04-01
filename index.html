@@ -1,21 +1,54 @@
----
-layout: main
-title: Übersicht
----
-<div class="liste">
+<!doctype html>
+<html lang="de">
 
-    {% for ort in site.deutschland %}
-    <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
-    {% endfor %}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Corona status for districts in Germany">
+    <meta name="author" content="Patrick Haußmann">
+    <meta name="web_author" content="Patrick Haußmann">
+    <link rel="author" href="https://patrickhaussmann.de/" />
+    <meta name="language" content="de">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg" color="#960e4d">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <meta name="apple-mobile-web-app-title" content="corona">
+    <meta name="application-name" content="corona">
+    <meta name="msapplication-TileColor" content="#960e4d">
+    <meta name="msapplication-config" content="/icons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+    
+    <title>corona</title>
+    
+    <link rel="stylesheet" href="/style.css">
 
+</head>
 
-    {% unless site.welt == empty %}
+<body>
 
-    <hr>
+    
+    <script src="/script.js"></script>
+    <script>
+        if ("serviceWorker" in navigator) {
+            if (navigator.serviceWorker.controller) {
+                console.log("[ServiceWorker] active service worker found");
+            } else {
+                // Register the service worker
+                navigator.serviceWorker
+                    .register("/service-worker.js", {
+                        scope: "/"
+                    })
+                    .then(function (reg) {
+                        console.log('[ServiceWorker] Service worker registered.', reg);
+                    });
+            }
+        }
+    </script>
+</body>
 
-    {% for ort in site.welt %}
-    <a href="{{ort.url}}" id="{{ort.url | slugify}}">{{ort.title}}</a><br>
-    {% endfor %}
-
-    {% endunless %}
-</div>
+</html>
