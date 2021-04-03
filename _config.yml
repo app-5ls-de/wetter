@@ -1,4 +1,17 @@
 exclude:
-  - CNAME
-  - LICENSE
-  - README.md
+    - CNAME
+    - LICENSE
+    - README.md
+
+collections:
+    locations:
+        output: true
+        permalink: /:name/
+
+defaults:
+    - scope:
+          path: ""
+          type: "locations"
+      values:
+          layout: "location"
+          country: de

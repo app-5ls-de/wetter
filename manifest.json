@@ -1,6 +1,6 @@
 {
-    "name": "corona",
-    "short_name": "corona",
+    "name": "wetter",
+    "short_name": "wetter",
     "icons": [
         {
             "src": "/icons/android-chrome-192x192.png",
@@ -21,6 +21,6 @@
     ],
     "theme_color": "#ffffff",
     "background_color": "#ffffff",
-    "start_url": "/?pwa",
+    "start_url": "/",
     "display": "standalone"
 }
