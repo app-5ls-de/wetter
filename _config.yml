@@ -1,31 +1,17 @@
-title: Wetter
-url: https://wetter.app.5ls.de
+exclude:
+    - CNAME
+    - LICENSE
+    - README.md
 
 collections:
-  deutschland:
-    output: true
-    permalink: /:title/
-  welt:
-    output: true
-    permalink: /:title/
-
+    locations:
+        output: true
+        permalink: /:name/
 
 defaults:
-  - scope:
-      path: ""
-      type: "deutschland"
-    values:
-      layout: "ort-default"
-      land: de
-  - scope:
-      path: ""
-      type: "welt"
-    values:
-      layout: "ort-default"
-      meteoblue: "disabled"
-
-
-exclude:
-  - CNAME
-
-timezone: Europe/Berlin
+    - scope:
+          path: ""
+          type: "locations"
+      values:
+          layout: "location"
+          country: de

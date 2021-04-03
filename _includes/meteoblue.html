@@ -1,12 +1,16 @@
-{% if page.meteoblue != "disabled" %}
-<div id="meteoblue" class="meteoblue">
-    {% if jekyll.environment == "development" %}
-    <img src="https://via.placeholder.com/740x490?text=meteoblue">
-    {% else %}
-    {{content}}
-    {% endif %}
+{%- if page.meteoblue -%}
+<div id="meteoblue" class="section">
+    {%- if jekyll.environment == "development" -%}
+    <img src="https://via.placeholder.com/2220x1470?text=meteoblue" />
+    {%- else -%}
+    <img src="{{page.meteoblue.srcset}}"
+         alt="Meteogram - 5 Tage - {{page.location}}"/>
+    {%- endif -%}
+    <a href="https://www.meteoblue.com/de/wetter/woche/{{page.meteoblue.id}}"
+       target="_blank">
+       Wetter {{page.location}} - meteoblue</a>
     <div class="info">
-        <a href="/meteoblue-hilfe"><img src="/info.svg"></a>
+        <a href="/meteoblue-hilfe"><img src="/info.svg" /></a>
     </div>
 </div>
-{% endif %}
+{%- endif -%}

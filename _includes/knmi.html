@@ -1,145 +1,100 @@
-<div id="knmi" class="knmi">
-    <div class="indicator-info">
-    </div>
-    <div class="indicator">
-        <div class="filler"></div>
-        <div>
-            <div class="dot"></div>
-        </div>
-    </div>
-    {% if jekyll.environment == "development" %}
-    <img id="animation" src="https://via.placeholder.com/800x653?text=knmi">
-    {% else %}
-    <img id="animation">
-    {% endif %}
+{% assign eu = "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se" | split: ',' %}
+{% if eu contains page.country %}
+
+<div id="knmi" class="section">
+    <img id="animation" />
     <div class="info">
-        <a href="/knmi-hilfe/"><img src="/info.svg"></a>
+        <a href="/knmi-hilfe/"><img src="/info.svg" /></a>
     </div>
 
     <script>
         function hour(date) {
-            let hour = date.getUTCHours()
-            return (hour < 10 ? '0' : '') + hour;
+            let hour = date.getUTCHours();
+            return (hour < 10 ? "0" : "") + hour;
         }
         function day(date) {
-            let day = date.getUTCDate()
-            return (day < 10 ? '0' : '') + day;
+            let day = date.getUTCDate();
+            return (day < 10 ? "0" : "") + day;
         }
         function month(date) {
-            let month = date.getUTCMonth()
-            return (month < 10 ? '0' : '') + month;
+            let month = date.getUTCMonth();
+            return (month < 10 ? "0" : "") + month;
         }
 
-        function make_indicator_info(date) {
-            let div = document.createElement("div")
-            let p = document.createElement("p")
-            let span = document.createElement("span")
-            p.innerHTML = "+" + offset + "h"
-            span.innerHTML = day(d) + "." + month(d) + "." + d.getUTCFullYear() + " " + hour(d) + ":00 UTC"
-            p.classList.add("tooltip");
-            span.classList.add("tooltiptext");
-            p.append(span)
-            div.append(p)
-            indicator_info.append(div)
-        }
-
-        var knmi = document.getElementById("knmi")
-        var img_animation = document.getElementById("animation")
-        var indicator_info = knmi.getElementsByClassName("indicator-info")[0]
-        let indicator = knmi.getElementsByClassName("indicator")[0]
-        indicator_info.style.display = "flex"
-        indicator.style.display = "flex"
-        var filler = indicator.getElementsByClassName("filler")[0]
+        var knmi = document.getElementById("knmi");
+        var img_animation = document.getElementById("animation");
 
         {% if jekyll.environment == "development" %}
-        var baseurl = "https://via.placeholder.com/800x653?text=knmi+"
-        {% else %}
-        var baseurl = "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/"
+        var baseurl = "https://via.placeholder.com/800x653?text=knmi+";
+        {%- else -%}
+        var baseurl = "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/";
         {% endif %}
 
 
-        var frameids = []
-        let d = new Date()
-        d.setUTCMinutes(0)
-        d.setUTCSeconds(0)
-        d.setUTCMilliseconds(0)
+        var interval,
+            frameids = [],
+            loaded = true,
+            paused = true;
+
+        let d = new Date();
+        d.setUTCMinutes(0);
+        d.setUTCSeconds(0);
+        d.setUTCMilliseconds(0);
         if (d.getUTCHours() >= 14) {
-            d.setUTCHours(12)
+            d.setUTCHours(12);
         } else if (d.getUTCHours() >= 2) {
-            d.setUTCHours(0)
+            d.setUTCHours(0);
         } else {
-            d.setUTCDate(d.getUTCDate() - 1)
-            d.setUTCHours(12)
+            d.setUTCDate(d.getUTCDate() - 1);
+            d.setUTCHours(12);
         }
 
-        let offset = 0
+        frameids.push("AL" + day(d) + hour(d) + "_large.gif");
 
-
-        frameids.push("AL" + day(d) + hour(d) + "_large.gif")
-
-        make_indicator_info(d)
-
+        let offset = 0;
         for (let i = 0; i < 2; i++) {
-            offset += 12
+            offset += 12;
             if (d.getUTCHours() == 0) {
-                d.setUTCHours(12)
+                d.setUTCHours(12);
             } else if (d.getUTCHours() == 12) {
-                d.setUTCDate(d.getUTCDate() + 1)
-                d.setUTCHours(0)
+                d.setUTCDate(d.getUTCDate() + 1);
+                d.setUTCHours(0);
             } else {
-                throw "wrong format for hours"
+                throw "wrong format for hours";
             }
-
-            frameids.push("PL" + day(d) + hour(d) + "_large.gif")
-
-            make_indicator_info(d)
+            frameids.push("PL" + day(d) + hour(d) + "_large.gif");
         }
 
-
-
-
-        var index = frameids.length - 1
-        var loaded = true
-
-        function completed_loading() {
-            loaded = true
-        }
+        var index = frameids.length - 1;
 
         function nextframe() {
             if (loaded) {
-
                 if (index == frameids.length - 1) {
-                    index = 0
+                    index = 0;
                 } else {
-                    index += 1
+                    index += 1;
                 }
 
-                loaded = false
-                img_animation.src = baseurl + frameids[index]
-                let percent = index / (frameids.length - 1) * 100
-                filler.style.width = percent.toString() + "%"
+                loaded = false;
+                img_animation.src = baseurl + frameids[index];
             }
             if (img_animation.complete) {
-                completed_loading();
+                loaded = true;
             }
         }
-        img_animation.addEventListener('load', completed_loading)
-        nextframe()//show first frame
 
-        var paused = true
-        let dot = indicator.getElementsByClassName("dot")[0]
-        function toggle() {
-            if (paused) {
-                interval = setInterval(nextframe, 1500)
-                dot.style.background = "green"
-                paused = false
-            } else {
-                clearInterval(interval)
-                dot.style.background = "red"
-                paused = true
-            }
-        }
-        knmi.addEventListener("click", toggle)
+        img_animation.addEventListener("load", () => {
+            loaded = true;
+        });
+        nextframe(); //show first frame
+
+        knmi.addEventListener("click", () => {
+            if (paused) interval = setInterval(nextframe, 1500);
+            else clearInterval(interval);
+
+            paused = !paused;
+        });
     </script>
-
 </div>
+
+{% endif %}
