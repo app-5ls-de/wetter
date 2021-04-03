@@ -2,8 +2,18 @@
 layout: default
 title: Übersicht
 ---
+
 <div class="liste">
     {% for location in site.locations %}
     <a href="{{location.url}}" id="{{location.url | slugify}}">{{location.location}}</a><br>
     {% endfor %}
 </div>
+
+<script>
+    if (location.search == "?pwa") {
+        let lastvisited = localStorage.getItem("lastvisited");
+        if (lastvisited) {
+            location.pathname = lastvisited;
+        }
+    }
+</script>
