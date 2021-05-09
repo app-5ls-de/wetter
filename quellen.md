@@ -12,7 +12,7 @@ title: Quellen
 1. [meteoblue](https://www.meteoblue.com/){:target="_blank"}
 1. [windguru](https://www.windguru.cz/){:target="_blank"}
 
-{% comment %}
+{%- comment -%}
 <li><a target="_blank" href="https://clearoutside.com/">clearoutside</a></li>
 <li><a target="_blank" href="https://www.climacell.co/">ClimaCell</a></li>
 <li><a target="_blank" href="https://www.windy.com/">windy</a></li>
@@ -21,4 +21,4 @@ https://www.windfinder.com/widget/configurator/muenchen-stadt
 https://www.wetterzentrale.de/en/topkarten.php
 https://www.metoffice.gov.uk/weather/maps-and-charts/surface-pressure
 https://developer.climacell.co/v3/widgets
-{% endcomment %}
+{%- endcomment -%}

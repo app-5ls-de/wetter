@@ -4,9 +4,9 @@ title: Übersicht
 ---
 
 <div class="liste">
-    {% for location in site.locations %}
+    {%- for location in site.locations -%}
     <a href="{{location.url}}" id="{{location.url | slugify}}">{{location.location}}</a><br>
-    {% endfor %}
+    {%- endfor -%}
 </div>
 
 <script>

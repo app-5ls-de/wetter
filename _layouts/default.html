@@ -62,14 +62,14 @@
     </head>
 
     <div class="kopf">
-        {% if page.layout == "location" %}
+        {%- if page.layout == "location" -%}
         <div class="back">
             <a class="normal" href="/"><img src="/back.svg" alt=""></a>
         </div>
-        {% endif %}
+        {%- endif -%}
         <div class="mitte">
             <img src="/icon.svg" alt="">
-            <h1><a href="/{% if page.layout == 'location' %}#{{page.url | slugify}}{% endif %}">{%- if page.location -%}{{page.location}}{%- else -%}{{page.title}}{%- endif -%}</a></h1>
+            <h1><a href="/{%- if page.layout == 'location' -%}#{{page.url | slugify}}{%- endif -%}">{%- if page.location -%}{{page.location}}{%- else -%}{{page.title}}{%- endif -%}</a></h1>
         </div>
     </div>
     <div class="main">
