@@ -2,22 +2,14 @@
 layout: default
 ---
 
-{%- if page.daswetter -%}
 {%- include daswetter.html -%}
-{%- endif -%}
 
 {%- if page.meteoblue.simple -%}
 {%- include meteoblue_simple.html -%}
-
-
 <hr class="divider">
-
-
 {%- endif -%}
 
-{%- if page.windguru -%}
 {%- include windguru.html -%}
-{%- endif -%}
 
 {%- include meteoblue.html -%}
 {%- include dwd.html -%}
