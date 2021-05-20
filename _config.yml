@@ -2,6 +2,7 @@ exclude:
     - CNAME
     - LICENSE
     - README.md
+    - locations.py
 
 collections:
     locations:
