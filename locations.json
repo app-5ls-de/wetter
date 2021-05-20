@@ -1,0 +1,301 @@
+[
+  {
+    "name": "aarhus",
+    "data": {
+      "location": "Aarhus",
+      "coordinates": {
+        "lat": 56.15,
+        "lon": 10.216667
+      },
+      "country": "dk",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=%C3%85rhus&iso2=dk&lat=56.156700&lon=10.210800&asl=10&tz=Europe%2FCopenhagen&lang=de&sig=e5f20ffcd48cfbca5778b5c7b385e089",
+        "id": "Århus_dänemark_2624652"
+      },
+      "accuweather": "dk/124594/minute-weather-forecast/124594"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "ulm",
+    "data": {
+      "location": "Ulm",
+      "coordinates": {
+        "lat": 48.4,
+        "lon": 9.983333
+      },
+      "district": "bw",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Ulm&iso2=de&lat=48.398399&lon=9.991550&asl=480&tz=Europe%2FBerlin&lang=de&sig=cb1bcf3809377a5a84a52273bf8c0153",
+        "id": "ulm_deutschland_2820256"
+      },
+      "accuweather": "de/ulm/89073/minute-weather-forecast/167216"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "frankfurt",
+    "data": {
+      "location": "Frankfurt",
+      "coordinates": {
+        "lat": 50.116667,
+        "lon": 8.683333
+      },
+      "district": "he",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Frankfurt+am+Main&iso2=de&lat=50.115501&lon=8.684170&asl=113&tz=Europe%2FBerlin&lang=de&sig=4277526e53a305140d6bfeab6165001f",
+        "id": "frankfurt-am-main_deutschland_2925533"
+      },
+      "accuweather": "de/leipzig/04109/minute-weather-forecast/171240"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "ammersee",
+    "data": {
+      "location": "Ammersee",
+      "coordinates": {
+        "lat": 48.0,
+        "lon": 11.116667
+      },
+      "district": "by",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Herrsching+am+Ammersee&iso2=de&lat=47.998901&lon=11.176800&asl=551&tz=Europe%2FBerlin&lang=de&sig=fffd5401d822b43d589ef032a694a313",
+        "id": "herrsching-am-ammersee_deutschland_2905604"
+      },
+      "accuweather": "de/ammersee/82211/minute-weather-forecast/2599630",
+      "windguru": {
+        "s": 243,
+        "uid": "wg_fwdg_243_3_1589997765794"
+      }
+    },
+    "markdown": ""
+  },
+  {
+    "name": "geislingen",
+    "data": {
+      "location": "Geislingen",
+      "coordinates": {
+        "lat": 48.624444,
+        "lon": 9.830556
+      },
+      "district": "bw",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Geislingen+an+der+Steige&iso2=de&lat=48.624199&lon=9.827360&asl=426&tz=Europe%2FBerlin&lang=de&sig=fac367a37d53be296c64678ef09ac0ab",
+        "id": "geislingen-an-der-steige_deutschland_2921653"
+      },
+      "accuweather": "de/geislingen-an-der-steige/73312/minute-weather-forecast/171775"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "landau",
+    "data": {
+      "location": "Landau in der Pfalz",
+      "coordinates": {
+        "lat": 49.2,
+        "lon": 8.116667
+      },
+      "district": "rp",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Landau+in+der+Pfalz&iso2=de&lat=49.198399&lon=8.116920&asl=144&tz=Europe%2FBerlin&lang=de&sig=0b60c1de828eabe40de97b318fff42e5",
+        "id": "landau-in-der-pfalz_deutschland_2881646"
+      },
+      "accuweather": "de/landau/76829/minute-weather-forecast/174595"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "leipzig",
+    "data": {
+      "location": "Leipzig",
+      "coordinates": {
+        "lat": 51.341699,
+        "lon": 12.2535538
+      },
+      "district": "sn",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Leipzig&iso2=de&lat=51.339600&lon=12.371300&asl=116&tz=Europe%2FBerlin&lang=de&sig=7f7bc3acbbd55f7b8eb5cdb79ac15c6e",
+        "id": "leipzig_deutschland_2879139"
+      },
+      "accuweather": "de/leipzig/04109/minute-weather-forecast/171240"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "lund",
+    "data": {
+      "location": "Lund",
+      "coordinates": {
+        "lat": 55.703889,
+        "lon": 13.195
+      },
+      "country": "se",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Lund&iso2=se&lat=55.705799&lon=13.193200&asl=51&tz=Europe%2FStockholm&lang=de&sig=ca9669498fcc1c1b6608bb9728a36b51",
+        "id": "lund_schweden_2693678"
+      },
+      "accuweather": "se/lund/314778/minute-weather-forecast/314778"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "berlin",
+    "data": {
+      "location": "Berlin",
+      "coordinates": {
+        "lat": 52.52,
+        "lon": 13.405
+      },
+      "district": "be",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Berlin&iso2=de&lat=52.524399&lon=13.410500&asl=74&tz=Europe%2FBerlin&lang=de&sig=746bd17297592ef3f64eed64e904a2d8",
+        "id": "berlin_deutschland_2950159"
+      },
+      "accuweather": "de/berlin/10178/minute-weather-forecast/178087"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "boehmenkirch",
+    "data": {
+      "location": "Böhmenkirch",
+      "coordinates": {
+        "lat": 48.684444,
+        "lon": 9.933889
+      },
+      "district": "bw",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=B%C3%B6hmenkirch&iso2=de&lat=48.683300&lon=9.933330&asl=693&tz=Europe%2FBerlin&lang=de&sig=a28dca9c3b23be9cc8a0d454a7555590",
+        "id": "b%c3%b6hmenkirch_deutschland_2946950",
+        "simple": true
+      },
+      "accuweather": "de/böhmenkirch/89558/minute-weather-forecast/171896",
+      "daswetter": "6823c1e09a17c26b7fa9bce8b601e68e"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "bietigheim-bissingen",
+    "data": {
+      "location": "Bietigheim-Bissingen",
+      "coordinates": {
+        "lat": 48.966667,
+        "lon": 9.133333
+      },
+      "district": "bw",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Bietigheim-Bissingen&iso2=de&lat=48.944099&lon=9.117550&asl=226&tz=Europe%2FBerlin&lang=de&sig=d241618d7b63b6bfdfdb4fee0f8f28d2",
+        "id": "bietigheim-bissingen_deutschland_2949012"
+      },
+      "accuweather": "de/bietigheim-bissingen/74321/weather-forecast/167389"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "muenchen",
+    "data": {
+      "location": "München",
+      "coordinates": {
+        "lat": 48.133333,
+        "lon": 11.566667
+      },
+      "district": "by",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=M%C3%BCnchen&iso2=de&lat=48.137402&lon=11.575500&asl=524&tz=Europe%2FBerlin&lang=de&sig=a5e68ab574603119132b6c5af72550e1",
+        "id": "m%c3%bcnchen_deutschland_2867714"
+      },
+      "accuweather": "de/munich/80331/minute-weather-forecast/178086"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "hamburg",
+    "data": {
+      "location": "Hamburg",
+      "coordinates": {
+        "lat": 53.565278,
+        "lon": 10.001389
+      },
+      "district": "hh",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Hamburg&iso2=de&lat=53.550701&lon=9.993020&asl=2&tz=Europe%2FBerlin&lang=de&sig=9da37d460e72ff65f429a0a21e07e00a",
+        "id": "hamburg_deutschland_2911298"
+      },
+      "accuweather": "de/hamburg/20095/minute-weather-forecast/178556"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "stuttgart",
+    "data": {
+      "location": "Stuttgart",
+      "coordinates": {
+        "lat": 48.782,
+        "lon": 9.184
+      },
+      "district": "bw",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Stuttgart&iso2=de&lat=48.782299&lon=9.177020&asl=252&tz=Europe%2FBerlin&lang=de&sig=7ae31cd04b5523e9a2244a23a80cd8d7",
+        "id": "stuttgart_deutschland_2825297"
+      },
+      "accuweather": "de/stuttgart/70173/minute-weather-forecast/167220"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "nuernberg",
+    "data": {
+      "location": "Nürnberg",
+      "coordinates": {
+        "lat": 49.45,
+        "lon": 11.083333
+      },
+      "district": "by",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=N%C3%BCrnberg&iso2=de&lat=49.454201&lon=11.077500&asl=300&tz=Europe%2FBerlin&lang=de&sig=0b691cf83cf03eea952869b6857f8a77",
+        "id": "nürnberg_deutschland_2861650"
+      },
+      "accuweather": "de/90402/minute-weather-forecast/167559"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "dortmund",
+    "data": {
+      "location": "Dortmund",
+      "coordinates": {
+        "lat": 51.516667,
+        "lon": 7.466667
+      },
+      "district": "nw",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Dortmund&iso2=de&lat=51.514900&lon=7.466000&asl=96&tz=Europe%2FBerlin&lang=de&sig=7bcba2c5fc2075f042405c6eca881624",
+        "id": "dortmund_deutschland_2935517"
+      },
+      "accuweather": "de/dortmund/44137/minute-weather-forecast/170370"
+    },
+    "markdown": ""
+  },
+  {
+    "name": "spitzingsee",
+    "data": {
+      "location": "Spitzingsee",
+      "coordinates": {
+        "lat": 47.666111,
+        "lon": 11.886667
+      },
+      "district": "by",
+      "meteoblue": {
+        "srcset": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Spitzingsee&iso2=de&lat=47.661301&lon=11.887600&asl=1089&tz=Europe%2FBerlin&lang=de&sig=2324fe8c179c06c644210dcdf795b9f4",
+        "id": "spitzingsee_deutschland_3205568"
+      },
+      "accuweather": "de/spitzingsee/83727/minute-weather-forecast/178049",
+      "windguru": {
+        "s": 245930,
+        "uid": "wg_fwdg_245930_3_1590655757107"
+      }
+    },
+    "markdown": ""
+  }
+]
