@@ -1,5 +1,5 @@
 ---
-location: Freiburg-im-Breisgau
+location: Freiburg im Breisgau
 coordinates:
     lat: 47.9955553
     lon: 7.850821
