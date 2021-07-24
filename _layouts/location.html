@@ -13,7 +13,19 @@ layout: default
 
 {%- include meteoblue.html -%}
 {%- include dwd.html -%}
+
+{% if page.accuweather %}
+{% include accuweather-link.html %}
+{% endif %}
+
 {%- include knmi.html -%}
+
+{% include windy-map-waves.html %}
+<div>
+    {% include windy-map.html %}
+    {% include windy-link.html %}
+</div>
+
 
 <script>
     localStorage.setItem("lastvisited", location.pathname)

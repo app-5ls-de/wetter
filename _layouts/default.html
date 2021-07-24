@@ -153,6 +153,14 @@
                     paused = !paused;
                 });
             }
+
+            window.addEventListener('load', function() {
+              let asyncIframes = document.getElementsByClassName('asyncIframe');
+              Array.from(asyncIframes).map((item) => {
+                item.src = item.getAttribute("data-src");
+              });
+            })
+
         </script>
 
     <div class="kopf">

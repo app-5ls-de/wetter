@@ -1,0 +1,6 @@
+{% if page.coordinates %}
+<div id="windy-link" class="windy-link">
+    <a
+        href="https://windy.com/{% include trunc coord=page.coordinates.lat n=3 %}/{% include trunc coord=page.coordinates.lon n=3 %}/meteogram?rain,{% include trunc coord=page.coordinates.lat n=3 %},{% include trunc coord=page.coordinates.lon n=3 %},7">Windy Meteogram (10 Tage)</a>
+</div>
+{% endif %}
