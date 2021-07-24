@@ -214,7 +214,7 @@ a[target="_blank"]::after {
 }
 
 #meteoblue > .info {
-    margin-top: -1.75rem;
+    margin-top: -1rem;
 }
 
 #meteoblue a::before,
@@ -230,6 +230,7 @@ a[target="_blank"]::after {
 #meteoblue a,
 #meteoblue-einfach a {
     font-size: 1rem;
+    line-height: 1rem;
 }
 
 #meteoblue-link,
