@@ -248,6 +248,11 @@ a[target="_blank"]::after {
     min-height: 300px;
 }
 
+.windy-map > iframe {
+    width: 100%;
+    height: 50vh;
+}
+
 .legal > a {
     font-size: 1rem;
     padding-left: 2rem;
