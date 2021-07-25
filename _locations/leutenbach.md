@@ -1,5 +1,5 @@
 ---
-location: Leutenbach
+location: Leutenbach (Württemberg)
 coordinates:
     lat: 48.89
     lon: 9.39
