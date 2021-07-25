@@ -8,6 +8,12 @@
     </div>
 
     <script>
+        {%- if jekyll.environment == "development" -%}
+        var knmi_baseurl = "https://via.placeholder.com/800x653?text=knmi+";
+        {%- else -%}
+        var knmi_baseurl =
+            "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/";
+        {%- endif -%}
         knmi_setup()
     </script>
 </div>

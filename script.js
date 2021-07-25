@@ -15,12 +15,6 @@ function knmi_setup() {
   var knmi = document.getElementById("knmi");
   var img_animation = document.getElementById("animation");
 
-  {%- if jekyll.environment == "development" -%}
-  var baseurl = "https://via.placeholder.com/800x653?text=knmi+";
-  {%- else -%}
-  var baseurl =
-    "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/";
-  {%- endif -%}
 
   var interval,
     frameids = [],
@@ -67,7 +61,7 @@ function knmi_setup() {
       }
 
       loaded = false;
-      img_animation.src = baseurl + frameids[index];
+      img_animation.src = knmi_baseurl + frameids[index];
     }
     if (img_animation.complete) {
       loaded = true;
