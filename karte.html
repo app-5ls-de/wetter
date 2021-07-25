@@ -1,0 +1,60 @@
+---
+layout: default
+title: Karte
+---
+
+<div id="map"></div>
+<script type="text/javascript">
+  fetch("/locations.json")
+    .then((response) => {
+      if (response.ok) {
+        return Promise.resolve(response);
+      } else {
+        return Promise.reject(new Error(response.statusText));
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      initMap(data);
+    })
+    .catch(function (error) {
+      console.log("Request failed", error);
+    });
+
+  function initMap(data) {
+    var map = L.map("map", {
+      zoomSnap: 0,
+      maxZoom: 16,
+    });
+
+    let markers = [];
+    data.forEach((element) => {
+      if (!element.type) element.type = 0;
+
+      let popupHtml =
+        '<a href="/' + element.name + '">' + element.data.location + "</a>";
+      let marker = L.marker([
+        element.data.coordinates.lat,
+        element.data.coordinates.lon,
+      ])
+        .addTo(map)
+        .bindPopup(popupHtml);
+      markers.push(marker);
+    });
+
+    var markers_group = new L.featureGroup(markers);
+    map.fitBounds(markers_group.getBounds().pad(0.1));
+
+    var light = L.tileLayer(
+      "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png",
+      {
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+        subdomains: "abcd",
+        maxZoom: 19,
+      }
+    ).addTo(map);
+  }
+</script>
