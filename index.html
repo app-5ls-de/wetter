@@ -9,12 +9,3 @@ title: Übersicht
     <br>
     {%- endfor -%}
 </div>
-
-<script>
-    if (location.search == "?pwa") {
-        let lastvisited = localStorage.getItem("lastvisited");
-        if (lastvisited) {
-            location.pathname = lastvisited;
-        }
-    }
-</script>
