@@ -10,4 +10,6 @@ meteoblue:
 accuweather: de/eckernförde/24340/minute-weather-forecast/171578
 windy:
     waves: true
+dwd:
+    warncellid: 101058000
 ---

@@ -11,4 +11,6 @@ accuweather: de/ammersee/82211/minute-weather-forecast/2599630
 windguru:
     s: 243
     uid: wg_fwdg_243_3_1589997765794
+dwd:
+    warncellid: 109188000
 ---

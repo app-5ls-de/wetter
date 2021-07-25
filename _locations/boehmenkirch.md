@@ -10,4 +10,6 @@ meteoblue:
     simple: true
 accuweather: de/böhmenkirch/89558/minute-weather-forecast/171896
 daswetter: 6823c1e09a17c26b7fa9bce8b601e68e
+dwd:
+    warncellid: 108117000
 ---

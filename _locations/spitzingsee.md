@@ -11,4 +11,6 @@ accuweather: de/spitzingsee/83727/minute-weather-forecast/178049
 windguru:
     s: 245930
     uid: wg_fwdg_245930_3_1590655757107
+dwd:
+    warncellid: 109182000
 ---
