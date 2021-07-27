@@ -4,7 +4,7 @@ import yaml
 import json
 from os import walk
 
-list_of_files = []
+list_locations = []
 directory ="_locations/"
 
 # from https://stackoverflow.com/a/3207973
@@ -20,10 +20,12 @@ for location in filenames:
                 "data": parsed_yaml,
                 "markdown": data_md
             }
-            list_of_files.append(location_dict)
+            list_locations.append(location_dict)
 
         except yaml.YAMLError as exc:
             print(exc)
 
+list_locations = sorted(list_locations, key=lambda k: k['name']) 
+
 with open('locations.json', 'w', encoding='utf-8') as f:
-    json.dump(list_of_files, f, ensure_ascii=False, indent=2)
+    json.dump(list_locations, f, ensure_ascii=False, indent=2)
