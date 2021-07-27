@@ -69,15 +69,17 @@
         <link rel="stylesheet" href="/style.css" />
     </head>
 
+    {% if page.url == "/" %}    
     <script>
-        if (location.pathname == "/" && location.search == "?pwa") {
-            let lastvisited = localStorage.getItem("lastvisited");
+        if (location.search == "?pwa") {
+            let lastvisited = localStorage.getItem("lastvisited") || "";
+            lastvisited = lastvisited.split("\n")[0]
             if (lastvisited) {
                 location.pathname = lastvisited;
             }
         }
     </script>
-    
+    {% endif %}
 
     <body>
 
