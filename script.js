@@ -15,7 +15,6 @@ function knmi_setup() {
   var knmi = document.getElementById("knmi");
   var img_animation = document.getElementById("animation");
 
-
   var interval,
     frameids = [],
     loaded = true,
