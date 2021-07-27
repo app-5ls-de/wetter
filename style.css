@@ -61,6 +61,7 @@ h1 {
     padding-right: 1rem;
     min-width: max-content;
     padding-bottom: 10rem;
+    padding-top: 1rem;
 }
 
 .liste > a {
@@ -75,11 +76,12 @@ h1 {
     padding-bottom: 1em;
 }
 
-hr {
-    margin-top: 3rem;
+.liste#lastvisited-liste {
+    padding-bottom: 1rem;
 }
 
 hr.divider {
+    margin-top: 3rem;
     margin: 15vh 0;
 }
 
