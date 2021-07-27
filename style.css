@@ -193,6 +193,61 @@ a[target="_blank"]::after {
     width: 100%;
 }
 
+.level-4 {
+    /* background-color: #880e4f; */ 
+    border: solid #880e4f 5px;
+}
+.level-3 {
+    /* background-color: #e53935; */ 
+    border: solid #e53935 5px;
+}
+.level-2 {
+    /* background-color: #fb8c00; */ 
+    border: solid #fb8c00 5px;
+}
+.level-1 {
+    /* background-color: #ffeb3b; */ 
+    border: solid #ffeb3b 5px;
+}
+
+.dwd-warn-element {
+    margin: 3rem;
+    padding: 0.5rem;
+}
+
+.dwd-warn-headline {
+    margin: 0;
+}
+
+.dwd-warn-instruction > input[type='checkbox'] {
+    display: none;
+}
+.dwd-warn-instruction > label {
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+}
+.dwd-warn-instruction > label::before {
+    content: ' ';
+    display: inline-block;
+    border-top: 0.3rem solid transparent;
+    border-bottom: 0.3rem solid transparent;
+    border-left: 0.3rem solid currentColor;
+    vertical-align: middle;
+    margin-right: 0.3rem;
+    transform: translateY(-0.1rem);
+    transition: transform .2s ease-out;
+}
+.dwd-warn-instruction > input:checked + label::before {
+    transform: rotate(90deg) translateX(-3px);
+}
+.dwd-warn-instruction > .dwd-warn-instruction-content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .25s ease-in-out;
+}
+.dwd-warn-instruction > input:checked + label  + .dwd-warn-instruction-content {
+    max-height: 100vh;
+}
 
 /* Includes */
 

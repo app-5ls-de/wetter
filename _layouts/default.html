@@ -107,6 +107,10 @@
         <a class="normal" href="/datenschutz">Datenschutz</a>
     </div>
 
+    {%- if page.dwd.warncellid -%}
+    <script src="https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json"></script>
+    {%- endif -%}
+
     <script>
         if ("serviceWorker" in navigator) {
             if (navigator.serviceWorker.controller) {
