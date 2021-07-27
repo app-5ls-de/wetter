@@ -220,13 +220,13 @@ a[target="_blank"]::after {
 .dwd-warn-headline {
     margin: 0;
 }
-
 .dwd-warn-instruction > input[type='checkbox'] {
     display: none;
 }
 .dwd-warn-instruction > label {
     cursor: pointer;
     transition: all 0.25s ease-out;
+    font-size: 0.8em;
 }
 .dwd-warn-instruction > label::before {
     content: ' ';
