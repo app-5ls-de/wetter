@@ -23,6 +23,7 @@ title: Übersicht
         lastvisited = lastvisited.split("\n");
 
         let lastvisited_liste_div = document.getElementById("lastvisited-liste");
+        lastvisited_liste_div.textContent = "";
 
         lastvisited.forEach((element) => {
             lastvisited_liste_div.appendChild(document.createElement("br"));
