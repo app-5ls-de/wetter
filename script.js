@@ -30,7 +30,32 @@ var location_data
 
 
 function display_widgets() {
+  meteoblue()
   knmi()
+}
+
+function meteoblue() {
+  if (!(location_data.meteoblue_src && location_data.meteoblue_id)) return
+
+  let meteoblue_div = document.getElementById("meteoblue")
+  meteoblue_div.classList.add("section")
+
+  let meteoblue_img = document.createElement("img")
+  meteoblue_img.src = location_data.meteoblue_src
+  if (debug) meteoblue_img.src = "https://via.placeholder.com/2220x1470?text=meteoblue"
+  meteoblue_img.alt = "meteoblue"
+  meteoblue_div.appendChild(meteoblue_img)
+
+  let meteoblue_a = document.createElement("a")
+  meteoblue_a.href = "https://www.meteoblue.com/de/wetter/woche/"+location_data.meteoblue_id
+  meteoblue_a.target = "_blank"
+  meteoblue_a.innerText = "Wetter " + location_data.name + " - meteoblue"
+  meteoblue_div.appendChild(meteoblue_a)
+  
+  let meteoblue_info_div = document.createElement("div")
+  meteoblue_info_div.classList.add("info")
+  meteoblue_info_div.innerHTML = "<a href=\"/meteoblue-hilfe\"><img src=\"/info.svg\" /></a>"
+  meteoblue_div.appendChild(meteoblue_info_div)
 }
 
 function knmi() {
