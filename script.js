@@ -33,6 +33,7 @@ function display_widgets() {
   meteoblue()
   knmi()
   accuweather_link()
+  windy_link()
 }
 
 
@@ -175,6 +176,18 @@ function accuweather_link() {
 }
 
 
+function windy_link() {
+  if (!(location_data.lat && location_data.lon)) return
+
+  let windy_div = document.getElementById("windy-link")
+  windy_div.classList.add("windy-link")
+
+  let windy_a = document.createElement("a")
+  windy_a.href = "https://windy.com/"+location_data.lat+"/"+location_data.lon+"/meteogram?rain,"+location_data.lat+","+location_data.lon+",7"
+  windy_a.target = "_blank"
+  windy_a.innerText = "Windy Meteogram (10 Tage)"
+  windy_div.appendChild(windy_a)
+}
 
 
 
