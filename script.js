@@ -32,7 +32,9 @@ var location_data
 function display_widgets() {
   meteoblue()
   knmi()
+  accuweather_link()
 }
+
 
 function meteoblue() {
   if (!(location_data.meteoblue_src && location_data.meteoblue_id)) return
@@ -57,6 +59,7 @@ function meteoblue() {
   meteoblue_info_div.innerHTML = "<a href=\"/meteoblue-hilfe\"><img src=\"/info.svg\" /></a>"
   meteoblue_div.appendChild(meteoblue_info_div)
 }
+
 
 function knmi() {
   let eu_states = "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se".split(',')
@@ -155,6 +158,20 @@ function knmi() {
 
     paused = !paused;
   });
+}
+
+
+function accuweather_link() {
+  if (!location_data.accuweather) return
+
+  let accuweather_div = document.getElementById("accuweather-link")
+  accuweather_div.classList.add("accuweather-link")
+
+  let accuweather_a = document.createElement("a")
+  accuweather_a.href = "https://www.accuweather.com/de/" + location_data.accuweather
+  accuweather_a.target = "_blank"
+  accuweather_a.innerText = "MinuteCast von Accuweather"
+  accuweather_div.appendChild(accuweather_a)
 }
 
 

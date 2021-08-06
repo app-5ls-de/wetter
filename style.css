@@ -285,7 +285,8 @@ a[target="_blank"]::after {
 }
 
 #meteoblue a::after,
-#meteoblue-einfach a::after {
+#meteoblue-einfach a::after, 
+#accuweather-link a::after {
     display: none;
 }
 
