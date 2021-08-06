@@ -10,11 +10,7 @@ title: Übersicht
 <hr>
 
 <h2>Alle Orte</h2>
-<div class="liste">
-    {%- for location in site.locations -%}
-    <a href="{{location.url}}" id="{{location.url | slugify}}">{{location.location}}</a>
-    <br>
-    {%- endfor -%}
+<div class="liste" id="all_locations">
 </div>
 
 <script>
@@ -36,7 +32,35 @@ title: Übersicht
             lastvisited_liste_a.innerText = element_reference.innerText;
         });
     }
-    show_lastvisited();
+
+    fetch("/locations.json")
+        .then((response) => {
+            if (response.ok) {
+                return Promise.resolve(response);
+            } else {
+                return Promise.reject(new Error(response.statusText));
+            }
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((data)=> {
+            let all_locations_div = document.getElementById("all_locations")
+            data.forEach(location => {
+                let location_a = document.createElement("a")
+                location_a.innerText = location.name
+                location_a.href = "/"+location.id
+                location_a.id = location.id
+                all_locations_div.appendChild(location_a)
+                all_locations_div.appendChild(document.createElement("br"))
+            });
+
+            show_lastvisited();
+        })
+        .catch((error) => {
+            console.log("Request failed", error);
+        });
+
 
     window.addEventListener("pageshow", (event) => {
     if (
