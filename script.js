@@ -34,6 +34,7 @@ function display_widgets() {
   knmi()
   accuweather_link()
   windy_link()
+  windy_map_waves()
 }
 
 
@@ -190,6 +191,36 @@ function windy_link() {
 }
 
 
+function windy_map_waves() {
+  if (!location_data.windy_waves) return
+  if (!(location_data.lat && location_data.lon)) return
+
+  let windy_map_waves_div = document.getElementById("windy-map-waves")
+  windy_map_waves_div.classList.add("windy-map")
+
+  let windy_map_waves_iframe
+  if (debug) {
+    windy_map_waves_iframe = document.createElement("img")
+    windy_map_waves_iframe.src = "https://via.placeholder.com/800?text=windy-map-waves"
+    windy_map_waves_iframe.alt = "windy-map-waves"
+    windy_map_waves_iframe.style.width = "100%"
+    windy_map_waves_iframe.style.height = "100%"
+  } else {
+    windy_map_waves_iframe = document.createElement("iframe")
+    windy_map_waves_div.classList.add("asyncIframe")
+    windy_map_waves_iframe.src = "https://embed.windy.com/embed2.html?lat="+location_data.lat+"&lon="+location_data.lon+"&zoom=10&level=surface&overlay=waves&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat="+location_data.lat+"&detailLon="+location_data.lon+"&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+    windy_map_waves_iframe.setAttribute("frameborder", "0")
+    windy_map_waves_iframe.setAttribute("importance", "low")
+  }
+  windy_map_waves_div.appendChild(windy_map_waves_iframe)
+
+  let windy_map_waves_info_div = document.createElement("div")
+  windy_map_waves_info_div.classList.add("info")
+  windy_map_waves_info_div.innerHTML = "<a href=\"https://community.windy.com/topic/3361/description-of-weather-overlays\"><img src=\"/info.svg\"></a>\n" +
+                                       "<a href=\"https://community.windy.com/topic/12/what-source-of-weather-data-windy-use\"><img src=\"/info.svg\"></a>"
+  windy_map_waves_div.appendChild(windy_map_waves_info_div)
+
+}
 
 
 
