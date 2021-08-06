@@ -3,6 +3,7 @@ exclude:
     - LICENSE
     - README.md
     - locations.py
+    - scripts/
 
 collections:
     locations:
