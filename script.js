@@ -1,4 +1,59 @@
-function knmi_setup() {
+var main_div = document.getElementById("main")
+
+var location_data
+    fetch("/locations.json")
+    .then((response) => {
+        if (response.ok) {
+            return Promise.resolve(response);
+        } else {
+            return Promise.reject(new Error(response.statusText));
+        }
+    })
+    .then((response) => {
+        return response.json();
+    })
+    .then((data)=> {
+        let location_name = window.location.pathname
+        location_name = location_name.substring(1,location_name.length-1)
+        data.forEach(element => {
+            if (element.id == location_name) {
+                location_data = element
+                // break
+
+                display_widgets()
+            }
+        });
+    })
+    .catch((error) => {
+        console.log("Request failed", error);
+    });
+
+
+function display_widgets() {
+  knmi()
+}
+
+function knmi() {
+  let eu_states = "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se".split(',')
+  if (location_data.country && !location_data.country in eu_states) return
+  
+
+  let knmi_div = document.getElementById("knmi")
+  knmi_div.classList.add("section")
+  
+  let knmi_animation_img = document.createElement("img")
+  knmi_animation_img.id = "animation"
+  knmi_animation_img.alt = "knmi"
+  knmi_div.appendChild(knmi_animation_img)
+
+  let knmi_info_div = document.createElement("div")
+  knmi_info_div.classList.add("info")
+  knmi_info_div.innerHTML = "<a href=\"/knmi-hilfe\"><img src=\"/info.svg\" /></a>"
+  knmi_div.appendChild(knmi_info_div)
+
+  var knmi_baseurl = "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/";
+  if (debug) knmi_baseurl = "https://via.placeholder.com/800x653?text=knmi+";
+
   function hour(date) {
     let hour = date.getUTCHours();
     return (hour < 10 ? "0" : "") + hour;
@@ -11,9 +66,6 @@ function knmi_setup() {
     let month = date.getUTCMonth();
     return (month < 10 ? "0" : "") + month;
   }
-
-  var knmi = document.getElementById("knmi");
-  var img_animation = document.getElementById("animation");
 
   var interval,
     frameids = [],
@@ -60,25 +112,33 @@ function knmi_setup() {
       }
 
       loaded = false;
-      img_animation.src = knmi_baseurl + frameids[index];
+      knmi_animation_img.src = knmi_baseurl + frameids[index];
     }
-    if (img_animation.complete) {
+    if (knmi_animation_img.complete) {
       loaded = true;
     }
   }
 
-  img_animation.addEventListener("load", () => {
+  knmi_animation_img.addEventListener("load", () => {
     loaded = true;
   });
   nextframe(); //show first frame
 
-  knmi.addEventListener("click", () => {
+  knmi_div.addEventListener("click", () => {
     if (paused) interval = setInterval(nextframe, 1500);
     else clearInterval(interval);
 
     paused = !paused;
   });
 }
+
+
+
+
+
+
+
+
 
 window.addEventListener("load", function () {
   let asyncIframes = document.getElementsByClassName("asyncIframe");

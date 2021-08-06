@@ -2,6 +2,8 @@
 layout: default
 ---
 
+<script>var debug = "development" == "{{jekyll.environment}}"</script>
+
 {%- include dwd-warn.html -%}
 
 {%- include daswetter.html -%}
@@ -20,7 +22,7 @@ layout: default
 {% include accuweather-link.html %}
 {% endif %}
 
-{%- include knmi.html -%}
+<div id="knmi"></div>
 
 {% include windy-map-waves.html %}
 <div>
@@ -29,10 +31,12 @@ layout: default
 </div>
 
 
+<script src="/script.js"></script>
+
 <script>
     let lastvisited = localStorage.getItem("lastvisited") || "";
     lastvisited = lastvisited.split("\n")
-    let location_name = location.pathname
+    let location_name = window.location.pathname
     location_name = location_name.substring(1,location_name.length-1)
     lastvisited.unshift(location_name)
 

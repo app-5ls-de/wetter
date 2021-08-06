@@ -83,8 +83,6 @@
 
     <body>
 
-        <script src="/script.js"></script>
-
     <div class="kopf">
         {%- if page.layout == "location" -%}
         <div class="back">
@@ -96,7 +94,7 @@
             <h1><a href="/{%- if page.layout == 'location' -%}#{{page.url | slugify}}{%- endif -%}">{%- if page.location -%}{{page.location}}{%- else -%}{{page.title}}{%- endif -%}</a></h1>
         </div>
     </div>
-    <div class="main">
+    <div class="main" id="main">
         {{content}}
     </div>
     <div class="links">
