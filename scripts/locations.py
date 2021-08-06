@@ -18,10 +18,34 @@ for location in filenames:
         try:
             parsed_yaml = yaml.safe_load(data_yaml)
             location_dict = {
-                "name": location[:-3],
-                "data": parsed_yaml,
-                "markdown": data_md
+                "id": location[:-3],
+                "name": parsed_yaml["location"],
+                "lat": parsed_yaml["coordinates"]["lat"],
+                "lon": parsed_yaml["coordinates"]["lon"],
+                "meteoblue_src": parsed_yaml["meteoblue"]["srcset"],
+                "meteoblue_id": parsed_yaml["meteoblue"]["id"],
             }
+            if "simple" in parsed_yaml["meteoblue"].keys():
+                location_dict["meteoblue_simple"] = parsed_yaml["meteoblue"]["simple"]
+            if "district" in parsed_yaml.keys():
+                location_dict["district"] = parsed_yaml["district"]
+            if "country" in parsed_yaml.keys():
+                location_dict["country"] = parsed_yaml["country"]
+            if "accuweather" in parsed_yaml.keys():
+                location_dict["accuweather"] = parsed_yaml["accuweather"]
+            if "windguru" in parsed_yaml.keys():
+                location_dict["windguru_s"] = parsed_yaml["windguru"]["s"]
+                location_dict["windguru_uid"] = parsed_yaml["windguru"]["uid"]
+            if "dwd" in parsed_yaml.keys():
+                location_dict["dwd_warncellid"] = parsed_yaml["dwd"]["warncellid"]
+            if "daswetter" in parsed_yaml.keys():
+                location_dict["daswetter"] = parsed_yaml["daswetter"]
+            if "windy" in parsed_yaml.keys():
+                location_dict["windy_waves"] = parsed_yaml["windy"]["waves"]
+            if "daswetter" in parsed_yaml.keys():
+                location_dict["daswetter"] = parsed_yaml["daswetter"]
+
+            location_dict = dict(sorted(location_dict.items()))
             list_locations.append(location_dict)
 
         except yaml.YAMLError as exc:
