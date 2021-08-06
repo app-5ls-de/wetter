@@ -36,6 +36,7 @@ function display_widgets() {
   windy_link()
   windy_map()
   windy_map("waves")
+  dwd_warn()
 }
 
 
@@ -228,7 +229,20 @@ function windy_map(overlay_type) {
   windy_map_info_div.innerHTML = "<a href=\"https://community.windy.com/topic/3361/description-of-weather-overlays\"><img src=\"/info.svg\"></a>\n" +
                                        "<a href=\"https://community.windy.com/topic/12/what-source-of-weather-data-windy-use\"><img src=\"/info.svg\"></a>"
   windy_map_div.appendChild(windy_map_info_div)
+}
 
+
+function dwd_warn() {
+  if (!location_data.dwd_warncellid) return
+  
+  let dwd_warn_div = document.getElementById("dwd-warn")
+  dwd_warn_div.classList.add("section")
+  
+  if (!debug) {
+    let dwd_warn_script = document.createElement("script")
+    dwd_warn_script.src = "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json"
+    document.body.appendChild(dwd_warn_script)
+  }
 }
 
 
@@ -244,7 +258,8 @@ window.addEventListener("load", function () {
 
 warnWetter = {};
 warnWetter.loadWarnings = function (dwd_json) {
-  var dwd_warn = document.getElementById("dwd-warn");
+  let dwd_warn_div = document.getElementById("dwd-warn");
+  let dwd_warncellid = location_data.dwd_warncellid
 
   let alerts = dwd_json.warnings[dwd_warncellid] || [];
   let prealerts = dwd_json.vorabInformation[dwd_warncellid] || [];
@@ -332,6 +347,6 @@ warnWetter.loadWarnings = function (dwd_json) {
     alert_instruction.appendChild(alert_instruction_content);
 
     alert_div.appendChild(alert_instruction);
-    dwd_warn.appendChild(alert_div);
+    dwd_warn_div.appendChild(alert_div);
   });
 };
