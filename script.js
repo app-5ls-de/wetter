@@ -35,6 +35,7 @@ function display_widgets() {
   accuweather_link()
   windy_link()
   windy_map_waves()
+  windy_map_waves("waves")
 }
 
 
@@ -191,24 +192,32 @@ function windy_link() {
 }
 
 
-function windy_map_waves() {
-  if (!location_data.windy_waves) return
+function windy_map_waves(overlay_type) {
+  if (overlay_type == "waves" && !location_data.windy_waves) return
   if (!(location_data.lat && location_data.lon)) return
 
-  let windy_map_waves_div = document.getElementById("windy-map-waves")
+  let windy_map_waves_div = document.getElementById("windy-map")
+  if (overlay_type == "waves") windy_map_waves_div = document.getElementById("windy-map-waves")
   windy_map_waves_div.classList.add("windy-map")
 
   let windy_map_waves_iframe
   if (debug) {
     windy_map_waves_iframe = document.createElement("img")
-    windy_map_waves_iframe.src = "https://via.placeholder.com/800?text=windy-map-waves"
-    windy_map_waves_iframe.alt = "windy-map-waves"
+    windy_map_waves_iframe.src = "https://via.placeholder.com/800?text=windy-map"
+    windy_map_waves_iframe.alt = "windy-map"
+    if (overlay_type == "waves") {
+      windy_map_waves_iframe.src += "-waves"
+      windy_map_waves_iframe.alt += "-waves"
+    }
     windy_map_waves_iframe.style.width = "100%"
     windy_map_waves_iframe.style.height = "100%"
   } else {
     windy_map_waves_iframe = document.createElement("iframe")
     windy_map_waves_div.classList.add("asyncIframe")
-    windy_map_waves_iframe.src = "https://embed.windy.com/embed2.html?lat="+location_data.lat+"&lon="+location_data.lon+"&zoom=10&level=surface&overlay=waves&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat="+location_data.lat+"&detailLon="+location_data.lon+"&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+    windy_map_waves_iframe.src = "https://embed.windy.com/embed2.html?lat="+location_data.lat+"&lon="+location_data.lon+"&zoom=7&level=surface&overlay=rain&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat="+location_data.lat+"&detailLon="+location_data.lon+"&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+    if (overlay_type == "waves") {
+      windy_map_waves_iframe.src = "https://embed.windy.com/embed2.html?lat="+location_data.lat+"&lon="+location_data.lon+"&zoom=10&level=surface&overlay=waves&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat="+location_data.lat+"&detailLon="+location_data.lon+"&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+    }
     windy_map_waves_iframe.setAttribute("frameborder", "0")
     windy_map_waves_iframe.setAttribute("importance", "low")
   }
