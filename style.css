@@ -399,3 +399,36 @@ h1 {
 #daswetter > img {
   width: 100%;
 }
+
+.search {
+  display: inline;
+  border: 2px solid #ccc;
+  border-radius: 100px;
+  padding: 15px 20px;
+  transition: background-color 0.5 ease-in-out;
+  position: relative;
+  text-align: center;
+}
+.search input {
+  border: 0;
+  background-color: transparent;
+  width: 200px;
+  font-size: 1.5em;
+  margin: 2rem 0;
+}
+.search input:focus {
+  outline: none;
+}
+.search img {
+  border: none;
+  background: none;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  height: 1.4rem;
+  margin-top: -0.7rem;
+  margin-left: -1rem;
+}
+.search select {
+  border: none;
+}

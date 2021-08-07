@@ -3,15 +3,48 @@ layout: default
 title: Übersicht
 ---
 
-<h2>Zuletzt Besucht</h2>
-<div class="liste" id="lastvisited-liste"></div>
+<div class="search">
+  <input id="search" type="text" placeholder="loading..." />
+  <img src="search.svg" />
+</div>
+<div class="liste" id="search-liste"></div>
 
-<hr />
-
-<h2>Alle Orte</h2>
-<div class="liste" id="all_locations"></div>
+<script src="https://cdn.jsdelivr.net/npm/fuzzysort@1.1.4/fuzzysort.min.js"></script>
 
 <script>
+  var search_input = document.getElementById("search");
+  var search_liste_div = document.getElementById("search-liste");
+
+  search_input.addEventListener("input", (e) => {
+    show_search_results();
+  });
+  search_input.addEventListener("keyup", ({ key }) => {
+    if (key === "Enter") {
+      console.log("Enter");
+    }
+  });
+
+  function show_search_results() {
+    let input = search_input.value;
+    if (!input || !locations_data) return;
+
+    const results = fuzzysort.go(input, locations_data, {
+      threshold: -Infinity,
+      limit: 5,
+      allowTypo: true,
+      key: "name",
+    });
+
+    search_liste_div.textContent = "";
+    results.forEach((result) => {
+      let location_a = document.createElement("a");
+      location_a.innerHTML = fuzzysort.highlight(result);
+      location_a.href = "/show?location=" + result.obj.id;
+      search_liste_div.appendChild(location_a);
+      search_liste_div.appendChild(document.createElement("br"));
+    });
+  }
+
   function show_lastvisited() {
     let lastvisited;
     try {
@@ -20,18 +53,26 @@ title: Übersicht
       lastvisited = [];
     }
 
-    let lastvisited_liste_div = document.getElementById("lastvisited-liste");
-    lastvisited_liste_div.textContent = "";
-
+    search_liste_div.textContent = "";
     lastvisited.forEach((element) => {
-      lastvisited_liste_div.appendChild(document.createElement("br"));
-
-      let lastvisited_liste_a = document.createElement("a");
-      lastvisited_liste_a.href = "/show?location=" + element.id;
-      lastvisited_liste_div.appendChild(lastvisited_liste_a);
-      lastvisited_liste_a.innerText = element.name;
+      let location_a = document.createElement("a");
+      location_a.innerText = element.name;
+      location_a.href = "/show?location=" + element.id;
+      search_liste_div.appendChild(location_a);
+      search_liste_div.appendChild(document.createElement("br"));
     });
   }
+
+  show_lastvisited();
+  window.addEventListener("pageshow", (event) => {
+    if (
+      event.persisted ||
+      (typeof window.performance != "undefined" &&
+        window.performance.navigation.type === 2)
+    )
+      show_lastvisited();
+  });
+  var locations_data;
 
   fetch("/locations.json")
     .then((response) => {
@@ -45,28 +86,11 @@ title: Übersicht
       return response.json();
     })
     .then((data) => {
-      let all_locations_div = document.getElementById("all_locations");
-      data.forEach((location) => {
-        let location_a = document.createElement("a");
-        location_a.innerText = location.name;
-        location_a.href = "/show?location=" + location.id;
-        location_a.id = location.id;
-        all_locations_div.appendChild(location_a);
-        all_locations_div.appendChild(document.createElement("br"));
-      });
-
-      show_lastvisited();
+      locations_data = data;
+      search_input.setAttribute("placeholder", "Suche");
+      show_search_results();
     })
     .catch((error) => {
       console.log("Request failed", error);
     });
-
-  window.addEventListener("pageshow", (event) => {
-    if (
-      event.persisted ||
-      (typeof window.performance != "undefined" &&
-        window.performance.navigation.type === 2)
-    )
-      show_lastvisited();
-  });
 </script>

@@ -14,6 +14,7 @@ const PRECACHE_URLS = [
     "/favicon.ico",
     "/info.svg",
     "/back.svg",
+    "search.svg",
     "/icons/android-chrome-192x192.png",
     "/icons/android-chrome-512x512.png",
     "/icons/maskable_icon.png",
