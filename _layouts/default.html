@@ -46,14 +46,6 @@
         <meta name="msapplication-config" content="/icons/browserconfig.xml" />
         <meta name="theme-color" content="#ffffff" />
 
-        {%- if page.url == "/karte.html" -%}
-        <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.css"
-        />
-        <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.min.js"></script>
-        {% endif %}
-
         <title>
             {%- if page.location -%}
                 {{page.location}} - Wetter
@@ -99,7 +91,6 @@
     </div>
     <div class="links">
         <a href="/">Übersicht aller Orte</a>
-        <a href="/karte">Karte</a>
         <a href="/quellen">Quellen</a>
     </div>
     <div class="legal">
