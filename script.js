@@ -39,6 +39,7 @@ function display_widgets() {
   dwd_warn()
   dwd_trend()
   meteoblue_simple()
+  daswetter()
 }
 
 
@@ -345,6 +346,19 @@ function meteoblue_simple() {
   let meteoblue_simple_hr = document.createElement("hr")
   meteoblue_simple_hr.classList.add("divider")
   meteoblue_simple_div.parentNode.insertBefore(meteoblue_simple_hr, meteoblue_simple_div.nextSibling)
+}
+
+
+function daswetter() {
+  if (!location_data.daswetter) return
+  let daswetter_div = document.getElementById("daswetter")
+  daswetter_div.classList.add("section")
+  
+  let daswetter_img = document.createElement("img")
+  daswetter_img.src = "https://www.daswetter.com/wimages/foto" + location_data.daswetter + ".png"
+  if (debug) daswetter_img.src = "https://via.placeholder.com/776x185?text=daswetter"
+  daswetter_img.alt = "daswetter"
+  daswetter_div.appendChild(daswetter_img)
 }
 
 
