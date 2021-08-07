@@ -261,17 +261,17 @@ a[target="_blank"]::after {
     width: 100%;
 }
 
-#meteoblue-einfach {
+#meteoblue-simple {
     text-align: center;
 }
 
 #meteoblue a,
-#meteoblue-einfach a {
+#meteoblue-simple a {
     display: unset !important;
 }
 
 #meteoblue > p,
-#meteoblue-einfach > p {
+#meteoblue-simple > p {
     margin: 0;
 }
 
@@ -280,19 +280,19 @@ a[target="_blank"]::after {
 }
 
 #meteoblue a::before,
-#meteoblue-einfach a::before {
+#meteoblue-simple a::before {
     display: none;
 }
 
 #meteoblue a::after,
-#meteoblue-einfach a::after, 
+#meteoblue-simple a::after, 
 #accuweather-link a::after, 
 #windy-link a::after {
     display: none;
 }
 
 #meteoblue a,
-#meteoblue-einfach a {
+#meteoblue-simple a {
     font-size: 1rem;
     line-height: 1rem;
 }
@@ -388,13 +388,13 @@ h1 {
     margin-left: -25px;
 }
 
-#meteoblue-einfach {
+#meteoblue-simple {
     border: 2px solid #d7d7d7;
     max-width: 100%;
     overflow-x: auto;
 }
 
-#meteoblue-einfach,
+#meteoblue-simple,
 #daswetter,
 #windguru,
 #daswetter > img {

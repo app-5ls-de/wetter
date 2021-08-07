@@ -38,6 +38,7 @@ function display_widgets() {
   windy_map("waves")
   dwd_warn()
   dwd_trend()
+  meteoblue_simple()
 }
 
 
@@ -246,6 +247,7 @@ function dwd_warn() {
   }
 }
 
+
 function dwd_trend() {  
   if (!location_data.district) return
   
@@ -306,6 +308,48 @@ function dwd_trend() {
   dwd_trend_div.appendChild(dwd_trend_info_div)
 
 }
+
+
+function meteoblue_simple() {
+  if (!(location_data.meteoblue_simple && location_data.meteoblue_id)) return
+
+  let meteoblue_simple_div = document.getElementById("meteoblue-simple")
+  meteoblue_simple_div.classList.add("section")
+  
+  let meteoblue_simple_iframe
+  if (debug) {
+    meteoblue_simple_iframe = document.createElement("img")
+    meteoblue_simple_iframe.src = "https://via.placeholder.com/805x623?text=meteoblue-simple"
+  } else {
+    meteoblue_simple_iframe = document.createElement("iframe")
+    meteoblue_simple_iframe.src = "https://www.meteoblue.com/de/wetter/widget/three/"+location_data.meteoblue_id+"?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=bright"
+    meteoblue_simple_iframe.setAttribute("frameborder", "0")
+    meteoblue_simple_iframe.setAttribute("scrolling", "NO")
+    meteoblue_simple_iframe.setAttribute("allowtransparency", "true")
+    meteoblue_simple_iframe.setAttribute("sandbox", "allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox")
+  }
+  meteoblue_simple_iframe.alt = "meteoblue-simple"
+  meteoblue_simple_iframe.style.width = "805px"
+  meteoblue_simple_iframe.style.height = "623px"
+  meteoblue_simple_div.appendChild(meteoblue_simple_iframe)
+
+  let meteoblue_simple_a = document.createElement("a")
+  meteoblue_simple_a.href = "https://www.meteoblue.com/de/wetter/woche/"+location_data.meteoblue_id+"?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget"
+  meteoblue_simple_a.target = "_blank"
+  meteoblue_simple_a.innerText = "meteoblue"
+  
+  let meteoblue_simple_a_div = document.createElement("div")
+  meteoblue_simple_a_div.appendChild(meteoblue_simple_a)
+  meteoblue_simple_div.appendChild(meteoblue_simple_a_div)
+
+  let meteoblue_simple_hr = document.createElement("hr")
+  meteoblue_simple_hr.classList.add("divider")
+  meteoblue_simple_div.parentNode.insertBefore(meteoblue_simple_hr, meteoblue_simple_div.nextSibling)
+}
+
+
+
+
 
 
 
