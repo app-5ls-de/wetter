@@ -40,6 +40,7 @@ function display_widgets() {
   dwd_trend()
   meteoblue_simple()
   daswetter()
+  windguru()
 }
 
 
@@ -359,6 +360,40 @@ function daswetter() {
   if (debug) daswetter_img.src = "https://via.placeholder.com/776x185?text=daswetter"
   daswetter_img.alt = "daswetter"
   daswetter_div.appendChild(daswetter_img)
+}
+
+
+function windguru() {
+  if (!(location_data.windguru_uid && location_data.windguru_s)) return
+  let windguru_div = document.getElementById("windguru")
+  windguru_div.classList.add("section")
+
+  let windguru_loading_div = document.createElement("div")
+  windguru_loading_div.classList.add("loading")
+
+  if (debug) {
+    let windguru_img = document.createElement("img")
+    windguru_img.src = "https://via.placeholder.com/800x512?text=windguru"
+    windguru_img.alt = "windguru"
+    windguru_img.style.width = "100%"
+    windguru_img.style.height = "512px"
+    windguru_loading_div.appendChild(windguru_img)
+  } else {
+    let windguru_reference_script = document.createElement("script")
+    windguru_reference_script.id = location_data.windguru_uid
+    windguru_loading_div.appendChild(windguru_reference_script)
+
+    let arg = ["s="+location_data.windguru_s, "m=3", "uid="+location_data.windguru_uid, "wj=knots", "tj=c", "odh=0", "doh=24", "fhours=240", "vt=fcst_graph", "lng=de"];
+    let windguru_script = document.createElement("script");
+    windguru_script.src = "https://www.windguru.cz/js/widget.php?" + (arg.join("&"));
+    document.body.appendChild(windguru_script); 
+  }
+  windguru_div.appendChild(windguru_loading_div)
+
+  let windguru_info_div = document.createElement("div")
+  windguru_info_div.classList.add("info")
+  windguru_info_div.innerHTML = "<a href=\"/windguru-hilfe.png\"><img src=\"/info.svg\"></a>"
+  windguru_div.appendChild(windguru_info_div)
 }
 
 
