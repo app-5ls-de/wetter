@@ -29,7 +29,11 @@ title: Übersicht
             lastvisited_liste_div.appendChild(lastvisited_liste_a);
 
             let element_reference = document.getElementById(element);
-            lastvisited_liste_a.innerText = element_reference.innerText;
+            if (element_reference) {                
+                lastvisited_liste_a.innerText = element_reference.innerText;
+            } else {
+                lastvisited_liste_a.innerText = element;
+            }
         });
     }
 

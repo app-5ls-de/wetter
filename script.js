@@ -15,15 +15,19 @@ fetch("/locations.json")
   .then((data) => {
     let params = new URLSearchParams(window.location.search);
     let location_name = params.get("location");
-    data.forEach((element) => {
-      if (element.id == location_name) {
-        location_data = element;
-        // break
-        document.getElementById("title-link").innerText = location_data.name
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].id == location_name) {
+        location_data = data[i];
+        document.getElementById("title-link").innerText = location_data.name;
 
         display_widgets();
+        break;
       }
-    });
+    }
+    if (!location_data) {
+      localStorage.removeItem("lastvisited");
+      window.location.href = window.location.origin;
+    }
   })
   .catch((error) => {
     console.log("Request failed", error);
