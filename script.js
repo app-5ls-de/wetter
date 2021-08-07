@@ -37,6 +37,7 @@ function display_widgets() {
   windy_map()
   windy_map("waves")
   dwd_warn()
+  dwd_trend()
 }
 
 
@@ -244,6 +245,68 @@ function dwd_warn() {
     document.body.appendChild(dwd_warn_script)
   }
 }
+
+function dwd_trend() {  
+  if (!location_data.district) return
+  
+  let id_mapping = {
+    'bw': '10738',
+    'by': '10870',
+    'be': '10382',
+    'bb': '10379',
+    'hb': '10224',
+    'hh': '10147',
+    'he': '10633',
+    'mv': '10162',
+    'ni': '10338',
+    'nw': '10400',
+    'rp': '10708',
+    'sl': 'K2613',
+    'sn': '10488',
+    'st': '10361',
+    'sh': '10046',
+    'th': '10554'
+  }
+
+  /* 
+  bw Baden-Württemberg
+  by Bayern
+  be Berlin
+  bb Brandenburg
+  hb Bremen
+  hh Hamburg
+  he Hessen
+  mv Mecklenburg-Vorpommern
+  ni Niedersachsen
+  nw Nordrhein-Westfalen
+  rp Rheinland-Pfalz
+  sl Saarland
+  sn Sachsen
+  st Sachsen-Anhalt
+  sh Schleswig-Holstein
+  th Thüringen
+  */
+
+  if (!location_data.district in Object.keys(id_mapping)) return
+  
+  let id = id_mapping[location_data.district]
+
+  let dwd_trend_div = document.getElementById("dwd-trend")
+  dwd_trend_div.classList.add("section")
+  
+  let dwd_trend_img = document.createElement("img")
+  dwd_trend_img.src = "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" + id + ".png"
+  if (debug) dwd_trend_img.src = "https://via.placeholder.com/950x680?text=dwd-trend"
+  dwd_trend_img.alt = "dwd-trend"
+  dwd_trend_div.appendChild(dwd_trend_img)
+  
+  let dwd_trend_info_div = document.createElement("div")
+  dwd_trend_info_div.classList.add("info")
+  dwd_trend_info_div.innerHTML = "<a href=\"https://www.dwd.de/DE/leistungen/trendvorhersage_regional/legende_trend_kurz.png?__blob=normal&v=5\"><img src=\"/info.svg\"/></a>"
+  dwd_trend_div.appendChild(dwd_trend_info_div)
+
+}
+
 
 
 
