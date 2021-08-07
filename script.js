@@ -20,6 +20,7 @@ fetch("/locations.json")
         location_data = data[i];
         document.getElementById("title-link").innerText = location_data.name;
 
+        save_location();
         display_widgets();
         break;
       }
@@ -560,3 +561,23 @@ warnWetter.loadWarnings = function (dwd_json) {
     dwd_warn_div.appendChild(alert_div);
   });
 };
+
+function save_location() {
+  let lastvisited;
+  try {
+    lastvisited = JSON.parse(localStorage.getItem("lastvisited")) || [];
+  } catch (e) {
+    lastvisited = [];
+  }
+
+  lastvisited = lastvisited.filter((element) => element.id != location_data.id);
+
+  lastvisited.unshift({
+    id: location_data.id,
+    name: location_data.name,
+  });
+
+  lastvisited = lastvisited.slice(0, 3);
+
+  localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
+}
