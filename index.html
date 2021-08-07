@@ -4,74 +4,71 @@ title: Übersicht
 ---
 
 <h2>Zuletzt Besucht</h2>
-<div class="liste" id="lastvisited-liste">
-</div>
+<div class="liste" id="lastvisited-liste"></div>
 
-<hr>
+<hr />
 
 <h2>Alle Orte</h2>
-<div class="liste" id="all_locations">
-</div>
+<div class="liste" id="all_locations"></div>
 
 <script>
-    function show_lastvisited() {
-        let lastvisited = localStorage.getItem("lastvisited") || "";
-        lastvisited = lastvisited.split("\n");
+  function show_lastvisited() {
+    let lastvisited = localStorage.getItem("lastvisited") || "";
+    lastvisited = lastvisited.split("\n");
 
-        let lastvisited_liste_div = document.getElementById("lastvisited-liste");
-        lastvisited_liste_div.textContent = "";
+    let lastvisited_liste_div = document.getElementById("lastvisited-liste");
+    lastvisited_liste_div.textContent = "";
 
-        lastvisited.forEach((element) => {
-            lastvisited_liste_div.appendChild(document.createElement("br"));
+    lastvisited.forEach((element) => {
+      lastvisited_liste_div.appendChild(document.createElement("br"));
 
-            let lastvisited_liste_a = document.createElement("a");
-            lastvisited_liste_a.href = "/show?location=" + element;
-            lastvisited_liste_div.appendChild(lastvisited_liste_a);
+      let lastvisited_liste_a = document.createElement("a");
+      lastvisited_liste_a.href = "/show?location=" + element;
+      lastvisited_liste_div.appendChild(lastvisited_liste_a);
 
-            let element_reference = document.getElementById(element);
-            if (element_reference) {                
-                lastvisited_liste_a.innerText = element_reference.innerText;
-            } else {
-                lastvisited_liste_a.innerText = element;
-            }
-        });
-    }
+      let element_reference = document.getElementById(element);
+      if (element_reference) {
+        lastvisited_liste_a.innerText = element_reference.innerText;
+      } else {
+        lastvisited_liste_a.innerText = element;
+      }
+    });
+  }
 
-    fetch("/locations.json")
-        .then((response) => {
-            if (response.ok) {
-                return Promise.resolve(response);
-            } else {
-                return Promise.reject(new Error(response.statusText));
-            }
-        })
-        .then((response) => {
-            return response.json();
-        })
-        .then((data)=> {
-            let all_locations_div = document.getElementById("all_locations")
-            data.forEach(location => {
-                let location_a = document.createElement("a")
-                location_a.innerText = location.name
-                location_a.href = "/show?location="+location.id
-                location_a.id = location.id
-                all_locations_div.appendChild(location_a)
-                all_locations_div.appendChild(document.createElement("br"))
-            });
+  fetch("/locations.json")
+    .then((response) => {
+      if (response.ok) {
+        return Promise.resolve(response);
+      } else {
+        return Promise.reject(new Error(response.statusText));
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      let all_locations_div = document.getElementById("all_locations");
+      data.forEach((location) => {
+        let location_a = document.createElement("a");
+        location_a.innerText = location.name;
+        location_a.href = "/show?location=" + location.id;
+        location_a.id = location.id;
+        all_locations_div.appendChild(location_a);
+        all_locations_div.appendChild(document.createElement("br"));
+      });
 
-            show_lastvisited();
-        })
-        .catch((error) => {
-            console.log("Request failed", error);
-        });
-
-
-    window.addEventListener("pageshow", (event) => {
-    if (
-        event.persisted ||
-        (typeof window.performance != "undefined" &&
-        window.performance.navigation.type === 2)
-    ) show_lastvisited();
+      show_lastvisited();
+    })
+    .catch((error) => {
+      console.log("Request failed", error);
     });
 
+  window.addEventListener("pageshow", (event) => {
+    if (
+      event.persisted ||
+      (typeof window.performance != "undefined" &&
+        window.performance.navigation.type === 2)
+    )
+      show_lastvisited();
+  });
 </script>

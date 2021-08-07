@@ -104,7 +104,16 @@ title: This
       }
 
       let iframe_windy = document.createElement("iframe");
-      iframe_windy.src = "https://embed.windy.com/embed2.html?lat="+datas.lat+"&lon="+datas.lon+"&detailLat="+datas.lat+"&detailLon="+datas.lon+"&width=650&height=450&zoom=7&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1"
+      iframe_windy.src =
+        "https://embed.windy.com/embed2.html?lat=" +
+        datas.lat +
+        "&lon=" +
+        datas.lon +
+        "&detailLat=" +
+        datas.lat +
+        "&detailLon=" +
+        datas.lon +
+        "&width=650&height=450&zoom=7&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
       iframe_windy.setAttribute("frameborder", "0");
       iframe_windy.setAttribute("width", "650");
       iframe_windy.setAttribute("height", "450");
