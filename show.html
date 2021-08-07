@@ -1,0 +1,41 @@
+---
+layout: default
+---
+
+<script>var debug = "development" == "{{jekyll.environment}}"</script>
+
+<div id="dwd-warn"></div>
+
+<div id="daswetter"></div>
+
+<div id="meteoblue-simple"></div>
+
+<div id="windguru"></div>
+
+<div id="meteoblue"></div>
+<div id="dwd-trend"></div>
+
+<div id="accuweather-link"></div>
+
+<div id="knmi"></div>
+
+<div id="windy-map-waves"></div>
+<div>
+    <div id="windy-map"></div>
+    <div id="windy-link"></div>
+</div>
+
+
+<script src="/script.js"></script>
+
+<script>
+    let lastvisited = localStorage.getItem("lastvisited") || "";
+    lastvisited = lastvisited.split("\n")
+    let params = new URLSearchParams(window.location.search);
+    let location_name = params.get("location");
+    lastvisited.unshift(location_name)
+
+    lastvisited = lastvisited.filter((value, index, self) => self.indexOf(value) === index);
+
+    localStorage.setItem("lastvisited", lastvisited.slice(0, 3).join("\n"))
+</script>

@@ -13,12 +13,13 @@ fetch("/locations.json")
     return response.json();
   })
   .then((data) => {
-    let location_name = window.location.pathname;
-    location_name = location_name.substring(1, location_name.length - 1);
+    let params = new URLSearchParams(window.location.search);
+    let location_name = params.get("location");
     data.forEach((element) => {
       if (element.id == location_name) {
         location_data = element;
         // break
+        document.getElementById("title-link").innerText = location_data.name
 
         display_widgets();
       }

@@ -6,11 +6,12 @@ const RUNTIME = "runtime";
 const PRECACHE_URLS = [
     "/",
     "/index.html",
+    "/show.html",
+    "/locations.json",
     "/404.html",
     "/style.css",
     "/manifest.json",
     "/favicon.ico",
-    "/icon.svg",
     "/info.svg",
     "/back.svg",
     "/icons/android-chrome-192x192.png",

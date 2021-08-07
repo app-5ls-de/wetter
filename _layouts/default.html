@@ -47,7 +47,7 @@
         <meta name="theme-color" content="#ffffff" />
 
         <title>
-            {%- if page.location -%}
+            {%- if page.url == "/show.html" -%}
                 {{page.location}} - Wetter
             {%- else -%}
                 {%- if page.title -%}
@@ -76,14 +76,14 @@
     <body>
 
     <div class="kopf">
-        {%- if page.layout == "location" -%}
+        {%- if page.url == "/show.html" -%}
         <div class="back">
             <a class="normal" href="/"><img src="/back.svg" alt=""></a>
         </div>
         {%- endif -%}
         <div class="mitte">
             <img src="/icon.svg" alt="">
-            <h1><a href="/{%- if page.layout == 'location' -%}#{{page.url | slugify}}{%- endif -%}">{%- if page.location -%}{{page.location}}{%- else -%}{{page.title}}{%- endif -%}</a></h1>
+            <h1><a id="title-link" href="/">{{page.title}}</a></h1>
         </div>
     </div>
     <div class="main" id="main">
