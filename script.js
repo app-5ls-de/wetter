@@ -1,4 +1,5 @@
 var main_div = document.getElementById("main");
+var widgets_div = document.getElementById("widgets");
 
 var location_data;
 fetch("/locations.json")
@@ -51,8 +52,10 @@ function display_widgets() {
 function meteoblue() {
   if (!(location_data.meteoblue_src && location_data.meteoblue_id)) return;
 
-  let meteoblue_div = document.getElementById("meteoblue");
+  let meteoblue_div = document.createElement("div");
+  meteoblue_div.id = "meteoblue";
   meteoblue_div.classList.add("section");
+  widgets_div.appendChild(meteoblue_div);
 
   let meteoblue_img = document.createElement("img");
   meteoblue_img.src = location_data.meteoblue_src;
@@ -82,8 +85,10 @@ function knmi() {
     );
   if (location_data.country && !location_data.country in eu_states) return;
 
-  let knmi_div = document.getElementById("knmi");
+  let knmi_div = document.createElement("div");
+  knmi_div.id = "knmi";
   knmi_div.classList.add("section");
+  widgets_div.appendChild(knmi_div);
 
   let knmi_animation_img = document.createElement("img");
   knmi_animation_img.id = "animation";
@@ -180,8 +185,10 @@ function knmi() {
 function accuweather_link() {
   if (!location_data.accuweather) return;
 
-  let accuweather_div = document.getElementById("accuweather-link");
+  let accuweather_div = document.createElement("div");
+  accuweather_div.id = "accuweather-link";
   accuweather_div.classList.add("accuweather-link");
+  widgets_div.appendChild(accuweather_div);
 
   let accuweather_a = document.createElement("a");
   accuweather_a.href =
@@ -194,8 +201,10 @@ function accuweather_link() {
 function windy_link() {
   if (!(location_data.lat && location_data.lon)) return;
 
-  let windy_div = document.getElementById("windy-link");
+  let windy_div = document.createElement("div");
+  windy_div.id = "windy-link";
   windy_div.classList.add("windy-link");
+  widgets_div.appendChild(windy_div);
 
   let windy_a = document.createElement("a");
   windy_a.href =
@@ -217,10 +226,11 @@ function windy_map(overlay_type) {
   if (overlay_type == "waves" && !location_data.windy_waves) return;
   if (!(location_data.lat && location_data.lon)) return;
 
-  let windy_map_div = document.getElementById("windy-map");
-  if (overlay_type == "waves")
-    windy_map_div = document.getElementById("windy-map-waves");
+  let windy_map_div = document.createElement("div");
+  windy_map_div.id = "windy-map";
+  if (overlay_type == "waves") windy_map_div.id = "windy-map-waves";
   windy_map_div.classList.add("windy-map");
+  widgets_div.appendChild(windy_map_div);
 
   let windy_map_iframe;
   if (debug) {
@@ -274,8 +284,10 @@ function windy_map(overlay_type) {
 function dwd_warn() {
   if (!location_data.dwd_warncellid) return;
 
-  let dwd_warn_div = document.getElementById("dwd-warn");
+  let dwd_warn_div = document.createElement("div");
+  dwd_warn_div.id = "dwd-warn";
   dwd_warn_div.classList.add("section");
+  widgets_div.appendChild(dwd_warn_div);
 
   if (!debug) {
     let dwd_warn_script = document.createElement("script");
@@ -330,8 +342,10 @@ function dwd_trend() {
 
   let id = id_mapping[location_data.district];
 
-  let dwd_trend_div = document.getElementById("dwd-trend");
+  let dwd_trend_div = document.createElement("div");
+  dwd_trend_div.id = "dwd-trend";
   dwd_trend_div.classList.add("section");
+  widgets_div.appendChild(dwd_trend_div);
 
   let dwd_trend_img = document.createElement("img");
   dwd_trend_img.src =
@@ -353,8 +367,10 @@ function dwd_trend() {
 function meteoblue_simple() {
   if (!(location_data.meteoblue_simple && location_data.meteoblue_id)) return;
 
-  let meteoblue_simple_div = document.getElementById("meteoblue-simple");
+  let meteoblue_simple_div = document.createElement("div");
+  meteoblue_simple_div.id = "meteoblue-simple";
   meteoblue_simple_div.classList.add("section");
+  widgets_div.appendChild(meteoblue_simple_div);
 
   let meteoblue_simple_iframe;
   if (debug) {
@@ -402,8 +418,10 @@ function meteoblue_simple() {
 
 function daswetter() {
   if (!location_data.daswetter) return;
-  let daswetter_div = document.getElementById("daswetter");
+  let daswetter_div = document.createElement("div");
+  daswetter_div.id = "daswetter";
   daswetter_div.classList.add("section");
+  widgets_div.appendChild(daswetter_div);
 
   let daswetter_img = document.createElement("img");
   daswetter_img.src =
@@ -416,8 +434,11 @@ function daswetter() {
 
 function windguru() {
   if (!(location_data.windguru_uid && location_data.windguru_s)) return;
-  let windguru_div = document.getElementById("windguru");
+
+  let windguru_div = document.createElement("div");
+  windguru_div.id = "windguru";
   windguru_div.classList.add("section");
+  widgets_div.appendChild(windguru_div);
 
   let windguru_loading_div = document.createElement("div");
   windguru_loading_div.classList.add("loading");
@@ -570,7 +591,9 @@ function save_location() {
     lastvisited = [];
   }
 
-  lastvisited = lastvisited.filter((element) => element.name != location_data.name);
+  lastvisited = lastvisited.filter(
+    (element) => element.name != location_data.name
+  );
 
   lastvisited.unshift({
     name: location_data.name,
