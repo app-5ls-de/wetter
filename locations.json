@@ -89,7 +89,7 @@
     "lon": 8.683333,
     "meteoblue_id": "frankfurt-am-main_deutschland_2925533",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Frankfurt+am+Main&iso2=de&lat=50.115501&lon=8.684170&asl=113&tz=Europe%2FBerlin&lang=de&sig=4277526e53a305140d6bfeab6165001f",
-    "name": "Frankfurt"
+    "name": "Frankfurt am Main"
   },
   {
     "accuweather": "de/freiburg-im-breisgau/79098/minute-weather-forecast/167209",
@@ -111,7 +111,7 @@
     "lon": 9.830556,
     "meteoblue_id": "geislingen-an-der-steige_deutschland_2921653",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Geislingen+an+der+Steige&iso2=de&lat=48.624199&lon=9.827360&asl=426&tz=Europe%2FBerlin&lang=de&sig=fac367a37d53be296c64678ef09ac0ab",
-    "name": "Geislingen"
+    "name": "Geislingen an der Steige"
   },
   {
     "accuweather": "de/göttingen/37073/minute-weather-forecast/169816",
@@ -166,7 +166,7 @@
     "lon": 11.42434,
     "meteoblue_id": "ingolstadt_deutschland_2895992",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Ingolstadt&iso2=de&lat=48.7651&lon=11.4237&asl=379&tz=Europe%2FBerlin&lang=de&sig=a19a41572fa9657137946bd967b6f824",
-    "name": "Ingolstadt"
+    "name": "Ingolstadt, Donau"
   },
   {
     "accuweather": "de/landau/76829/minute-weather-forecast/174595",
@@ -253,7 +253,7 @@
     "lon": 14.005556,
     "meteoblue_id": "senftenberg_deutschland_2833073",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Senftenberg&iso2=de&lat=51.5252&lon=14.0016&asl=104&tz=Europe%2FBerlin&lang=de&sig=8cf90774bb3c2bb049ed8f4e481d1b66",
-    "name": "Senftenberg"
+    "name": "Senftenberg, Niederlausitz"
   },
   {
     "accuweather": "de/spitzingsee/83727/minute-weather-forecast/178049",
@@ -288,6 +288,6 @@
     "lon": 9.983333,
     "meteoblue_id": "ulm_deutschland_2820256",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Ulm&iso2=de&lat=48.398399&lon=9.991550&asl=480&tz=Europe%2FBerlin&lang=de&sig=cb1bcf3809377a5a84a52273bf8c0153",
-    "name": "Ulm"
+    "name": "Ulm (Donau)"
   }
 ]
