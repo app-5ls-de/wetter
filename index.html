@@ -39,7 +39,7 @@ title: Übersicht
     results.forEach((result) => {
       let location_a = document.createElement("a");
       location_a.innerHTML = fuzzysort.highlight(result);
-      location_a.href = "/show?location=" + result.obj.id;
+      location_a.href = "/show?location=" + result.obj.name;
       search_liste_div.appendChild(location_a);
       search_liste_div.appendChild(document.createElement("br"));
     });
@@ -57,7 +57,7 @@ title: Übersicht
     lastvisited.forEach((element) => {
       let location_a = document.createElement("a");
       location_a.innerText = element.name;
-      location_a.href = "/show?location=" + element.id;
+      location_a.href = "/show?location=" + element.name;
       search_liste_div.appendChild(location_a);
       search_liste_div.appendChild(document.createElement("br"));
     });

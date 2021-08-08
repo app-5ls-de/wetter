@@ -16,7 +16,7 @@ fetch("/locations.json")
     let params = new URLSearchParams(window.location.search);
     let location_name = params.get("location");
     for (let i = 0; i < data.length; i++) {
-      if (data[i].id == location_name) {
+      if (data[i].name == location_name) {
         location_data = data[i];
         document.getElementById("title-link").innerText = location_data.name;
 
@@ -570,10 +570,9 @@ function save_location() {
     lastvisited = [];
   }
 
-  lastvisited = lastvisited.filter((element) => element.id != location_data.id);
+  lastvisited = lastvisited.filter((element) => element.name != location_data.name);
 
   lastvisited.unshift({
-    id: location_data.id,
     name: location_data.name,
   });
 
