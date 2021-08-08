@@ -196,8 +196,6 @@ function accuweather_link() {
 }
 
 function windy_link() {
-  if (!(location_data.lat && location_data.lon)) return;
-
   let windy_div = document.createElement("div");
   windy_div.id = "windy-link";
   windy_div.classList.add("windy-link");
@@ -221,7 +219,6 @@ function windy_link() {
 
 function windy_map(overlay_type) {
   if (overlay_type == "waves" && !location_data.windy_waves) return;
-  if (!(location_data.lat && location_data.lon)) return;
 
   let windy_map_div = document.createElement("div");
   windy_map_div.id = "windy-map";
@@ -295,49 +292,109 @@ function dwd_warn() {
 }
 
 function dwd_trend() {
-  if (!location_data.district) return;
+  let id_mapping = [
+    {
+      // Stuttgart
+      lat: 48.7761,
+      lon: 9.1775,
+      id: "10738",
+    },
+    {
+      // München
+      lat: 48.133333,
+      lon: 11.566667,
+      id: "10870",
+    },
+    {
+      // Berlin
+      lat: 52.5167,
+      lon: 13.3833,
+      id: "10382",
+    },
+    {
+      // Brandenburg
+      lat: 52.4117,
+      lon: 12.5561,
+      id: "10379",
+    },
+    {
+      // Bremen
+      lat: 53.1153,
+      lon: 8.7975,
+      id: "10224",
+    },
+    {
+      // Hamburg
+      lat: 53.55,
+      lon: 10.0,
+      id: "10147",
+    },
+    {
+      // Wiesbaden
+      lat: 50.0825,
+      lon: 8.24,
+      id: "10633",
+    },
+    {
+      // Schwerin
+      lat: 53.6333,
+      lon: 11.4167,
+      id: "10162",
+    },
+    {
+      // Hannover
+      lat: 52.374444,
+      lon: 9.738611,
+      id: "10338",
+    },
+    {
+      // Düsseldorf
+      lat: 51.2311,
+      lon: 6.7724,
+      id: "10400",
+    },
+    {
+      // Mainz
+      lat: 50.0,
+      lon: 8.2667,
+      id: "10708",
+    },
+    {
+      // Saarbrücken
+      lat: 49.2333,
+      lon: 7.0,
+      id: "K2613",
+    },
+    {
+      // Dresden
+      lat: 51.05,
+      lon: 13.74,
+      id: "10488",
+    },
+    {
+      // Magdeburg
+      lat: 52.1278,
+      lon: 11.6292,
+      id: "10361",
+    },
+    {
+      // Kiel
+      lat: 54.3233,
+      lon: 10.1394,
+      id: "10046",
+    },
+    {
+      // Erfurt
+      lat: 50.9787,
+      lon: 11.0328,
+      id: "10554",
+    },
+  ];
 
-  let id_mapping = {
-    bw: "10738",
-    by: "10870",
-    be: "10382",
-    bb: "10379",
-    hb: "10224",
-    hh: "10147",
-    he: "10633",
-    mv: "10162",
-    ni: "10338",
-    nw: "10400",
-    rp: "10708",
-    sl: "K2613",
-    sn: "10488",
-    st: "10361",
-    sh: "10046",
-    th: "10554",
-  };
-
-  /* 
-  bw Baden-Württemberg
-  by Bayern
-  be Berlin
-  bb Brandenburg
-  hb Bremen
-  hh Hamburg
-  he Hessen
-  mv Mecklenburg-Vorpommern
-  ni Niedersachsen
-  nw Nordrhein-Westfalen
-  rp Rheinland-Pfalz
-  sl Saarland
-  sn Sachsen
-  st Sachsen-Anhalt
-  sh Schleswig-Holstein
-  th Thüringen
-  */
-
-  if (!location_data.district in Object.keys(id_mapping)) return;
-
-  let id = id_mapping[location_data.district];
+  let closest = get_closest(location_data, id_mapping);
+  if (!closest) return;
+  if (closest.distance > 176) return; // max is "Weil am Rhein": 175km
+  let id = closest.id;
 
   let dwd_trend_div = document.createElement("div");
   dwd_trend_div.id = "dwd-trend";
@@ -599,4 +656,33 @@ function save_location() {
   lastvisited = lastvisited.slice(0, 3);
 
   localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
+}
+
+function get_closest(target, array) {
+  array.forEach((element) => {
+    element.distance = distance(target, element);
+  });
+
+  let minimum = array.reduce((prev, curr) => {
+    return prev.distance < curr.distance ? prev : curr;
+  });
+  return minimum;
+}
+
+function distance(obj1, obj2) {
+  function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+  }
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(obj2.lat - obj1.lat);
+  var dLon = deg2rad(obj2.lon - obj1.lon);
+  var a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(deg2rad(obj1.lat)) *
+      Math.cos(deg2rad(obj2.lat)) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  var d = R * c; // Distance in km
+  return d;
 }
