@@ -35,17 +35,17 @@ fetch("/locations.json")
   });
 
 function display_widgets() {
-  meteoblue();
-  knmi();
-  accuweather_link();
-  windy_link();
-  windy_map();
-  windy_map("waves");
   dwd_warn();
-  dwd_trend();
-  meteoblue_simple();
   daswetter();
+  meteoblue_simple();
   windguru();
+  meteoblue();
+  dwd_trend();
+  accuweather_link();
+  knmi();
+  windy_map("waves");
+  windy_map();
+  windy_link();
 }
 
 function meteoblue() {
