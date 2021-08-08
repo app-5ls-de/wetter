@@ -248,7 +248,6 @@
   },
   {
     "accuweather": "dk/124594/minute-weather-forecast/124594",
-    "country": "dk",
     "lat": 56.15,
     "lon": 10.216667,
     "meteoblue_id": "Århus_dänemark_2624652",
@@ -257,7 +256,6 @@
   },
   {
     "accuweather": "se/lund/314778/minute-weather-forecast/314778",
-    "country": "se",
     "lat": 55.703889,
     "lon": 13.195,
     "meteoblue_id": "lund_schweden_2693678",

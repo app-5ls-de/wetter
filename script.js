@@ -79,11 +79,8 @@ function meteoblue() {
 }
 
 function knmi() {
-  let eu_states =
-    "at,bg,be,hr,cy,cz,dk,ee,fi,fr,de,gb,gr,hu,ie,it,lv,lt,lu,mt,nl,po,pt,ro,sk,si,es,se".split(
-      ","
-    );
-  if (location_data.country && !location_data.country in eu_states) return;
+  if (location_data.lat < 33.5 || location_data.lat > 67.2) return;
+  if (location_data.lon < -39.1 || location_data.lon > 35.3) return;
 
   let knmi_div = document.createElement("div");
   knmi_div.id = "knmi";
