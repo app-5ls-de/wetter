@@ -41,6 +41,8 @@ title: Übersicht
       location_a.innerHTML = fuzzysort.highlight(result);
       location_a.href = "/show?location=" + result.obj.name;
       search_liste_div.appendChild(location_a);
+      if (result.obj.meteoblue_src)
+        search_liste_div.appendChild(document.createTextNode("*"));
       search_liste_div.appendChild(document.createElement("br"));
     });
   }
