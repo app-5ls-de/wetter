@@ -4,7 +4,7 @@
     "district": "by",
     "dwd_warncellid": 109188000,
     "lat": 48.0,
-    "lon": 11.116667,
+    "lon": 11.12,
     "meteoblue_id": "herrsching-am-ammersee_deutschland_2905604",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Herrsching+am+Ammersee&iso2=de&lat=47.998901&lon=11.176800&asl=551&tz=Europe%2FBerlin&lang=de&sig=fffd5401d822b43d589ef032a694a313",
     "name": "Ammersee",
@@ -16,8 +16,8 @@
     "daswetter": "6823c1e09a17c26b7fa9bce8b601e68e",
     "district": "bw",
     "dwd_warncellid": 108117000,
-    "lat": 48.684444,
-    "lon": 9.933889,
+    "lat": 48.68,
+    "lon": 9.93,
     "meteoblue_id": "b%c3%b6hmenkirch_deutschland_2946950",
     "meteoblue_simple": true,
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=B%C3%B6hmenkirch&iso2=de&lat=48.683300&lon=9.933330&asl=693&tz=Europe%2FBerlin&lang=de&sig=a28dca9c3b23be9cc8a0d454a7555590",
@@ -27,8 +27,8 @@
     "accuweather": "de/spitzingsee/83727/minute-weather-forecast/178049",
     "district": "by",
     "dwd_warncellid": 109182000,
-    "lat": 47.666111,
-    "lon": 11.886667,
+    "lat": 47.67,
+    "lon": 11.89,
     "meteoblue_id": "spitzingsee_deutschland_3205568",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Spitzingsee&iso2=de&lat=47.661301&lon=11.887600&asl=1089&tz=Europe%2FBerlin&lang=de&sig=2324fe8c179c06c644210dcdf795b9f4",
     "name": "Spitzingsee",
@@ -39,8 +39,8 @@
     "accuweather": "de/eckernförde/24340/minute-weather-forecast/171578",
     "district": "sh",
     "dwd_warncellid": 101058000,
-    "lat": 54.473333,
-    "lon": 9.832222,
+    "lat": 54.47,
+    "lon": 9.83,
     "meteoblue_id": "eckernf%c3%b6rde_deutschland_2933627",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Eckernf%C3%B6rde&iso2=de&lat=54.4685&lon=9.83824&asl=4&tz=Europe%2FBerlin&lang=de&sig=803e07d8818bfeb967cf8bb57a1b3b7f",
     "name": "Eckernförde",
@@ -51,7 +51,7 @@
     "district": "be",
     "dwd_warncellid": 111000000,
     "lat": 52.52,
-    "lon": 13.405,
+    "lon": 13.41,
     "meteoblue_id": "berlin_deutschland_2950159",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Berlin&iso2=de&lat=52.524399&lon=13.410500&asl=74&tz=Europe%2FBerlin&lang=de&sig=746bd17297592ef3f64eed64e904a2d8",
     "name": "Berlin"
@@ -60,8 +60,8 @@
     "accuweather": "de/bremen/28195/minute-weather-forecast/167950",
     "district": "hb",
     "dwd_warncellid": 104011000,
-    "lat": 53.075878,
-    "lon": 8.807311,
+    "lat": 53.08,
+    "lon": 8.81,
     "meteoblue_id": "bremen_deutschland_2944388",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Bremen&iso2=de&lat=53.0758&lon=8.80717&asl=3&tz=Europe%2FBerlin&lang=de&sig=9586d131fdd3f85f45bbad488cc7aac9",
     "name": "Bremen"
@@ -70,8 +70,8 @@
     "accuweather": "de/dortmund/44137/minute-weather-forecast/170370",
     "district": "nw",
     "dwd_warncellid": 105913000,
-    "lat": 51.516667,
-    "lon": 7.466667,
+    "lat": 51.51,
+    "lon": 7.47,
     "meteoblue_id": "dortmund_deutschland_2935517",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Dortmund&iso2=de&lat=51.514900&lon=7.466000&asl=96&tz=Europe%2FBerlin&lang=de&sig=7bcba2c5fc2075f042405c6eca881624",
     "name": "Dortmund"
@@ -80,8 +80,8 @@
     "accuweather": "de/frankfurt/60311/minute-weather-forecast/168720",
     "district": "he",
     "dwd_warncellid": 106412000,
-    "lat": 50.116667,
-    "lon": 8.683333,
+    "lat": 50.12,
+    "lon": 8.68,
     "meteoblue_id": "frankfurt-am-main_deutschland_2925533",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Frankfurt+am+Main&iso2=de&lat=50.115501&lon=8.684170&asl=113&tz=Europe%2FBerlin&lang=de&sig=4277526e53a305140d6bfeab6165001f",
     "name": "Frankfurt am Main"
@@ -90,8 +90,8 @@
     "accuweather": "de/freiburg-im-breisgau/79098/minute-weather-forecast/167209",
     "district": "bw",
     "dwd_warncellid": 108311000,
-    "lat": 47.9955553,
-    "lon": 7.850821,
+    "lat": 47.99,
+    "lon": 7.85,
     "meteoblue_id": "freiburg-im-breisgau_deutschland_2925177",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Freiburg+im+Breisgau&iso2=de&lat=47.9959&lon=7.85222&asl=278&tz=Europe%2FBerlin&lang=de&sig=993957ca86458ff6abb9e80ff07f4281",
     "name": "Freiburg im Breisgau"
@@ -100,8 +100,8 @@
     "accuweather": "de/geislingen-an-der-steige/73312/minute-weather-forecast/171775",
     "district": "bw",
     "dwd_warncellid": 108117000,
-    "lat": 48.624444,
-    "lon": 9.830556,
+    "lat": 48.62,
+    "lon": 9.83,
     "meteoblue_id": "geislingen-an-der-steige_deutschland_2921653",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Geislingen+an+der+Steige&iso2=de&lat=48.624199&lon=9.827360&asl=426&tz=Europe%2FBerlin&lang=de&sig=fac367a37d53be296c64678ef09ac0ab",
     "name": "Geislingen an der Steige"
@@ -110,8 +110,8 @@
     "accuweather": "de/göttingen/37073/minute-weather-forecast/169816",
     "district": "ni",
     "dwd_warncellid": 103159000,
-    "lat": 51.533889,
-    "lon": 9.935556,
+    "lat": 51.54,
+    "lon": 9.93,
     "meteoblue_id": "g%c3%b6ttingen_deutschland_2918632",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=G%C3%B6ttingen&iso2=de&lat=51.5344&lon=9.93228&asl=153&tz=Europe%2FBerlin&lang=de&sig=e626c1b39bf05d84fb1d3d1bbaadf2a0",
     "name": "Göttingen"
@@ -120,8 +120,8 @@
     "accuweather": "de/hamburg/20095/minute-weather-forecast/178556",
     "district": "hh",
     "dwd_warncellid": 102000000,
-    "lat": 53.565278,
-    "lon": 10.001389,
+    "lat": 53.55,
+    "lon": 9.99,
     "meteoblue_id": "hamburg_deutschland_2911298",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Hamburg&iso2=de&lat=53.550701&lon=9.993020&asl=2&tz=Europe%2FBerlin&lang=de&sig=9da37d460e72ff65f429a0a21e07e00a",
     "name": "Hamburg"
@@ -130,8 +130,8 @@
     "accuweather": "de/hanover/30159/minute-weather-forecast/169824",
     "district": "ni",
     "dwd_warncellid": 103241000,
-    "lat": 52.374444,
-    "lon": 9.738611,
+    "lat": 52.37,
+    "lon": 9.73,
     "meteoblue_id": "hannover_deutschland_2910831",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Hannover&iso2=de&lat=52.3705&lon=9.73322&asl=57&tz=Europe%2FBerlin&lang=de&sig=9ce4185c6f23a375dce672a1d68df65c",
     "name": "Hannover"
@@ -140,8 +140,8 @@
     "accuweather": "de/immenstadt/87509/weather-forecast/167621",
     "district": "by",
     "dwd_warncellid": 109780000,
-    "lat": 47.561389,
-    "lon": 10.221111,
+    "lat": 47.56,
+    "lon": 10.22,
     "meteoblue_id": "immenstadt-im-allg%c3%a4u_deutschland_2896261",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Immenstadt+im+Allg%C3%A4u&iso2=de&lat=47.56&lon=10.2139&asl=733&tz=Europe%2FBerlin&lang=de&sig=587e316f72ad991661ca270a85749995",
     "name": "Immenstadt im Allgäu"
@@ -150,8 +150,8 @@
     "accuweather": "de/ingolstadt/85049/minute-weather-forecast/167555",
     "district": "by",
     "dwd_warncellid": 109161000,
-    "lat": 48.76415,
-    "lon": 11.42434,
+    "lat": 48.77,
+    "lon": 11.43,
     "meteoblue_id": "ingolstadt_deutschland_2895992",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Ingolstadt&iso2=de&lat=48.7651&lon=11.4237&asl=379&tz=Europe%2FBerlin&lang=de&sig=a19a41572fa9657137946bd967b6f824",
     "name": "Ingolstadt, Donau"
@@ -160,8 +160,8 @@
     "accuweather": "de/landau/76829/minute-weather-forecast/174595",
     "district": "rp",
     "dwd_warncellid": 107313000,
-    "lat": 49.2,
-    "lon": 8.116667,
+    "lat": 49.21,
+    "lon": 8.11,
     "meteoblue_id": "landau-in-der-pfalz_deutschland_2881646",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Landau+in+der+Pfalz&iso2=de&lat=49.198399&lon=8.116920&asl=144&tz=Europe%2FBerlin&lang=de&sig=0b60c1de828eabe40de97b318fff42e5",
     "name": "Landau in der Pfalz"
@@ -170,8 +170,8 @@
     "accuweather": "de/leipzig/04109/minute-weather-forecast/171240",
     "district": "sn",
     "dwd_warncellid": 114713000,
-    "lat": 51.341699,
-    "lon": 12.2535538,
+    "lat": 51.34,
+    "lon": 12.37,
     "meteoblue_id": "leipzig_deutschland_2879139",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Leipzig&iso2=de&lat=51.339600&lon=12.371300&asl=116&tz=Europe%2FBerlin&lang=de&sig=7f7bc3acbbd55f7b8eb5cdb79ac15c6e",
     "name": "Leipzig"
@@ -190,8 +190,8 @@
     "accuweather": "de/munich/80331/minute-weather-forecast/178086",
     "district": "by",
     "dwd_warncellid": 109162000,
-    "lat": 48.133333,
-    "lon": 11.566667,
+    "lat": 48.14,
+    "lon": 11.58,
     "meteoblue_id": "m%c3%bcnchen_deutschland_2867714",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=M%C3%BCnchen&iso2=de&lat=48.137402&lon=11.575500&asl=524&tz=Europe%2FBerlin&lang=de&sig=a5e68ab574603119132b6c5af72550e1",
     "name": "München"
@@ -201,7 +201,7 @@
     "district": "by",
     "dwd_warncellid": 109564000,
     "lat": 49.45,
-    "lon": 11.083333,
+    "lon": 11.07,
     "meteoblue_id": "nürnberg_deutschland_2861650",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=N%C3%BCrnberg&iso2=de&lat=49.454201&lon=11.077500&asl=300&tz=Europe%2FBerlin&lang=de&sig=0b691cf83cf03eea952869b6857f8a77",
     "name": "Nürnberg"
@@ -210,8 +210,8 @@
     "accuweather": "de/rostock/18055/minute-weather-forecast/169581",
     "district": "mv",
     "dwd_warncellid": 113003000,
-    "lat": 54.08816,
-    "lon": 12.13468,
+    "lat": 54.08,
+    "lon": 12.1,
     "meteoblue_id": "rostock_deutschland_2844588",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Rostock&iso2=de&lat=54.0887&lon=12.1405&asl=18&tz=Europe%2FBerlin&lang=de&sig=eaddc9df7c4f86505fd53a2024f2bdbe",
     "name": "Rostock"
@@ -220,8 +220,8 @@
     "accuweather": "de/senftenberg/01968/minute-weather-forecast/173217",
     "district": "bb",
     "dwd_warncellid": 112066000,
-    "lat": 51.518889,
-    "lon": 14.005556,
+    "lat": 51.52,
+    "lon": 14.01,
     "meteoblue_id": "senftenberg_deutschland_2833073",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Senftenberg&iso2=de&lat=51.5252&lon=14.0016&asl=104&tz=Europe%2FBerlin&lang=de&sig=8cf90774bb3c2bb049ed8f4e481d1b66",
     "name": "Senftenberg, Niederlausitz"
@@ -230,8 +230,8 @@
     "accuweather": "de/stuttgart/70173/minute-weather-forecast/167220",
     "district": "bw",
     "dwd_warncellid": 108111000,
-    "lat": 48.782,
-    "lon": 9.184,
+    "lat": 48.78,
+    "lon": 9.18,
     "meteoblue_id": "stuttgart_deutschland_2825297",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Stuttgart&iso2=de&lat=48.782299&lon=9.177020&asl=252&tz=Europe%2FBerlin&lang=de&sig=7ae31cd04b5523e9a2244a23a80cd8d7",
     "name": "Stuttgart"
@@ -241,7 +241,7 @@
     "district": "bw",
     "dwd_warncellid": 108421000,
     "lat": 48.4,
-    "lon": 9.983333,
+    "lon": 9.98,
     "meteoblue_id": "ulm_deutschland_2820256",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Ulm&iso2=de&lat=48.398399&lon=9.991550&asl=480&tz=Europe%2FBerlin&lang=de&sig=cb1bcf3809377a5a84a52273bf8c0153",
     "name": "Ulm (Donau)"
@@ -249,15 +249,15 @@
   {
     "accuweather": "dk/124594/minute-weather-forecast/124594",
     "lat": 56.15,
-    "lon": 10.216667,
+    "lon": 10.22,
     "meteoblue_id": "Århus_dänemark_2624652",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=%C3%85rhus&iso2=dk&lat=56.156700&lon=10.210800&asl=10&tz=Europe%2FCopenhagen&lang=de&sig=e5f20ffcd48cfbca5778b5c7b385e089",
     "name": "Aarhus"
   },
   {
     "accuweather": "se/lund/314778/minute-weather-forecast/314778",
-    "lat": 55.703889,
-    "lon": 13.195,
+    "lat": 55.7,
+    "lon": 13.19,
     "meteoblue_id": "lund_schweden_2693678",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Lund&iso2=se&lat=55.705799&lon=13.193200&asl=51&tz=Europe%2FStockholm&lang=de&sig=ca9669498fcc1c1b6608bb9728a36b51",
     "name": "Lund"
@@ -623,11 +623,6 @@
     "name": "Bergstraße"
   },
   {
-    "lat": 52.52,
-    "lon": 13.41,
-    "name": "Berlin"
-  },
-  {
     "lat": 52.68,
     "lon": 13.59,
     "name": "Bernau bei Berlin"
@@ -741,11 +736,6 @@
     "lat": 52.27,
     "lon": 10.53,
     "name": "Braunschweig"
-  },
-  {
-    "lat": 53.08,
-    "lon": 8.81,
-    "name": "Bremen"
   },
   {
     "lat": 53.55,
@@ -1038,11 +1028,6 @@
     "name": "Dorsten"
   },
   {
-    "lat": 51.51,
-    "lon": 7.47,
-    "name": "Dortmund"
-  },
-  {
     "lat": 50,
     "lon": 8.7,
     "name": "Dreieich"
@@ -1081,11 +1066,6 @@
     "lat": 52.84,
     "lon": 13.79,
     "name": "Eberswalde"
-  },
-  {
-    "lat": 54.47,
-    "lon": 9.83,
-    "name": "Eckernförde"
   },
   {
     "lat": 53.13,
@@ -1308,11 +1288,6 @@
     "name": "Frankfurt (Oder)"
   },
   {
-    "lat": 50.12,
-    "lon": 8.68,
-    "name": "Frankfurt am Main"
-  },
-  {
     "lat": 50.92,
     "lon": 6.82,
     "name": "Frechen"
@@ -1321,11 +1296,6 @@
     "lat": 50.92,
     "lon": 13.37,
     "name": "Freiberg, Sachsen"
-  },
-  {
-    "lat": 47.99,
-    "lon": 7.85,
-    "name": "Freiburg im Breisgau"
   },
   {
     "lat": 48.4,
@@ -1443,11 +1413,6 @@
     "name": "Geilenkirchen"
   },
   {
-    "lat": 48.62,
-    "lon": 9.83,
-    "name": "Geislingen an der Steige"
-  },
-  {
     "lat": 51.52,
     "lon": 6.33,
     "name": "Geldern"
@@ -1563,11 +1528,6 @@
     "name": "Gotha, Thüringen"
   },
   {
-    "lat": 51.54,
-    "lon": 9.93,
-    "name": "Göttingen"
-  },
-  {
     "lat": 54.09,
     "lon": 13.39,
     "name": "Greifswald, Hansestadt"
@@ -1670,11 +1630,6 @@
   {
     "lat": 53.55,
     "lon": 9.99,
-    "name": "Hamburg"
-  },
-  {
-    "lat": 53.55,
-    "lon": 9.99,
     "name": "Hamburg-Mitte"
   },
   {
@@ -1711,11 +1666,6 @@
     "lat": 51.42,
     "lon": 9.66,
     "name": "Hann. Münden"
-  },
-  {
-    "lat": 52.37,
-    "lon": 9.73,
-    "name": "Hannover"
   },
   {
     "lat": 52.85,
@@ -1988,11 +1938,6 @@
     "name": "Ingelheim am Rhein"
   },
   {
-    "lat": 48.77,
-    "lon": 11.43,
-    "name": "Ingolstadt, Donau"
-  },
-  {
     "lat": 50.93,
     "lon": 6.95,
     "name": "Innenstadt"
@@ -2243,11 +2188,6 @@
     "name": "Lampertheim, Hessen"
   },
   {
-    "lat": 49.21,
-    "lon": 8.11,
-    "name": "Landau in der Pfalz"
-  },
-  {
     "lat": 52.32,
     "lon": 11.54,
     "name": "Landkreis Börde"
@@ -2321,11 +2261,6 @@
     "lat": 48.7,
     "lon": 9.15,
     "name": "Leinfelden-Echterdingen"
-  },
-  {
-    "lat": 51.34,
-    "lon": 12.37,
-    "name": "Leipzig"
   },
   {
     "lat": 52.03,
@@ -2733,11 +2668,6 @@
     "name": "Mülheim an der Ruhr"
   },
   {
-    "lat": 48.14,
-    "lon": 11.58,
-    "name": "München"
-  },
-  {
     "lat": 51.95,
     "lon": 7.63,
     "name": "Münster, Westfalen"
@@ -2926,11 +2856,6 @@
     "lat": 51.93,
     "lon": 7.36,
     "name": "Nottuln"
-  },
-  {
-    "lat": 49.45,
-    "lon": 11.07,
-    "name": "Nürnberg"
   },
   {
     "lat": 48.63,
@@ -3373,11 +3298,6 @@
     "name": "Rösrath"
   },
   {
-    "lat": 54.08,
-    "lon": 12.1,
-    "name": "Rostock"
-  },
-  {
     "lat": 53.11,
     "lon": 9.4,
     "name": "Rotenburg an der Wümme"
@@ -3603,11 +3523,6 @@
     "name": "Senden, Westfalen"
   },
   {
-    "lat": 51.52,
-    "lon": 14,
-    "name": "Senftenberg, Niederlausitz"
-  },
-  {
     "lat": 50.8,
     "lon": 7.2,
     "name": "Siegburg"
@@ -3788,11 +3703,6 @@
     "name": "Stutensee"
   },
   {
-    "lat": 48.78,
-    "lon": 9.18,
-    "name": "Stuttgart"
-  },
-  {
     "lat": 49.19,
     "lon": 8.06,
     "name": "Südliche Weinstraße"
@@ -3901,11 +3811,6 @@
     "lat": 52.46,
     "lon": 10.2,
     "name": "Uetze"
-  },
-  {
-    "lat": 48.4,
-    "lon": 10,
-    "name": "Ulm (Donau)"
   },
   {
     "lat": 51.54,
