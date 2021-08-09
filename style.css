@@ -16,6 +16,7 @@ body {
   padding: 0 3rem;
   min-height: 100vh;
   margin: 0 auto;
+  width: fit-content;
 }
 
 h1 {
@@ -54,11 +55,15 @@ h1 {
   height: 3.5rem;
 }
 
-.liste {
+.liste,
+.search {
   margin-left: 10vw;
   margin-right: 10vw;
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.liste {
   min-width: max-content;
   padding-bottom: 10rem;
   padding-top: 1rem;
