@@ -601,7 +601,6 @@ warnWetter.loadWarnings = function (dwd_json) {
         allowTypo: false,
         key: "regionName",
       });
-      debugger;
 
       let alerts = [];
       results.forEach((el) => {
