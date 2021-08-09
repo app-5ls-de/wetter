@@ -2,6 +2,7 @@ var main_div = document.getElementById("main");
 var widgets_div = document.getElementById("widgets");
 
 var location_data;
+var all_location_data;
 fetch("/locations.json")
   .then((response) => {
     if (response.ok) {
@@ -14,6 +15,7 @@ fetch("/locations.json")
     return response.json();
   })
   .then((data) => {
+    all_location_data = data;
     let params = new URLSearchParams(window.location.search);
     let location_name = params.get("location");
     for (let i = 0; i < data.length; i++) {
@@ -50,7 +52,18 @@ function display_widgets() {
 }
 
 function meteoblue() {
-  if (!(location_data.meteoblue_src && location_data.meteoblue_id)) return;
+  let closest_data;
+  if (location_data.meteoblue_src) {
+    closest_data = location_data;
+  } else {
+    let closest = get_closest(
+      location_data,
+      all_location_data.filter((el) => el.meteoblue_src)
+    );
+    if (!closest) return;
+    if (closest.distance > 176) return; // max is "Weil am Rhein": 175km
+    closest_data = closest;
+  }
 
   let meteoblue_div = document.createElement("div");
   meteoblue_div.id = "meteoblue";
@@ -58,7 +71,7 @@ function meteoblue() {
   widgets_div.appendChild(meteoblue_div);
 
   let meteoblue_img = document.createElement("img");
-  meteoblue_img.src = location_data.meteoblue_src;
+  meteoblue_img.src = closest_data.meteoblue_src;
   if (debug)
     meteoblue_img.src = "https://via.placeholder.com/2220x1470?text=meteoblue";
   meteoblue_img.alt = "meteoblue";
@@ -66,9 +79,9 @@ function meteoblue() {
 
   let meteoblue_a = document.createElement("a");
   meteoblue_a.href =
-    "https://www.meteoblue.com/de/wetter/woche/" + location_data.meteoblue_id;
+    "https://www.meteoblue.com/de/wetter/woche/" + closest_data.meteoblue_id;
   meteoblue_a.target = "_blank";
-  meteoblue_a.innerText = "Wetter " + location_data.name + " - meteoblue";
+  meteoblue_a.innerText = "Wetter " + closest_data.name + " - meteoblue";
   meteoblue_div.appendChild(meteoblue_a);
 
   let meteoblue_info_div = document.createElement("div");
