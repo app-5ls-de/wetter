@@ -577,12 +577,13 @@ warnWetter.loadWarnings = function (dwd_json) {
     }
   }
 
-  if (location_data.dwd_warncellid)
-    show_warnings(
-      dwd_json.warnings[dwd_warncellid].concat(
-        dwd_json.vorabInformation[dwd_warncellid]
-      )
-    );
+  if (location_data.dwd_warncellid) {
+    let alerts = dwd_json.warnings[location_data.dwd_warncellid] || [];
+    let prealerts =
+      dwd_json.vorabInformation[location_data.dwd_warncellid] || [];
+    alerts.concat(prealerts);
+    show_warnings(alerts);
+  }
 
   f(
     "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
