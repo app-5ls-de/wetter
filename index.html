@@ -27,7 +27,7 @@ title: Übersicht
     if (!input || !locations_data) return;
 
     const results = fuzzysort.go(input, locations_data, {
-      threshold: -Infinity,
+      threshold: -20000,
       limit: 5,
       allowTypo: true,
       key: "name",

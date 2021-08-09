@@ -1,47 +1,50 @@
 var main_div = document.getElementById("main");
 var widgets_div = document.getElementById("widgets");
 
+function f(url, callback) {
+  fetch(url)
+    .then((response) => {
+      if (response.ok) {
+        return Promise.resolve(response);
+      } else {
+        return Promise.reject(new Error(response.statusText));
+      }
+    })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      callback(data);
+    });
+}
+
 var location_data;
 var all_location_data;
-fetch("/locations.json")
-  .then((response) => {
-    if (response.ok) {
-      return Promise.resolve(response);
-    } else {
-      return Promise.reject(new Error(response.statusText));
-    }
-  })
-  .then((response) => {
-    return response.json();
-  })
-  .then((data) => {
-    all_location_data = data;
-    let params = new URLSearchParams(window.location.search);
-    let location_name = params.get("location");
-    for (let i = 0; i < data.length; i++) {
-      if (data[i].name == location_name) {
-        location_data = data[i];
-        document.getElementById("title-link").innerText = location_data.name;
+f("/locations.json", (data) => {
+  all_location_data = data;
+  let params = new URLSearchParams(window.location.search);
+  let location_name = params.get("location");
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].name == location_name) {
+      location_data = data[i];
+      document.getElementById("title-link").innerText = location_data.name;
 
-        save_location();
-        display_widgets();
-        break;
-      }
+      save_location();
+      display_widgets();
+      break;
     }
-    if (!location_data) {
-      localStorage.removeItem("lastvisited");
-      window.location.href = window.location.origin;
-    }
-  })
-  .catch((error) => {
-    console.log("Request failed", error);
-  });
+  }
+  if (!location_data) {
+    localStorage.removeItem("lastvisited");
+    window.location.href = window.location.origin;
+  }
+});
 
 function display_widgets() {
   daswetter();
   meteoblue_simple();
   windguru();
-  
+
   meteoblue();
   dwd_trend();
   accuweather_link();
@@ -290,8 +293,6 @@ function windy_map(overlay_type) {
 }
 
 function dwd_warn() {
-  if (!location_data.dwd_warncellid) return;
-
   let dwd_warn_div = document.getElementById("dwd-warn");
   dwd_warn_div.classList.add("section");
 
@@ -556,20 +557,68 @@ window.addEventListener("load", function () {
 
 warnWetter = {};
 warnWetter.loadWarnings = function (dwd_json) {
-  let dwd_warn_div = document.getElementById("dwd-warn");
-  let dwd_warncellid = location_data.dwd_warncellid;
+  let dwd_json_list = [];
+  for (const key in dwd_json.warnings) {
+    if (Object.hasOwnProperty.call(dwd_json.warnings, key)) {
+      let element = dwd_json.warnings[key];
+      element.forEach((el) => {
+        el.category = "warnings";
+      });
+      dwd_json_list = dwd_json_list.concat(element);
+    }
+  }
+  for (const key in dwd_json.vorabInformation) {
+    if (Object.hasOwnProperty.call(dwd_json.vorabInformation, key)) {
+      let element = dwd_json.vorabInformation[key];
+      element.forEach((el) => {
+        el.category = "vorabInformation";
+      });
+      dwd_json_list = dwd_json_list.concat(element);
+    }
+  }
 
-  let alerts = dwd_json.warnings[dwd_warncellid] || [];
-  let prealerts = dwd_json.vorabInformation[dwd_warncellid] || [];
+  if (location_data.dwd_warncellid)
+    show_warnings(
+      dwd_json.warnings[dwd_warncellid].concat(
+        dwd_json.vorabInformation[dwd_warncellid]
+      )
+    );
+
+  f(
+    "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+      location_data.lat +
+      "&lon=" +
+      location_data.lon +
+      "&zoom=10&addressdetails=1",
+    (data) => {
+      let name = data.address.county ? data.address.county : data.address.city;
+      name = name.toLowerCase();
+      name = name.replace("landkreis", "");
+      name = name.replace("kreis", "");
+      name = name.trim();
+      let results = fuzzysort.go(name, dwd_json_list, {
+        threshold: -20000,
+        allowTypo: false,
+        key: "regionName",
+      });
+      debugger;
+
+      let alerts = [];
+      results.forEach((el) => {
+        alerts.push(el.obj);
+      });
+
+      show_warnings(alerts);
+    }
+  );
+};
+
+function show_warnings(alerts) {
+  let dwd_warn_div = document.getElementById("dwd-warn");
 
   alerts = alerts
     .filter((x) => x !== undefined)
     .sort((a, b) => b.level - a.level);
-  prealerts = prealerts
-    .filter((x) => x !== undefined)
-    .sort((a, b) => b.level - a.level);
-
-  alerts = alerts.concat(prealerts);
 
   alerts.forEach((alert) => {
     let alert_div = document.createElement("div");
@@ -647,7 +696,7 @@ warnWetter.loadWarnings = function (dwd_json) {
     alert_div.appendChild(alert_instruction);
     dwd_warn_div.appendChild(alert_div);
   });
-};
+}
 
 function save_location() {
   let lastvisited;
