@@ -1,7 +1,6 @@
 [
   {
     "accuweather": "de/ammersee/82211/minute-weather-forecast/2599630",
-    "district": "by",
     "dwd_warncellid": 109188000,
     "lat": 48.0,
     "lon": 11.12,
@@ -14,7 +13,6 @@
   {
     "accuweather": "de/böhmenkirch/89558/minute-weather-forecast/171896",
     "daswetter": "6823c1e09a17c26b7fa9bce8b601e68e",
-    "district": "bw",
     "dwd_warncellid": 108117000,
     "lat": 48.68,
     "lon": 9.93,
@@ -25,7 +23,6 @@
   },
   {
     "accuweather": "de/spitzingsee/83727/minute-weather-forecast/178049",
-    "district": "by",
     "dwd_warncellid": 109182000,
     "lat": 47.67,
     "lon": 11.89,
@@ -37,7 +34,6 @@
   },
   {
     "accuweather": "de/eckernförde/24340/minute-weather-forecast/171578",
-    "district": "sh",
     "dwd_warncellid": 101058000,
     "lat": 54.47,
     "lon": 9.83,
@@ -48,7 +44,6 @@
   },
   {
     "accuweather": "de/berlin/10178/minute-weather-forecast/178087",
-    "district": "be",
     "dwd_warncellid": 111000000,
     "lat": 52.52,
     "lon": 13.41,
@@ -58,7 +53,6 @@
   },
   {
     "accuweather": "de/bremen/28195/minute-weather-forecast/167950",
-    "district": "hb",
     "dwd_warncellid": 104011000,
     "lat": 53.08,
     "lon": 8.81,
@@ -68,7 +62,6 @@
   },
   {
     "accuweather": "de/dortmund/44137/minute-weather-forecast/170370",
-    "district": "nw",
     "dwd_warncellid": 105913000,
     "lat": 51.51,
     "lon": 7.47,
@@ -78,7 +71,6 @@
   },
   {
     "accuweather": "de/frankfurt/60311/minute-weather-forecast/168720",
-    "district": "he",
     "dwd_warncellid": 106412000,
     "lat": 50.12,
     "lon": 8.68,
@@ -88,7 +80,6 @@
   },
   {
     "accuweather": "de/freiburg-im-breisgau/79098/minute-weather-forecast/167209",
-    "district": "bw",
     "dwd_warncellid": 108311000,
     "lat": 47.99,
     "lon": 7.85,
@@ -98,7 +89,6 @@
   },
   {
     "accuweather": "de/geislingen-an-der-steige/73312/minute-weather-forecast/171775",
-    "district": "bw",
     "dwd_warncellid": 108117000,
     "lat": 48.62,
     "lon": 9.83,
@@ -108,7 +98,6 @@
   },
   {
     "accuweather": "de/göttingen/37073/minute-weather-forecast/169816",
-    "district": "ni",
     "dwd_warncellid": 103159000,
     "lat": 51.54,
     "lon": 9.93,
@@ -118,7 +107,6 @@
   },
   {
     "accuweather": "de/hamburg/20095/minute-weather-forecast/178556",
-    "district": "hh",
     "dwd_warncellid": 102000000,
     "lat": 53.55,
     "lon": 9.99,
@@ -128,7 +116,6 @@
   },
   {
     "accuweather": "de/hanover/30159/minute-weather-forecast/169824",
-    "district": "ni",
     "dwd_warncellid": 103241000,
     "lat": 52.37,
     "lon": 9.73,
@@ -138,7 +125,6 @@
   },
   {
     "accuweather": "de/immenstadt/87509/weather-forecast/167621",
-    "district": "by",
     "dwd_warncellid": 109780000,
     "lat": 47.56,
     "lon": 10.22,
@@ -148,7 +134,6 @@
   },
   {
     "accuweather": "de/ingolstadt/85049/minute-weather-forecast/167555",
-    "district": "by",
     "dwd_warncellid": 109161000,
     "lat": 48.77,
     "lon": 11.43,
@@ -158,7 +143,6 @@
   },
   {
     "accuweather": "de/landau/76829/minute-weather-forecast/174595",
-    "district": "rp",
     "dwd_warncellid": 107313000,
     "lat": 49.21,
     "lon": 8.11,
@@ -168,7 +152,6 @@
   },
   {
     "accuweather": "de/leipzig/04109/minute-weather-forecast/171240",
-    "district": "sn",
     "dwd_warncellid": 114713000,
     "lat": 51.34,
     "lon": 12.37,
@@ -178,7 +161,6 @@
   },
   {
     "accuweather": "de/leutenbach/71397/weather-forecast/167298",
-    "district": "bw",
     "dwd_warncellid": 108119000,
     "lat": 48.89,
     "lon": 9.39,
@@ -188,7 +170,6 @@
   },
   {
     "accuweather": "de/munich/80331/minute-weather-forecast/178086",
-    "district": "by",
     "dwd_warncellid": 109162000,
     "lat": 48.14,
     "lon": 11.58,
@@ -198,7 +179,6 @@
   },
   {
     "accuweather": "de/nuremberg/90402/weather-forecast/167559",
-    "district": "by",
     "dwd_warncellid": 109564000,
     "lat": 49.45,
     "lon": 11.07,
@@ -208,7 +188,6 @@
   },
   {
     "accuweather": "de/rostock/18055/minute-weather-forecast/169581",
-    "district": "mv",
     "dwd_warncellid": 113003000,
     "lat": 54.08,
     "lon": 12.1,
@@ -218,7 +197,6 @@
   },
   {
     "accuweather": "de/senftenberg/01968/minute-weather-forecast/173217",
-    "district": "bb",
     "dwd_warncellid": 112066000,
     "lat": 51.52,
     "lon": 14.01,
@@ -228,7 +206,6 @@
   },
   {
     "accuweather": "de/stuttgart/70173/minute-weather-forecast/167220",
-    "district": "bw",
     "dwd_warncellid": 108111000,
     "lat": 48.78,
     "lon": 9.18,
@@ -238,7 +215,6 @@
   },
   {
     "accuweather": "de/ulm/89073/minute-weather-forecast/167216",
-    "district": "bw",
     "dwd_warncellid": 108421000,
     "lat": 48.4,
     "lon": 9.98,
