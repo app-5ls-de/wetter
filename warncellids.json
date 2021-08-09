@@ -1,0 +1,2456 @@
+[
+  {
+    "warncellid": "101001000",
+    "name": "Stadt Flensburg",
+    "lat": 54.7862616,
+    "lon": 9.4341114
+  },
+  {
+    "warncellid": "101002000",
+    "name": "Stadt Kiel",
+    "lat": 54.395531899999995,
+    "lon": 10.36956268038591
+  },
+  {
+    "warncellid": "101003000",
+    "name": "Hansestadt Lübeck",
+    "lat": 53.866444,
+    "lon": 10.684738
+  },
+  {
+    "warncellid": "101004000",
+    "name": "Stadt Neumünster",
+    "lat": 54.0763188,
+    "lon": 9.9801573
+  },
+  {
+    "warncellid": "101051000",
+    "name": "Kreis Dithmarschen",
+    "lat": 54.1331231,
+    "lon": 9.0799113
+  },
+  {
+    "warncellid": "101053000",
+    "name": "Kreis Herzogtum Lauenburg",
+    "lat": 53.59366475,
+    "lon": 10.664326241692065
+  },
+  {
+    "warncellid": "101054000",
+    "name": "Kreis Nordfriesland",
+    "lat": 54.6591848,
+    "lon": 8.998149926747127
+  },
+  {
+    "warncellid": "101055000",
+    "name": "Kreis Ostholstein",
+    "lat": 54.1766629,
+    "lon": 10.84762
+  },
+  {
+    "warncellid": "101056000",
+    "name": "Kreis Pinneberg",
+    "lat": 53.7278939,
+    "lon": 9.6979598
+  },
+  {
+    "warncellid": "101057000",
+    "name": "Kreis Plön",
+    "lat": 54.24611515,
+    "lon": 10.413274327272728
+  },
+  {
+    "warncellid": "101058000",
+    "name": "Kreis Rendsburg-Eckernförde",
+    "lat": 54.327869500000006,
+    "lon": 9.720589290602598
+  },
+  {
+    "warncellid": "101059000",
+    "name": "Kreis Schleswig-Flensburg",
+    "lat": 54.579719350000005,
+    "lon": 9.533193824950633
+  },
+  {
+    "warncellid": "101060000",
+    "name": "Kreis Segeberg",
+    "lat": 53.9232287,
+    "lon": 10.1612312
+  },
+  {
+    "warncellid": "101061000",
+    "name": "Kreis Steinburg",
+    "lat": 53.9409342,
+    "lon": 9.5157896
+  },
+  {
+    "warncellid": "101062000",
+    "name": "Kreis Stormarn",
+    "lat": 53.7215127,
+    "lon": 10.3586145
+  },
+  {
+    "warncellid": "102000000",
+    "name": "Hansestadt Hamburg",
+    "lat": 53.4344365,
+    "lon": 10.3003779
+  },
+  {
+    "warncellid": "103101000",
+    "name": "Stadt Braunschweig",
+    "lat": 52.2640761,
+    "lon": 10.5510166
+  },
+  {
+    "warncellid": "103102000",
+    "name": "Stadt Salzgitter",
+    "lat": 52.1562494,
+    "lon": 10.3282419
+  },
+  {
+    "warncellid": "103103000",
+    "name": "Stadt Wolfsburg",
+    "lat": 52.4359747,
+    "lon": 10.813609239526107
+  },
+  {
+    "warncellid": "103151000",
+    "name": "Kreis Gifhorn",
+    "lat": 52.569228,
+    "lon": 10.5216368
+  },
+  {
+    "warncellid": "103153000",
+    "name": "Kreis Goslar",
+    "lat": 54.073787749999994,
+    "lon": 10.773343678113694
+  },
+  {
+    "warncellid": "103154000",
+    "name": "Kreis Helmstedt",
+    "lat": 52.2312786,
+    "lon": 10.9260726
+  },
+  {
+    "warncellid": "103155000",
+    "name": "Kreis Northeim",
+    "lat": 51.64996565,
+    "lon": 9.43335871747735
+  },
+  {
+    "warncellid": "103157000",
+    "name": "Kreis Peine",
+    "lat": 51.7108905,
+    "lon": 9.084504654164038
+  },
+  {
+    "warncellid": "103158000",
+    "name": "Kreis Wolfenbüttel",
+    "lat": 54.0357916,
+    "lon": 9.0771537
+  },
+  {
+    "warncellid": "103159000",
+    "name": "Kreis Göttingen",
+    "lat": 48.4728004,
+    "lon": 10.080002412155292
+  },
+  {
+    "warncellid": "103241000",
+    "name": "Region Hannover",
+    "lat": 52.4026852,
+    "lon": 9.801197840611401
+  },
+  {
+    "warncellid": "103251000",
+    "name": "Kreis Diepholz",
+    "lat": 52.611121,
+    "lon": 8.468965601328117
+  },
+  {
+    "warncellid": "103252000",
+    "name": "Kreis Hameln-Pyrmont",
+    "lat": 52.2130196,
+    "lon": 9.4536495
+  },
+  {
+    "warncellid": "103254000",
+    "name": "Kreis Hildesheim",
+    "lat": 52.1435959,
+    "lon": 9.8746269
+  },
+  {
+    "warncellid": "103255000",
+    "name": "Kreis Holzminden",
+    "lat": 51.8271933,
+    "lon": 9.4387596
+  },
+  {
+    "warncellid": "103256000",
+    "name": "Kreis Nienburg (Weser)",
+    "lat": 52.6384265,
+    "lon": 9.235590364718732
+  },
+  {
+    "warncellid": "103257000",
+    "name": "Kreis Schaumburg",
+    "lat": 50.33948155,
+    "lon": 7.9784308849342604
+  },
+  {
+    "warncellid": "103351000",
+    "name": "Kreis Celle",
+    "lat": 52.6456208,
+    "lon": 10.0278508
+  },
+  {
+    "warncellid": "103352000",
+    "name": "Kreis Cuxhaven",
+    "lat": 53.5898883,
+    "lon": 8.8067513
+  },
+  {
+    "warncellid": "103353000",
+    "name": "Kreis Harburg",
+    "lat": 53.3890454,
+    "lon": 10.4459358
+  },
+  {
+    "warncellid": "103354000",
+    "name": "Kreis Lüchow-Dannenberg",
+    "lat": 53.1297437,
+    "lon": 11.233894
+  },
+  {
+    "warncellid": "103355000",
+    "name": "Kreis Lüneburg",
+    "lat": 54.07357845,
+    "lon": 10.77185860729335
+  },
+  {
+    "warncellid": "103356000",
+    "name": "Kreis Osterholz",
+    "lat": 51.2262003,
+    "lon": 7.025152678471909
+  },
+  {
+    "warncellid": "103357000",
+    "name": "Kreis Rotenburg (Wümme)",
+    "lat": 52.8974295,
+    "lon": 9.292322294300035
+  },
+  {
+    "warncellid": "103358000",
+    "name": "Heidekreis",
+    "lat": 52.8217435,
+    "lon": 9.6601426
+  },
+  {
+    "warncellid": "103359000",
+    "name": "Kreis Stade",
+    "lat": 51.0584847,
+    "lon": 7.8422541
+  },
+  {
+    "warncellid": "103360000",
+    "name": "Kreis Uelzen",
+    "lat": 51.5422328,
+    "lon": 7.7236103
+  },
+  {
+    "warncellid": "103361000",
+    "name": "Kreis Verden",
+    "lat": 52.8974295,
+    "lon": 9.292322294300035
+  },
+  {
+    "warncellid": "103401000",
+    "name": "Stadt Delmenhorst",
+    "lat": 53.0485345,
+    "lon": 8.6190729
+  },
+  {
+    "warncellid": "103402000",
+    "name": "Stadt Emden",
+    "lat": 53.3653764,
+    "lon": 7.206673987345784
+  },
+  {
+    "warncellid": "103403000",
+    "name": "Stadt Oldenburg (Oldb)",
+    "lat": 53.138771,
+    "lon": 8.2138483
+  },
+  {
+    "warncellid": "103404000",
+    "name": "Stadt Osnabrück",
+    "lat": 52.27294755,
+    "lon": 8.061504371664096
+  },
+  {
+    "warncellid": "103405000",
+    "name": "Stadt Wilhelmshaven",
+    "lat": 53.5364309,
+    "lon": 8.0699401
+  },
+  {
+    "warncellid": "103451000",
+    "name": "Kreis Ammerland",
+    "lat": 50.9048272,
+    "lon": 7.1935135
+  },
+  {
+    "warncellid": "103452000",
+    "name": "Kreis Aurich",
+    "lat": 53.419413,
+    "lon": 7.098833
+  },
+  {
+    "warncellid": "103453000",
+    "name": "Kreis Cloppenburg",
+    "lat": 51.7160088,
+    "lon": 8.7484024
+  },
+  {
+    "warncellid": "103454000",
+    "name": "Kreis Emsland",
+    "lat": 51.85622085,
+    "lon": 8.36710086148129
+  },
+  {
+    "warncellid": "103455000",
+    "name": "Kreis Friesland",
+    "lat": 54.6591848,
+    "lon": 8.998149926747127
+  },
+  {
+    "warncellid": "103456000",
+    "name": "Kreis Grafschaft Bentheim",
+    "lat": 52.5370787,
+    "lon": 6.7556319
+  },
+  {
+    "warncellid": "103457000",
+    "name": "Kreis Leer",
+    "lat": 52.11463155,
+    "lon": 7.295291754775832
+  },
+  {
+    "warncellid": "103458000",
+    "name": "Kreis Oldenburg",
+    "lat": 51.839345800000004,
+    "lon": 9.227378749999998
+  },
+  {
+    "warncellid": "103459000",
+    "name": "Kreis Osnabrück",
+    "lat": 52.2824766,
+    "lon": 7.9371938
+  },
+  {
+    "warncellid": "103460000",
+    "name": "Kreis Vechta",
+    "lat": 51.9271906,
+    "lon": 7.86837233283371
+  },
+  {
+    "warncellid": "103461000",
+    "name": "Kreis Wesermarsch",
+    "lat": 53.357451,
+    "lon": 8.1307589
+  },
+  {
+    "warncellid": "103462000",
+    "name": "Kreis Wittmund",
+    "lat": 53.6009025,
+    "lon": 7.4751308
+  },
+  {
+    "warncellid": "104011000",
+    "name": "Hansestadt Bremen",
+    "lat": 53.0758196,
+    "lon": 8.8071646
+  },
+  {
+    "warncellid": "104012000",
+    "name": "Stadt Bremerhaven",
+    "lat": 53.555329,
+    "lon": 8.5909103
+  },
+  {
+    "warncellid": "105111000",
+    "name": "Stadt Düsseldorf",
+    "lat": 51.2564578,
+    "lon": 6.7498305
+  },
+  {
+    "warncellid": "105112000",
+    "name": "Stadt Duisburg",
+    "lat": 51.4596478,
+    "lon": 6.7298616
+  },
+  {
+    "warncellid": "105113000",
+    "name": "Stadt Essen",
+    "lat": 51.4475032,
+    "lon": 7.0432708
+  },
+  {
+    "warncellid": "105114000",
+    "name": "Stadt Krefeld",
+    "lat": 51.3036669,
+    "lon": 6.5052601
+  },
+  {
+    "warncellid": "105116000",
+    "name": "Stadt Mönchengladbach",
+    "lat": 51.1288353,
+    "lon": 6.4214767
+  },
+  {
+    "warncellid": "105117000",
+    "name": "Stadt Mülheim an der Ruhr",
+    "lat": 51.4277052,
+    "lon": 6.877259586322582
+  },
+  {
+    "warncellid": "105119000",
+    "name": "Stadt Oberhausen",
+    "lat": 51.528447,
+    "lon": 6.8570881
+  },
+  {
+    "warncellid": "105120000",
+    "name": "Stadt Remscheid",
+    "lat": 51.1688337,
+    "lon": 7.1495868
+  },
+  {
+    "warncellid": "105122000",
+    "name": "Stadt Solingen",
+    "lat": 51.13801345,
+    "lon": 7.148321050000002
+  },
+  {
+    "warncellid": "105124000",
+    "name": "Stadt Wuppertal",
+    "lat": 51.257369249999996,
+    "lon": 7.1466392156630345
+  },
+  {
+    "warncellid": "105154000",
+    "name": "Kreis Kleve",
+    "lat": 51.6299669,
+    "lon": 6.200945825316141
+  },
+  {
+    "warncellid": "105158000",
+    "name": "Kreis Mettmann",
+    "lat": 51.2529687,
+    "lon": 6.977586
+  },
+  {
+    "warncellid": "105162000",
+    "name": "Rhein-Kreis Neuss",
+    "lat": 51.1758799,
+    "lon": 6.6600605780584905
+  },
+  {
+    "warncellid": "105166000",
+    "name": "Kreis Viersen",
+    "lat": 51.29587305,
+    "lon": 6.319948250804863
+  },
+  {
+    "warncellid": "105170000",
+    "name": "Kreis Wesel",
+    "lat": 51.60293755,
+    "lon": 6.605002354945109
+  },
+  {
+    "warncellid": "105314000",
+    "name": "Bonn",
+    "lat": 50.735851,
+    "lon": 7.10066
+  },
+  {
+    "warncellid": "105315000",
+    "name": "Stadt Köln",
+    "lat": 50.9567195,
+    "lon": 6.8662818
+  },
+  {
+    "warncellid": "105316000",
+    "name": "Stadt Leverkusen",
+    "lat": 51.0545718,
+    "lon": 7.0141162072473495
+  },
+  {
+    "warncellid": "105334000",
+    "name": "StädteRegion Aachen",
+    "lat": 50.7611222,
+    "lon": 6.2055544
+  },
+  {
+    "warncellid": "105358000",
+    "name": "Kreis Düren",
+    "lat": 50.8032819,
+    "lon": 6.4822764
+  },
+  {
+    "warncellid": "105362000",
+    "name": "Rhein-Erft-Kreis",
+    "lat": 50.90334,
+    "lon": 6.763334
+  },
+  {
+    "warncellid": "105366000",
+    "name": "Kreis Euskirchen",
+    "lat": 50.6612623,
+    "lon": 6.7871219
+  },
+  {
+    "warncellid": "105370000",
+    "name": "Kreis Heinsberg",
+    "lat": 51.0655162,
+    "lon": 6.0984046
+  },
+  {
+    "warncellid": "105374000",
+    "name": "Oberbergischer Kreis",
+    "lat": 51.03461315,
+    "lon": 7.52435320757235
+  },
+  {
+    "warncellid": "105378000",
+    "name": "Rheinisch-Bergischer Kreis",
+    "lat": 51.01403715,
+    "lon": 7.17161321648333
+  },
+  {
+    "warncellid": "105382000",
+    "name": "Rhein-Sieg-Kreis",
+    "lat": 50.75279855,
+    "lon": 7.381303798517825
+  },
+  {
+    "warncellid": "105512000",
+    "name": "Stadt Bottrop",
+    "lat": 51.60218415,
+    "lon": 6.93021811419087
+  },
+  {
+    "warncellid": "105513000",
+    "name": "Stadt Gelsenkirchen",
+    "lat": 51.49343265,
+    "lon": 7.135314576615165
+  },
+  {
+    "warncellid": "105515000",
+    "name": "Stadt Münster",
+    "lat": 51.960698300000004,
+    "lon": 7.633047603081664
+  },
+  {
+    "warncellid": "105554000",
+    "name": "Kreis Borken",
+    "lat": 51.9859378,
+    "lon": 6.946333178164557
+  },
+  {
+    "warncellid": "105558000",
+    "name": "Kreis Coesfeld",
+    "lat": 51.8634761,
+    "lon": 7.320806932263865
+  },
+  {
+    "warncellid": "105562000",
+    "name": "Kreis Recklinghausen",
+    "lat": 51.6708384,
+    "lon": 7.146167864467408
+  },
+  {
+    "warncellid": "105566000",
+    "name": "Kreis Steinfurt",
+    "lat": 52.234923,
+    "lon": 7.51210543809956
+  },
+  {
+    "warncellid": "105570000",
+    "name": "Kreis Warendorf",
+    "lat": 51.9533241,
+    "lon": 7.9917445
+  },
+  {
+    "warncellid": "105711000",
+    "name": "Stadt Bielefeld",
+    "lat": 52.0134195,
+    "lon": 8.5210468
+  },
+  {
+    "warncellid": "105754000",
+    "name": "Kreis Gütersloh",
+    "lat": 51.903622,
+    "lon": 8.3810659
+  },
+  {
+    "warncellid": "105758000",
+    "name": "Kreis Herford",
+    "lat": 52.1678893,
+    "lon": 8.6446072
+  },
+  {
+    "warncellid": "105762000",
+    "name": "Kreis Höxter",
+    "lat": 51.6887952,
+    "lon": 9.1960369
+  },
+  {
+    "warncellid": "105766000",
+    "name": "Kreis Lippe",
+    "lat": 51.991762550000004,
+    "lon": 8.916596968343498
+  },
+  {
+    "warncellid": "105770000",
+    "name": "Kreis Minden-Lübbecke",
+    "lat": 52.3214469,
+    "lon": 8.711927
+  },
+  {
+    "warncellid": "105774000",
+    "name": "Kreis Paderborn",
+    "lat": 51.662729049999996,
+    "lon": 8.771403681280422
+  },
+  {
+    "warncellid": "105911000",
+    "name": "Stadt Bochum",
+    "lat": 51.47795895,
+    "lon": 7.21479015
+  },
+  {
+    "warncellid": "105913000",
+    "name": "Stadt Dortmund",
+    "lat": 51.51145794999999,
+    "lon": 7.46520083089969
+  },
+  {
+    "warncellid": "105914000",
+    "name": "Stadt Hagen",
+    "lat": 51.355949550000005,
+    "lon": 7.474000458111946
+  },
+  {
+    "warncellid": "105915000",
+    "name": "Stadt Hamm",
+    "lat": 51.6893437,
+    "lon": 7.8439343
+  },
+  {
+    "warncellid": "105916000",
+    "name": "Stadt Herne",
+    "lat": 51.5582721,
+    "lon": 7.2091267
+  },
+  {
+    "warncellid": "105954000",
+    "name": "Ennepe-Ruhr-Kreis",
+    "lat": 51.3481444,
+    "lon": 7.3351844
+  },
+  {
+    "warncellid": "105958000",
+    "name": "Hochsauerlandkreis",
+    "lat": 51.32082475,
+    "lon": 8.268492475234643
+  },
+  {
+    "warncellid": "105962000",
+    "name": "Märkischer Kreis",
+    "lat": 51.27348575,
+    "lon": 7.727426555037326
+  },
+  {
+    "warncellid": "105966000",
+    "name": "Kreis Olpe",
+    "lat": 51.0293852,
+    "lon": 7.8422155
+  },
+  {
+    "warncellid": "105970000",
+    "name": "Kreis Siegen-Wittgenstein",
+    "lat": 50.9175238,
+    "lon": 8.137557211996047
+  },
+  {
+    "warncellid": "105974000",
+    "name": "Kreis Soest",
+    "lat": 51.5707862,
+    "lon": 8.1071503
+  },
+  {
+    "warncellid": "105978000",
+    "name": "Kreis Unna",
+    "lat": 51.5766562,
+    "lon": 7.6893878
+  },
+  {
+    "warncellid": "106411000",
+    "name": "Stadt Darmstadt",
+    "lat": 49.8790123,
+    "lon": 8.66189
+  },
+  {
+    "warncellid": "106412000",
+    "name": "Stadt Frankfurt am Main",
+    "lat": 50.1111793,
+    "lon": 8.680760381911783
+  },
+  {
+    "warncellid": "106413000",
+    "name": "Stadt Offenbach",
+    "lat": 50.088621,
+    "lon": 8.7834589
+  },
+  {
+    "warncellid": "106414000",
+    "name": "Stadt Wiesbaden",
+    "lat": 50.1053622,
+    "lon": 8.193779826230347
+  },
+  {
+    "warncellid": "106431000",
+    "name": "Kreis Bergstraße",
+    "lat": 49.62303715,
+    "lon": 8.527174217356759
+  },
+  {
+    "warncellid": "106432000",
+    "name": "Kreis Darmstadt-Dieburg",
+    "lat": 49.843514,
+    "lon": 8.6582383852447
+  },
+  {
+    "warncellid": "106433000",
+    "name": "Kreis Groß-Gerau",
+    "lat": 49.9009218,
+    "lon": 8.45134639647473
+  },
+  {
+    "warncellid": "106434000",
+    "name": "Hochtaunuskreis",
+    "lat": 50.28538435,
+    "lon": 8.502987484754563
+  },
+  {
+    "warncellid": "106435000",
+    "name": "Main-Kinzig-Kreis",
+    "lat": 50.265220799999994,
+    "lon": 9.405233417250212
+  },
+  {
+    "warncellid": "106436000",
+    "name": "Main-Taunus-Kreis",
+    "lat": 50.0995554,
+    "lon": 8.426411154335458
+  },
+  {
+    "warncellid": "106437000",
+    "name": "Odenwaldkreis",
+    "lat": 49.66397155,
+    "lon": 8.966028345529717
+  },
+  {
+    "warncellid": "106438000",
+    "name": "Kreis Offenbach am Main",
+    "lat": 50.1251078,
+    "lon": 8.871792
+  },
+  {
+    "warncellid": "106439000",
+    "name": "Rheingau-Taunus-Kreis",
+    "lat": 50.133906499999995,
+    "lon": 8.069959837878164
+  },
+  {
+    "warncellid": "106440000",
+    "name": "Wetteraukreis",
+    "lat": 50.3311113,
+    "lon": 8.933770821912313
+  },
+  {
+    "warncellid": "106531000",
+    "name": "Kreis Gießen",
+    "lat": 48.1812375,
+    "lon": 10.0840375
+  },
+  {
+    "warncellid": "106532000",
+    "name": "Lahn-Dill-Kreis",
+    "lat": 50.63871725,
+    "lon": 8.326829857627118
+  },
+  {
+    "warncellid": "106533000",
+    "name": "Kreis Limburg-Weilburg",
+    "lat": 50.4317857,
+    "lon": 8.075622
+  },
+  {
+    "warncellid": "106534000",
+    "name": "Kreis Marburg-Biedenkopf",
+    "lat": 50.8504742,
+    "lon": 9.1208071
+  },
+  {
+    "warncellid": "106535000",
+    "name": "Vogelsbergkreis",
+    "lat": 50.6412263,
+    "lon": 9.258772
+  },
+  {
+    "warncellid": "106611000",
+    "name": "Stadt Kassel",
+    "lat": 51.313261749999995,
+    "lon": 9.498956519146304
+  },
+  {
+    "warncellid": "106631000",
+    "name": "Kreis Fulda",
+    "lat": 51.07086355,
+    "lon": 9.551882590789466
+  },
+  {
+    "warncellid": "106632000",
+    "name": "Kreis Hersfeld-Rotenburg",
+    "lat": 51.07056605,
+    "lon": 9.933896099999993
+  },
+  {
+    "warncellid": "106633000",
+    "name": "Kreis Kassel",
+    "lat": 51.293642500000004,
+    "lon": 9.507014840087482
+  },
+  {
+    "warncellid": "106634000",
+    "name": "Schwalm-Eder-Kreis",
+    "lat": 51.0151052,
+    "lon": 9.328527886251411
+  },
+  {
+    "warncellid": "106635000",
+    "name": "Kreis Waldeck-Frankenberg",
+    "lat": 51.0937029,
+    "lon": 8.9282851
+  },
+  {
+    "warncellid": "106636000",
+    "name": "Werra-Meißner-Kreis",
+    "lat": 51.2065714,
+    "lon": 9.891924361094981
+  },
+  {
+    "warncellid": "107111000",
+    "name": "Stadt Koblenz",
+    "lat": 50.43912895,
+    "lon": 7.404867884771138
+  },
+  {
+    "warncellid": "107131000",
+    "name": "Kreis Ahrweiler",
+    "lat": 50.60933935,
+    "lon": 6.806985643306305
+  },
+  {
+    "warncellid": "107132000",
+    "name": "Kreis Altenkirchen (Westerwald)",
+    "lat": 50.541370650000005,
+    "lon": 7.438038515919403
+  },
+  {
+    "warncellid": "107133000",
+    "name": "Kreis Bad Kreuznach",
+    "lat": 49.8344671,
+    "lon": 7.8356738
+  },
+  {
+    "warncellid": "107134000",
+    "name": "Kreis Birkenfeld",
+    "lat": 50.854912,
+    "lon": 7.3677905
+  },
+  {
+    "warncellid": "107135000",
+    "name": "Kreis Cochem-Zell",
+    "lat": 50.13073565,
+    "lon": 7.143680231140941
+  },
+  {
+    "warncellid": "107137000",
+    "name": "Kreis Mayen-Koblenz",
+    "lat": 50.3829059,
+    "lon": 7.6390839
+  },
+  {
+    "warncellid": "107138000",
+    "name": "Kreis Neuwied",
+    "lat": 51.1197923,
+    "lon": 10.4213476
+  },
+  {
+    "warncellid": "107140000",
+    "name": "Rhein-Hunsrück-Kreis",
+    "lat": 50.0215164,
+    "lon": 7.4890547
+  },
+  {
+    "warncellid": "107141000",
+    "name": "Rhein-Lahn-Kreis",
+    "lat": 50.2649233,
+    "lon": 7.8606742
+  },
+  {
+    "warncellid": "107143000",
+    "name": "Westerwaldkreis",
+    "lat": 50.5568937,
+    "lon": 7.8657066
+  },
+  {
+    "warncellid": "107211000",
+    "name": "Stadt Trier",
+    "lat": 49.7515414,
+    "lon": 6.6413137
+  },
+  {
+    "warncellid": "107231000",
+    "name": "Kreis Bernkastel-Wittlich",
+    "lat": 50.0982297,
+    "lon": 6.8084529
+  },
+  {
+    "warncellid": "107232000",
+    "name": "Eifelkreis Bitburg-Prüm",
+    "lat": 50.0375377,
+    "lon": 6.3976527
+  },
+  {
+    "warncellid": "107233000",
+    "name": "Kreis Vulkaneifel",
+    "lat": 50.2313654,
+    "lon": 6.5876393
+  },
+  {
+    "warncellid": "107235000",
+    "name": "Kreis Trier-Saarburg",
+    "lat": 49.5551603,
+    "lon": 6.7173258
+  },
+  {
+    "warncellid": "107311000",
+    "name": "Stadt Frankenthal (Pfalz)",
+    "lat": 49.542145899999994,
+    "lon": 8.357006586624845
+  },
+  {
+    "warncellid": "107312000",
+    "name": "Stadt Kaiserslautern",
+    "lat": 49.431081250000005,
+    "lon": 7.792431868145339
+  },
+  {
+    "warncellid": "107313000",
+    "name": "Stadt Landau in der Pfalz",
+    "lat": 49.1957846,
+    "lon": 8.1205568
+  },
+  {
+    "warncellid": "107314000",
+    "name": "Stadt Ludwigshafen am Rhein",
+    "lat": 49.4898698,
+    "lon": 8.425538494776742
+  },
+  {
+    "warncellid": "107315000",
+    "name": "Stadt Mainz",
+    "lat": 49.998060100000004,
+    "lon": 8.268014356070584
+  },
+  {
+    "warncellid": "107316000",
+    "name": "Stadt Neustadt an der Weinstraße",
+    "lat": 49.37585525,
+    "lon": 8.1214517933017
+  },
+  {
+    "warncellid": "107317000",
+    "name": "Stadt Pirmasens",
+    "lat": 49.2003968,
+    "lon": 7.604348378798127
+  },
+  {
+    "warncellid": "107318000",
+    "name": "Stadt Speyer",
+    "lat": 49.3610588,
+    "lon": 8.4251897
+  },
+  {
+    "warncellid": "107319000",
+    "name": "Stadt Worms",
+    "lat": 49.628104199999996,
+    "lon": 8.357752665908048
+  },
+  {
+    "warncellid": "107320000",
+    "name": "Stadt Zweibrücken",
+    "lat": 49.25010905,
+    "lon": 7.366670200383183
+  },
+  {
+    "warncellid": "107331000",
+    "name": "Kreis Alzey-Worms",
+    "lat": 49.720784,
+    "lon": 8.1957196
+  },
+  {
+    "warncellid": "107332000",
+    "name": "Kreis Bad Dürkheim",
+    "lat": 49.4513458,
+    "lon": 8.0329784
+  },
+  {
+    "warncellid": "107333000",
+    "name": "Donnersbergkreis",
+    "lat": 49.639283,
+    "lon": 7.9104292
+  },
+  {
+    "warncellid": "107334000",
+    "name": "Kreis Germersheim",
+    "lat": 49.22663415,
+    "lon": 8.26395651907459
+  },
+  {
+    "warncellid": "107335000",
+    "name": "Kreis Kaiserslautern",
+    "lat": 49.4268635,
+    "lon": 7.678942
+  },
+  {
+    "warncellid": "107336000",
+    "name": "Kreis Kusel",
+    "lat": 51.6720792,
+    "lon": 8.3981413
+  },
+  {
+    "warncellid": "107337000",
+    "name": "Kreis Südliche Weinstraße",
+    "lat": 49.1714706,
+    "lon": 7.9349327
+  },
+  {
+    "warncellid": "107338000",
+    "name": "Rhein-Pfalz-Kreis",
+    "lat": 49.4294558,
+    "lon": 8.314052637125616
+  },
+  {
+    "warncellid": "107339000",
+    "name": "Kreis Mainz-Bingen",
+    "lat": 49.9129405,
+    "lon": 8.0440425
+  },
+  {
+    "warncellid": "107340000",
+    "name": "Kreis Südwestpfalz",
+    "lat": 49.2048668,
+    "lon": 7.478439
+  },
+  {
+    "warncellid": "108111000",
+    "name": "Stadt Stuttgart",
+    "lat": 48.8309646,
+    "lon": 9.1929077
+  },
+  {
+    "warncellid": "108115000",
+    "name": "Kreis Böblingen",
+    "lat": 48.6797212,
+    "lon": 8.994212602597567
+  },
+  {
+    "warncellid": "108116000",
+    "name": "Kreis Esslingen",
+    "lat": 48.7411576,
+    "lon": 9.3013967
+  },
+  {
+    "warncellid": "108117000",
+    "name": "Kreis Göppingen",
+    "lat": 48.5486489,
+    "lon": 9.6261818
+  },
+  {
+    "warncellid": "108118000",
+    "name": "Kreis Ludwigsburg",
+    "lat": 54.5133252,
+    "lon": 9.9319813
+  },
+  {
+    "warncellid": "108119000",
+    "name": "Rems-Murr-Kreis",
+    "lat": 48.8875653,
+    "lon": 9.4954806
+  },
+  {
+    "warncellid": "108121000",
+    "name": "Stadt Heilbronn",
+    "lat": 49.0994619,
+    "lon": 9.1544295
+  },
+  {
+    "warncellid": "108125000",
+    "name": "Kreis Heilbronn",
+    "lat": 49.471941,
+    "lon": 8.6576858
+  },
+  {
+    "warncellid": "108126000",
+    "name": "Hohenlohekreis",
+    "lat": 49.263305900000006,
+    "lon": 9.621815925226084
+  },
+  {
+    "warncellid": "108127000",
+    "name": "Kreis Schwäbisch Hall",
+    "lat": 49.3717421,
+    "lon": 8.746515
+  },
+  {
+    "warncellid": "108128000",
+    "name": "Main-Tauber-Kreis",
+    "lat": 49.5713991,
+    "lon": 9.671039958568594
+  },
+  {
+    "warncellid": "108135000",
+    "name": "Kreis Heidenheim",
+    "lat": 48.6727091,
+    "lon": 10.146767
+  },
+  {
+    "warncellid": "108136000",
+    "name": "Ostalbkreis",
+    "lat": 48.88774545,
+    "lon": 10.099352516280666
+  },
+  {
+    "warncellid": "108211000",
+    "name": "Stadt Baden-Baden",
+    "lat": 48.7697696,
+    "lon": 8.2025472
+  },
+  {
+    "warncellid": "108212000",
+    "name": "Stadt Karlsruhe",
+    "lat": 48.998351,
+    "lon": 8.401427066362848
+  },
+  {
+    "warncellid": "108215000",
+    "name": "Kreis Karlsruhe",
+    "lat": 50.14539325,
+    "lon": 7.432247195572249
+  },
+  {
+    "warncellid": "108216000",
+    "name": "Kreis Rastatt",
+    "lat": 48.6952684,
+    "lon": 8.3413515
+  },
+  {
+    "warncellid": "108221000",
+    "name": "Stadt Heidelberg",
+    "lat": 49.411780300000004,
+    "lon": 8.703386771936266
+  },
+  {
+    "warncellid": "108222000",
+    "name": "Stadt Mannheim",
+    "lat": 49.5000928,
+    "lon": 8.4614823
+  },
+  {
+    "warncellid": "108225000",
+    "name": "Neckar-Odenwald-Kreis",
+    "lat": 49.4678557,
+    "lon": 9.271007185203327
+  },
+  {
+    "warncellid": "108226000",
+    "name": "Rhein-Neckar-Kreis",
+    "lat": 49.39996025,
+    "lon": 8.565594868784146
+  },
+  {
+    "warncellid": "108231000",
+    "name": "Stadt Pforzheim",
+    "lat": 48.8432087,
+    "lon": 8.641243
+  },
+  {
+    "warncellid": "108235000",
+    "name": "Kreis Calw",
+    "lat": 48.660733300000004,
+    "lon": 8.696831736542931
+  },
+  {
+    "warncellid": "108236000",
+    "name": "Enzkreis",
+    "lat": 48.9182003,
+    "lon": 8.843240892598908
+  },
+  {
+    "warncellid": "108237000",
+    "name": "Kreis Freudenstadt",
+    "lat": 48.4905215,
+    "lon": 8.3129171
+  },
+  {
+    "warncellid": "108311000",
+    "name": "Stadt Freiburg im Breisgau",
+    "lat": 47.9961661,
+    "lon": 7.8489814
+  },
+  {
+    "warncellid": "108315000",
+    "name": "Kreis Breisgau-Hochschwarzwald",
+    "lat": 48.030323,
+    "lon": 7.7728929
+  },
+  {
+    "warncellid": "108316000",
+    "name": "Kreis Emmendingen",
+    "lat": 48.118394,
+    "lon": 7.866062
+  },
+  {
+    "warncellid": "108317000",
+    "name": "Ortenaukreis",
+    "lat": 48.438979599999996,
+    "lon": 8.009902759217347
+  },
+  {
+    "warncellid": "108325000",
+    "name": "Kreis Rottweil",
+    "lat": 48.055953349999996,
+    "lon": 8.460343606924642
+  },
+  {
+    "warncellid": "108326000",
+    "name": "Schwarzwald-Baar-Kreis",
+    "lat": 47.979414750000004,
+    "lon": 8.488942937199678
+  },
+  {
+    "warncellid": "108327000",
+    "name": "Kreis Tuttlingen",
+    "lat": 48.0486399,
+    "lon": 8.6237769
+  },
+  {
+    "warncellid": "108335000",
+    "name": "Kreis Konstanz",
+    "lat": 47.708338,
+    "lon": 9.0816672
+  },
+  {
+    "warncellid": "108336000",
+    "name": "Kreis Lörrach",
+    "lat": 47.5908546,
+    "lon": 7.7975441
+  },
+  {
+    "warncellid": "108337000",
+    "name": "Kreis Waldshut",
+    "lat": 47.6283934,
+    "lon": 8.5013251
+  },
+  {
+    "warncellid": "108415000",
+    "name": "Kreis Reutlingen",
+    "lat": 48.2075025,
+    "lon": 9.5627653
+  },
+  {
+    "warncellid": "108416000",
+    "name": "Kreis Tübingen",
+    "lat": 48.5265385,
+    "lon": 9.0865834
+  },
+  {
+    "warncellid": "108417000",
+    "name": "Zollernalbkreis",
+    "lat": 48.26036825,
+    "lon": 8.91244975996355
+  },
+  {
+    "warncellid": "108421000",
+    "name": "Stadt Ulm",
+    "lat": 48.3959509,
+    "lon": 9.9914088
+  },
+  {
+    "warncellid": "108425000",
+    "name": "Alb-Donau-Kreis",
+    "lat": 48.3869659,
+    "lon": 9.728756084059711
+  },
+  {
+    "warncellid": "108426000",
+    "name": "Kreis Biberach",
+    "lat": 48.088717,
+    "lon": 9.7538928
+  },
+  {
+    "warncellid": "108435000",
+    "name": "Bodenseekreis",
+    "lat": 47.7309856,
+    "lon": 9.375236685811299
+  },
+  {
+    "warncellid": "108436000",
+    "name": "Kreis Ravensburg",
+    "lat": 50.8293349,
+    "lon": 7.1694423
+  },
+  {
+    "warncellid": "108437000",
+    "name": "Kreis Sigmaringen",
+    "lat": 48.09633855,
+    "lon": 9.222722989858205
+  },
+  {
+    "warncellid": "109161000",
+    "name": "Stadt Ingolstadt",
+    "lat": 48.762996150000006,
+    "lon": 11.425527132897457
+  },
+  {
+    "warncellid": "109162000",
+    "name": "Stadt München",
+    "lat": 48.141579,
+    "lon": 11.6090201
+  },
+  {
+    "warncellid": "109163000",
+    "name": "Stadt Rosenheim",
+    "lat": 47.8507976,
+    "lon": 12.1199746
+  },
+  {
+    "warncellid": "109171000",
+    "name": "Kreis Altötting",
+    "lat": 48.2208934,
+    "lon": 12.8799176
+  },
+  {
+    "warncellid": "109172000",
+    "name": "Kreis Berchtesgadener Land",
+    "lat": 47.7051183,
+    "lon": 12.7338986
+  },
+  {
+    "warncellid": "109173000",
+    "name": "Kreis Bad Tölz-Wolfratshausen",
+    "lat": 47.7402685,
+    "lon": 11.4204383
+  },
+  {
+    "warncellid": "109174000",
+    "name": "Kreis Dachau",
+    "lat": 48.2579318,
+    "lon": 11.3422433
+  },
+  {
+    "warncellid": "109175000",
+    "name": "Kreis Ebersberg",
+    "lat": 49.2994335,
+    "lon": 7.3402527
+  },
+  {
+    "warncellid": "109176000",
+    "name": "Kreis Eichstätt",
+    "lat": 48.9939626,
+    "lon": 11.4621158
+  },
+  {
+    "warncellid": "109177000",
+    "name": "Kreis Erding",
+    "lat": 49.6865198,
+    "lon": 9.6971691
+  },
+  {
+    "warncellid": "109178000",
+    "name": "Kreis Freising",
+    "lat": 48.4825736,
+    "lon": 11.915519
+  },
+  {
+    "warncellid": "109179000",
+    "name": "Kreis Fürstenfeldbruck",
+    "lat": 48.2386304,
+    "lon": 11.1554951
+  },
+  {
+    "warncellid": "109180000",
+    "name": "Kreis Garmisch-Partenkirchen",
+    "lat": 47.4711256,
+    "lon": 10.9761788
+  },
+  {
+    "warncellid": "109181000",
+    "name": "Kreis Landsberg am Lech",
+    "lat": 48.0336797,
+    "lon": 10.8305498
+  },
+  {
+    "warncellid": "109182000",
+    "name": "Kreis Miesbach",
+    "lat": 50.4041105,
+    "lon": 6.3866293
+  },
+  {
+    "warncellid": "109183000",
+    "name": "Kreis Mühldorf a. Inn",
+    "lat": 48.2504789,
+    "lon": 12.4735157
+  },
+  {
+    "warncellid": "109184000",
+    "name": "Kreis München",
+    "lat": 47.9958373,
+    "lon": 11.6595764
+  },
+  {
+    "warncellid": "109185000",
+    "name": "Kreis Neuburg-Schrobenhausen",
+    "lat": 48.62692,
+    "lon": 11.0463738
+  },
+  {
+    "warncellid": "109186000",
+    "name": "Kreis Pfaffenhofen a.d. Ilm",
+    "lat": 48.534535,
+    "lon": 11.508249
+  },
+  {
+    "warncellid": "109187000",
+    "name": "Kreis Rosenheim",
+    "lat": 47.784724,
+    "lon": 12.1010489
+  },
+  {
+    "warncellid": "109188000",
+    "name": "Kreis Starnberg",
+    "lat": 48.0358583,
+    "lon": 11.359362181611843
+  },
+  {
+    "warncellid": "109189000",
+    "name": "Kreis Traunstein",
+    "lat": 47.9406165,
+    "lon": 12.604484
+  },
+  {
+    "warncellid": "109190000",
+    "name": "Kreis Weilheim-Schongau",
+    "lat": 47.7851205,
+    "lon": 10.9328396
+  },
+  {
+    "warncellid": "109261000",
+    "name": "Stadt Landshut",
+    "lat": 48.53867835,
+    "lon": 12.152590676133112
+  },
+  {
+    "warncellid": "109262000",
+    "name": "Stadt Passau",
+    "lat": 48.5786653,
+    "lon": 13.473976756960129
+  },
+  {
+    "warncellid": "109263000",
+    "name": "Stadt Straubing",
+    "lat": 48.8846135,
+    "lon": 12.53668131491891
+  },
+  {
+    "warncellid": "109271000",
+    "name": "Kreis Deggendorf",
+    "lat": 48.8477159,
+    "lon": 12.9038174
+  },
+  {
+    "warncellid": "109272000",
+    "name": "Kreis Freyung-Grafenau",
+    "lat": 48.80710535,
+    "lon": 13.544701850928433
+  },
+  {
+    "warncellid": "109273000",
+    "name": "Kreis Kelheim",
+    "lat": 48.8796275,
+    "lon": 11.8745792
+  },
+  {
+    "warncellid": "109274000",
+    "name": "Kreis Landshut",
+    "lat": 48.7399039,
+    "lon": 12.0826755
+  },
+  {
+    "warncellid": "109275000",
+    "name": "Kreis Passau",
+    "lat": 54.2671736,
+    "lon": 10.3118071
+  },
+  {
+    "warncellid": "109276000",
+    "name": "Kreis Regen",
+    "lat": 51.2105164,
+    "lon": 6.9759603
+  },
+  {
+    "warncellid": "109277000",
+    "name": "Kreis Rottal-Inn",
+    "lat": 48.5127125,
+    "lon": 13.0767654
+  },
+  {
+    "warncellid": "109278000",
+    "name": "Kreis Straubing-Bogen",
+    "lat": 49.0504105,
+    "lon": 12.686039
+  },
+  {
+    "warncellid": "109279000",
+    "name": "Kreis Dingolfing-Landau",
+    "lat": 48.5704808,
+    "lon": 12.4502162
+  },
+  {
+    "warncellid": "109361000",
+    "name": "Stadt Amberg",
+    "lat": 51.0022863,
+    "lon": 14.2558424
+  },
+  {
+    "warncellid": "109362000",
+    "name": "Stadt Regensburg",
+    "lat": 49.0166281,
+    "lon": 12.0891414
+  },
+  {
+    "warncellid": "109363000",
+    "name": "Stadt Weiden i.d. OPf.",
+    "lat": 49.6640857,
+    "lon": 12.130384
+  },
+  {
+    "warncellid": "109371000",
+    "name": "Kreis Amberg-Sulzbach",
+    "lat": 50.302682,
+    "lon": 7.7518932
+  },
+  {
+    "warncellid": "109372000",
+    "name": "Kreis Cham",
+    "lat": 49.2022165,
+    "lon": 12.5862172
+  },
+  {
+    "warncellid": "109373000",
+    "name": "Kreis Neumarkt i.d. OPf.",
+    "lat": 49.2778814,
+    "lon": 11.4454834
+  },
+  {
+    "warncellid": "109374000",
+    "name": "Kreis Neustadt a.d. Waldnaab",
+    "lat": 49.7269912,
+    "lon": 12.1313373
+  },
+  {
+    "warncellid": "109375000",
+    "name": "Kreis Regensburg",
+    "lat": 49.0131682,
+    "lon": 12.1413103
+  },
+  {
+    "warncellid": "109376000",
+    "name": "Kreis Schwandorf",
+    "lat": 49.3177917,
+    "lon": 12.0343638
+  },
+  {
+    "warncellid": "109377000",
+    "name": "Kreis Tirschenreuth",
+    "lat": 49.8887211,
+    "lon": 12.2793154
+  },
+  {
+    "warncellid": "109461000",
+    "name": "Stadt Bamberg",
+    "lat": 49.8925395,
+    "lon": 10.8875105
+  },
+  {
+    "warncellid": "109462000",
+    "name": "Stadt Bayreuth",
+    "lat": 49.9438899,
+    "lon": 11.5746336
+  },
+  {
+    "warncellid": "109463000",
+    "name": "Stadt Coburg",
+    "lat": 50.26501665,
+    "lon": 10.957831692313746
+  },
+  {
+    "warncellid": "109464000",
+    "name": "Stadt Hof",
+    "lat": 48.7902811,
+    "lon": 9.5170769
+  },
+  {
+    "warncellid": "109471000",
+    "name": "Kreis Bamberg",
+    "lat": 50.5515972,
+    "lon": 8.52074
+  },
+  {
+    "warncellid": "109472000",
+    "name": "Kreis Bayreuth",
+    "lat": 49.8293929,
+    "lon": 11.3764296
+  },
+  {
+    "warncellid": "109473000",
+    "name": "Kreis Coburg",
+    "lat": 48.3869659,
+    "lon": 9.728756084059711
+  },
+  {
+    "warncellid": "109474000",
+    "name": "Kreis Forchheim",
+    "lat": 49.7123656,
+    "lon": 11.0281205
+  },
+  {
+    "warncellid": "109475000",
+    "name": "Kreis Hof",
+    "lat": 51.0818014,
+    "lon": 7.3555356
+  },
+  {
+    "warncellid": "109476000",
+    "name": "Kreis Kronach",
+    "lat": 50.2483061,
+    "lon": 11.2711515
+  },
+  {
+    "warncellid": "109477000",
+    "name": "Kreis Kulmbach",
+    "lat": 50.1236494,
+    "lon": 11.3626139
+  },
+  {
+    "warncellid": "109478000",
+    "name": "Kreis Lichtenfels",
+    "lat": 51.0937029,
+    "lon": 8.9282851
+  },
+  {
+    "warncellid": "109479000",
+    "name": "Kreis Wunsiedel i. Fichtelgebirge",
+    "lat": 50.0730421,
+    "lon": 12.17301578844516
+  },
+  {
+    "warncellid": "109561000",
+    "name": "Stadt Ansbach",
+    "lat": 49.2941259,
+    "lon": 10.5694424
+  },
+  {
+    "warncellid": "109562000",
+    "name": "Stadt Erlangen",
+    "lat": 49.5937898,
+    "lon": 11.0049855
+  },
+  {
+    "warncellid": "109563000",
+    "name": "Stadt Fürth",
+    "lat": 49.4686492,
+    "lon": 11.012619930696044
+  },
+  {
+    "warncellid": "109564000",
+    "name": "Stadt Nürnberg",
+    "lat": 49.457172099999994,
+    "lon": 11.073826976367776
+  },
+  {
+    "warncellid": "109565000",
+    "name": "Stadt Schwabach",
+    "lat": 49.322706499999995,
+    "lon": 11.028610096481144
+  },
+  {
+    "warncellid": "109571000",
+    "name": "Kreis Ansbach",
+    "lat": 50.0061128,
+    "lon": 8.0000249
+  },
+  {
+    "warncellid": "109572000",
+    "name": "Kreis Erlangen-Höchstadt",
+    "lat": 49.6296902,
+    "lon": 10.8001543
+  },
+  {
+    "warncellid": "109573000",
+    "name": "Kreis Fürth",
+    "lat": 49.6477624,
+    "lon": 8.7762994
+  },
+  {
+    "warncellid": "109574000",
+    "name": "Kreis Nürnberger Land",
+    "lat": 51.0874925,
+    "lon": 9.5575154
+  },
+  {
+    "warncellid": "109575000",
+    "name": "Kreis Neustadt a.d. Aisch-Bad Windsheim",
+    "lat": 49.6463966,
+    "lon": 10.6963349
+  },
+  {
+    "warncellid": "109576000",
+    "name": "Kreis Roth",
+    "lat": 50.2668456,
+    "lon": 7.8955191
+  },
+  {
+    "warncellid": "109577000",
+    "name": "Kreis Weißenburg-Gunzenhausen",
+    "lat": 49.0597262,
+    "lon": 10.8278728
+  },
+  {
+    "warncellid": "109661000",
+    "name": "Stadt Aschaffenburg",
+    "lat": 49.9761466,
+    "lon": 9.146201278519857
+  },
+  {
+    "warncellid": "109662000",
+    "name": "Stadt Schweinfurt",
+    "lat": 50.043634749999995,
+    "lon": 10.23732660774052
+  },
+  {
+    "warncellid": "109663000",
+    "name": "Stadt Würzburg",
+    "lat": 49.8197953,
+    "lon": 9.959961
+  },
+  {
+    "warncellid": "109671000",
+    "name": "Kreis Aschaffenburg",
+    "lat": 49.97255,
+    "lon": 9.1494327
+  },
+  {
+    "warncellid": "109672000",
+    "name": "Kreis Bad Kissingen",
+    "lat": 50.197504,
+    "lon": 9.9849711
+  },
+  {
+    "warncellid": "109673000",
+    "name": "Kreis Rhön-Grabfeld",
+    "lat": 50.3802192,
+    "lon": 10.1258051
+  },
+  {
+    "warncellid": "109674000",
+    "name": "Kreis Haßberge",
+    "lat": 50.0599105,
+    "lon": 10.4512826
+  },
+  {
+    "warncellid": "109675000",
+    "name": "Kreis Kitzingen",
+    "lat": 49.7473996,
+    "lon": 10.1259295
+  },
+  {
+    "warncellid": "109676000",
+    "name": "Kreis Miltenberg",
+    "lat": 49.5788137,
+    "lon": 9.3852974
+  },
+  {
+    "warncellid": "109677000",
+    "name": "Kreis Main-Spessart",
+    "lat": 50.24092645,
+    "lon": 9.419279810205744
+  },
+  {
+    "warncellid": "109678000",
+    "name": "Kreis Schweinfurt",
+    "lat": 49.9911683,
+    "lon": 10.3083341
+  },
+  {
+    "warncellid": "109679000",
+    "name": "Kreis Würzburg",
+    "lat": 50.621146749999994,
+    "lon": 8.16191798126642
+  },
+  {
+    "warncellid": "109761000",
+    "name": "Stadt Augsburg",
+    "lat": 48.3702557,
+    "lon": 10.8945246
+  },
+  {
+    "warncellid": "109762000",
+    "name": "Stadt Kaufbeuren",
+    "lat": 47.8795683,
+    "lon": 10.6218581
+  },
+  {
+    "warncellid": "109763000",
+    "name": "Stadt Kempten (Allgäu)",
+    "lat": 47.73475,
+    "lon": 10.3032333
+  },
+  {
+    "warncellid": "109764000",
+    "name": "Stadt Memmingen",
+    "lat": 47.9861021,
+    "lon": 10.1826868
+  },
+  {
+    "warncellid": "109771000",
+    "name": "Kreis Aichach-Friedberg",
+    "lat": 48.3935884,
+    "lon": 10.9896894
+  },
+  {
+    "warncellid": "109772000",
+    "name": "Kreis Augsburg",
+    "lat": 54.5033271,
+    "lon": 9.1026652
+  },
+  {
+    "warncellid": "109773000",
+    "name": "Kreis Dillingen a.d. Donau",
+    "lat": 48.5776082,
+    "lon": 10.4961322
+  },
+  {
+    "warncellid": "109774000",
+    "name": "Kreis Günzburg",
+    "lat": 48.2333983,
+    "lon": 10.3164183
+  },
+  {
+    "warncellid": "109775000",
+    "name": "Kreis Neu-Ulm",
+    "lat": 48.4889216,
+    "lon": 10.1208466
+  },
+  {
+    "warncellid": "109776000",
+    "name": "Kreis Lindau (Bodensee)",
+    "lat": 47.5728559,
+    "lon": 9.6535153
+  },
+  {
+    "warncellid": "109777000",
+    "name": "Kreis Ostallgäu",
+    "lat": 47.786358,
+    "lon": 10.6597937
+  },
+  {
+    "warncellid": "109778000",
+    "name": "Kreis Unterallgäu",
+    "lat": 48.0628031,
+    "lon": 10.6403727
+  },
+  {
+    "warncellid": "109779000",
+    "name": "Kreis Donau-Ries",
+    "lat": 48.8396592,
+    "lon": 10.850461165126813
+  },
+  {
+    "warncellid": "109780000",
+    "name": "Kreis Oberallgäu",
+    "lat": 47.5665404,
+    "lon": 9.9547941
+  },
+  {
+    "warncellid": "110041000",
+    "name": "Regionalverband Saarbrücken",
+    "lat": 49.2447573,
+    "lon": 6.971662876252603
+  },
+  {
+    "warncellid": "110042000",
+    "name": "Kreis Merzig-Wadern",
+    "lat": 49.4927238,
+    "lon": 6.5199026
+  },
+  {
+    "warncellid": "110043000",
+    "name": "Kreis Neunkirchen",
+    "lat": 50.8422101,
+    "lon": 7.336617
+  },
+  {
+    "warncellid": "110044000",
+    "name": "Kreis Saarlouis",
+    "lat": 49.3108873,
+    "lon": 6.751119763940672
+  },
+  {
+    "warncellid": "110045000",
+    "name": "Saarpfalz-Kreis",
+    "lat": 49.2613761,
+    "lon": 7.198231589855275
+  },
+  {
+    "warncellid": "110046000",
+    "name": "Kreis St. Wendel",
+    "lat": 49.4787585,
+    "lon": 7.072434727256018
+  },
+  {
+    "warncellid": "111000000",
+    "name": "Berlin",
+    "lat": 52.5170365,
+    "lon": 13.3888599
+  },
+  {
+    "warncellid": "112051000",
+    "name": "Stadt Brandenburg",
+    "lat": 52.41249525,
+    "lon": 12.553925882476161
+  },
+  {
+    "warncellid": "112052000",
+    "name": "Stadt Cottbus",
+    "lat": 51.7512991,
+    "lon": 14.3223077
+  },
+  {
+    "warncellid": "112053000",
+    "name": "Stadt Frankfurt (Oder)",
+    "lat": 52.3365359,
+    "lon": 14.5466945
+  },
+  {
+    "warncellid": "112054000",
+    "name": "Stadt Potsdam",
+    "lat": 52.4849368,
+    "lon": 13.1251172
+  },
+  {
+    "warncellid": "112060000",
+    "name": "Kreis Barnim",
+    "lat": 52.8010566,
+    "lon": 13.4963488
+  },
+  {
+    "warncellid": "112061000",
+    "name": "Kreis Dahme-Spreewald",
+    "lat": 52.40313775,
+    "lon": 13.44764684830248
+  },
+  {
+    "warncellid": "112062000",
+    "name": "Kreis Elbe-Elster",
+    "lat": 51.4296306,
+    "lon": 13.7059152
+  },
+  {
+    "warncellid": "112063000",
+    "name": "Kreis Havelland",
+    "lat": 51.6446753,
+    "lon": 7.1128016
+  },
+  {
+    "warncellid": "112064000",
+    "name": "Kreis Märkisch-Oderland",
+    "lat": 52.638301,
+    "lon": 13.8449923
+  },
+  {
+    "warncellid": "112065000",
+    "name": "Kreis Oberhavel",
+    "lat": 52.7438751,
+    "lon": 13.1744973
+  },
+  {
+    "warncellid": "112066000",
+    "name": "Kreis Oberspreewald-Lausitz",
+    "lat": 51.7466278,
+    "lon": 13.953923
+  },
+  {
+    "warncellid": "112067000",
+    "name": "Kreis Oder-Spree",
+    "lat": 52.370708750000006,
+    "lon": 14.053486967636994
+  },
+  {
+    "warncellid": "112068000",
+    "name": "Kreis Ostprignitz-Ruppin",
+    "lat": 52.9423176,
+    "lon": 12.3981094
+  },
+  {
+    "warncellid": "112069000",
+    "name": "Kreis Potsdam-Mittelmark",
+    "lat": 52.0808869,
+    "lon": 12.3227103
+  },
+  {
+    "warncellid": "112070000",
+    "name": "Kreis Prignitz",
+    "lat": 53.3329198,
+    "lon": 12.2454148
+  },
+  {
+    "warncellid": "112071000",
+    "name": "Kreis Spree-Neiße",
+    "lat": 51.7655526,
+    "lon": 14.2661347
+  },
+  {
+    "warncellid": "112072000",
+    "name": "Kreis Teltow-Fläming",
+    "lat": 52.09020975,
+    "lon": 13.160548664485997
+  },
+  {
+    "warncellid": "112073000",
+    "name": "Kreis Uckermark",
+    "lat": 51.6465221,
+    "lon": 7.1156782
+  },
+  {
+    "warncellid": "113003000",
+    "name": "Hansestadt Rostock",
+    "lat": 54.0833,
+    "lon": 12.1333
+  },
+  {
+    "warncellid": "113004000",
+    "name": "Stadt Schwerin",
+    "lat": 53.6288297,
+    "lon": 11.4148038
+  },
+  {
+    "warncellid": "113071000",
+    "name": "Kreis Mecklenburgische Seenplatte",
+    "lat": 53.906273049999996,
+    "lon": 13.030095616549291
+  },
+  {
+    "warncellid": "113072000",
+    "name": "Kreis Rostock",
+    "lat": 54.073728849999995,
+    "lon": 10.771180308191429
+  },
+  {
+    "warncellid": "113073000",
+    "name": "Kreis Vorpommern-Rügen",
+    "lat": 54.329099,
+    "lon": 12.7425291
+  },
+  {
+    "warncellid": "113074000",
+    "name": "Kreis Nordwestmecklenburg",
+    "lat": 53.7999311,
+    "lon": 10.9989234
+  },
+  {
+    "warncellid": "113075000",
+    "name": "Kreis Vorpommern-Greifswald",
+    "lat": 53.4983182,
+    "lon": 13.990243757463352
+  },
+  {
+    "warncellid": "113076000",
+    "name": "Kreis Ludwigslust-Parchim",
+    "lat": 53.3761834,
+    "lon": 10.7186702
+  },
+  {
+    "warncellid": "114511000",
+    "name": "Stadt Chemnitz",
+    "lat": 50.82857275,
+    "lon": 12.915209245066158
+  },
+  {
+    "warncellid": "114521000",
+    "name": "Erzgebirgskreis",
+    "lat": 50.6018498,
+    "lon": 12.956783460886657
+  },
+  {
+    "warncellid": "114522000",
+    "name": "Kreis Mittelsachsen",
+    "lat": 50.90472525,
+    "lon": 13.367115949999999
+  },
+  {
+    "warncellid": "114523000",
+    "name": "Vogtlandkreis",
+    "lat": 50.424055100000004,
+    "lon": 12.252434849999727
+  },
+  {
+    "warncellid": "114524000",
+    "name": "Kreis Zwickau",
+    "lat": 50.7272852,
+    "lon": 12.4171147
+  },
+  {
+    "warncellid": "114612000",
+    "name": "Stadt Dresden",
+    "lat": 51.0704343,
+    "lon": 13.763011230852843
+  },
+  {
+    "warncellid": "114625000",
+    "name": "Kreis Bautzen",
+    "lat": 51.1841142,
+    "lon": 14.3734269
+  },
+  {
+    "warncellid": "114626000",
+    "name": "Kreis Görlitz",
+    "lat": 51.2918957,
+    "lon": 6.8245473
+  },
+  {
+    "warncellid": "114627000",
+    "name": "Kreis Meißen",
+    "lat": 52.2685572,
+    "lon": 8.9544086
+  },
+  {
+    "warncellid": "114628000",
+    "name": "Kreis Sächsische Schweiz-Osterzgebirge",
+    "lat": 50.9030623,
+    "lon": 13.6315438
+  },
+  {
+    "warncellid": "114713000",
+    "name": "Stadt Leipzig",
+    "lat": 51.328722,
+    "lon": 12.3484446
+  },
+  {
+    "warncellid": "114729000",
+    "name": "Kreis Leipzig",
+    "lat": 51.2911091,
+    "lon": 6.8264811
+  },
+  {
+    "warncellid": "114730000",
+    "name": "Kreis Nordsachsen",
+    "lat": 51.5618029,
+    "lon": 12.981466879774445
+  },
+  {
+    "warncellid": "115001000",
+    "name": "Stadt Dessau-Roßlau",
+    "lat": 51.7892487,
+    "lon": 12.2374226
+  },
+  {
+    "warncellid": "115002000",
+    "name": "Stadt Halle (Saale)",
+    "lat": 51.4806977,
+    "lon": 11.971959604467887
+  },
+  {
+    "warncellid": "115003000",
+    "name": "Stadt Magdeburg",
+    "lat": 52.127156,
+    "lon": 11.638162504529834
+  },
+  {
+    "warncellid": "115081000",
+    "name": "Altmarkkreis Salzwedel",
+    "lat": 52.6911174,
+    "lon": 11.2303736
+  },
+  {
+    "warncellid": "115082000",
+    "name": "Kreis Anhalt-Bitterfeld",
+    "lat": 51.7363509,
+    "lon": 12.003942
+  },
+  {
+    "warncellid": "115083000",
+    "name": "Kreis Börde",
+    "lat": 51.9955729,
+    "lon": 11.1945516
+  },
+  {
+    "warncellid": "115084000",
+    "name": "Burgenlandkreis",
+    "lat": 51.12906475,
+    "lon": 11.851558102170362
+  },
+  {
+    "warncellid": "115085000",
+    "name": "Kreis Harz",
+    "lat": 51.9188077,
+    "lon": 9.2027931
+  },
+  {
+    "warncellid": "115086000",
+    "name": "Kreis Jerichower Land",
+    "lat": 52.2726088,
+    "lon": 11.842639096339092
+  },
+  {
+    "warncellid": "115087000",
+    "name": "Kreis Mansfeld-Südharz",
+    "lat": 51.4426239,
+    "lon": 11.1955698
+  },
+  {
+    "warncellid": "115088000",
+    "name": "Saalekreis",
+    "lat": 51.4546989,
+    "lon": 11.850501942841106
+  },
+  {
+    "warncellid": "115089000",
+    "name": "Salzlandkreis",
+    "lat": 51.850979949999996,
+    "lon": 11.600462179820752
+  },
+  {
+    "warncellid": "115090000",
+    "name": "Kreis Stendal",
+    "lat": 51.2915436,
+    "lon": 6.8154698
+  },
+  {
+    "warncellid": "115091000",
+    "name": "Kreis Wittenberg",
+    "lat": 51.4812541,
+    "lon": 9.1659241
+  },
+  {
+    "warncellid": "116051000",
+    "name": "Stadt Erfurt",
+    "lat": 50.97866775,
+    "lon": 11.029248140781498
+  },
+  {
+    "warncellid": "116052000",
+    "name": "Stadt Gera",
+    "lat": 50.9057416,
+    "lon": 12.1203652
+  },
+  {
+    "warncellid": "116053000",
+    "name": "Stadt Jena",
+    "lat": 50.93035425,
+    "lon": 11.591657833519783
+  },
+  {
+    "warncellid": "116054000",
+    "name": "Stadt Suhl",
+    "lat": 50.9384246,
+    "lon": 10.0702031
+  },
+  {
+    "warncellid": "116055000",
+    "name": "Stadt Weimar",
+    "lat": 50.983479,
+    "lon": 11.3233894
+  },
+  {
+    "warncellid": "116056000",
+    "name": "Stadt Eisenach",
+    "lat": 50.97492,
+    "lon": 10.3246033
+  },
+  {
+    "warncellid": "116061000",
+    "name": "Kreis Eichsfeld",
+    "lat": 51.1646743,
+    "lon": 10.5737997
+  },
+  {
+    "warncellid": "116062000",
+    "name": "Kreis Nordhausen",
+    "lat": 51.411038,
+    "lon": 10.7671742
+  },
+  {
+    "warncellid": "116063000",
+    "name": "Wartburgkreis",
+    "lat": 50.8903377,
+    "lon": 10.241270021910985
+  },
+  {
+    "warncellid": "116064000",
+    "name": "Unstrut-Hainich-Kreis",
+    "lat": 51.1880771,
+    "lon": 10.573759716403169
+  },
+  {
+    "warncellid": "116065000",
+    "name": "Kyffhäuserkreis",
+    "lat": 51.31461125,
+    "lon": 10.838226333260048
+  },
+  {
+    "warncellid": "116066000",
+    "name": "Kreis Schmalkalden-Meiningen",
+    "lat": 50.6215952,
+    "lon": 10.1158014
+  },
+  {
+    "warncellid": "116067000",
+    "name": "Kreis Gotha",
+    "lat": 50.82924095,
+    "lon": 10.8431425503715
+  },
+  {
+    "warncellid": "116068000",
+    "name": "Kreis Sömmerda",
+    "lat": 51.1728268,
+    "lon": 11.0695036
+  },
+  {
+    "warncellid": "116069000",
+    "name": "Kreis Hildburghausen",
+    "lat": 50.5600738,
+    "lon": 10.7380837
+  },
+  {
+    "warncellid": "116070000",
+    "name": "Ilm-Kreis",
+    "lat": 50.73144175,
+    "lon": 10.930792129321897
+  },
+  {
+    "warncellid": "116071000",
+    "name": "Kreis Weimarer Land",
+    "lat": 50.9563735,
+    "lon": 11.2615111
+  },
+  {
+    "warncellid": "116072000",
+    "name": "Kreis Sonneberg",
+    "lat": 50.55090525,
+    "lon": 11.465994836835367
+  },
+  {
+    "warncellid": "116073000",
+    "name": "Kreis Saalfeld-Rudolstadt",
+    "lat": 50.55090525,
+    "lon": 11.465994836835367
+  },
+  {
+    "warncellid": "116074000",
+    "name": "Saale-Holzland-Kreis",
+    "lat": 50.9166089,
+    "lon": 11.80970505740581
+  },
+  {
+    "warncellid": "116075000",
+    "name": "Saale-Orla-Kreis",
+    "lat": 50.58645455,
+    "lon": 11.77617418194042
+  },
+  {
+    "warncellid": "116076000",
+    "name": "Kreis Greiz",
+    "lat": 50.6306956,
+    "lon": 12.1072202
+  },
+  {
+    "warncellid": "116077000",
+    "name": "Kreis Altenburger Land",
+    "lat": 50.9566152,
+    "lon": 12.2909249
+  },
+  {
+    "warncellid": "501000001",
+    "name": "Ostfriesische Küste",
+    "lat": 53.4284423,
+    "lon": 6.8494497
+  },
+  {
+    "warncellid": "501000002",
+    "name": "Helgoland",
+    "lat": 54.18004525,
+    "lon": 7.885362101180695
+  },
+  {
+    "warncellid": "501000003",
+    "name": "Elbe-/Wesermündung",
+    "lat": 53.5429875,
+    "lon": 8.5057033
+  },
+  {
+    "warncellid": "501000004",
+    "name": "Elbe von Hamburg bis Cuxhaven",
+    "lat": 53.9140774,
+    "lon": 9.0811573
+  },
+  {
+    "warncellid": "501000005",
+    "name": "Nordfriesische Küste",
+    "lat": 54.6647746,
+    "lon": 8.2180237
+  },
+  {
+    "warncellid": "501000006",
+    "name": "Flensburg bis Fehmarn",
+    "lat": 54.6238209,
+    "lon": 10.5349314
+  },
+  {
+    "warncellid": "501000007",
+    "name": "Östlich Fehmarn bis Rügen",
+    "lat": 54.3823054,
+    "lon": 12.0750267
+  },
+  {
+    "warncellid": "501000008",
+    "name": "Östlich Rügen",
+    "lat": 54.2809487,
+    "lon": 13.8725929
+  }
+]
