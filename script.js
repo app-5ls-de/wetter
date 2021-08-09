@@ -38,14 +38,15 @@ fetch("/locations.json")
   });
 
 function display_widgets() {
-  dwd_warn();
   daswetter();
   meteoblue_simple();
   windguru();
+  
   meteoblue();
   dwd_trend();
   accuweather_link();
   knmi();
+  dwd_warn();
   windy_map("waves");
   windy_map();
   windy_link();
@@ -291,10 +292,8 @@ function windy_map(overlay_type) {
 function dwd_warn() {
   if (!location_data.dwd_warncellid) return;
 
-  let dwd_warn_div = document.createElement("div");
-  dwd_warn_div.id = "dwd-warn";
+  let dwd_warn_div = document.getElementById("dwd-warn");
   dwd_warn_div.classList.add("section");
-  widgets_div.appendChild(dwd_warn_div);
 
   if (!debug) {
     let dwd_warn_script = document.createElement("script");
