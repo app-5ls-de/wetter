@@ -96,8 +96,8 @@ f("/locations.json", (data) => {
             location_data.name = nominatim_data.address.city;
             document.getElementById("title-info").innerText =
               "aktueller Standort";
-              document.getElementById("title-info-small").innerText =
-                " ±" + format(accuracy) + "m";
+            document.getElementById("title-info-small").innerText =
+              " ±" + format(accuracy) + "m";
             main_routine();
           }
         ).catch(geolocation_error);
@@ -124,6 +124,7 @@ async function display_widgets() {
   windguru();
 
   await meteoblue();
+  await sunrise();
   dwd_trend();
   accuweather_link();
   knmi();
@@ -675,6 +676,50 @@ function brightsky() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+    });
+}
+
+function sunrise() {
+  let sunrise_div = document.createElement("div");
+  sunrise_div.id = "sunrise";
+  sunrise_div.classList.add("section");
+  widgets_div.appendChild(sunrise_div);
+
+  return fetch(
+    "https://api.sunrise-sunset.org/json?lat=" +
+      location_data.lat +
+      "&lng=" +
+      location_data.lon +
+      "&formatted=0"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      sunrise_div.innerHTML = `<div>
+  <img class="sunrise-icon" src="/sunrise.svg" /><br />
+  <p class="sunrise-time">${new Date(data.results.sunrise).toLocaleTimeString(
+    "de-DE",
+    { hour: "2-digit", minute: "2-digit" }
+  )} Uhr</p>
+  <p class="sunrise-secondary">
+    (${new Date(data.results.civil_twilight_begin).toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}) <span class="tooltip">Dämmerung</span>
+  </p>
+</div>
+<div>
+  <img class="sunrise-icon" src="/sunset.svg" /><br />
+  <p class="sunrise-time">${new Date(data.results.sunset).toLocaleTimeString(
+    "de-DE",
+    { hour: "2-digit", minute: "2-digit" }
+  )} Uhr</p>
+  <p class="sunrise-secondary">
+    (${new Date(data.results.civil_twilight_end).toLocaleTimeString("de-DE", {
+      hour: "2-digit",
+      minute: "2-digit",
+    })}) <span class="tooltip">Dämmerung</span>
+  </p>
+</div>`;
     });
 }
 
