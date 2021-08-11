@@ -40,12 +40,12 @@ f("/locations.json", (data) => {
   }
 });
 
-function display_widgets() {
+async function display_widgets() {
   daswetter();
   meteoblue_simple();
   windguru();
 
-  meteoblue();
+  await meteoblue();
   dwd_trend();
   accuweather_link();
   knmi();
@@ -75,24 +75,31 @@ function meteoblue() {
   widgets_div.appendChild(meteoblue_div);
 
   let meteoblue_img = document.createElement("img");
-  meteoblue_img.src = closest_data.meteoblue_src;
-  if (debug)
-    meteoblue_img.src = "https://via.placeholder.com/2220x1470?text=meteoblue";
   meteoblue_img.alt = "meteoblue";
-  meteoblue_div.appendChild(meteoblue_img);
 
   let meteoblue_a = document.createElement("a");
   meteoblue_a.href =
     "https://www.meteoblue.com/de/wetter/woche/" + closest_data.meteoblue_id;
   meteoblue_a.target = "_blank";
   meteoblue_a.innerText = "Wetter " + closest_data.name + " - meteoblue";
-  meteoblue_div.appendChild(meteoblue_a);
 
   let meteoblue_info_div = document.createElement("div");
   meteoblue_info_div.classList.add("info");
   meteoblue_info_div.innerHTML =
     '<a href="/meteoblue-hilfe"><img src="/info.svg" /></a>';
-  meteoblue_div.appendChild(meteoblue_info_div);
+
+  return new Promise((resolve, reject) => {
+    meteoblue_img.onload = resolve;
+    meteoblue_img.onerror = reject;
+
+    meteoblue_img.src = closest_data.meteoblue_src;
+    if (debug)
+      meteoblue_img.src =
+        "https://via.placeholder.com/2220x1470?text=meteoblue";
+    meteoblue_div.appendChild(meteoblue_img);
+    meteoblue_div.appendChild(meteoblue_a);
+    meteoblue_div.appendChild(meteoblue_info_div);
+  });
 }
 
 function knmi() {
