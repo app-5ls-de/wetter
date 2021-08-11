@@ -18,26 +18,6 @@ function f(url, callback) {
     });
 }
 function format(number) {
-  // known SI prefixes
-  /* var PREFIXES = {
-        24: "Y",
-        21: "Z",
-        18: "E",
-        15: "P",
-        12: "T",
-        9: "G",
-        6: "M",
-        3: "k",
-        0: "",
-        "-3": "m",
-        "-6": "µ",
-        "-9": "n",
-        "-12": "p",
-        "-15": "f",
-        "-18": "a",
-        "-21": "z",
-        "-24": "y",
-    }; */
   var PREFIXES = {
     6: "M",
     3: "k",
@@ -66,7 +46,7 @@ function format(number) {
     return precise(n / Math.pow(10, e)).toString() + PREFIXES[e];
   }
 
-  if (Math.abs(number) >= 10000) return toHumanString(number);
+  if (Math.abs(number) >= 1000) return toHumanString(number);
   else return precise(number).toString();
 }
 
@@ -109,13 +89,13 @@ f("/locations.json", (data) => {
             location_data.lon +
             "&zoom=10&addressdetails=1&accept-language=de",
           (nominatim_data) => {
+            let accuracy = Math.max(
+              location.coords.accuracy,
+              distance(location_data, nominatim_data) * 1000
+            );
             location_data.name = nominatim_data.address.city;
-            /* document.getElementById("title-info").innerText =
-              "aktueller Standort ±" + format(location.coords.accuracy) + "m"; */
             document.getElementById("title-info").innerHTML =
-              "aktueller Standort <small>±" +
-              format(location.coords.accuracy) +
-              "m</small>";
+              "aktueller Standort <small>±" + format(accuracy) + "m</small>";
             main_routine();
           }
         ).catch(geolocation_error);
