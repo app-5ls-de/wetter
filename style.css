@@ -35,11 +35,13 @@ h1 {
 
 #title-info {
   margin: 0;
+  display: inline-block;
 }
 
-#title-info > small {
+#title-info-small {
   font-size: small;
   color: darkgray;
+  margin-left: 0.5rem;
 }
 
 .links,

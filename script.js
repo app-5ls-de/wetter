@@ -94,8 +94,10 @@ f("/locations.json", (data) => {
               distance(location_data, nominatim_data) * 1000
             );
             location_data.name = nominatim_data.address.city;
-            document.getElementById("title-info").innerHTML =
-              "aktueller Standort <small>±" + format(accuracy) + "m</small>";
+            document.getElementById("title-info").innerText =
+              "aktueller Standort";
+              document.getElementById("title-info-small").innerText =
+                " ±" + format(accuracy) + "m";
             main_routine();
           }
         ).catch(geolocation_error);
