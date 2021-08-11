@@ -89,8 +89,8 @@ function meteoblue() {
     '<a href="/meteoblue-hilfe"><img src="/info.svg" /></a>';
 
   return new Promise((resolve, reject) => {
-    meteoblue_img.onload = resolve;
-    meteoblue_img.onerror = reject;
+    meteoblue_img.addEventListener("load", resolve);
+    meteoblue_img.addEventListener("error", reject);
 
     meteoblue_img.src = closest_data.meteoblue_src;
     if (debug)
