@@ -116,6 +116,9 @@ function main_routine() {
 }
 
 async function display_widgets() {
+  //metno();
+  //brightsky();
+
   daswetter();
   meteoblue_simple();
   windguru();
@@ -636,6 +639,44 @@ window.addEventListener("load", function () {
     item.src = item.getAttribute("data-src");
   });
 });
+
+function metno() {
+  let metno_div = document.createElement("div");
+  metno_div.id = "metno";
+  metno_div.classList.add("section");
+  widgets_div.appendChild(metno_div);
+
+  return fetch(
+    "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=" +
+      location_data.lat +
+      "&lon=" +
+      location_data.lon
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
+
+function brightsky() {
+  let brightsky_div = document.createElement("div");
+  brightsky_div.id = "brightsky";
+  brightsky_div.classList.add("section");
+  widgets_div.appendChild(brightsky_div);
+
+  return fetch(
+    "https://api.brightsky.dev/weather?lat=" +
+      location_data.lat +
+      "&lon=" +
+      location_data.lon +
+      "&date=" +
+      new Date().toISOString().split("T")[0]
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+}
 
 warnWetter = {};
 warnWetter.loadWarnings = function (dwd_json) {
