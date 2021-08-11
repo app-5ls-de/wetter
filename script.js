@@ -714,7 +714,7 @@ function save_location() {
     name: location_data.name,
   });
 
-  lastvisited = lastvisited.slice(0, 3);
+  lastvisited = lastvisited.slice(0, 5);
 
   localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
 }
