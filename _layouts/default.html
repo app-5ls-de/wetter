@@ -73,7 +73,10 @@
       {%- endif -%}
       <div class="mitte">
         <img src="/icon.svg" alt="" />
-        <h1><a id="title-link" href="/">{{page.title}}</a></h1>
+        <div>
+          <h1><a id="title-link" href="/">{{page.title}}</a></h1>
+          <p id="title-info"></p>
+        </div>
       </div>
     </div>
     <div class="main" id="main">{{content}}</div>

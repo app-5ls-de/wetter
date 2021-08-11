@@ -33,6 +33,15 @@ h1 {
   width: min-content;
 }
 
+#title-info {
+  margin: 0;
+}
+
+#title-info > small {
+  font-size: small;
+  color: darkgray;
+}
+
 .links,
 .kopf > .mitte {
   margin: 0 auto;

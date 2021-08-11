@@ -54,6 +54,8 @@ title: Wetter
     }
 
     search_liste_div.textContent = "";
+    search_liste_div.innerHTML =
+      '<a href="/show?gps"><b>aktueller Standort</b></a><br>';
     lastvisited.forEach((element) => {
       let location_a = document.createElement("a");
       location_a.innerText = element.name;

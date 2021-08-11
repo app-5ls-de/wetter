@@ -2,7 +2,7 @@ var main_div = document.getElementById("main");
 var widgets_div = document.getElementById("widgets");
 
 function f(url, callback) {
-  fetch(url)
+  return fetch(url)
     .then((response) => {
       if (response.ok) {
         return Promise.resolve(response);
@@ -17,28 +17,121 @@ function f(url, callback) {
       callback(data);
     });
 }
+function format(number) {
+  // known SI prefixes
+  /* var PREFIXES = {
+        24: "Y",
+        21: "Z",
+        18: "E",
+        15: "P",
+        12: "T",
+        9: "G",
+        6: "M",
+        3: "k",
+        0: "",
+        "-3": "m",
+        "-6": "µ",
+        "-9": "n",
+        "-12": "p",
+        "-15": "f",
+        "-18": "a",
+        "-21": "z",
+        "-24": "y",
+    }; */
+  var PREFIXES = {
+    6: "M",
+    3: "k",
+    0: "",
+  };
+  let maxExponent = Math.max(...Object.keys(PREFIXES).map(Number));
+
+  function getExponent(n) {
+    if (n === 0) {
+      return 0;
+    }
+    return Math.floor(Math.log10(Math.abs(n)));
+  }
+
+  function precise(n) {
+    return Number.parseFloat(n.toPrecision(2));
+  }
+
+  function toHumanString(sn) {
+    // from https://www.npmjs.com/package/human-readable-numbers
+    var n = precise(Number.parseFloat(sn));
+    var e = Math.max(
+      Math.min(3 * Math.floor(getExponent(n) / 3), maxExponent),
+      -maxExponent
+    );
+    return precise(n / Math.pow(10, e)).toString() + PREFIXES[e];
+  }
+
+  if (Math.abs(number) >= 10000) return toHumanString(number);
+  else return precise(number).toString();
+}
 
 var location_data;
 var all_location_data;
 f("/locations.json", (data) => {
   all_location_data = data;
+
   let params = new URLSearchParams(window.location.search);
   let location_name = params.get("location");
-  for (let i = 0; i < data.length; i++) {
-    if (data[i].name == location_name) {
-      location_data = data[i];
-      document.getElementById("title-link").innerText = location_data.name;
-
-      save_location();
-      display_widgets();
-      break;
+  if (location_name) {
+    for (let i = 0; i < data.length; i++) {
+      if (data[i].name == location_name) {
+        location_data = data[i];
+        main_routine();
+        break;
+      }
+    }
+    if (!location_data) {
+      localStorage.removeItem("lastvisited");
+      window.location.href = window.location.origin;
+    }
+  } else if (typeof params.get("gps") === "string") {
+    function geolocation_error(error) {
+      document.getElementById("title-info").innerText =
+        "Position nicht gefunden";
+      console.error(error);
+      throw "GeolocationError";
+    }
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        location_data = {
+          lat: location.coords.latitude,
+          lon: location.coords.longitude,
+        };
+        f(
+          "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+            location_data.lat +
+            "&lon=" +
+            location_data.lon +
+            "&zoom=10&addressdetails=1&accept-language=de",
+          (nominatim_data) => {
+            location_data.name = nominatim_data.address.city;
+            /* document.getElementById("title-info").innerText =
+              "aktueller Standort ±" + format(location.coords.accuracy) + "m"; */
+            document.getElementById("title-info").innerHTML =
+              "aktueller Standort <small>±" +
+              format(location.coords.accuracy) +
+              "m</small>";
+            main_routine();
+          }
+        ).catch(geolocation_error);
+      }, geolocation_error);
+    } else {
+      geolocation_error();
     }
   }
-  if (!location_data) {
-    localStorage.removeItem("lastvisited");
-    window.location.href = window.location.origin;
-  }
 });
+
+function main_routine() {
+  document.getElementById("title-link").innerText = location_data.name;
+
+  save_location();
+  display_widgets();
+}
 
 async function display_widgets() {
   daswetter();
