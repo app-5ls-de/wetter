@@ -367,24 +367,7 @@ body {
 }
 
 h1 {
-  font-size: 2em;
   font-size: xxx-large;
-}
-
-@media (max-width: 1120px) {
-  h1 {
-    font-size: 1em;
-    font-size: xx-large;
-  }
-
-  .kopf > .mitte > img {
-    height: 4rem;
-    margin-right: 1rem;
-  }
-
-  .back img {
-    height: 1.5rem;
-  }
 }
 
 .section {
@@ -502,13 +485,52 @@ h1 {
   margin-left: -150%;
 }
 
+@media (max-width: 1120px) {
+  h1 {
+    font-size: 1em;
+    font-size: xx-large;
+  }
+
+  .kopf > .mitte > img {
+    height: 4rem;
+    margin-right: 1rem;
+  }
+
+  .back img {
+    height: 1.5rem;
+  }
+}
+
 @media (max-width: 600px) {
   h1 {
-    font-size: 0.5em;
     font-size: x-large;
+  }
+
+  .back {
+    padding: 1rem;
   }
 
   #sunrise > div {
     margin: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: large;
+  }
+}
+
+@media (max-width: 400px) {
+  .kopf > .mitte > img {
+    display: none;
+  }
+
+  #dwd-trend > img {
+    margin-left: 0;
+  }
+
+  .main {
+    padding: 0;
   }
 }
