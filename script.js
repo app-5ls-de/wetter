@@ -94,17 +94,25 @@ f("/locations.json", (data) => {
         document.getElementById("title-info").innerText = "aktueller Standort";
         document.getElementById("title-info-small").innerText =
           " ±" + format(accuracy) + "m";
-        f(
-          "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
-            location_data.lat +
-            "&lon=" +
-            location_data.lon +
-            "&zoom=10&addressdetails=1&accept-language=de",
-          (nominatim_data) => {
-            location_data.name = nominatim_data.address.city;
-            main_routine();
-          }
-        ).catch(geolocation_error);
+
+        if (debug) {
+          location_data.name = "?";
+          main_routine();
+        } else {
+          f(
+            "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+              location_data.lat +
+              "&lon=" +
+              location_data.lon +
+              "&zoom=10&addressdetails=1&accept-language=de",
+            (nominatim_data) => {
+              location_data.name = nominatim_data.address.city
+                ? nominatim_data.address.city
+                : "?";
+              main_routine();
+            }
+          ).catch(geolocation_error);
+        }
       }, geolocation_error);
     } else {
       geolocation_error();
