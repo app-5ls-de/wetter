@@ -383,17 +383,6 @@ h1 {
   }
 }
 
-@media (max-width: 600px) {
-  h1 {
-    font-size: 0.5em;
-    font-size: x-large;
-  }
-
-  .kopf > .mitte > img {
-    /* display: none; */
-  }
-}
-
 .section {
   margin: auto;
   width: fit-content;
@@ -453,8 +442,10 @@ h1 {
 
 #sunrise {
   display: flex;
+  justify-content: center;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  margin: 0 auto;
 }
 
 #sunrise > div {
@@ -489,10 +480,10 @@ h1 {
 }
 
 .sunrise-secondary .tooltip {
-  visibility: hidden;
+  display: none;
   width: 120px;
   background-color: black;
-  color: #fff;
+  color: white;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
@@ -501,5 +492,19 @@ h1 {
 }
 
 .sunrise-secondary:hover .tooltip {
-  visibility: visible;
+  display: initial;
+  top: 135%;
+  left: 50%;
+  margin-left: -150%;
+}
+
+@media (max-width: 600px) {
+  h1 {
+    font-size: 0.5em;
+    font-size: x-large;
+  }
+
+  #sunrise > div {
+    margin: 0;
+  }
 }
