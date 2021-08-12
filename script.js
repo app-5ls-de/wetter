@@ -67,6 +67,7 @@ f("/locations.json", (data) => {
     }
     if (!location_data) {
       localStorage.removeItem("lastvisited");
+      localStorage.removeItem("quickresume");
       window.location.href = window.location.origin;
     }
   } else if (typeof params.get("gps") === "string") {
@@ -111,6 +112,10 @@ f("/locations.json", (data) => {
     } else {
       geolocation_error();
     }
+  } else {
+    localStorage.removeItem("lastvisited");
+    localStorage.removeItem("quickresume");
+    window.location.href = window.location.origin;
   }
 });
 
@@ -883,24 +888,31 @@ function show_warnings(alerts) {
 }
 
 function save_location() {
-  let lastvisited;
-  try {
-    lastvisited = JSON.parse(localStorage.getItem("lastvisited")) || [];
-  } catch (e) {
-    lastvisited = [];
+  localStorage.setItem("quickresume", location.pathname + location.search);
+
+  let params = new URLSearchParams(window.location.search);
+  let location_name = params.get("location");
+  if (location_name) {
+    let lastvisited;
+    try {
+      lastvisited = JSON.parse(localStorage.getItem("lastvisited")) || [];
+    } catch (e) {
+      lastvisited = [];
+    }
+
+    lastvisited = lastvisited.filter(
+      (element) =>
+        element.location != location_name && element.name != location_name
+    );
+
+    lastvisited.unshift({
+      name: location_data.name,
+      location: location_name,
+    });
+
+    lastvisited = lastvisited.slice(0, 5);
+    localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
   }
-
-  lastvisited = lastvisited.filter(
-    (element) => element.name != location_data.name
-  );
-
-  lastvisited.unshift({
-    name: location_data.name,
-  });
-
-  lastvisited = lastvisited.slice(0, 5);
-
-  localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
 }
 
 function get_closest(target, array) {

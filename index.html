@@ -59,7 +59,9 @@ title: Wetter
     lastvisited.forEach((element) => {
       let location_a = document.createElement("a");
       location_a.innerText = element.name;
-      location_a.href = "/show?location=" + element.name;
+      location_a.href =
+        "/show?location=" +
+        (element.location ? element.location : element.name);
       search_liste_div.appendChild(location_a);
       search_liste_div.appendChild(document.createElement("br"));
     });

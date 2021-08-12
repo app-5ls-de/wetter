@@ -51,12 +51,9 @@
   {% if page.url == "/" %}
   <script>
     if (location.search == "?pwa") {
-      let lastvisited;
-      try {
-        lastvisited = JSON.parse(localStorage.getItem("lastvisited"))[0];
-      } catch (e) {}
-      if (lastvisited) {
-        location.href = "/show?location=" + lastvisited.name;
+      let quickresume = localStorage.getItem("quickresume")
+      if (quickresume) {
+        location.href = quickresume;
       }
     }
   </script>
