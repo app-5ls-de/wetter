@@ -79,8 +79,8 @@ f("/locations.json", (data) => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((location) => {
         location_data = {
-          lat: location.coords.latitude,
-          lon: location.coords.longitude,
+          lat: Math.round(location.coords.latitude * 100) / 100,
+          lon: Math.round(location.coords.longitude * 100) / 100,
         };
         f(
           "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
@@ -91,7 +91,8 @@ f("/locations.json", (data) => {
           (nominatim_data) => {
             let accuracy = Math.max(
               location.coords.accuracy,
-              distance(location_data, nominatim_data) * 1000
+              distance(location_data, nominatim_data) * 1000,
+              1110 // intentional error from rounding
             );
             location_data.name = nominatim_data.address.city;
             document.getElementById("title-info").innerText =
