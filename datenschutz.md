@@ -23,6 +23,7 @@ Auf dieser Webseite sind iFrames, Javascript und Bilder der nachfolgenden Seiten
 Diese Dienste könnten unter anderem folgende Informationen speichern und verarbeiten:
 
 - IP-Adresse des anfragenden Rechners
+- Standort
 - Datum und Uhrzeit des Zugriffs
 - Name und URL der abgerufenen Datei, sowie die angesteuerten Unterwebseiten
 - Website, von der aus der Zugriff erfolgt (Referrer-URL)
