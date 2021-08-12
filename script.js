@@ -689,16 +689,28 @@ function sunrise() {
   sunrise_div.classList.add("section");
   widgets_div.appendChild(sunrise_div);
 
-  return fetch(
-    "https://api.sunrise-sunset.org/json?lat=" +
-      location_data.lat +
-      "&lng=" +
-      location_data.lon +
-      "&formatted=0"
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      sunrise_div.innerHTML = `<div>
+  let fetch_promise;
+  if (debug) {
+    fetch_promise = Promise.resolve({
+      results: {
+        sunrise: "1970-01-01T05:00:00+00:00",
+        sunset: "1970-01-01T19:00:00+00:00",
+        civil_twilight_begin: "1970-01-01T04:00:00+00:00",
+        civil_twilight_end: "1970-01-01T20:00:00+00:00",
+      },
+    });
+  } else {
+    fetch_promise = fetch(
+      "https://api.sunrise-sunset.org/json?lat=" +
+        location_data.lat +
+        "&lng=" +
+        location_data.lon +
+        "&formatted=0"
+    ).then((response) => response.json());
+  }
+
+  return fetch_promise.then((data) => {
+    sunrise_div.innerHTML = `<div>
   <img class="sunrise-icon" src="/sunrise.svg" /><br />
   <p class="sunrise-time">${new Date(data.results.sunrise).toLocaleTimeString(
     "de-DE",
@@ -724,7 +736,7 @@ function sunrise() {
     })}) <span class="tooltip">Dämmerung</span>
   </p>
 </div>`;
-    });
+  });
 }
 
 warnWetter = {};
