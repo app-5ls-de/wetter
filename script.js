@@ -84,8 +84,16 @@ f("/locations.json", (data) => {
           lat: Math.round(location.coords.latitude * 100) / 100,
           lon: Math.round(location.coords.longitude * 100) / 100,
         };
+        let accuracy = Math.max(
+          location.coords.accuracy,
+          distance(location_data, {
+            lat: location.coords.latitude,
+            lon: location.coords.longitude,
+          }) * 1000
+        );
+        document.getElementById("title-info").innerText = "aktueller Standort";
         document.getElementById("title-info-small").innerText =
-          " ±" + format(location.coords.accuracy) + "m";
+          " ±" + format(accuracy) + "m";
         f(
           "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
             location_data.lat +
@@ -93,18 +101,7 @@ f("/locations.json", (data) => {
             location_data.lon +
             "&zoom=10&addressdetails=1&accept-language=de",
           (nominatim_data) => {
-            let accuracy = Math.max(
-              location.coords.accuracy,
-              distance(location_data, {
-                lat: location.coords.latitude,
-                lon: location.coords.longitude,
-              }) * 1000
-            );
             location_data.name = nominatim_data.address.city;
-            document.getElementById("title-info").innerText =
-              "aktueller Standort";
-            document.getElementById("title-info-small").innerText =
-              " ±" + format(accuracy) + "m";
             main_routine();
           }
         ).catch(geolocation_error);
