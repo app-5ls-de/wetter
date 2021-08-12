@@ -14,6 +14,8 @@ const PRECACHE_URLS = [
     "/favicon.ico",
     "/info.svg",
     "/icon.svg",
+    "/sunset.svg",
+    "/sunrise.svg",
     "/script.js",
     "https://cdn.jsdelivr.net/npm/fuzzysort@1.1.4/fuzzysort.min.js",
     "/back.svg",
