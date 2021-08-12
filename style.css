@@ -97,6 +97,10 @@ h1 {
   padding-bottom: 1rem;
 }
 
+ol {
+  line-height: 2rem;
+}
+
 hr.divider {
   margin-top: 3rem;
   margin: 15vh 0;
