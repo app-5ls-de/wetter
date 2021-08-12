@@ -16,6 +16,7 @@ body {
   min-height: 100vh;
   margin: 0 auto;
   width: fit-content;
+  padding: 1rem;
 }
 
 h1 {
@@ -31,6 +32,10 @@ h1 {
 .kopf > .mitte {
   display: flex;
   width: min-content;
+}
+
+.mitte > div {
+  white-space: nowrap;
 }
 
 #title-info {
@@ -455,10 +460,11 @@ h1 {
 #sunrise > div {
   margin: 0 2rem;
   padding: 1rem;
+  white-space: nowrap;
 }
 
 .sunrise-icon {
-  width: 5rem;
+  width: 4rem;
   color: grey;
   display: block;
   margin: 0 auto;

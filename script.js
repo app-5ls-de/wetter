@@ -124,10 +124,8 @@ async function display_widgets() {
   windguru();
 
   await meteoblue();
-  await sunrise();
-  dwd_trend();
-  accuweather_link();
-  knmi();
+  Promise.all([dwd_trend(), accuweather_link(), sunrise(), knmi()]);
+
   dwd_warn();
   windy_map("waves");
   windy_map();
