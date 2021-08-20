@@ -790,7 +790,7 @@ warnWetter.loadWarnings = function (dwd_json) {
       location_data.lat +
       "&lon=" +
       location_data.lon +
-      "&zoom=10&addressdetails=1",
+      "&zoom=10&addressdetails=1&accept-language=de",
     (data) => {
       let name;
       if (data.address?.county) {
