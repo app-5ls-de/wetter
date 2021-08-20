@@ -109,6 +109,8 @@ f("/locations.json", (data) => {
               location_data.name = "?";
               if (nominatim_data.address?.city) {
                 location_data.name = nominatim_data.address.city;
+              } else if (nominatim_data.address?.town) {
+                location_data.name = nominatim_data.address.town;
               } else if (nominatim_data.address?.village) {
                 location_data.name = nominatim_data.address.village;
               }
@@ -795,6 +797,8 @@ warnWetter.loadWarnings = function (dwd_json) {
         name = data.address.county;
       } else if (data.address?.city) {
         name = data.address.city;
+      } else if (data.address?.town) {
+        name = data.address.town;
       }
       if (!name) {
         console.error("county not found");
