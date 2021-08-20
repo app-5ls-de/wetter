@@ -781,8 +781,9 @@ warnWetter.loadWarnings = function (dwd_json) {
     let alerts = dwd_json.warnings[location_data.dwd_warncellid] || [];
     let prealerts =
       dwd_json.vorabInformation[location_data.dwd_warncellid] || [];
-    alerts.concat(prealerts);
+    alerts = alerts.concat(prealerts);
     show_warnings(alerts);
+    return;
   }
 
   f(
