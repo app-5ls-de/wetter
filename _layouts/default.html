@@ -51,7 +51,7 @@
   {% if page.url == "/" %}
   <script>
     if (location.search == "?pwa") {
-      let quickresume = localStorage.getItem("quickresume")
+      let quickresume = localStorage.getItem("quickresume");
       if (quickresume) {
         location.href = quickresume;
       }
@@ -72,7 +72,8 @@
         <img src="/icon.svg" alt="" />
         <div>
           <h1><a id="title-link" href="/">{{page.title}}</a></h1>
-          <p id="title-info"></p><small id="title-info-small"></small>
+          <p id="title-info"></p>
+          <small id="title-info-small"></small>
         </div>
       </div>
     </div>
@@ -86,6 +87,7 @@
       <a class="normal" href="/datenschutz">Datenschutz</a>
     </div>
 
+    {%- if jekyll.environment == "production" -%}
     <script>
       if ("serviceWorker" in navigator) {
         if (navigator.serviceWorker.controller) {
@@ -102,5 +104,7 @@
         }
       }
     </script>
+    {%- endif -%}
+
   </body>
 </html>
