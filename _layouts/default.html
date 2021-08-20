@@ -39,6 +39,9 @@
     <meta name="msapplication-config" content="/icons/browserconfig.xml" />
     <meta name="theme-color" content="#ffffff" />
 
+    <link rel="preconnect" href="https://storage.googleapis.com">
+    <link rel="preconnect" href="https://nominatim.openstreetmap.org">
+
     <title>
       {%- if page.url == "/show.html" -%} {{page.location}} - Wetter {%- else
       -%} {%- if page.title -%} {{page.title}} {%- else -%} Wetter {%- endif -%}
