@@ -757,14 +757,15 @@ function sunrise() {
 
 warnWetter = {};
 warnWetter.loadWarnings = function (dwd_json) {
-  let dwd_json_list = [];
+  let alerts_list = [];
   for (const key in dwd_json.warnings) {
     if (Object.hasOwnProperty.call(dwd_json.warnings, key)) {
       let element = dwd_json.warnings[key];
       element.forEach((el) => {
         el.category = "warnings";
+        el.id = key;
       });
-      dwd_json_list = dwd_json_list.concat(element);
+      alerts_list = alerts_list.concat(element);
     }
   }
   for (const key in dwd_json.vorabInformation) {
@@ -772,18 +773,15 @@ warnWetter.loadWarnings = function (dwd_json) {
       let element = dwd_json.vorabInformation[key];
       element.forEach((el) => {
         el.category = "vorabInformation";
+        el.id = key;
       });
-      dwd_json_list = dwd_json_list.concat(element);
+      alerts_list = alerts_list.concat(element);
     }
   }
 
+  let warncellids = [];
   if (location_data.dwd_warncellid) {
-    let alerts = dwd_json.warnings[location_data.dwd_warncellid] || [];
-    let prealerts =
-      dwd_json.vorabInformation[location_data.dwd_warncellid] || [];
-    alerts = alerts.concat(prealerts);
-    show_warnings(alerts);
-    return;
+    warncellids.push(String(location_data.dwd_warncellid));
   }
 
   f(
@@ -805,32 +803,41 @@ warnWetter.loadWarnings = function (dwd_json) {
         console.error("county not found");
         return;
       }
-      name = name.toLowerCase();
-      name = name.replace("landkreis", "");
-      name = name.replace("kreis", "");
-      name = name.trim();
-      let results = fuzzysort.go(name, dwd_json_list, {
+      name = name
+        .toLowerCase()
+        .replace("landkreis", "")
+        .replace("kreis", "")
+        .trim();
+      let results = fuzzysort.go(name, alerts_list, {
         threshold: -20000,
         allowTypo: false,
         key: "regionName",
       });
 
-      let alerts = [];
       results.forEach((el) => {
-        alerts.push(el.obj);
+        warncellids.push(el.obj.id);
       });
 
-      show_warnings(alerts);
+      show_warnings(alerts_list, warncellids);
     }
-  );
+  ).catch((er) => {
+    console.error(er);
+    show_warnings(alerts_list, warncellids);
+  });
 };
 
-function show_warnings(alerts) {
+function show_warnings(alerts_list, warncellids) {
   let dwd_warn_div = document.getElementById("dwd-warn");
 
-  alerts = alerts
-    .filter((x) => x !== undefined)
-    .sort((a, b) => b.level - a.level);
+  let alerts = [];
+  warncellids = [...new Set(warncellids)];
+  alerts_list.forEach((element) => {
+    if (warncellids.includes(element?.id)) {
+      alerts.push(element);
+    }
+  });
+
+  alerts = alerts.sort((a, b) => b.level - a.level);
 
   alerts.forEach((alert) => {
     let alert_div = document.createElement("div");
