@@ -4,11 +4,13 @@ importScripts(
 const { registerRoute, setDefaultHandler } = workbox.routing;
 const { StaleWhileRevalidate, CacheFirst } = workbox.strategies;
 const { ExpirationPlugin } = workbox.expiration;
-const { cacheNames } = workbox.core;
+const { cacheNames, setCacheNameDetails } = workbox.core;
 
-/* workbox.setConfig({
-  debug: false,
-}); */
+setCacheNameDetails({
+  suffix: "v1",
+});
+const expirationCacheName =
+  cacheNames.prefix + "-expiration-" + cacheNames.suffix;
 
 async function cacheKeyWillBeUsed({ request }) {
   const url = new URL(request.url || request);
@@ -38,7 +40,7 @@ registerRoute(
       url.origin
     ),
   new CacheFirst({
-    cacheName: "expiration-cache",
+    cacheName: expirationCacheName,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 24 * 60 * 60,
@@ -52,7 +54,7 @@ registerRoute(
 
 setDefaultHandler(
   new StaleWhileRevalidate({
-    cacheName: "expiration-cache",
+    cacheName: expirationCacheName,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 1 * 60 * 60,
@@ -65,7 +67,33 @@ setDefaultHandler(
 );
 
 self.addEventListener("install", (event) => {
-  const urls = ["/", "/show", "/404.html"];
+  const urls = [
+    "/",
+    "/show",
+    "/404.html",
+    "/style.css",
+    "/script.js",
+    "/locations.json",
+    "https://cdn.jsdelivr.net/npm/fuzzysort@1.1.4/fuzzysort.min.js",
+  ];
   const cacheName = cacheNames.runtime;
   event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(urls)));
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    (async function () {
+      const userCacheNames = await caches.keys();
+      const cacheNamesArray =
+        Object.values(cacheNames).concat(expirationCacheName);
+      await Promise.all(
+        userCacheNames.map(async (cacheName) => {
+          if (!cacheNamesArray.includes(cacheName)) {
+            return await caches.delete(cacheName);
+          }
+          return await Promise.resolve();
+        })
+      );
+    })()
+  );
 });
