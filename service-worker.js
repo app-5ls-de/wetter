@@ -38,7 +38,7 @@ registerRoute(
   ({ url }) =>
     ["https://cdn.knmi.nl", "https://api.sunrise-sunset.org"].includes(
       url.origin
-    ),
+    ) || url.href.startsWith("https://www.dwd.de/DWD/wetter"),
   new CacheFirst({
     cacheName: expirationCacheName,
     plugins: [
