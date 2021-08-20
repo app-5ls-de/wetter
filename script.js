@@ -106,9 +106,13 @@ f("/locations.json", (data) => {
               location_data.lon +
               "&zoom=10&addressdetails=1&accept-language=de",
             (nominatim_data) => {
-              location_data.name = nominatim_data.address.city
-                ? nominatim_data.address.city
-                : "?";
+              location_data.name = "?";
+              if (nominatim_data.address?.city) {
+                location_data.name = nominatim_data.address.city;
+              } else if (nominatim_data.address?.village) {
+                location_data.name = nominatim_data.address.village;
+              }
+
               main_routine();
             }
           ).catch(geolocation_error);
@@ -786,7 +790,16 @@ warnWetter.loadWarnings = function (dwd_json) {
       location_data.lon +
       "&zoom=10&addressdetails=1",
     (data) => {
-      let name = data.address.county ? data.address.county : data.address.city;
+      let name;
+      if (data.address?.county) {
+        name = data.address.county;
+      } else if (data.address?.city) {
+        name = data.address.city;
+      }
+      if (!name) {
+        console.error("county not found");
+        return;
+      }
       name = name.toLowerCase();
       name = name.replace("landkreis", "");
       name = name.replace("kreis", "");
