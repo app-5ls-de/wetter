@@ -850,7 +850,7 @@ function show_warnings(alerts) {
     let alert_date = document.createElement("strong");
     alert_date.innerText = new Date(alert.start).toLocaleString("de-DE", {
       weekday: "short",
-      month: "long",
+      month: "short",
       day: "numeric",
       hour: "2-digit",
       minute: "2-digit",
@@ -867,7 +867,7 @@ function show_warnings(alerts) {
       } else {
         alert_date.innerText += new Date(alert.end).toLocaleString("de-DE", {
           weekday: "short",
-          month: "long",
+          month: "short",
           day: "numeric",
           hour: "2-digit",
           minute: "2-digit",
