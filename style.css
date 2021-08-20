@@ -216,26 +216,31 @@ a[target="_blank"]::after {
   width: 100%;
 }
 
-.level-4 {
-  /* background-color: #880e4f; */
-  border: solid #880e4f 5px;
-}
-.level-3 {
-  /* background-color: #e53935; */
-  border: solid #e53935 5px;
-}
-.level-2 {
-  /* background-color: #fb8c00; */
-  border: solid #fb8c00 5px;
-}
-.level-1 {
-  /* background-color: #ffeb3b; */
-  border: solid #ffeb3b 5px;
-}
-
 .dwd-warn-element {
   margin: 3rem;
   padding: 0.5rem;
+  border: solid darkgray 5px;
+}
+
+.level-1 {
+  /* warnings */
+  border: solid #ffeb3b 5px;
+}
+.level-2 {
+  /* significant */
+  border: solid #fb8c00 5px;
+}
+.level-3 {
+  /* severe */
+  border: solid #e53935 5px;
+}
+.level-4 {
+  /* extreme */
+  border: solid #880e4f 5px;
+}
+.level-50 {
+  /* heat */
+  border: solid #cc99ff 5px;
 }
 
 .dwd-warn-headline {
