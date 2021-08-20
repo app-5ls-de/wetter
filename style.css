@@ -246,6 +246,20 @@ a[target="_blank"]::after {
 .dwd-warn-headline {
   margin: 0;
 }
+
+.dwd-warn-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dwd-warn-info > * {
+  display: inline;
+  margin: 0;
+}
+.dwd-warn-info > p {
+  color: darkgray;
+}
+
 .dwd-warn-instruction > input[type="checkbox"] {
   display: none;
 }

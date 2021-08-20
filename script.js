@@ -842,6 +842,11 @@ function show_warnings(alerts) {
     alert_div.appendChild(alert_headline);
 
     alert_div.appendChild(document.createElement("br"));
+
+    let alert_info = document.createElement("div");
+    alert_info.classList.add("dwd-warn-info");
+    alert_div.appendChild(alert_info);
+
     let alert_date = document.createElement("strong");
     alert_date.innerText = new Date(alert.start).toLocaleString("de-DE", {
       weekday: "short",
@@ -869,47 +874,49 @@ function show_warnings(alerts) {
         });
       }
     }
-    alert_headline.classList.add("dwd-warn-start");
-    alert_div.appendChild(alert_date);
+    alert_info.appendChild(alert_date);
 
-    if (alert.description) { 
+    let alert_regionName = document.createElement("p");
+    alert_regionName.innerText = alert.regionName;
+    alert_info.appendChild(alert_regionName);
+
+    if (alert.description) {
       let alert_description = document.createElement("p");
       alert_description.innerText = alert.description;
-      alert_headline.classList.add("dwd-warn-description");
+      alert_description.classList.add("dwd-warn-description");
       alert_div.appendChild(alert_description);
     }
 
     if (alert.instruction) {
-      
       let alert_instruction = document.createElement("div");
       alert_instruction.classList.add("dwd-warn-instruction");
       let alert_instruction_id =
-      "dwd-warn-instruction-" + Math.floor(Math.random() * 10000);
-      
+        "dwd-warn-instruction-" + Math.floor(Math.random() * 10000);
+
       let alert_instruction_input = document.createElement("input");
       alert_instruction_input.id = alert_instruction_id;
       alert_instruction_input.type = "checkbox";
       alert_instruction.appendChild(alert_instruction_input);
-      
+
       let alert_instruction_label = document.createElement("label");
       alert_instruction_label.htmlFor = alert_instruction_id;
       alert_instruction.appendChild(alert_instruction_label);
-      
+
       let alert_instruction_a = document.createElement("a");
       alert_instruction_a.tabindex = "0";
       alert_instruction_a.innerText = "Mögliche Gefahren anzeigen";
       alert_instruction_label.appendChild(alert_instruction_a);
-      
+
       let alert_instruction_content = document.createElement("div");
       alert_instruction_content.classList.add("dwd-warn-instruction-content");
-      
+
       let alert_instruction_p = document.createElement("p");
       alert_instruction_p.innerText = alert.instruction;
       alert_instruction_content.appendChild(alert_instruction_p);
       alert_instruction.appendChild(alert_instruction_content);
       alert_div.appendChild(alert_instruction);
     }
-    
+
     dwd_warn_div.appendChild(alert_div);
   });
 }
