@@ -834,7 +834,11 @@ function show_warnings(alerts) {
 
   alerts.forEach((alert) => {
     let alert_div = document.createElement("div");
-    alert_div.classList.add("level-" + alert.level);
+    alert_div.classList.add("dwd-warn-level-" + alert.level);
+
+    if (alert.category == "vorabInformation") {
+      alert_div.classList.add("dwd-warn-vorabInformation");
+    }
     alert_div.classList.add("dwd-warn-element");
 
     let alert_headline = document.createElement("h3");

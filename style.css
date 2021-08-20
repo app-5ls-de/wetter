@@ -219,28 +219,34 @@ a[target="_blank"]::after {
 .dwd-warn-element {
   margin: 3rem;
   padding: 0.5rem;
-  border: solid darkgray 5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: darkgray;
 }
 
-.level-1 {
+.dwd-warn-level-1 {
   /* warnings */
-  border: solid #ffeb3b 5px;
+  border-color: #ffeb3b;
 }
-.level-2 {
+.dwd-warn-level-2 {
   /* significant */
-  border: solid #fb8c00 5px;
+  border-color: #fb8c00;
 }
-.level-3 {
+.dwd-warn-level-3 {
   /* severe */
-  border: solid #e53935 5px;
+  border-color: #e53935;
 }
-.level-4 {
+.dwd-warn-level-4 {
   /* extreme */
-  border: solid #880e4f 5px;
+  border-color: #880e4f;
 }
-.level-50 {
+.dwd-warn-level-50 {
   /* heat */
-  border: solid #cc99ff 5px;
+  border-color: #cc99ff;
+}
+
+.dwd-warn-vorabInformation {
+  border-style: dotted;
 }
 
 .dwd-warn-headline {
