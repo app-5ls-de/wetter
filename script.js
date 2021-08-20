@@ -191,6 +191,7 @@ function meteoblue() {
     meteoblue_img.addEventListener("load", resolve);
     meteoblue_img.addEventListener("error", reject);
 
+    meteoblue_img.setAttribute("crossorigin", "anonymous");
     meteoblue_img.src = closest_data.meteoblue_src;
     if (debug)
       meteoblue_img.src =
@@ -213,6 +214,7 @@ function knmi() {
   let knmi_animation_img = document.createElement("img");
   knmi_animation_img.id = "animation";
   knmi_animation_img.alt = "knmi";
+  knmi_animation_img.setAttribute("crossorigin", "anonymous");
   knmi_div.appendChild(knmi_animation_img);
 
   let knmi_info_div = document.createElement("div");
@@ -387,6 +389,7 @@ function windy_map(overlay_type) {
     }
     windy_map_iframe.setAttribute("frameborder", "0");
     windy_map_iframe.setAttribute("importance", "low");
+    windy_map_iframe.setAttribute("loading", "lazy");
   }
   windy_map_div.appendChild(windy_map_iframe);
 
@@ -404,6 +407,7 @@ function dwd_warn() {
 
   if (!debug) {
     let dwd_warn_script = document.createElement("script");
+    dwd_warn_script.setAttribute("crossorigin", "anonymous");
     dwd_warn_script.src =
       "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json";
     document.body.appendChild(dwd_warn_script);
@@ -521,6 +525,7 @@ function dwd_trend() {
   widgets_div.appendChild(dwd_trend_div);
 
   let dwd_trend_img = document.createElement("img");
+  dwd_trend_img.setAttribute("crossorigin", "anonymous");
   dwd_trend_img.src =
     "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
     id +
@@ -597,6 +602,7 @@ function daswetter() {
   widgets_div.appendChild(daswetter_div);
 
   let daswetter_img = document.createElement("img");
+  daswetter_img.setAttribute("crossorigin", "anonymous");
   daswetter_img.src =
     "https://www.daswetter.com/wimages/foto" + location_data.daswetter + ".png";
   if (debug)
@@ -653,13 +659,6 @@ function windguru() {
     '<a href="/windguru-hilfe.png"><img src="/info.svg"></a>';
   windguru_div.appendChild(windguru_info_div);
 }
-
-window.addEventListener("load", function () {
-  let asyncIframes = document.getElementsByClassName("asyncIframe");
-  Array.from(asyncIframes).map((item) => {
-    item.src = item.getAttribute("data-src");
-  });
-});
 
 function metno() {
   let metno_div = document.createElement("div");
