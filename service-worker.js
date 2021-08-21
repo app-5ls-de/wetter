@@ -75,6 +75,7 @@ self.addEventListener("install", (event) => {
     "/script.js",
     "/locations.json",
     "https://cdn.jsdelivr.net/npm/fuzzysort@1.1.4/fuzzysort.min.js",
+    "https://cdn.jsdelivr.net/npm/crel@4.2.1/crel.min.js",
   ];
   const cacheName = cacheNames.runtime;
   event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(urls)));
