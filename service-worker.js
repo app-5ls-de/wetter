@@ -6,23 +6,17 @@ const { StaleWhileRevalidate, CacheFirst } = workbox.strategies;
 const { ExpirationPlugin } = workbox.expiration;
 const { cacheNames, setCacheNameDetails } = workbox.core;
 
-setCacheNameDetails({
-  suffix: "v2",
-});
-const expirationCacheName =
-  cacheNames.prefix + "-expiration-" + cacheNames.suffix;
+setCacheNameDetails({ suffix: "v3" });
+cacheNames.expiration = cacheNames.prefix + "-expiration-" + cacheNames.suffix;
 
 async function cacheKeyWillBeUsed({ request }) {
   const url = new URL(request.url || request);
-  // Any search params or hash will be left out.
   return url.origin + url.pathname;
 }
 
 registerRoute(
   ({ url }) => url.origin == location.origin,
-  new StaleWhileRevalidate({
-    plugins: [{ cacheKeyWillBeUsed }],
-  })
+  new StaleWhileRevalidate({ plugins: [{ cacheKeyWillBeUsed }] })
 );
 
 registerRoute(
@@ -40,13 +34,11 @@ registerRoute(
       url.origin
     ) || url.href.startsWith("https://www.dwd.de/DWD/wetter"),
   new CacheFirst({
-    cacheName: expirationCacheName,
+    cacheName: cacheNames.expiration,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 24 * 60 * 60,
-        matchOptions: {
-          ignoreVary: true,
-        },
+        matchOptions: { ignoreVary: true },
       }),
     ],
   })
@@ -54,13 +46,11 @@ registerRoute(
 
 setDefaultHandler(
   new StaleWhileRevalidate({
-    cacheName: expirationCacheName,
+    cacheName: cacheNames.expiration,
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 1 * 60 * 60,
-        matchOptions: {
-          ignoreVary: true,
-        },
+        matchOptions: { ignoreVary: true },
       }),
     ],
   })
@@ -85,8 +75,7 @@ self.addEventListener("activate", (event) => {
   event.waitUntil(
     (async function () {
       const userCacheNames = await caches.keys();
-      const cacheNamesArray =
-        Object.values(cacheNames).concat(expirationCacheName);
+      const cacheNamesArray = Object.values(cacheNames);
       await Promise.all(
         userCacheNames.map(async (cacheName) => {
           if (!cacheNamesArray.includes(cacheName)) {
