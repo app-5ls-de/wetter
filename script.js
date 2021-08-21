@@ -188,11 +188,11 @@ function meteoblue() {
     meteoblue_img.addEventListener("load", resolve);
     meteoblue_img.addEventListener("error", reject);
 
-    meteoblue_img.setAttribute("crossorigin", "anonymous");
     meteoblue_img.src = closest_data.meteoblue_src;
     if (debug)
       meteoblue_img.src =
         "https://via.placeholder.com/2220x1470?text=meteoblue";
+    else meteoblue_img.setAttribute("crossorigin", "anonymous");
     meteoblue_div.appendChild(meteoblue_img);
     meteoblue_div.appendChild(meteoblue_a);
     meteoblue_div.appendChild(meteoblue_info_div);
@@ -211,7 +211,6 @@ function knmi() {
   let knmi_animation_img = document.createElement("img");
   knmi_animation_img.id = "animation";
   knmi_animation_img.alt = "knmi";
-  knmi_animation_img.setAttribute("crossorigin", "anonymous");
   knmi_div.appendChild(knmi_animation_img);
 
   let knmi_info_div = document.createElement("div");
@@ -222,6 +221,7 @@ function knmi() {
   var knmi_baseurl =
     "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/";
   if (debug) knmi_baseurl = "https://via.placeholder.com/800x653?text=knmi+";
+  else knmi_animation_img.setAttribute("crossorigin", "anonymous");
 
   function hour(date) {
     let hour = date.getUTCHours();
@@ -522,13 +522,13 @@ function dwd_trend() {
   widgets_div.appendChild(dwd_trend_div);
 
   let dwd_trend_img = document.createElement("img");
-  dwd_trend_img.setAttribute("crossorigin", "anonymous");
   dwd_trend_img.src =
     "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
     id +
     ".png";
   if (debug)
     dwd_trend_img.src = "https://via.placeholder.com/950x680?text=dwd-trend";
+  else dwd_trend_img.setAttribute("crossorigin", "anonymous");
   dwd_trend_img.alt = "dwd-trend";
   dwd_trend_div.appendChild(dwd_trend_img);
 
@@ -599,11 +599,11 @@ function daswetter() {
   widgets_div.appendChild(daswetter_div);
 
   let daswetter_img = document.createElement("img");
-  daswetter_img.setAttribute("crossorigin", "anonymous");
   daswetter_img.src =
     "https://www.daswetter.com/wimages/foto" + location_data.daswetter + ".png";
   if (debug)
     daswetter_img.src = "https://via.placeholder.com/776x185?text=daswetter";
+  else daswetter_img.setAttribute("crossorigin", "anonymous");
   daswetter_img.alt = "daswetter";
   daswetter_div.appendChild(daswetter_img);
 }
