@@ -15,11 +15,7 @@ function fetch_json(url, options) {
     });
 }
 function format(number) {
-  var PREFIXES = {
-    6: "M",
-    3: "k",
-    0: "",
-  };
+  var PREFIXES = { 6: "M", 3: "k", 0: "" };
   let maxExponent = Math.max(...Object.keys(PREFIXES).map(Number));
 
   function getExponent(n) {
@@ -231,10 +227,6 @@ function knmi() {
     let day = date.getUTCDate();
     return (day < 10 ? "0" : "") + day;
   }
-  function month(date) {
-    let month = date.getUTCMonth();
-    return (month < 10 ? "0" : "") + month;
-  }
 
   var interval,
     frameids = [],
@@ -256,9 +248,7 @@ function knmi() {
 
   frameids.push("AL" + day(d) + hour(d) + "_large.gif");
 
-  let offset = 0;
   for (let i = 0; i < 2; i++) {
-    offset += 12;
     if (d.getUTCHours() == 0) {
       d.setUTCHours(12);
     } else if (d.getUTCHours() == 12) {
@@ -413,102 +403,38 @@ function dwd_warn() {
 
 function dwd_trend() {
   let id_mapping = [
-    {
-      // Stuttgart
-      lat: 48.7761,
-      lon: 9.1775,
-      id: "10738",
-    },
-    {
-      // München
-      lat: 48.133333,
-      lon: 11.566667,
-      id: "10870",
-    },
-    {
-      // Berlin
-      lat: 52.5167,
-      lon: 13.3833,
-      id: "10382",
-    },
-    {
-      // Brandenburg
-      lat: 52.4117,
-      lon: 12.5561,
-      id: "10379",
-    },
-    {
-      // Bremen
-      lat: 53.1153,
-      lon: 8.7975,
-      id: "10224",
-    },
-    {
-      // Hamburg
-      lat: 53.55,
-      lon: 10.0,
-      id: "10147",
-    },
-    {
-      // Wiesbaden
-      lat: 50.0825,
-      lon: 8.24,
-      id: "10633",
-    },
-    {
-      // Schwerin
-      lat: 53.6333,
-      lon: 11.4167,
-      id: "10162",
-    },
-    {
-      // Hannover
-      lat: 52.374444,
-      lon: 9.738611,
-      id: "10338",
-    },
-    {
-      // Düsseldorf
-      lat: 51.2311,
-      lon: 6.7724,
-      id: "10400",
-    },
-    {
-      // Mainz
-      lat: 50.0,
-      lon: 8.2667,
-      id: "10708",
-    },
-    {
-      // Saarbrücken
-      lat: 49.2333,
-      lon: 7.0,
-      id: "K2613",
-    },
-    {
-      // Dresden
-      lat: 51.05,
-      lon: 13.74,
-      id: "10488",
-    },
-    {
-      // Magdeburg
-      lat: 52.1278,
-      lon: 11.6292,
-      id: "10361",
-    },
-    {
-      // Kiel
-      lat: 54.3233,
-      lon: 10.1394,
-      id: "10046",
-    },
-    {
-      // Erfurt
-      lat: 50.9787,
-      lon: 11.0328,
-      id: "10554",
-    },
+    // Stuttgart
+    { lat: 48.7761, lon: 9.1775, id: "10738" },
+    // München
+    { lat: 48.133333, lon: 11.566667, id: "10870" },
+    // Berlin
+    { lat: 52.5167, lon: 13.3833, id: "10382" },
+    // Brandenburg
+    { lat: 52.4117, lon: 12.5561, id: "10379" },
+    // Bremen
+    { lat: 53.1153, lon: 8.7975, id: "10224" },
+    // Hamburg
+    { lat: 53.55, lon: 10.0, id: "10147" },
+    // Wiesbaden
+    { lat: 50.0825, lon: 8.24, id: "10633" },
+    // Schwerin
+    { lat: 53.6333, lon: 11.4167, id: "10162" },
+    // Hannover
+    { lat: 52.374444, lon: 9.738611, id: "10338" },
+    // Düsseldorf
+    { lat: 51.2311, lon: 6.7724, id: "10400" },
+    // Mainz
+    { lat: 50.0, lon: 8.2667, id: "10708" },
+    // Saarbrücken
+    { lat: 49.2333, lon: 7.0, id: "K2613" },
+    // Dresden
+    { lat: 51.05, lon: 13.74, id: "10488" },
+    // Magdeburg
+    { lat: 52.1278, lon: 11.6292, id: "10361" },
+    // Kiel
+    { lat: 54.3233, lon: 10.1394, id: "10046" },
+    // Erfurt
+    { lat: 50.9787, lon: 11.0328, id: "10554" },
   ];
 
   let closest = get_closest(location_data, id_mapping);
@@ -948,10 +874,7 @@ function save_location() {
         element.location != location_name && element.name != location_name
     );
 
-    lastvisited.unshift({
-      name: location_data.name,
-      location: location_name,
-    });
+    lastvisited.unshift({ name: location_data.name, location: location_name });
 
     lastvisited = lastvisited.slice(0, 5);
     localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
