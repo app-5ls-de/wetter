@@ -331,6 +331,7 @@ function windy_link() {
 
 function windy_map(overlay_type) {
   if (overlay_type == "waves" && !location_data.windy_waves) return;
+  if (overlay_type && overlay_type != "waves") return;
 
   let windy_map_div = document.createElement("div");
   windy_map_div.id = "windy-map";
