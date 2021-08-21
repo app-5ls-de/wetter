@@ -1,8 +1,8 @@
 var main_div = document.getElementById("main");
 var widgets_div = document.getElementById("widgets");
 
-function f(url, callback) {
-  return fetch(url)
+function fetch_json(url, options) {
+  return fetch(url, options)
     .then((response) => {
       if (response.ok) {
         return Promise.resolve(response);
@@ -12,9 +12,6 @@ function f(url, callback) {
     })
     .then((response) => {
       return response.json();
-    })
-    .then((data) => {
-      callback(data);
     });
 }
 function format(number) {
@@ -52,7 +49,7 @@ function format(number) {
 
 var location_data;
 var all_location_data;
-f("/locations.json", (data) => {
+fetch_json("/locations.json").then((data) => {
   all_location_data = data;
 
   let params = new URLSearchParams(window.location.search);
@@ -99,13 +96,14 @@ f("/locations.json", (data) => {
           location_data.name = "?";
           main_routine();
         } else {
-          f(
+          fetch_json(
             "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
               location_data.lat +
               "&lon=" +
               location_data.lon +
-              "&zoom=10&addressdetails=1&accept-language=de",
-            (nominatim_data) => {
+              "&zoom=10&addressdetails=1&accept-language=de"
+          )
+            .then((nominatim_data) => {
               location_data.name = "?";
               if (nominatim_data.address?.city) {
                 location_data.name = nominatim_data.address.city;
@@ -116,8 +114,8 @@ f("/locations.json", (data) => {
               }
 
               main_routine();
-            }
-          ).catch(geolocation_error);
+            })
+            .catch(geolocation_error);
         }
       }, geolocation_error);
     } else {
@@ -782,13 +780,14 @@ warnWetter.loadWarnings = function (dwd_json) {
     warncellids.push(String(location_data.dwd_warncellid));
   }
 
-  f(
+  fetch_json(
     "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
       location_data.lat +
       "&lon=" +
       location_data.lon +
-      "&zoom=10&addressdetails=1&accept-language=de",
-    (data) => {
+      "&zoom=10&addressdetails=1&accept-language=de"
+  )
+    .then((data) => {
       let name;
       if (data.address?.county) {
         name = data.address.county;
@@ -817,11 +816,11 @@ warnWetter.loadWarnings = function (dwd_json) {
       });
 
       show_warnings(alerts_list, warncellids);
-    }
-  ).catch((er) => {
-    console.error(er);
-    show_warnings(alerts_list, warncellids);
-  });
+    })
+    .catch((er) => {
+      console.error(er);
+      show_warnings(alerts_list, warncellids);
+    });
 };
 
 function show_warnings(alerts_list, warncellids) {
