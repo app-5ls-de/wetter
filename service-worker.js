@@ -1,5 +1,5 @@
 importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/6.1.5/workbox-sw.js"
+  "https://storage.googleapis.com/workbox-cdn/releases/6.2.4/workbox-sw.js"
 );
 const { registerRoute, setDefaultHandler } = workbox.routing;
 const { StaleWhileRevalidate, CacheFirst } = workbox.strategies;
@@ -7,7 +7,7 @@ const { ExpirationPlugin } = workbox.expiration;
 const { cacheNames, setCacheNameDetails } = workbox.core;
 
 setCacheNameDetails({
-  suffix: "v1",
+  suffix: "v2",
 });
 const expirationCacheName =
   cacheNames.prefix + "-expiration-" + cacheNames.suffix;
