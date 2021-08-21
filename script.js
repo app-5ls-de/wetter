@@ -16,8 +16,9 @@ function fetch_json(url, options) {
     });
 }
 function format(number) {
-  var PREFIXES = { 6: "M", 3: "k", 0: "" };
-  let maxExponent = Math.max(...Object.keys(PREFIXES).map(Number));
+  const PREFIXES = { 6: "M", 3: "k", 0: "" };
+  const maxExponent = Math.max(...Object.keys(PREFIXES).map(Number));
+  const minExponent = Math.min(...Object.keys(PREFIXES).map(Number));
 
   function getExponent(n) {
     if (n === 0) {
@@ -35,7 +36,7 @@ function format(number) {
     var n = precise(Number.parseFloat(sn));
     var e = Math.max(
       Math.min(3 * Math.floor(getExponent(n) / 3), maxExponent),
-      -maxExponent
+      minExponent
     );
     return precise(n / Math.pow(10, e)).toString() + PREFIXES[e];
   }
