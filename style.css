@@ -441,15 +441,20 @@ h1 {
   outline: none;
 }
 .search img {
+  height: 1.4rem;
+}
+.search button {
   border: none;
-  background: none;
-  pointer-events: none;
   position: absolute;
   top: 50%;
-  height: 1.4rem;
-  margin-top: -0.7rem;
+  margin: 0;
+  padding: 0;
+  margin-top: -0.8rem;
   margin-left: -1rem;
+  background: transparent;
+  cursor: pointer;
 }
+
 .search select {
   border: none;
 }

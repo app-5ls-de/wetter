@@ -5,7 +5,7 @@ title: Wetter
 
 <div class="search">
   <input id="search" type="text" placeholder="loading..." />
-  <img src="search.svg" alt="" />
+  <button id="search-button"><img src="search.svg" alt="" /></button>
 </div>
 <div class="liste" id="search-liste"></div>
 
@@ -14,15 +14,16 @@ title: Wetter
   var search_liste_div = document.getElementById("search-liste");
 
   search_input.addEventListener("input", (e) => {
-    show_search_results();
+    show_autocomplete_results();
   });
   search_input.addEventListener("keyup", ({ key }) => {
-    if (key === "Enter") {
-      console.log("Enter");
-    }
+    if (key === "Enter") search();
+  });
+  document.getElementById("search-button").addEventListener("click", () => {
+    search();
   });
 
-  function show_search_results() {
+  function show_autocomplete_results() {
     let input = search_input.value;
     if (!input || !locations_data) return;
 
@@ -43,6 +44,43 @@ title: Wetter
         search_liste_div.appendChild(document.createTextNode("*"));
       search_liste_div.appendChild(document.createElement("br"));
     });
+  }
+
+  function search() {
+    let input = search_input.value;
+    if (!input || input.length < 3) return;
+
+    fetch(
+      "https://nominatim.openstreetmap.org/search.php?q=" +
+        input.toLowerCase().trim() +
+        "&dedupe=1&accept-language=de&limit=5&format=jsonv2"
+    )
+      .then((response) => {
+        if (response.ok) {
+          return Promise.resolve(response);
+        } else {
+          return Promise.reject(new Error(response.statusText));
+        }
+      })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        data = data.filter((element) => element.importance > 0.2);
+
+        search_liste_div.textContent = "";
+        data.forEach((result_element) => {
+          let location_a = document.createElement("a");
+          location_a.innerText = result_element.display_name;
+          location_a.href =
+            "/show?lat=" +
+            parseFloat(result_element.lat).toPrecision(4) +
+            "&lon=" +
+            parseFloat(result_element.lon).toPrecision(4);
+          search_liste_div.appendChild(location_a);
+          search_liste_div.appendChild(document.createElement("br"));
+        });
+      });
   }
 
   function show_lastvisited() {
@@ -92,7 +130,7 @@ title: Wetter
     .then((data) => {
       locations_data = data;
       search_input.setAttribute("placeholder", "Suche");
-      show_search_results();
+      show_autocomplete_results();
     })
     .catch((error) => {
       console.log("Request failed", error);
