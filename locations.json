@@ -248,6 +248,14 @@
     "name": "Lund"
   },
   {
+    "accuweather": "sk/michalovce/298695/minute-weather-forecast/298695",
+    "lat": 48.75,
+    "lon": 21.88,
+    "meteoblue_id": "gro%c3%9fmichel_slowakei-%28slowakische-republik%29_724144",
+    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Gro%C3%9Fmichel&iso2=sk&lat=48.7543&lon=21.9195&asl=111&tz=Europe%2FBratislava&lang=de&sig=cad22fffaa431635db38aad294d46c43",
+    "name": "Michalovce (Großmichel)"
+  },
+  {
     "lat": 50.77,
     "lon": 6.1,
     "name": "Aachen"
