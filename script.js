@@ -336,72 +336,78 @@ function windy_map(overlay_type) {
   if (overlay_type == "waves" && !location_data.windy_waves) return;
   if (overlay_type && overlay_type != "waves") return;
 
-  let windy_map_div = el.div({
-    id: overlay_type ? "windy-map-" + overlay_type : "windy-map",
-    class: "windy-map",
-  });
+  let windy_map_iframe;
+  if (debug) windy_map_iframe = el.img();
+  else windy_map_iframe = el.iframe();
+
+  let windy_map_div = el.div(
+    {
+      id: overlay_type ? "windy-map-" + overlay_type : "windy-map",
+      class: "windy-map",
+    },
+    windy_map_iframe,
+    el.div(
+      { class: "info" },
+      el.a(
+        {
+          href: "https://community.windy.com/topic/3361/description-of-weather-overlays",
+        },
+        el.img({ src: "/info.svg" })
+      ),
+      el.a(
+        {
+          href: "https://community.windy.com/topic/12/what-source-of-weather-data-windy-use",
+        },
+        el.img({ src: "/info.svg" })
+      )
+    )
+  );
   widgets_div.appendChild(windy_map_div);
 
-  let windy_map_iframe;
-  if (debug) {
-    windy_map_iframe = el.img({
-      src: "https://via.placeholder.com/800?text=windy-map",
-      alt: "windy-map",
-    });
-    if (overlay_type) {
-      windy_map_iframe.src += "-" + overlay_type;
-      windy_map_iframe.alt += "-" + overlay_type;
-    }
-    windy_map_iframe.style.width = "100%";
-    windy_map_iframe.style.height = "100%";
-  } else {
-    windy_map_iframe = el.iframe({ class: "asyncIframe" });
-    windy_map_iframe.src =
-      "https://embed.windy.com/embed2.html?lat=" +
-      location_data.lat +
-      "&lon=" +
-      location_data.lon +
-      "&zoom=7&level=surface&overlay=rain&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
-      location_data.lat +
-      "&detailLon=" +
-      location_data.lon +
-      "&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
-    if (overlay_type == "waves") {
+  return new Promise((resolve, reject) => {
+    windy_map_iframe.addEventListener("load", resolve);
+    windy_map_iframe.addEventListener("error", reject);
+
+    if (debug) {
+      windy_map_iframe.alt = "windy-map";
+      windy_map_iframe.src = "https://via.placeholder.com/800?text=windy-map";
+      if (overlay_type) {
+        windy_map_iframe.src += "-" + overlay_type;
+        windy_map_iframe.alt += "-" + overlay_type;
+      }
+      windy_map_iframe.style.width = "100%";
+      windy_map_iframe.style.height = "100%";
+    } else {
+      crel(windy_map_iframe, {
+        class: "asyncIframe",
+        frameborder: "0",
+        importance: "low",
+        loading: "lazy",
+      });
       windy_map_iframe.src =
         "https://embed.windy.com/embed2.html?lat=" +
         location_data.lat +
         "&lon=" +
         location_data.lon +
-        "&zoom=10&level=surface&overlay=waves&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
+        "&zoom=7&level=surface&overlay=rain&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
         location_data.lat +
         "&detailLon=" +
         location_data.lon +
         "&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
+      if (overlay_type == "waves") {
+        windy_map_iframe.src =
+          "https://embed.windy.com/embed2.html?lat=" +
+          location_data.lat +
+          "&lon=" +
+          location_data.lon +
+          "&zoom=10&level=surface&overlay=waves&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
+          location_data.lat +
+          "&detailLon=" +
+          location_data.lon +
+          "&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
+      }
     }
-    crel(windy_map_iframe, {
-      frameborder: "0",
-      importance: "low",
-      loading: "lazy",
-    });
-  }
-  windy_map_div.appendChild(windy_map_iframe);
-
-  let windy_map_info_div = el.div(
-    { class: "info" },
-    el.a(
-      {
-        href: "https://community.windy.com/topic/3361/description-of-weather-overlays",
-      },
-      el.img({ src: "/info.svg" })
-    ),
-    el.a(
-      {
-        href: "https://community.windy.com/topic/12/what-source-of-weather-data-windy-use",
-      },
-      el.img({ src: "/info.svg" })
-    )
-  );
-  windy_map_div.appendChild(windy_map_info_div);
+  });
 }
 
 function dwd_warn() {
