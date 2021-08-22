@@ -588,9 +588,7 @@ function windguru() {
   let windguru_loading_div,
     windguru_div = el.div(
       { id: "windguru", class: "section" },
-      (windguru_loading_div = el.div({
-        class: "loading",
-      })),
+      (windguru_loading_div = el.div({ class: "loading" })),
       el.div(
         { class: "info" },
         el.a({ href: "/windguru-hilfe.png" }, el.img({ src: "/info.svg" }))
@@ -598,37 +596,43 @@ function windguru() {
     );
   widgets_div.appendChild(windguru_div);
 
-  if (debug) {
-    let windguru_img = el.img({
-      src: "https://via.placeholder.com/800x512?text=windguru",
-      alt: "windguru",
-    });
-    windguru_img.style.width = "100%";
-    windguru_img.style.height = "512px";
-    windguru_loading_div.appendChild(windguru_img);
-  } else {
-    let windguru_reference_script = el.script({
-      id: location_data.windguru_uid,
-    });
-    windguru_loading_div.appendChild(windguru_reference_script);
+  return new Promise((resolve, reject) => {
+    if (debug) {
+      let windguru_img = el.img({ alt: "windguru" });
+      windguru_img.style.width = "100%";
+      windguru_img.style.height = "512px";
 
-    let arg = [
-      "s=" + location_data.windguru_s,
-      "m=3",
-      "uid=" + location_data.windguru_uid,
-      "wj=knots",
-      "tj=c",
-      "odh=0",
-      "doh=24",
-      "fhours=240",
-      "vt=fcst_graph",
-      "lng=de",
-    ];
-    let windguru_script = el.script({
-      src: "https://www.windguru.cz/js/widget.php?" + arg.join("&"),
-    });
-    document.body.appendChild(windguru_script);
-  }
+      windguru_img.addEventListener("load", resolve);
+      windguru_img.addEventListener("error", reject);
+      windguru_img.src = "https://via.placeholder.com/800x512?text=windguru";
+
+      windguru_loading_div.appendChild(windguru_img);
+    } else {
+      let windguru_reference_script = el.script({
+        id: location_data.windguru_uid,
+      });
+      windguru_loading_div.appendChild(windguru_reference_script);
+
+      let arg = [
+        "s=" + location_data.windguru_s,
+        "m=3",
+        "uid=" + location_data.windguru_uid,
+        "wj=knots",
+        "tj=c",
+        "odh=0",
+        "doh=24",
+        "fhours=240",
+        "vt=fcst_graph",
+        "lng=de",
+      ];
+      let windguru_script = el.script();
+      windguru_script.addEventListener("load", resolve);
+      windguru_script.addEventListener("error", reject);
+      windguru_script.src =
+        "https://www.windguru.cz/js/widget.php?" + arg.join("&");
+      document.body.appendChild(windguru_script);
+    }
+  });
 }
 
 function metno() {
