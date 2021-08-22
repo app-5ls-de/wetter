@@ -563,18 +563,23 @@ function daswetter() {
   let daswetter_img,
     daswetter_div = el.div(
       { id: "daswetter", class: "section" },
-      (daswetter_img = el.img({
-        src:
-          "https://www.daswetter.com/wimages/foto" +
-          location_data.daswetter +
-          ".png",
-        alt: "daswetter",
-      }))
+      (daswetter_img = el.img({ alt: "daswetter" }))
     );
   widgets_div.appendChild(daswetter_div);
 
-  if (debug)
-    daswetter_img.src = "https://via.placeholder.com/776x185?text=daswetter";
+  return new Promise((resolve, reject) => {
+    daswetter_div.addEventListener("load", resolve);
+    daswetter_div.addEventListener("error", reject);
+
+    if (debug) {
+      daswetter_img.src = "https://via.placeholder.com/776x185?text=daswetter";
+    } else {
+      daswetter_img.src =
+        "https://www.daswetter.com/wimages/foto" +
+        location_data.daswetter +
+        ".png";
+    }
+  });
 }
 
 function windguru() {
