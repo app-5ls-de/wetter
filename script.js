@@ -505,15 +505,9 @@ function meteoblue_simple() {
 
   let meteoblue_simple_iframe;
   if (debug) {
-    meteoblue_simple_iframe = el.img({
-      src: "https://via.placeholder.com/805x623?text=meteoblue-simple",
-    });
+    meteoblue_simple_iframe = el.img();
   } else {
     meteoblue_simple_iframe = el.iframe({
-      src:
-        "https://www.meteoblue.com/de/wetter/widget/three/" +
-        location_data.meteoblue_id +
-        "?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=bright",
       frameborder: "0",
       scrolling: "NO",
       allowtransparency: "true",
@@ -547,6 +541,21 @@ function meteoblue_simple() {
     el.hr({ class: "divider" }),
     meteoblue_simple_div.nextSibling
   );
+
+  return new Promise((resolve, reject) => {
+    meteoblue_simple_iframe.addEventListener("load", resolve);
+    meteoblue_simple_iframe.addEventListener("error", reject);
+
+    if (debug) {
+      meteoblue_simple_iframe.src =
+        "https://via.placeholder.com/805x623?text=meteoblue-simple";
+    } else {
+      meteoblue_simple_iframe.src =
+        "https://www.meteoblue.com/de/wetter/widget/three/" +
+        location_data.meteoblue_id +
+        "?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=bright";
+    }
+  });
 }
 
 function daswetter() {
