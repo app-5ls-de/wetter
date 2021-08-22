@@ -22,6 +22,15 @@
     "name": "Böhmenkirch"
   },
   {
+    "accuweather": "de/dresden/01067/minute-weather-forecast/171239",
+    "dwd_warncellid": 114612000,
+    "lat": 51.05,
+    "lon": 13.75,
+    "meteoblue_id": "dresden_deutschland_2935022",
+    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Dresden&iso2=de&lat=51.0509&lon=13.7383&asl=116&tz=Europe%2FBerlin&lang=de&sig=f59454dd4109cc83f52948c2fdeeacc6",
+    "name": "Dresden"
+  },
+  {
     "accuweather": "de/spitzingsee/83727/minute-weather-forecast/178049",
     "dwd_warncellid": 109182000,
     "lat": 47.67,
@@ -1007,11 +1016,6 @@
     "lat": 50,
     "lon": 8.7,
     "name": "Dreieich"
-  },
-  {
-    "lat": 51.05,
-    "lon": 13.75,
-    "name": "Dresden"
   },
   {
     "lat": 51.51,
