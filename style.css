@@ -192,6 +192,7 @@ a[target="_blank"]::after {
   margin-left: 5px;
 }
 
+.info > a::after,
 .info > a::before {
   display: none;
 }
