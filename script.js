@@ -826,12 +826,16 @@ function show_warnings(alerts_list, warncellids) {
 
   alerts.forEach((alert) => {
     let alert_date,
+      alert_info_p,
       alert_div = el.div(
         { class: "dwd-warn-element dwd-warn-level-" + alert.level },
         el.h3({ class: "dwd-warn-headline" }, alert.headline),
         el.br(),
-        el.div({ class: "dwd-warn-info" }),
-        (alert_date = el.strong())
+        el.div(
+          { class: "dwd-warn-info" },
+          (alert_date = el.strong()),
+          (alert_info_p = el.p())
+        )
       );
 
     if (alert.category == "vorabInformation") {
@@ -864,23 +868,21 @@ function show_warnings(alerts_list, warncellids) {
         });
       }
     }
-    alert_info.appendChild(el.p(alert.regionName));
+    alert_info_p.innerText = alert.regionName;
 
     if (alert.description)
       alert_div.appendChild(
         el.p({ class: "dwd-warn-description" }, alert.description)
       );
-
+    alert_instruction_id =
+      "dwd-warn-instruction-" + Math.floor(Math.random() * 10000);
     if (alert.instruction) {
       alert_div.appendChild(
         el.div(
-          {
-            class: "dwd-warn-instruction",
-            id: "dwd-warn-instruction-" + Math.floor(Math.random() * 10000),
-          },
+          { class: "dwd-warn-instruction" },
           el.input({ type: "checkbox", id: alert_instruction_id }),
           el.label(
-            { htmlFor: alert_instruction_id },
+            { for: alert_instruction_id },
             el.a({ tabindex: "0" }, "Mögliche Gefahren anzeigen")
           ),
           el.div(
