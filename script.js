@@ -275,16 +275,21 @@ function knmi() {
     }
   }
 
-  knmi_animation_img.addEventListener("load", () => {
-    loaded = true;
-  });
-  nextframe(); //show first frame
-
   knmi_div.addEventListener("click", () => {
     if (paused) interval = setInterval(nextframe, 1500);
     else clearInterval(interval);
 
     paused = !paused;
+  });
+
+  return new Promise((resolve, reject) => {
+    knmi_animation_img.addEventListener("load", () => {
+      loaded = true;
+      resolve();
+    });
+    knmi_animation_img.addEventListener("error", reject);
+
+    nextframe(); //show first frame
   });
 }
 
