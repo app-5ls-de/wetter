@@ -94,7 +94,7 @@ fetch_json("locations.json").then((fetch_location_response) => {
   if (params.get("location")) {
     let location_name = params.get("location");
     for (let i = 0; i < all_location_data.length; i++) {
-      if (data[i].name == location_name) {
+      if (all_location_data[i].name == location_name) {
         location_data = all_location_data[i];
         main_routine();
         break;
