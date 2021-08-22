@@ -471,13 +471,7 @@ function dwd_trend() {
   let dwd_trend_img,
     dwd_trend_div = el.div(
       { id: "dwd-trend", class: "section" },
-      (dwd_trend_img = el.img({
-        src:
-          "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
-          id +
-          ".png",
-        alt: "dwd-trend",
-      })),
+      (dwd_trend_img = el.img({ alt: "dwd-trend" })),
       el.div(
         { class: "info" },
         el.a(
@@ -490,9 +484,20 @@ function dwd_trend() {
     );
   widgets_div.appendChild(dwd_trend_div);
 
-  if (debug)
-    dwd_trend_img.src = "https://via.placeholder.com/950x680?text=dwd-trend";
-  else dwd_trend_img.setAttribute("crossorigin", "anonymous");
+  return new Promise((resolve, reject) => {
+    dwd_trend_img.addEventListener("load", resolve);
+    dwd_trend_img.addEventListener("error", reject);
+
+    if (debug)
+      dwd_trend_img.src = "https://via.placeholder.com/950x680?text=dwd-trend";
+    else {
+      dwd_trend_img.setAttribute("crossorigin", "anonymous");
+      dwd_trend_img.src =
+        "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
+        id +
+        ".png";
+    }
+  });
 }
 
 function meteoblue_simple() {
