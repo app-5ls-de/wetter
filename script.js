@@ -116,8 +116,8 @@ fetch_json("locations.json").then((fetch_location_response) => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((location) => {
         location_data = {
-          lat: Number.parseFloat(location.coords.latitude.toPrecision(2)),
-          lon: Number.parseFloat(location.coords.longitude.toPrecision(2)),
+          lat: Math.round(location.coords.latitude * 100) / 100,
+          lon: Math.round(location.coords.longitude * 100) / 100,
         };
         let accuracy = Math.max(
           location.coords.accuracy,

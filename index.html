@@ -74,9 +74,9 @@ title: Wetter
           location_a.innerText = result_element.display_name;
           location_a.href =
             "/show?lat=" +
-            parseFloat(result_element.lat).toPrecision(4) +
+            Math.round(parseFloat(result_element.lat) * 100) / 100 +
             "&lon=" +
-            parseFloat(result_element.lon).toPrecision(4);
+            Math.round(parseFloat(result_element.lon) * 100) / 100;
           search_liste_div.appendChild(location_a);
           search_liste_div.appendChild(document.createElement("br"));
         });
