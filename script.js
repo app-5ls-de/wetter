@@ -45,17 +45,57 @@ function format(number) {
   else return precise(number).toString();
 }
 
-var location_data;
-var all_location_data;
-fetch_json("/locations.json").then((data) => {
-  all_location_data = data;
+var location_data, all_location_data;
+
+async function getAddress() {
+  if (debug) {
+    location_data.name = "?";
+    location_data.address = {};
+    return Promise.resolve();
+  }
+
+  if (location_data.address) {
+    return Promise.resolve();
+  } else {
+    return fetch_json(
+      "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+        location_data.lat +
+        "&lon=" +
+        location_data.lon +
+        "&zoom=10&addressdetails=1&accept-language=de"
+    ).then((nominatim_data) => {
+      location_data.address = nominatim_data.address || {};
+      location_data.name = "?";
+      if (location_data.address.city) {
+        location_data.name = location_data.address.city;
+      } else if (location_data.address.town) {
+        location_data.name = nominatim_data.address.town;
+      } else if (location_data.address.village) {
+        location_data.name = location_data.address.village;
+      } else if (location_data.address.municipality) {
+        location_data.name = location_data.address.municipality;
+      }
+
+      if (location_data.address.county) {
+        location_data.address.district = location_data.address.county;
+      } else if (location_data.address.city) {
+        location_data.address.district = location_data.address.city;
+      } else if (location_data.address.town) {
+        location_data.address.district = location_data.address.town;
+      }
+    });
+  }
+}
+
+fetch_json("locations.json").then((fetch_location_response) => {
+  all_location_data = fetch_location_response;
 
   let params = new URLSearchParams(window.location.search);
-  let location_name = params.get("location");
-  if (location_name) {
-    for (let i = 0; i < data.length; i++) {
+  if (params.get("location")) {
+    let location_name = params.get("location");
+    for (let i = 0; i < all_location_data.length; i++) {
       if (data[i].name == location_name) {
-        location_data = data[i];
+        location_data = all_location_data[i];
         main_routine();
         break;
       }
@@ -90,35 +130,31 @@ fetch_json("/locations.json").then((data) => {
         document.getElementById("title-info-small").innerText =
           " ±" + format(accuracy) + "m";
 
-        if (debug) {
-          location_data.name = "?";
-          main_routine();
-        } else {
-          fetch_json(
-            "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
-              location_data.lat +
-              "&lon=" +
-              location_data.lon +
-              "&zoom=10&addressdetails=1&accept-language=de"
-          )
-            .then((nominatim_data) => {
-              location_data.name = "?";
-              if (nominatim_data.address?.city) {
-                location_data.name = nominatim_data.address.city;
-              } else if (nominatim_data.address?.town) {
-                location_data.name = nominatim_data.address.town;
-              } else if (nominatim_data.address?.village) {
-                location_data.name = nominatim_data.address.village;
-              }
-
-              main_routine();
-            })
-            .catch(geolocation_error);
-        }
+        getAddress()
+          .then(() => {
+            main_routine();
+          })
+          .catch(geolocation_error);
       }, geolocation_error);
     } else {
       geolocation_error();
     }
+  } else if (params.get("lat") && params.get("lon")) {
+    function latlon_error(error) {
+      document.getElementById("title-info").innerText = "Ort nicht gefunden";
+      console.error(error);
+      throw "LatLonError";
+    }
+    location_data = {
+      lat: Math.round(parseFloat(params.get("lat")) * 100) / 100,
+      lon: Math.round(parseFloat(params.get("lon")) * 100) / 100,
+    };
+
+    getAddress()
+      .then(() => {
+        main_routine();
+      })
+      .catch(latlon_error);
   } else {
     localStorage.removeItem("lastvisited");
     localStorage.removeItem("quickresume");
@@ -787,32 +823,19 @@ warnWetter.loadWarnings = function (dwd_json) {
     warncellids.push(String(location_data.dwd_warncellid));
   }
 
-  fetch_json(
-    "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
-      location_data.lat +
-      "&lon=" +
-      location_data.lon +
-      "&zoom=10&addressdetails=1&accept-language=de"
-  )
-    .then((data) => {
-      let name;
-      if (data.address?.county) {
-        name = data.address.county;
-      } else if (data.address?.city) {
-        name = data.address.city;
-      } else if (data.address?.town) {
-        name = data.address.town;
-      }
-      if (!name) {
-        console.error("county not found");
+  getAddress()
+    .then(() => {
+      let district = location_data.address.district;
+      if (!district) {
+        console.error("district not found");
         return;
       }
-      name = name
+      district = district
         .toLowerCase()
         .replace("landkreis", "")
         .replace("kreis", "")
         .trim();
-      let results = fuzzysort.go(name, alerts_list, {
+      let results = fuzzysort.go(district, alerts_list, {
         threshold: -20000,
         allowTypo: false,
         key: "regionName",
