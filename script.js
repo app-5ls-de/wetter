@@ -414,11 +414,16 @@ function dwd_warn() {
   crel(document.getElementById("dwd-warn"), { class: "section" });
 
   if (!debug) {
-    let dwd_warn_script = el.script({
-      crossorigin: "anonymous",
-      src: "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
-    });
+    let dwd_warn_script = el.script({ crossorigin: "anonymous" });
     document.body.appendChild(dwd_warn_script);
+
+    return new Promise((resolve, reject) => {
+      dwd_warn_script.addEventListener("load", resolve);
+      dwd_warn_script.addEventListener("error", reject);
+
+      dwd_warn_script.src =
+        "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json";
+    });
   }
 }
 
