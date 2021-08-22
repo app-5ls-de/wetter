@@ -959,9 +959,22 @@ function show_warnings(alerts_list, warncellids) {
 function save_location() {
   localStorage.setItem("quickresume", location.pathname + location.search);
 
+  let to_add;
   let params = new URLSearchParams(window.location.search);
-  let location_name = params.get("location");
-  if (location_name) {
+  if (params.get("location")) {
+    to_add = {
+      name: location_data.name,
+      location: location_data.name,
+    };
+  } else if (params.get("lat") && params.get("lon")) {
+    to_add = {
+      name: location_data.name,
+      lat: location_data.lat,
+      lon: location_data.lon,
+    };
+  }
+
+  if (to_add) {
     let lastvisited;
     try {
       lastvisited = JSON.parse(localStorage.getItem("lastvisited")) || [];
@@ -969,12 +982,14 @@ function save_location() {
       lastvisited = [];
     }
 
+    let to_add_strigified = JSON.stringify(to_add, Object.keys(to_add).sort());
     lastvisited = lastvisited.filter(
       (element) =>
-        element.location != location_name && element.name != location_name
+        to_add_strigified !=
+        JSON.stringify(element, Object.keys(element).sort())
     );
 
-    lastvisited.unshift({ name: location_data.name, location: location_name });
+    lastvisited.unshift(to_add);
 
     lastvisited = lastvisited.slice(0, 5);
     localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
