@@ -72,18 +72,15 @@ self.addEventListener("install", (event) => {
 });
 
 self.addEventListener("activate", (event) => {
+  const cacheNamesArray = Object.values(cacheNames);
   event.waitUntil(
-    (async function () {
-      const userCacheNames = await caches.keys();
-      const cacheNamesArray = Object.values(cacheNames);
-      await Promise.all(
-        userCacheNames.map(async (cacheName) => {
-          if (!cacheNamesArray.includes(cacheName)) {
-            return await caches.delete(cacheName);
-          }
-          return await Promise.resolve();
+    caches.keys().then((userCacheNames) =>
+      Promise.all(
+        userCacheNames.map((cacheName) => {
+          if (!cacheNamesArray.includes(cacheName))
+            return caches.delete(cacheName);
         })
-      );
-    })()
+      )
+    )
   );
 });
