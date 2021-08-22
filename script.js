@@ -640,34 +640,30 @@ function metno() {
   let metno_div = el.div({ id: "metno", class: "section" });
   widgets_div.appendChild(metno_div);
 
-  return fetch(
+  return fetch_json(
     "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=" +
       location_data.lat +
       "&lon=" +
       location_data.lon
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+  ).then((data) => {
+    console.log(data);
+  });
 }
 
 function brightsky() {
   let brightsky_div = el.div({ id: "brightsky", class: "section" });
   widgets_div.appendChild(brightsky_div);
 
-  return fetch(
+  return fetch_json(
     "https://api.brightsky.dev/weather?lat=" +
       location_data.lat +
       "&lon=" +
       location_data.lon +
       "&date=" +
       new Date().toISOString().split("T")[0]
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-    });
+  ).then((data) => {
+    console.log(data);
+  });
 }
 
 function sunrise() {
@@ -685,13 +681,13 @@ function sunrise() {
       },
     });
   } else {
-    fetch_promise = fetch(
+    fetch_promise = fetch_json(
       "https://api.sunrise-sunset.org/json?lat=" +
         location_data.lat +
         "&lng=" +
         location_data.lon +
         "&formatted=0"
-    ).then((response) => response.json());
+    );
   }
 
   return fetch_promise.then((data) => {
