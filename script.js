@@ -822,7 +822,24 @@ function show_warnings(alerts_list, warncellids) {
     }
   });
 
-  alerts = alerts.sort((a, b) => b.level - a.level);
+  alerts = alerts
+    .sort((a, b) => a.start - b.start)
+    .sort((a, b) => b.level - a.level)
+    .filter(
+      (value, index, array) =>
+        index ==
+        array.findIndex(
+          (t) =>
+            t.regionName === value.regionName &&
+            t.event === value.event &&
+            t.start === value.start &&
+            t.end === value.end &&
+            t.level === value.level &&
+            t.type === value.type &&
+            t.altitudeStart === value.altitudeStart &&
+            t.altitudeEnd === value.altitudeEnd
+        )
+    );
 
   alerts.forEach((alert) => {
     let alert_date,
