@@ -174,12 +174,16 @@ function meteoblue() {
             "https://www.meteoblue.com/de/wetter/woche/" +
             closest_data.meteoblue_id,
           target: "_blank",
+          rel: "noopener",
         },
         "Wetter " + closest_data.name + " - meteoblue"
       ),
       el.div(
         { class: "info" },
-        el.a({ href: "/meteoblue-hilfe" }, el.img({ src: "/info.svg" }))
+        el.a(
+          { href: "/meteoblue-hilfe" },
+          el.img({ src: "/info.svg", alt: "" })
+        )
       )
     );
 
@@ -207,7 +211,10 @@ function knmi() {
       (knmi_animation_img = el.img({ id: "animation", alt: "knmi" })),
       el.div(
         { class: "info" },
-        el.a({ href: "/meteoblue-hilfe" }, el.img({ src: "/info.svg" }))
+        el.a(
+          { href: "/meteoblue-hilfe" },
+          el.img({ src: "/info.svg", alt: "" })
+        )
       )
     );
   widgets_div.appendChild(knmi_div);
@@ -303,6 +310,7 @@ function accuweather_link() {
       {
         href: "https://www.accuweather.com/de/" + location_data.accuweather,
         target: "_blank",
+        rel: "noopener",
       },
       "MinuteCast von Accuweather"
     )
@@ -326,6 +334,7 @@ function windy_link() {
           location_data.lon +
           ",7",
         target: "_blank",
+        rel: "noopener",
       },
       "Windy Meteogram (10 Tage)"
     )
@@ -352,14 +361,18 @@ function windy_map(overlay_type) {
       el.a(
         {
           href: "https://community.windy.com/topic/3361/description-of-weather-overlays",
+          target: "_blank",
+          rel: "noopener",
         },
-        el.img({ src: "/info.svg" })
+        el.img({ src: "/info.svg", alt: "" })
       ),
       el.a(
         {
           href: "https://community.windy.com/topic/12/what-source-of-weather-data-windy-use",
+          target: "_blank",
+          rel: "noopener",
         },
-        el.img({ src: "/info.svg" })
+        el.img({ src: "/info.svg", alt: "" })
       )
     )
   );
@@ -380,7 +393,7 @@ function windy_map(overlay_type) {
       windy_map_iframe.style.height = "100%";
     } else {
       crel(windy_map_iframe, {
-        class: "asyncIframe",
+        title: "windy-map",
         frameborder: "0",
         importance: "low",
         loading: "lazy",
@@ -478,8 +491,10 @@ function dwd_trend() {
         el.a(
           {
             href: "https://www.dwd.de/DE/leistungen/trendvorhersage_regional/legende_trend_kurz.png?__blob=normal&v=5",
+            target: "_blank",
+            rel: "noopener",
           },
-          el.img({ src: "/info.svg" })
+          el.img({ src: "/info.svg", alt: "" })
         )
       )
     );
@@ -531,6 +546,7 @@ function meteoblue_simple() {
             location_data.meteoblue_id +
             "?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget",
           target: "_blank",
+          rel: "noopener",
         },
         "meteoblue"
       )
@@ -592,7 +608,10 @@ function windguru() {
       (windguru_loading_div = el.div({ class: "loading" })),
       el.div(
         { class: "info" },
-        el.a({ href: "/windguru-hilfe.png" }, el.img({ src: "/info.svg" }))
+        el.a(
+          { href: "/windguru-hilfe.png" },
+          el.img({ src: "/info.svg", alt: "" })
+        )
       )
     );
   widgets_div.appendChild(windguru_div);
@@ -694,7 +713,7 @@ function sunrise() {
     crel(
       sunrise_div,
       el.div(
-        el.img({ class: "sunrise-icon", src: "/sunrise.svg" }),
+        el.img({ class: "sunrise-icon", src: "/sunrise.svg", alt: "" }),
         el.br(),
         el.p(
           { class: "sunrise-time" },
@@ -715,7 +734,7 @@ function sunrise() {
         )
       ),
       el.div(
-        el.img({ class: "sunrise-icon", src: "/sunset.svg" }),
+        el.img({ class: "sunrise-icon", src: "/sunset.svg", alt: "" }),
         el.br(),
         el.p(
           { class: "sunrise-time" },
