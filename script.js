@@ -74,14 +74,14 @@ async function getAddress() {
         location_data.name = location_data.address.village;
       } else if (location_data.address.municipality) {
         location_data.name = location_data.address.municipality;
+      } else if (location_data.address.state) {
+        location_data.name = location_data.address.state;
       }
 
       if (location_data.address.county) {
         location_data.address.district = location_data.address.county;
-      } else if (location_data.address.city) {
-        location_data.address.district = location_data.address.city;
-      } else if (location_data.address.town) {
-        location_data.address.district = location_data.address.town;
+      } else if (location_data.name != "?") {
+        location_data.address.district = location_data.name;
       }
     });
   }
@@ -116,8 +116,8 @@ fetch_json("locations.json").then((fetch_location_response) => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((location) => {
         location_data = {
-          lat: Math.round(location.coords.latitude * 100) / 100,
-          lon: Math.round(location.coords.longitude * 100) / 100,
+          lat: Number.parseFloat(location.coords.latitude.toPrecision(2)),
+          lon: Number.parseFloat(location.coords.longitude.toPrecision(2)),
         };
         let accuracy = Math.max(
           location.coords.accuracy,
