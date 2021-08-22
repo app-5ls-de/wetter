@@ -257,6 +257,7 @@ a[target="_blank"]::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
 }
 .dwd-warn-info > * {
   display: inline;
