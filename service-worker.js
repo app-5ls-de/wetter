@@ -2,7 +2,7 @@ importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/6.2.4/workbox-sw.js"
 );
 const { registerRoute, setDefaultHandler } = workbox.routing;
-const { StaleWhileRevalidate, CacheFirst } = workbox.strategies;
+const { StaleWhileRevalidate, CacheFirst, NetworkFirst } = workbox.strategies;
 const { ExpirationPlugin } = workbox.expiration;
 const { cacheNames, setCacheNameDetails } = workbox.core;
 
@@ -38,6 +38,24 @@ registerRoute(
     plugins: [
       new ExpirationPlugin({
         maxAgeSeconds: 24 * 60 * 60,
+        matchOptions: { ignoreVary: true },
+      }),
+    ],
+  })
+);
+
+registerRoute(
+  ({ url }) =>
+    [
+      "https://www.meteoblue.com",
+      "https://api.met.no",
+      "https://api.brightsky.dev",
+    ].includes(url.origin),
+  new NetworkFirst({
+    cacheName: cacheNames.expiration,
+    plugins: [
+      new ExpirationPlugin({
+        maxAgeSeconds: 6 * 60 * 60,
         matchOptions: { ignoreVary: true },
       }),
     ],
