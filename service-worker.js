@@ -1,13 +1,16 @@
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/6.2.4/workbox-sw.js"
 );
-const { registerRoute, setDefaultHandler } = workbox.routing;
 const { StaleWhileRevalidate, CacheFirst, NetworkFirst } = workbox.strategies;
-const { ExpirationPlugin } = workbox.expiration;
+const { registerRoute, setDefaultHandler } = workbox.routing;
 const { cacheNames, setCacheNameDetails } = workbox.core;
+const { ExpirationPlugin } = workbox.expiration;
 
-setCacheNameDetails({ suffix: "v3" });
+setCacheNameDetails({ suffix: "v4" });
 cacheNames.expiration = cacheNames.prefix + "-expiration-" + cacheNames.suffix;
+cacheNames.offline = cacheNames.prefix + "-offline-" + cacheNames.suffix;
+cacheNames.network = cacheNames.prefix + "-network-" + cacheNames.suffix;
+cacheNames.stale = cacheNames.prefix + "-stale-" + cacheNames.suffix;
 
 async function cacheKeyWillBeUsed({ request }) {
   const url = new URL(request.url || request);
@@ -15,17 +18,24 @@ async function cacheKeyWillBeUsed({ request }) {
 }
 
 registerRoute(
-  ({ url }) => url.origin == location.origin,
-  new StaleWhileRevalidate({ plugins: [{ cacheKeyWillBeUsed }] })
-);
-
-registerRoute(
   ({ url }) =>
     [
       "https://cdn.jsdelivr.net",
       "https://nominatim.openstreetmap.org",
-    ].includes(url.origin),
-  new CacheFirst()
+    ].includes(url.origin) ||
+    (url.origin == location.origin &&
+      new RegExp("\\.(json|svg|png)$").test(url.pathname)),
+  new CacheFirst({
+    cacheName: cacheNames.offline,
+  })
+);
+
+registerRoute(
+  ({ url }) => url.origin == location.origin,
+  new StaleWhileRevalidate({
+    cacheName: cacheNames.stale,
+    plugins: [{ cacheKeyWillBeUsed }],
+  })
 );
 
 registerRoute(
@@ -44,49 +54,18 @@ registerRoute(
   })
 );
 
-registerRoute(
-  ({ url }) =>
-    [
-      "https://www.meteoblue.com",
-      "https://api.met.no",
-      "https://api.brightsky.dev",
-    ].includes(url.origin),
-  new NetworkFirst({
-    cacheName: cacheNames.expiration,
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 6 * 60 * 60,
-        matchOptions: { ignoreVary: true },
-      }),
-    ],
-  })
-);
-
 setDefaultHandler(
-  new StaleWhileRevalidate({
-    cacheName: cacheNames.expiration,
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 1 * 60 * 60,
-        matchOptions: { ignoreVary: true },
-      }),
-    ],
+  new NetworkFirst({
+    cacheName: cacheNames.network,
   })
 );
 
 self.addEventListener("install", (event) => {
-  const urls = [
-    "/",
-    "/show",
-    "/404.html",
-    "/style.css",
-    "/script.js",
-    "/locations.json",
-    "https://cdn.jsdelivr.net/npm/fuzzysort@1.1.4/fuzzysort.min.js",
-    "https://cdn.jsdelivr.net/npm/crel@4.2.1/crel.min.js",
-  ];
-  const cacheName = cacheNames.runtime;
-  event.waitUntil(caches.open(cacheName).then((cache) => cache.addAll(urls)));
+  event.waitUntil(
+    caches
+      .open(cacheNames.stale)
+      .then((cache) => cache.addAll(["/", "/show", "/404"]))
+  );
 });
 
 self.addEventListener("activate", (event) => {
