@@ -1,7 +1,28 @@
 var main_div = document.getElementById("main");
 var widgets_div = document.getElementById("widgets");
 
-var el = crel.proxy;
+crel = crel.proxy;
+
+crel.attrMap["on"] = (element, value) => {
+  for (const eventName in value) {
+    if (Object.hasOwnProperty.call(value, eventName)) {
+      element.addEventListener(eventName, value[eventName]);
+    }
+  }
+};
+
+crel.attrMap["style"] = (element, value) => {
+  for (const eventName in value) {
+    if (Object.hasOwnProperty.call(value, eventName)) {
+      element.style[styleName] = value[styleName];
+    }
+  }
+};
+
+crel.attrMap["middleware"] = (element, func) => {
+  func(element);
+};
+
 function fetch_json(url, options) {
   return fetch(url, options)
     .then((response) => {
@@ -201,10 +222,10 @@ function meteoblue() {
   }
 
   let meteoblue_img,
-    meteoblue_div = el.div(
+    meteoblue_div = crel.div(
       { id: "meteoblue", class: "section" },
-      (meteoblue_img = el.img({ alt: "meteoblue" })),
-      el.a(
+      (meteoblue_img = crel.img({ alt: "meteoblue" })),
+      crel.a(
         {
           href:
             "https://www.meteoblue.com/de/wetter/woche/" +
@@ -214,11 +235,11 @@ function meteoblue() {
         },
         "Wetter " + closest_data.name + " - meteoblue"
       ),
-      el.div(
+      crel.div(
         { class: "info" },
-        el.a(
+        crel.a(
           { href: "/meteoblue-hilfe" },
-          el.img({ src: "/info.svg", alt: "" })
+          crel.img({ src: "/info.svg", alt: "" })
         )
       )
     );
@@ -242,14 +263,14 @@ function knmi() {
   if (location_data.lon < -39.1 || location_data.lon > 35.3) return;
 
   let knmi_animation_img,
-    knmi_div = el.div(
+    knmi_div = crel.div(
       { id: "knmi", class: "section" },
-      (knmi_animation_img = el.img({ id: "animation", alt: "knmi" })),
-      el.div(
+      (knmi_animation_img = crel.img({ id: "animation", alt: "knmi" })),
+      crel.div(
         { class: "info" },
-        el.a(
+        crel.a(
           { href: "/meteoblue-hilfe" },
-          el.img({ src: "/info.svg", alt: "" })
+          crel.img({ src: "/info.svg", alt: "" })
         )
       )
     );
@@ -340,9 +361,9 @@ function knmi() {
 function accuweather_link() {
   if (!location_data.accuweather) return;
 
-  let accuweather_div = el.div(
+  let accuweather_div = crel.div(
     { id: "accuweather-link", class: "accuweather-link" },
-    el.a(
+    crel.a(
       {
         href: "https://www.accuweather.com/de/" + location_data.accuweather,
         target: "_blank",
@@ -355,9 +376,9 @@ function accuweather_link() {
 }
 
 function windy_link() {
-  let windy_div = el.div(
+  let windy_div = crel.div(
     { id: "windy-link", class: "windy-link" },
-    el.a(
+    crel.a(
       {
         href:
           "https://windy.com/" +
@@ -383,40 +404,44 @@ function windy_map(overlay_type) {
   if (overlay_type && overlay_type != "waves") return;
 
   let windy_map_iframe;
-  if (debug) windy_map_iframe = el.img();
-  else windy_map_iframe = el.iframe();
+  if (debug) windy_map_iframe = crel.img();
+  else windy_map_iframe = crel.iframe();
 
-  let windy_map_div = el.div(
+  let windy_map_div = crel.div(
     {
       id: overlay_type ? "windy-map-" + overlay_type : "windy-map",
       class: "windy-map",
     },
     windy_map_iframe,
-    el.div(
+    crel.div(
       { class: "info" },
-      el.a(
+      crel.a(
         {
           href: "https://community.windy.com/topic/3361/description-of-weather-overlays",
           target: "_blank",
           rel: "noopener",
         },
-        el.img({ src: "/info.svg", alt: "" })
+        crel.img({ src: "/info.svg", alt: "" })
       ),
-      el.a(
+      crel.a(
         {
           href: "https://community.windy.com/topic/12/what-source-of-weather-data-windy-use",
           target: "_blank",
           rel: "noopener",
         },
-        el.img({ src: "/info.svg", alt: "" })
+        crel.img({ src: "/info.svg", alt: "" })
       )
     )
   );
   widgets_div.appendChild(windy_map_div);
 
   return new Promise((resolve, reject) => {
-    windy_map_iframe.addEventListener("load", resolve);
-    windy_map_iframe.addEventListener("error", reject);
+    crel(windy_map_iframe, {
+      on: {
+        load: resolve,
+        error: reject,
+      },
+    });
 
     if (debug) {
       windy_map_iframe.alt = "windy-map";
@@ -425,8 +450,12 @@ function windy_map(overlay_type) {
         windy_map_iframe.src += "-" + overlay_type;
         windy_map_iframe.alt += "-" + overlay_type;
       }
-      windy_map_iframe.style.width = "100%";
-      windy_map_iframe.style.height = "100%";
+      crel(windy_map_iframe, {
+        style: {
+          width: "100%",
+          height: "100%",
+        },
+      });
     } else {
       crel(windy_map_iframe, {
         title: "windy-map",
@@ -464,15 +493,17 @@ function dwd_warn() {
   crel(document.getElementById("dwd-warn"), { class: "section" });
 
   if (!debug) {
-    let dwd_warn_script = el.script({ crossorigin: "anonymous" });
+    let dwd_warn_script = crel.script({ crossorigin: "anonymous" });
     document.body.appendChild(dwd_warn_script);
 
     return new Promise((resolve, reject) => {
-      dwd_warn_script.addEventListener("load", resolve);
-      dwd_warn_script.addEventListener("error", reject);
-
-      dwd_warn_script.src =
-        "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json";
+      crel(dwd_warn_script, {
+        on: {
+          load: resolve,
+          error: reject,
+        },
+        src: "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
+      });
     });
   }
 }
@@ -519,26 +550,30 @@ function dwd_trend() {
   let id = closest.id;
 
   let dwd_trend_img,
-    dwd_trend_div = el.div(
+    dwd_trend_div = crel.div(
       { id: "dwd-trend", class: "section" },
-      (dwd_trend_img = el.img({ alt: "dwd-trend" })),
-      el.div(
+      (dwd_trend_img = crel.img({ alt: "dwd-trend" })),
+      crel.div(
         { class: "info" },
-        el.a(
+        crel.a(
           {
             href: "https://www.dwd.de/DE/leistungen/trendvorhersage_regional/legende_trend_kurz.png?__blob=normal&v=5",
             target: "_blank",
             rel: "noopener",
           },
-          el.img({ src: "/info.svg", alt: "" })
+          crel.img({ src: "/info.svg", alt: "" })
         )
       )
     );
   widgets_div.appendChild(dwd_trend_div);
 
   return new Promise((resolve, reject) => {
-    dwd_trend_img.addEventListener("load", resolve);
-    dwd_trend_img.addEventListener("error", reject);
+    crel(dwd_trend_img, {
+      on: {
+        load: resolve,
+        error: reject,
+      },
+    });
 
     if (debug)
       dwd_trend_img.src = "https://via.placeholder.com/950x680?text=dwd-trend";
@@ -557,9 +592,9 @@ function meteoblue_simple() {
 
   let meteoblue_simple_iframe;
   if (debug) {
-    meteoblue_simple_iframe = el.img();
+    meteoblue_simple_iframe = crel.img();
   } else {
-    meteoblue_simple_iframe = el.iframe({
+    meteoblue_simple_iframe = crel.iframe({
       frameborder: "0",
       scrolling: "NO",
       allowtransparency: "true",
@@ -567,15 +602,19 @@ function meteoblue_simple() {
         "allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox",
     });
   }
-  meteoblue_simple_iframe.alt = "meteoblue-simple";
-  meteoblue_simple_iframe.style.width = "805px";
-  meteoblue_simple_iframe.style.height = "623px";
+  crel(meteoblue_simple_iframe, {
+    alt: "meteoblue-simple",
+    style: {
+      width: "805px",
+      height: "623px",
+    },
+  });
 
-  let meteoblue_simple_div = el.div(
+  let meteoblue_simple_div = crel.div(
     { id: "meteoblue-simple", class: "section" },
     meteoblue_simple_iframe,
-    el.div(
-      el.a(
+    crel.div(
+      crel.a(
         {
           href:
             "https://www.meteoblue.com/de/wetter/woche/" +
@@ -591,13 +630,17 @@ function meteoblue_simple() {
   widgets_div.appendChild(meteoblue_simple_div);
 
   meteoblue_simple_div.parentNode.insertBefore(
-    el.hr({ class: "divider" }),
+    crel.hr({ class: "divider" }),
     meteoblue_simple_div.nextSibling
   );
 
   return new Promise((resolve, reject) => {
-    meteoblue_simple_iframe.addEventListener("load", resolve);
-    meteoblue_simple_iframe.addEventListener("error", reject);
+    crel(meteoblue_simple_iframe, {
+      on: {
+        load: resolve,
+        error: reject,
+      },
+    });
 
     if (debug) {
       meteoblue_simple_iframe.src =
@@ -614,15 +657,19 @@ function meteoblue_simple() {
 function daswetter() {
   if (!location_data.daswetter) return;
   let daswetter_img,
-    daswetter_div = el.div(
+    daswetter_div = crel.div(
       { id: "daswetter", class: "section" },
-      (daswetter_img = el.img({ alt: "daswetter" }))
+      (daswetter_img = crel.img({ alt: "daswetter" }))
     );
   widgets_div.appendChild(daswetter_div);
 
   return new Promise((resolve, reject) => {
-    daswetter_div.addEventListener("load", resolve);
-    daswetter_div.addEventListener("error", reject);
+    crel(daswetter_div, {
+      on: {
+        load: resolve,
+        error: reject,
+      },
+    });
 
     if (debug) {
       daswetter_img.src = "https://via.placeholder.com/776x185?text=daswetter";
@@ -639,14 +686,14 @@ function windguru() {
   if (!(location_data.windguru_uid && location_data.windguru_s)) return;
 
   let windguru_loading_div,
-    windguru_div = el.div(
+    windguru_div = crel.div(
       { id: "windguru", class: "section" },
-      (windguru_loading_div = el.div({ class: "loading" })),
-      el.div(
+      (windguru_loading_div = crel.div({ class: "loading" })),
+      crel.div(
         { class: "info" },
-        el.a(
+        crel.a(
           { href: "/windguru-hilfe.png" },
-          el.img({ src: "/info.svg", alt: "" })
+          crel.img({ src: "/info.svg", alt: "" })
         )
       )
     );
@@ -654,17 +701,22 @@ function windguru() {
 
   return new Promise((resolve, reject) => {
     if (debug) {
-      let windguru_img = el.img({ alt: "windguru" });
-      windguru_img.style.width = "100%";
-      windguru_img.style.height = "512px";
-
-      windguru_img.addEventListener("load", resolve);
-      windguru_img.addEventListener("error", reject);
-      windguru_img.src = "https://via.placeholder.com/800x512?text=windguru";
+      let windguru_img = crel.img({
+        alt: "windguru",
+        style: {
+          width: "100%",
+          height: "512px",
+        },
+        on: {
+          load: resolve,
+          error: reject,
+        },
+        src: "https://via.placeholder.com/800x512?text=windguru",
+      });
 
       windguru_loading_div.appendChild(windguru_img);
     } else {
-      let windguru_reference_script = el.script({
+      let windguru_reference_script = crel.script({
         id: location_data.windguru_uid,
       });
       windguru_loading_div.appendChild(windguru_reference_script);
@@ -681,18 +733,20 @@ function windguru() {
         "vt=fcst_graph",
         "lng=de",
       ];
-      let windguru_script = el.script();
-      windguru_script.addEventListener("load", resolve);
-      windguru_script.addEventListener("error", reject);
-      windguru_script.src =
-        "https://www.windguru.cz/js/widget.php?" + arg.join("&");
+      let windguru_script = crel.script({
+        on: {
+          load: resolve,
+          error: reject,
+        },
+        src: "https://www.windguru.cz/js/widget.php?" + arg.join("&"),
+      });
       document.body.appendChild(windguru_script);
     }
   });
 }
 
 function metno() {
-  let metno_div = el.div({ id: "metno", class: "section" });
+  let metno_div = crel.div({ id: "metno", class: "section" });
   widgets_div.appendChild(metno_div);
 
   return fetch_json(
@@ -706,7 +760,7 @@ function metno() {
 }
 
 function brightsky() {
-  let brightsky_div = el.div({ id: "brightsky", class: "section" });
+  let brightsky_div = crel.div({ id: "brightsky", class: "section" });
   widgets_div.appendChild(brightsky_div);
 
   return fetch_json(
@@ -722,7 +776,7 @@ function brightsky() {
 }
 
 function sunrise() {
-  let sunrise_div = el.div({ id: "sunrise", class: "section" });
+  let sunrise_div = crel.div({ id: "sunrise", class: "section" });
   widgets_div.appendChild(sunrise_div);
 
   let fetch_promise;
@@ -748,17 +802,17 @@ function sunrise() {
   return fetch_promise.then((data) => {
     crel(
       sunrise_div,
-      el.div(
-        el.img({ class: "sunrise-icon", src: "/sunrise.svg", alt: "" }),
-        el.br(),
-        el.p(
+      crel.div(
+        crel.img({ class: "sunrise-icon", src: "/sunrise.svg", alt: "" }),
+        crel.br(),
+        crel.p(
           { class: "sunrise-time" },
           new Date(data.results.sunrise).toLocaleTimeString("de-DE", {
             hour: "2-digit",
             minute: "2-digit",
           }) + " Uhr"
         ),
-        el.p(
+        crel.p(
           { class: "sunrise-secondary" },
           "(" +
             new Date(data.results.civil_twilight_begin).toLocaleTimeString(
@@ -766,20 +820,20 @@ function sunrise() {
               { hour: "2-digit", minute: "2-digit" }
             ) +
             ")",
-          el.span({ class: "tooltip" }, "Dämmerung")
+          crel.span({ class: "tooltip" }, "Dämmerung")
         )
       ),
-      el.div(
-        el.img({ class: "sunrise-icon", src: "/sunset.svg", alt: "" }),
-        el.br(),
-        el.p(
+      crel.div(
+        crel.img({ class: "sunrise-icon", src: "/sunset.svg", alt: "" }),
+        crel.br(),
+        crel.p(
           { class: "sunrise-time" },
           new Date(data.results.sunset).toLocaleTimeString("de-DE", {
             hour: "2-digit",
             minute: "2-digit",
           }) + " Uhr"
         ),
-        el.p(
+        crel.p(
           { class: "sunrise-secondary" },
           "(" +
             new Date(data.results.civil_twilight_end).toLocaleTimeString(
@@ -787,7 +841,7 @@ function sunrise() {
               { hour: "2-digit", minute: "2-digit" }
             ) +
             ")",
-          el.span({ class: "tooltip" }, "Dämmerung")
+          crel.span({ class: "tooltip" }, "Dämmerung")
         )
       )
     );
@@ -886,14 +940,14 @@ function show_warnings(alerts_list, warncellids) {
   alerts.forEach((alert) => {
     let alert_date,
       alert_info_p,
-      alert_div = el.div(
+      alert_div = crel.div(
         { class: "dwd-warn-element dwd-warn-level-" + alert.level },
-        el.h3({ class: "dwd-warn-headline" }, alert.headline),
-        el.br(),
-        el.div(
+        crel.h3({ class: "dwd-warn-headline" }, alert.headline),
+        crel.br(),
+        crel.div(
           { class: "dwd-warn-info" },
-          (alert_date = el.strong()),
-          (alert_info_p = el.p())
+          (alert_date = crel.strong()),
+          (alert_info_p = crel.p())
         )
       );
 
@@ -931,22 +985,22 @@ function show_warnings(alerts_list, warncellids) {
 
     if (alert.description)
       alert_div.appendChild(
-        el.p({ class: "dwd-warn-description" }, alert.description)
+        crel.p({ class: "dwd-warn-description" }, alert.description)
       );
     alert_instruction_id =
       "dwd-warn-instruction-" + Math.floor(Math.random() * 10000);
     if (alert.instruction) {
       alert_div.appendChild(
-        el.div(
+        crel.div(
           { class: "dwd-warn-instruction" },
-          el.input({ type: "checkbox", id: alert_instruction_id }),
-          el.label(
+          crel.input({ type: "checkbox", id: alert_instruction_id }),
+          crel.label(
             { for: alert_instruction_id },
-            el.a({ tabindex: "0" }, "Mögliche Gefahren anzeigen")
+            crel.a({ tabindex: "0" }, "Mögliche Gefahren anzeigen")
           ),
-          el.div(
+          crel.div(
             { class: "dwd-warn-instruction-content" },
-            el.p(alert.instruction)
+            crel.p(alert.instruction)
           )
         )
       );
