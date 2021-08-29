@@ -539,6 +539,7 @@ h1 {
   display: flex;
   font-size: initial;
   cursor: pointer;
+  user-select: none;
 }
 .leaflet-touch .rainviewer-control a,
 .rainviewer-control a {

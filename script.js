@@ -791,11 +791,11 @@ function rainviewer() {
       on: {
         pointerenter: () => {
           map.doubleClickZoom.disable();
-          map.gestureHandling.disable()
+          map.gestureHandling.disable();
         },
-        pointerout: () => {
+        pointerleave: () => {
           map.doubleClickZoom.enable();
-          map.gestureHandling.enable()
+          map.gestureHandling.enable();
         },
       },
     },
