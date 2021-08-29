@@ -69,12 +69,6 @@ function format(number) {
 var location_data, all_location_data;
 
 async function getAddress() {
-  if (debug) {
-    location_data.name = "?";
-    location_data.address = {};
-    return Promise.resolve();
-  }
-
   if (location_data.address) {
     return Promise.resolve();
   } else {
@@ -250,10 +244,7 @@ function meteoblue() {
     meteoblue_img.addEventListener("error", reject);
 
     meteoblue_img.src = closest_data.meteoblue_src;
-    if (debug)
-      meteoblue_img.src =
-        "https://via.placeholder.com/2220x1470?text=meteoblue";
-    else meteoblue_img.setAttribute("crossorigin", "anonymous");
+    meteoblue_img.setAttribute("crossorigin", "anonymous");
   });
 }
 
@@ -277,8 +268,7 @@ function knmi() {
 
   var knmi_baseurl =
     "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/";
-  if (debug) knmi_baseurl = "https://via.placeholder.com/800x653?text=knmi+";
-  else knmi_animation_img.setAttribute("crossorigin", "anonymous");
+  knmi_animation_img.setAttribute("crossorigin", "anonymous");
 
   function hour(date) {
     let hour = date.getUTCHours();
@@ -402,9 +392,7 @@ function windy_map(overlay_type) {
   if (overlay_type == "waves" && !location_data.windy_waves) return;
   if (overlay_type && overlay_type != "waves") return;
 
-  let windy_map_iframe;
-  if (debug) windy_map_iframe = crel.img();
-  else windy_map_iframe = crel.iframe();
+  let windy_map_iframe = crel.iframe();
 
   let windy_map_div = crel.div(
     {
@@ -442,48 +430,33 @@ function windy_map(overlay_type) {
       },
     });
 
-    if (debug) {
-      windy_map_iframe.alt = "windy-map";
-      windy_map_iframe.src = "https://via.placeholder.com/800?text=windy-map";
-      if (overlay_type) {
-        windy_map_iframe.src += "-" + overlay_type;
-        windy_map_iframe.alt += "-" + overlay_type;
-      }
-      crel(windy_map_iframe, {
-        style: {
-          width: "100%",
-          height: "100%",
-        },
-      });
-    } else {
-      crel(windy_map_iframe, {
-        title: "windy-map",
-        frameborder: "0",
-        importance: "low",
-        loading: "lazy",
-      });
+    crel(windy_map_iframe, {
+      title: "windy-map",
+      frameborder: "0",
+      importance: "low",
+      loading: "lazy",
+    });
+    windy_map_iframe.src =
+      "https://embed.windy.com/embed2.html?lat=" +
+      location_data.lat +
+      "&lon=" +
+      location_data.lon +
+      "&zoom=7&level=surface&overlay=rain&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
+      location_data.lat +
+      "&detailLon=" +
+      location_data.lon +
+      "&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
+    if (overlay_type == "waves") {
       windy_map_iframe.src =
         "https://embed.windy.com/embed2.html?lat=" +
         location_data.lat +
         "&lon=" +
         location_data.lon +
-        "&zoom=7&level=surface&overlay=rain&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
+        "&zoom=10&level=surface&overlay=waves&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
         location_data.lat +
         "&detailLon=" +
         location_data.lon +
         "&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
-      if (overlay_type == "waves") {
-        windy_map_iframe.src =
-          "https://embed.windy.com/embed2.html?lat=" +
-          location_data.lat +
-          "&lon=" +
-          location_data.lon +
-          "&zoom=10&level=surface&overlay=waves&menu=&message=true&marker=true&calendar=now&pressure=true&type=map&location=coordinates&detail=&detailLat=" +
-          location_data.lat +
-          "&detailLon=" +
-          location_data.lon +
-          "&metricWind=km%2Fh&metricTemp=%C2%B0C&radarRange=-1";
-      }
     }
   });
 }
@@ -491,20 +464,18 @@ function windy_map(overlay_type) {
 function dwd_warn() {
   crel(document.getElementById("dwd-warn"), { class: "section" });
 
-  if (!debug) {
-    let dwd_warn_script = crel.script({ crossorigin: "anonymous" });
-    document.body.appendChild(dwd_warn_script);
+  let dwd_warn_script = crel.script({ crossorigin: "anonymous" });
+  document.body.appendChild(dwd_warn_script);
 
-    return new Promise((resolve, reject) => {
-      crel(dwd_warn_script, {
-        on: {
-          load: resolve,
-          error: reject,
-        },
-        src: "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
-      });
+  return new Promise((resolve, reject) => {
+    crel(dwd_warn_script, {
+      on: {
+        load: resolve,
+        error: reject,
+      },
+      src: "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
     });
-  }
+  });
 }
 
 function dwd_trend() {
@@ -574,15 +545,11 @@ function dwd_trend() {
       },
     });
 
-    if (debug)
-      dwd_trend_img.src = "https://via.placeholder.com/950x680?text=dwd-trend";
-    else {
-      dwd_trend_img.setAttribute("crossorigin", "anonymous");
-      dwd_trend_img.src =
-        "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
-        id +
-        ".png";
-    }
+    dwd_trend_img.setAttribute("crossorigin", "anonymous");
+    dwd_trend_img.src =
+      "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
+      id +
+      ".png";
   });
 }
 
@@ -590,17 +557,15 @@ function meteoblue_simple() {
   if (!(location_data.meteoblue_simple && location_data.meteoblue_id)) return;
 
   let meteoblue_simple_iframe;
-  if (debug) {
-    meteoblue_simple_iframe = crel.img();
-  } else {
-    meteoblue_simple_iframe = crel.iframe({
-      frameborder: "0",
-      scrolling: "NO",
-      allowtransparency: "true",
-      sandbox:
-        "allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox",
-    });
-  }
+
+  meteoblue_simple_iframe = crel.iframe({
+    frameborder: "0",
+    scrolling: "NO",
+    allowtransparency: "true",
+    sandbox:
+      "allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox",
+  });
+
   crel(meteoblue_simple_iframe, {
     alt: "meteoblue-simple",
     style: {
@@ -641,15 +606,10 @@ function meteoblue_simple() {
       },
     });
 
-    if (debug) {
-      meteoblue_simple_iframe.src =
-        "https://via.placeholder.com/805x623?text=meteoblue-simple";
-    } else {
-      meteoblue_simple_iframe.src =
-        "https://www.meteoblue.com/de/wetter/widget/three/" +
-        location_data.meteoblue_id +
-        "?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=bright";
-    }
+    meteoblue_simple_iframe.src =
+      "https://www.meteoblue.com/de/wetter/widget/three/" +
+      location_data.meteoblue_id +
+      "?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=bright";
   });
 }
 
@@ -670,14 +630,10 @@ function daswetter() {
       },
     });
 
-    if (debug) {
-      daswetter_img.src = "https://via.placeholder.com/776x185?text=daswetter";
-    } else {
-      daswetter_img.src =
-        "https://www.daswetter.com/wimages/foto" +
-        location_data.daswetter +
-        ".png";
-    }
+    daswetter_img.src =
+      "https://www.daswetter.com/wimages/foto" +
+      location_data.daswetter +
+      ".png";
   });
 }
 
@@ -699,48 +655,31 @@ function windguru() {
   widgets_div.appendChild(windguru_div);
 
   return new Promise((resolve, reject) => {
-    if (debug) {
-      let windguru_img = crel.img({
-        alt: "windguru",
-        style: {
-          width: "100%",
-          height: "512px",
-        },
-        on: {
-          load: resolve,
-          error: reject,
-        },
-        src: "https://via.placeholder.com/800x512?text=windguru",
-      });
+    let windguru_reference_script = crel.script({
+      id: location_data.windguru_uid,
+    });
+    windguru_loading_div.appendChild(windguru_reference_script);
 
-      windguru_loading_div.appendChild(windguru_img);
-    } else {
-      let windguru_reference_script = crel.script({
-        id: location_data.windguru_uid,
-      });
-      windguru_loading_div.appendChild(windguru_reference_script);
-
-      let arg = [
-        "s=" + location_data.windguru_s,
-        "m=3",
-        "uid=" + location_data.windguru_uid,
-        "wj=knots",
-        "tj=c",
-        "odh=0",
-        "doh=24",
-        "fhours=240",
-        "vt=fcst_graph",
-        "lng=de",
-      ];
-      let windguru_script = crel.script({
-        on: {
-          load: resolve,
-          error: reject,
-        },
-        src: "https://www.windguru.cz/js/widget.php?" + arg.join("&"),
-      });
-      document.body.appendChild(windguru_script);
-    }
+    let arg = [
+      "s=" + location_data.windguru_s,
+      "m=3",
+      "uid=" + location_data.windguru_uid,
+      "wj=knots",
+      "tj=c",
+      "odh=0",
+      "doh=24",
+      "fhours=240",
+      "vt=fcst_graph",
+      "lng=de",
+    ];
+    let windguru_script = crel.script({
+      on: {
+        load: resolve,
+        error: reject,
+      },
+      src: "https://www.windguru.cz/js/widget.php?" + arg.join("&"),
+    });
+    document.body.appendChild(windguru_script);
   });
 }
 
@@ -778,27 +717,13 @@ function sunrise() {
   let sunrise_div = crel.div({ id: "sunrise", class: "section" });
   widgets_div.appendChild(sunrise_div);
 
-  let fetch_promise;
-  if (debug) {
-    fetch_promise = Promise.resolve({
-      results: {
-        sunrise: "1970-01-01T05:00:00+00:00",
-        sunset: "1970-01-01T19:00:00+00:00",
-        civil_twilight_begin: "1970-01-01T04:00:00+00:00",
-        civil_twilight_end: "1970-01-01T20:00:00+00:00",
-      },
-    });
-  } else {
-    fetch_promise = fetch_json(
-      "https://api.sunrise-sunset.org/json?lat=" +
-        location_data.lat +
-        "&lng=" +
-        location_data.lon +
-        "&formatted=0"
-    );
-  }
-
-  return fetch_promise.then((data) => {
+  return fetch_json(
+    "https://api.sunrise-sunset.org/json?lat=" +
+      location_data.lat +
+      "&lng=" +
+      location_data.lon +
+      "&formatted=0"
+  ).then((data) => {
     crel(
       sunrise_div,
       crel.div(
