@@ -534,6 +534,10 @@ h1 {
   color: orange;
 }
 
+.leaflet-gesture-handling-touch-warning:after,
+.leaflet-gesture-handling-scroll-warning:after {
+  text-align: center;
+}
 .leaflet-touch .rainviewer-control,
 .rainviewer-control {
   display: flex;
