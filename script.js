@@ -194,9 +194,10 @@ async function display_widgets() {
 
   await Promise.allSettled([meteoblue(), dwd_warn()]);
   await Promise.allSettled([dwd_trend(), accuweather_link(), sunrise()]);
-  await Promise.allSettled([knmi()]);
 
   rainviewer();
+  knmi();
+
   windy_map("waves");
 }
 
