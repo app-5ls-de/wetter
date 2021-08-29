@@ -517,6 +517,72 @@ h1 {
   margin-left: -150%;
 }
 
+#rainviewer-map {
+  width: 100%;
+  height: 50vh;
+}
+
+.leaflet-left.leaflet-bottom {
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+.rainviewer-timestamp {
+  text-align: center;
+}
+
+.rainviewer-timestamp.future {
+  color: orange;
+}
+
+.leaflet-touch .rainviewer-control,
+.rainviewer-control {
+  display: flex;
+  font-size: initial;
+  cursor: pointer;
+}
+.leaflet-touch .rainviewer-control a,
+.rainviewer-control a {
+  min-width: 30px;
+  width: auto;
+  display: flex;
+}
+.rainviewer-control img {
+  height: 22px;
+  margin: auto;
+}
+.rainviewer-control a:first-child {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.rainviewer-control a:last-child {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom: none;
+}
+.leaflet-touch .rainviewer-control a:first-child {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.leaflet-touch .rainviewer-control a:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.rainviewer-control.running .play-icon,
+.pause-icon {
+  display: none;
+}
+
+.rainviewer-control.running .pause-icon {
+  display: initial;
+}
+
+.rainviewer-dot {
+  opacity: 0.6;
+  color: black;
+}
+
 @media (max-width: 1120px) {
   h1 {
     font-size: 1em;

@@ -202,9 +202,8 @@ async function display_widgets() {
   await Promise.allSettled([dwd_trend(), accuweather_link(), sunrise()]);
   await Promise.allSettled([knmi()]);
 
+  rainviewer();
   windy_map("waves");
-  windy_map();
-  windy_link();
 }
 
 function meteoblue() {
@@ -846,6 +845,222 @@ function sunrise() {
       )
     );
   });
+}
+
+function rainviewer() {
+  let rainviewer_map_div,
+    rainviewer_info_div,
+    rainviewer_timestamp_div,
+    rainviewer_div = crel.div(
+      { id: "rainviewer", class: "section" },
+      (rainviewer_map_div = crel.div({
+        id: "rainviewer-map",
+        style: { width: "100%", height: "50vh" },
+      }))
+    );
+  widgets_div.appendChild(rainviewer_div);
+
+  rainviewer_info_div = crel.div(
+    {
+      class: "leaflet-bar rainviewer-control",
+      on: {
+        mouseover: () => {
+          map.doubleClickZoom.disable();
+        },
+        mouseout: () => {
+          map.doubleClickZoom.enable();
+        },
+      },
+    },
+    crel.a(
+      {
+        on: {
+          click: () => {
+            stop();
+            showFrame(animationPosition - 1);
+            return;
+          },
+        },
+      },
+      crel.img({ src: "/previous.svg" })
+    ),
+    crel.a(
+      {
+        on: {
+          click: (e) => {
+            e.preventDefault();
+            playStop();
+            return;
+          },
+        },
+      },
+      crel.img({ class: "play-icon", src: "/play.svg" }),
+      crel.img({ class: "pause-icon", src: "/pause.svg" }),
+      (rainviewer_timestamp_div = crel.div({ class: "rainviewer-timestamp" }))
+    ),
+    crel.a(
+      {
+        on: {
+          click: () => {
+            stop();
+            showFrame(animationPosition + 1);
+            return;
+          },
+        },
+      },
+      crel.img({ src: "/next.svg" })
+    )
+  );
+
+  var map = L.map(rainviewer_map_div, {
+    zoomSnap: 1,
+    maxZoom: 12,
+    gestureHandling: true,
+    gestureHandlingOptions: {
+      text: {
+        touch: "Verschieben der Karte mit zwei Fingern",
+        scroll: "Verwende Strg+Scrollen zum zoomen der Karte",
+        scrollMac: "Verwende \u2318+Scrollen zum zoomen der Karte",
+      },
+    },
+  }).setView([location_data.lat, location_data.lon], 9);
+
+  L.marker([location_data.lat, location_data.lon], {
+    icon: L.divIcon({
+      html: "&#9679;" /* "&#8226;" */ /* "&#11044;" */,
+      className: "rainviewer-dot",
+    }),
+  }).addTo(map);
+
+  //"https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
+  L.tileLayer(
+    "https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png",
+    {
+      attribution:
+        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
+      subdomains: "abcd",
+      maxZoom: 19,
+    }
+  ).addTo(map);
+
+  var rainviewer_control = L.control({ position: "bottomleft" });
+
+  rainviewer_control.onAdd = () => {
+    return rainviewer_info_div;
+  };
+
+  rainviewer_control.addTo(map);
+
+  var apiData = {};
+  var mapFrames = [];
+  var lastPastFramePosition = -1;
+  var radarLayers = [];
+
+  var animationPosition = 0;
+  var animationTimer = false;
+
+  fetch_json("https://api.rainviewer.com/public/weather-maps.json").then(
+    (data) => {
+      apiData = data;
+      if (!apiData) {
+        return;
+      }
+      if (apiData.radar && apiData.radar.past) {
+        mapFrames = apiData.radar.past;
+        if (apiData.radar.nowcast) {
+          mapFrames = mapFrames.concat(apiData.radar.nowcast);
+        }
+
+        // show the last "past" frame
+        lastPastFramePosition = apiData.radar.past.length - 1;
+        showFrame(lastPastFramePosition);
+      }
+    }
+  );
+
+  function addLayer(frame) {
+    if (!radarLayers[frame.path]) {
+      radarLayers[frame.path] = new L.TileLayer(
+        apiData.host + frame.path + "/256/{z}/{x}/{y}/8/1_1.png",
+        {
+          tileSize: 256,
+          opacity: 0.001,
+          zIndex: frame.time,
+        }
+      );
+    }
+    if (!map.hasLayer(radarLayers[frame.path])) {
+      map.addLayer(radarLayers[frame.path]);
+    }
+  }
+
+  function changeRadarPosition(position, preloadOnly) {
+    while (position >= mapFrames.length) {
+      position -= mapFrames.length;
+    }
+    while (position < 0) {
+      position += mapFrames.length;
+    }
+
+    var currentFrame = mapFrames[animationPosition];
+    var nextFrame = mapFrames[position];
+
+    addLayer(nextFrame);
+
+    if (preloadOnly) {
+      return;
+    }
+
+    animationPosition = position;
+
+    if (radarLayers[currentFrame.path]) {
+      radarLayers[currentFrame.path].setOpacity(0);
+    }
+    radarLayers[nextFrame.path].setOpacity(100);
+
+    if (nextFrame.time > Date.now() / 1000) {
+      rainviewer_timestamp_div.classList.add("future");
+    } else {
+      rainviewer_timestamp_div.classList.remove("future");
+    }
+
+    rainviewer_timestamp_div.innerText =
+      new Date(nextFrame.time * 1000).toLocaleTimeString("de-DE", {
+        hour: "2-digit",
+        minute: "2-digit",
+      }) + " Uhr";
+  }
+
+  function showFrame(nextPosition) {
+    var preloadingDirection = nextPosition - animationPosition > 0 ? 1 : -1;
+
+    changeRadarPosition(nextPosition);
+
+    // preload next next frame
+    changeRadarPosition(nextPosition + preloadingDirection, true);
+  }
+
+  function stop() {
+    if (animationTimer) {
+      clearTimeout(animationTimer);
+      animationTimer = false;
+      rainviewer_info_div.classList.remove("running");
+      return true;
+    }
+    return false;
+  }
+
+  function play() {
+    showFrame(animationPosition + 1);
+    animationTimer = setTimeout(play, 500);
+    rainviewer_info_div.classList.add("running");
+  }
+
+  function playStop() {
+    if (!stop()) {
+      play();
+    }
+  }
 }
 
 warnWetter = {};

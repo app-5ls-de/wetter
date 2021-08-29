@@ -1,7 +1,8 @@
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/6.2.4/workbox-sw.js"
 );
-const { StaleWhileRevalidate, CacheFirst, NetworkFirst } = workbox.strategies;
+const { StaleWhileRevalidate, CacheFirst, NetworkFirst, NetworkOnly } =
+  workbox.strategies;
 const { registerRoute, setDefaultHandler } = workbox.routing;
 const { cacheNames, setCacheNameDetails } = workbox.core;
 const { ExpirationPlugin } = workbox.expiration;
@@ -52,6 +53,13 @@ registerRoute(
       }),
     ],
   })
+);
+
+registerRoute(
+  ({ url }) =>
+    url.origin.endsWith("cartocdn.com") ||
+    url.origin.endsWith("rainviewer.com"),
+  new NetworkOnly()
 );
 
 setDefaultHandler(
