@@ -789,11 +789,13 @@ function rainviewer() {
     {
       class: "leaflet-bar rainviewer-control",
       on: {
-        mouseover: () => {
+        pointerenter: () => {
           map.doubleClickZoom.disable();
+          map.gestureHandling.disable()
         },
-        mouseout: () => {
+        pointerout: () => {
           map.doubleClickZoom.enable();
+          map.gestureHandling.enable()
         },
       },
     },
