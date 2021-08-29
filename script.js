@@ -409,7 +409,7 @@ function windy_map(overlay_type) {
   let windy_map_div = crel.div(
     {
       id: overlay_type ? "windy-map-" + overlay_type : "windy-map",
-      class: "windy-map",
+      class: "windy-map section",
     },
     windy_map_iframe,
     crel.div(

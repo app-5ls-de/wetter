@@ -15,7 +15,6 @@ body {
 .main {
   min-height: 100vh;
   margin: 0 auto;
-  width: fit-content;
   padding: 1rem;
 }
 
@@ -399,7 +398,7 @@ h1 {
 
 .section {
   margin: auto;
-  width: fit-content;
+  width: auto;
   margin-top: 1rem;
 }
 
