@@ -12,8 +12,8 @@ crel.attrMap["on"] = (element, value) => {
 };
 
 crel.attrMap["style"] = (element, value) => {
-  for (const eventName in value) {
-    if (Object.hasOwnProperty.call(value, eventName)) {
+  for (const styleName in value) {
+    if (Object.hasOwnProperty.call(value, styleName)) {
       element.style[styleName] = value[styleName];
     }
   }
