@@ -880,7 +880,7 @@ function rainviewer() {
 
   var apiData = {};
   var mapFrames = [];
-  var lastPastFramePosition = -1;
+  var lastPastFramePosition = 0;
   var radarLayers = [];
 
   var animationPosition = 0;
@@ -893,16 +893,25 @@ function rainviewer() {
         return;
       }
       if (apiData.radar && apiData.radar.past) {
-        let hour_ago_seconds = Date.now() / 1000 - 3600;
+        let one_hour_ago = Date.now() / 1000 - 3600;
         mapFrames = apiData.radar.past.filter(
-          (element) => element.time > hour_ago_seconds
+          (element) => element.time > one_hour_ago
         );
         if (apiData.radar.nowcast) {
           mapFrames = mapFrames.concat(apiData.radar.nowcast);
         }
 
+        lastPastFramePosition = mapFrames.length;
+
         // show the last "past" frame
-        lastPastFramePosition = apiData.radar.past.length - 1;
+        let now = Date.now() / 1000;
+        for (let i = mapFrames.length - 1; i >= 0; i--) {
+          if (mapFrames[i].time < now) {
+            lastPastFramePosition = i;
+            break;
+          }
+        }
+
         showFrame(lastPastFramePosition);
       }
     }
