@@ -893,7 +893,10 @@ function rainviewer() {
         return;
       }
       if (apiData.radar && apiData.radar.past) {
-        mapFrames = apiData.radar.past;
+        let hour_ago_seconds = Date.now() / 1000 - 3600;
+        mapFrames = apiData.radar.past.filter(
+          (element) => element.time > hour_ago_seconds
+        );
         if (apiData.radar.nowcast) {
           mapFrames = mapFrames.concat(apiData.radar.nowcast);
         }
