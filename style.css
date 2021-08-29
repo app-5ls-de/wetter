@@ -538,6 +538,11 @@ h1 {
 .leaflet-gesture-handling-scroll-warning:after {
   text-align: center;
 }
+.no-gesture-handling.leaflet-gesture-handling-touch-warning:after,
+.no-gesture-handling.leaflet-gesture-handling-scroll-warning:after {
+  display: none;
+}
+
 .leaflet-touch .rainviewer-control,
 .rainviewer-control {
   display: flex;
