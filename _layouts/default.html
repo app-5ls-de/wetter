@@ -97,12 +97,10 @@
       <a class="normal" href="/datenschutz">Datenschutz</a>
     </div>
 
-    {%- if jekyll.environment == "production" -%}
     <script>
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("/service-worker.js");
       }
     </script>
-    {%- endif -%}
   </body>
 </html>
