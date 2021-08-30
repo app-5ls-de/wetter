@@ -773,6 +773,7 @@ function sunrise() {
   });
 }
 
+var rainviewer_doubleClick_timer;
 function rainviewer() {
   let rainviewer_map_div,
     rainviewer_info_div,
@@ -793,9 +794,13 @@ function rainviewer() {
         pointerenter: () => {
           map.doubleClickZoom.disable();
           rainviewer_map_div.classList.add("no-gesture-handling");
+
+          clearTimeout(rainviewer_doubleClick_timer);
+          rainviewer_doubleClick_timer = setTimeout(() => {
+            map.doubleClickZoom.enable();
+          }, 500);
         },
         pointerleave: () => {
-          map.doubleClickZoom.enable();
           rainviewer_map_div.classList.remove("no-gesture-handling");
         },
       },
