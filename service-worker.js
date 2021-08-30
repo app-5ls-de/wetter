@@ -7,7 +7,7 @@ const { registerRoute, setDefaultHandler } = workbox.routing;
 const { cacheNames, setCacheNameDetails } = workbox.core;
 const { ExpirationPlugin } = workbox.expiration;
 
-setCacheNameDetails({ suffix: "v4" });
+setCacheNameDetails({ suffix: "v5" });
 cacheNames.expiration = cacheNames.prefix + "-expiration-" + cacheNames.suffix;
 cacheNames.offline = cacheNames.prefix + "-offline-" + cacheNames.suffix;
 cacheNames.network = cacheNames.prefix + "-network-" + cacheNames.suffix;

@@ -4,6 +4,7 @@ exclude:
     - README.md
     - locations.py
     - scripts/
+    - style.css
 
 collections:
     locations:
