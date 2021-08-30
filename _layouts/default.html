@@ -59,7 +59,15 @@
       href="https://cdn.jsdelivr.net/npm/leaflet-gesture-handling@1.2.1/dist/leaflet-gesture-handling.min.css"
       type="text/css"
     />
+
+    {% if jekyll.environment == "production" %}
     <link rel="stylesheet" href="/tailwind.css" />
+    {% else %}
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    {% endif %}
   </head>
 
   {% if page.url == "/" %}
