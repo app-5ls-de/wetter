@@ -524,7 +524,7 @@ function dwd_trend() {
   let dwd_trend_img,
     dwd_trend_div = crel.div(
       { id: "dwd-trend" },
-      (dwd_trend_img = crel.img({ alt: "dwd-trend", class: "-ml-7" })),
+      (dwd_trend_img = crel.img({ alt: "dwd-trend" })),
       crel.div(
         { class: "info" },
         crel.a(
@@ -730,9 +730,9 @@ function sunrise() {
 
   function generate_sunrise_half(first, second, svg_path) {
     return crel.div(
-      { class: "mx-8 p-4 whitespace-nowrap" },
+      { class: "xs:mx-8 p-4 whitespace-nowrap" },
       crel.img({
-        class: "w-16 text-gray-500 block mx-auto",
+        class: "!w-16 text-gray-500 block mx-auto",
         src: svg_path,
         alt: "",
       }),
@@ -757,13 +757,14 @@ function sunrise() {
     );
   }
 
-  return fetch_json(
-    "https://api.sunrise-sunset.org/json?lat=" +
-      location_data.lat +
-      "&lng=" +
-      location_data.lon +
-      "&formatted=0"
-  ).then((data) => {
+  return Promise.resolve({
+    results: {
+      sunrise: "1970-01-01T05:00:00+00:00",
+      sunset: "1970-01-01T19:00:00+00:00",
+      civil_twilight_begin: "1970-01-01T04:00:00+00:00",
+      civil_twilight_end: "1970-01-01T20:00:00+00:00",
+    },
+  }).then((data) => {
     crel(
       sunrise_div,
       generate_sunrise_half(
@@ -1110,14 +1111,14 @@ function show_warnings(alerts_list, warncellids) {
       alert_div = crel.div(
         {
           class:
-            "m-12 p-2 border-4 border-gray-400 border-solid dwd-warn-level-" +
+            "lg:m-12 p-2 border-4 border-gray-400 border-solid dwd-warn-level-" +
             alert.level,
         },
         crel.h3(alert.headline),
         crel.br(),
         crel.div(
           { class: "flex flex-wrap justify-between items-center" },
-          (alert_date = crel.strong({ class: "inline" })),
+          (alert_date = crel.strong({ class: "inline mr-2" })),
           (alert_info_p = crel.p({ class: "inline text-gray-500" }))
         )
       );
@@ -1208,10 +1209,24 @@ function save_location() {
         JSON.stringify(element, Object.keys(element).sort())
     );
 
-    lastvisited.unshift(to_add);
+    lastvisited.forEach((element) => {
+      if (
+        to_add &&
+        element.name == to_add.name &&
+        to_add.lat &&
+        to_add.lon &&
+        element.location
+      ) {
+        to_add = null;
+      }
+    });
 
-    lastvisited = lastvisited.slice(0, 5);
-    localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
+    if (to_add) {
+      lastvisited.unshift(to_add);
+
+      lastvisited = lastvisited.slice(0, 5);
+      localStorage.setItem("lastvisited", JSON.stringify(lastvisited));
+    }
   }
 }
 

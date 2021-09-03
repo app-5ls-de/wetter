@@ -70,7 +70,13 @@
   }
 
   h1 {
-    @apply text-4xl;
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+  h3 {
+    @apply text-lg;
   }
 }
 
@@ -182,7 +188,6 @@
 
 #widgets img {
   @apply max-h-screen w-full;
-  max-width: min(950px, 100%);
 }
 
 #widgets > div {
@@ -191,10 +196,6 @@
 
 #widgets a {
   @apply after:hidden;
-}
-
-#main {
-  max-width: min(950px, 100vw);
 }
 
 .dwd-warn-level-1 {
@@ -216,6 +217,15 @@
 .dwd-warn-level-50 {
   /* heat */
   border-color: #cc99ff;
+}
+
+#dwd-trend > img {
+  @apply ml-0;
+}
+@media screen(2xs) {
+  #dwd-trend > img {
+    margin-left: -25px;
+  }
 }
 
 .leaflet-left.leaflet-bottom {

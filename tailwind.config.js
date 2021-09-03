@@ -1,4 +1,5 @@
 const plugin = require("tailwindcss/plugin");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   purge: {
@@ -20,11 +21,18 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    screens: {
+      "2xs": "375px",
+      xs: "475px",
+      ...defaultTheme.screens,
+      "3xl": "1600px",
+    },
     extend: {},
   },
   variants: {
-    position: ["before"],
-    display: ["before", "after"],
+    position: ["responsive", "before"],
+    display: ["responsive", "before", "after"],
+    width: ["responsive", "important"],
     extend: {},
   },
   plugins: [
@@ -37,6 +45,14 @@ module.exports = {
       addVariant("after", ({ modifySelectors, separator }) => {
         modifySelectors(({ className }) => {
           return `.${e(`after${separator}${className}`)}::after`;
+        });
+      });
+      addVariant("important", ({ container }) => {
+        container.walkRules((rule) => {
+          rule.selector = `.\\!${rule.selector.slice(1)}`;
+          rule.walkDecls((decl) => {
+            decl.important = true;
+          });
         });
       });
     }),
