@@ -3,9 +3,42 @@ layout: default
 title: Wetter
 ---
 
-<div class="search">
-  <input id="search" type="text" placeholder="loading..." />
-  <button id="search-button"><img src="search.svg" alt="" /></button>
+<div
+  class="
+    mx-10-screen
+    inline
+    border-2 border-solid border-gray-500
+    rounded-full
+    text-gray-500
+    px-4
+    py-5
+    relative
+    text-center
+    whitespace-nowrap
+  "
+>
+  <input
+    class="focus:outline-none bg-transparent w-52 text-2xl mx-8"
+    id="search"
+    type="text"
+    placeholder="loading..."
+  />
+  <button
+    class="
+      border-none
+      absolute
+      top-2/4
+      m-0
+      p-0
+      -mt-3
+      -ml-4
+      cursor-pointer
+      bg-transparent
+    "
+    id="search-button"
+  >
+    <img class="h-6" src="search.svg" alt="" />
+  </button>
 </div>
 <div class="liste" id="search-liste"></div>
 

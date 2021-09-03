@@ -1,19 +1,20 @@
 exclude:
-    - CNAME
-    - LICENSE
-    - README.md
-    - locations.py
-    - scripts/
+  - CNAME
+  - LICENSE
+  - README.md
+  - locations.py
+  - scripts/
+  - style.css
 
 collections:
-    locations:
-        output: true
-        permalink: /:name/
+  locations:
+    output: true
+    permalink: /:name/
 
 defaults:
-    - scope:
-          path: ""
-          type: "locations"
-      values:
-          layout: "location"
-          country: de
+  - scope:
+      path: ""
+      type: "locations"
+    values:
+      layout: "location"
+      country: de
