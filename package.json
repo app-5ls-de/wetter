@@ -8,6 +8,6 @@
   },
   "scripts": {
     "build": "NODE_ENV=production npx tailwindcss -i ./style.css | npx strip-css-comments --no-preserve | npx prettier --stdin-filepath foo.css | grep '\\S' > ./tailwind.css",
-    "lint": "prettier --write *.js *.css *.html *.json *.yml _layouts/*.html"
+    "lint": "npx prettier --write *.js *.css *.html *.json *.yml _layouts/*.html"
   }
 }
