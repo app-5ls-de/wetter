@@ -5,10 +5,8 @@ const { StaleWhileRevalidate, CacheFirst, NetworkFirst, NetworkOnly } =
   workbox.strategies;
 const { registerRoute, setDefaultHandler } = workbox.routing;
 const { cacheNames, setCacheNameDetails } = workbox.core;
-const { ExpirationPlugin } = workbox.expiration;
 
-setCacheNameDetails({ suffix: "v5" });
-cacheNames.expiration = cacheNames.prefix + "-expiration-" + cacheNames.suffix;
+setCacheNameDetails({ suffix: "v6" });
 cacheNames.offline = cacheNames.prefix + "-offline-" + cacheNames.suffix;
 cacheNames.network = cacheNames.prefix + "-network-" + cacheNames.suffix;
 cacheNames.stale = cacheNames.prefix + "-stale-" + cacheNames.suffix;
@@ -44,14 +42,8 @@ registerRoute(
     ["https://cdn.knmi.nl", "https://api.sunrise-sunset.org"].includes(
       url.origin
     ) || url.href.startsWith("https://www.dwd.de/DWD/wetter"),
-  new CacheFirst({
-    cacheName: cacheNames.expiration,
-    plugins: [
-      new ExpirationPlugin({
-        maxAgeSeconds: 24 * 60 * 60,
-        matchOptions: { ignoreVary: true },
-      }),
-    ],
+  new StaleWhileRevalidate({
+    cacheName: cacheNames.stale,
   })
 );
 
