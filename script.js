@@ -757,14 +757,13 @@ function sunrise() {
     );
   }
 
-  return Promise.resolve({
-    results: {
-      sunrise: "1970-01-01T05:00:00+00:00",
-      sunset: "1970-01-01T19:00:00+00:00",
-      civil_twilight_begin: "1970-01-01T04:00:00+00:00",
-      civil_twilight_end: "1970-01-01T20:00:00+00:00",
-    },
-  }).then((data) => {
+  return fetch_json(
+    "https://api.sunrise-sunset.org/json?lat=" +
+      location_data.lat +
+      "&lng=" +
+      location_data.lon +
+      "&formatted=0"
+  ).then((data) => {
     crel(
       sunrise_div,
       generate_sunrise_half(
