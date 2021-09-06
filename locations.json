@@ -256,6 +256,13 @@
     "name": "Michalovce (Großmichel)"
   },
   {
+    "lat": 47.08,
+    "lon": 10.67,
+    "meteoblue_id": "prutz_%c3%96sterreich_2768291",
+    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Prutz&iso2=at&lat=47.0833&lon=10.6667&asl=865&tz=Europe%2FVienna&lang=de&sig=b0068c248af051f4ed8712d200d155ee",
+    "name": "Prutz"
+  },
+  {
     "lat": 50.77,
     "lon": 6.1,
     "name": "Aachen"
