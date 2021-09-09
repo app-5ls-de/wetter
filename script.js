@@ -1,28 +1,6 @@
 var main_div = document.getElementById("main");
 var widgets_div = document.getElementById("widgets");
 
-crel = crel.proxy;
-
-crel.attrMap["on"] = (element, value) => {
-  for (const eventName in value) {
-    if (Object.hasOwnProperty.call(value, eventName)) {
-      element.addEventListener(eventName, value[eventName]);
-    }
-  }
-};
-
-crel.attrMap["style"] = (element, value) => {
-  for (const styleName in value) {
-    if (Object.hasOwnProperty.call(value, styleName)) {
-      element.style[styleName] = value[styleName];
-    }
-  }
-};
-
-crel.attrMap["middleware"] = (element, func) => {
-  func(element);
-};
-
 function fetch_json(url, options) {
   return fetch(url, options)
     .then((response) => {
