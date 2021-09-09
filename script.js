@@ -67,6 +67,8 @@ async function getAddress() {
         location_data.name = location_data.address.village;
       } else if (location_data.address.municipality) {
         location_data.name = location_data.address.municipality;
+      } else if (location_data.address.county) {
+        location_data.name = location_data.address.county;
       } else if (location_data.address.state) {
         location_data.name = location_data.address.state;
       }
