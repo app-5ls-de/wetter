@@ -77,6 +77,14 @@ title: Wetter
         search_liste_div.appendChild(document.createTextNode("*"));
       search_liste_div.appendChild(document.createElement("br"));
     });
+
+    if (!results || results.length == 0) {
+      let location_a = document.createElement("a");
+      location_a.innerHTML = "-> erweiterte Suche";
+      location_a.href = "javascript:void(0)";
+      location_a.addEventListener("click", search);
+      search_liste_div.appendChild(location_a);
+    }
   }
 
   function search() {
@@ -113,6 +121,12 @@ title: Wetter
           search_liste_div.appendChild(location_a);
           search_liste_div.appendChild(document.createElement("br"));
         });
+
+        if (!data || data.length == 0) {
+          let location_p = document.createElement("a");
+          location_p.innerHTML = "kein Ergebnis";
+          search_liste_div.appendChild(location_a);
+        }
       });
   }
 
