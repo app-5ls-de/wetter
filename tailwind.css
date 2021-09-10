@@ -648,6 +648,9 @@ h3 {
 .whitespace-nowrap {
   white-space: nowrap;
 }
+.rounded {
+  border-radius: 0.25rem;
+}
 .rounded-full {
   border-radius: 9999px;
 }
@@ -681,7 +684,15 @@ h3 {
 .bg-transparent {
   background-color: transparent;
 }
+.bg-gray-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+}
 .bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
+}
+.hover\:bg-gray-300:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(209, 213, 219, var(--tw-bg-opacity));
 }
@@ -745,6 +756,9 @@ h3 {
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
+}
+.font-bold {
+  font-weight: 700;
 }
 .text-gray-500 {
   --tw-text-opacity: 1;

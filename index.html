@@ -90,11 +90,18 @@ title: Wetter
     });
 
     if (!results || results.length == 0) {
-      let location_a = document.createElement("a");
-      location_a.innerHTML = "-> erweiterte Suche";
-      location_a.href = "javascript:void(0)";
-      location_a.addEventListener("click", search);
-      search_liste_div.appendChild(location_a);
+      let location_button = document.createElement("button");
+      location_button.classList.add(
+        "font-bold",
+        "py-2",
+        "px-4",
+        "rounded",
+        "bg-gray-200",
+        "hover:bg-gray-300"
+      );
+      location_button.innerHTML = "erweiterte Suche";
+      location_button.addEventListener("click", search);
+      search_liste_div.appendChild(location_button);
     }
   }
 
@@ -125,6 +132,7 @@ title: Wetter
     if (!data || data.length == 0) {
       let location_p = document.createElement("p");
       location_p.innerHTML = "kein Ergebnis";
+      location_p.classList.add("font-bold");
       search_liste_div.appendChild(location_p);
     }
   }
