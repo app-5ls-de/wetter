@@ -56,6 +56,13 @@ title: Wetter
     search();
   });
 
+  async function fetch_json(url) {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(response.status);
+    const data = await response.json();
+    return data;
+  }
+
   function show_autocomplete_results() {
     let input = search_input.value;
     if (!input || !locations_data) return;
@@ -87,47 +94,35 @@ title: Wetter
     }
   }
 
-  function search() {
+  async function search() {
     let input = search_input.value;
     if (!input || input.length < 3) return;
 
-    fetch(
+    const data = awaitfetch_json(
       "https://nominatim.openstreetmap.org/search.php?q=" +
         input.toLowerCase().trim() +
         "&dedupe=1&accept-language=de&limit=5&format=jsonv2"
-    )
-      .then((response) => {
-        if (response.ok) {
-          return Promise.resolve(response);
-        } else {
-          return Promise.reject(new Error(response.statusText));
-        }
-      })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        data = data.filter((element) => element.importance > 0.2);
+    );
+    data = data.filter((element) => element.importance > 0.2);
 
-        search_liste_div.textContent = "";
-        data.forEach((result_element) => {
-          let location_a = document.createElement("a");
-          location_a.innerText = result_element.display_name;
-          location_a.href =
-            "/show?lat=" +
-            Math.round(parseFloat(result_element.lat) * 100) / 100 +
-            "&lon=" +
-            Math.round(parseFloat(result_element.lon) * 100) / 100;
-          search_liste_div.appendChild(location_a);
-          search_liste_div.appendChild(document.createElement("br"));
-        });
+    search_liste_div.textContent = "";
+    data.forEach((result_element) => {
+      let location_a = document.createElement("a");
+      location_a.innerText = result_element.display_name;
+      location_a.href =
+        "/show?lat=" +
+        Math.round(parseFloat(result_element.lat) * 100) / 100 +
+        "&lon=" +
+        Math.round(parseFloat(result_element.lon) * 100) / 100;
+      search_liste_div.appendChild(location_a);
+      search_liste_div.appendChild(document.createElement("br"));
+    });
 
-        if (!data || data.length == 0) {
-          let location_p = document.createElement("a");
-          location_p.innerHTML = "kein Ergebnis";
-          search_liste_div.appendChild(location_p);
-        }
-      });
+    if (!data || data.length == 0) {
+      let location_p = document.createElement("a");
+      location_p.innerHTML = "kein Ergebnis";
+      search_liste_div.appendChild(location_p);
+    }
   }
 
   function show_lastvisited() {
@@ -167,23 +162,9 @@ title: Wetter
   });
   var locations_data;
 
-  fetch("/locations.json")
-    .then((response) => {
-      if (response.ok) {
-        return Promise.resolve(response);
-      } else {
-        return Promise.reject(new Error(response.statusText));
-      }
-    })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      locations_data = data;
-      search_input.setAttribute("placeholder", "Suche");
-      show_autocomplete_results();
-    })
-    .catch((error) => {
-      console.log("Request failed", error);
-    });
+  fetch_json("/locations.json").then((data) => {
+    locations_data = data;
+    search_input.setAttribute("placeholder", "Suche");
+    show_autocomplete_results();
+  });
 </script>

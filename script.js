@@ -1,19 +1,13 @@
 var main_div = document.getElementById("main");
 var widgets_div = document.getElementById("widgets");
 
-function fetch_json(url, options) {
-  return fetch(url, options)
-    .then((response) => {
-      if (response.ok) {
-        return Promise.resolve(response);
-      } else {
-        return Promise.reject(new Error(response.statusText));
-      }
-    })
-    .then((response) => {
-      return response.json();
-    });
+async function fetch_json(url) {
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(response.status);
+  const data = await response.json();
+  return data;
 }
+
 function format(number) {
   const PREFIXES = { 6: "M", 3: "k", 0: "" };
   const maxExponent = Math.max(...Object.keys(PREFIXES).map(Number));
@@ -47,38 +41,36 @@ function format(number) {
 var location_data, all_location_data;
 
 async function getAddress() {
-  if (location_data.address) {
-    return Promise.resolve();
-  } else {
-    return fetch_json(
-      "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
-        location_data.lat +
-        "&lon=" +
-        location_data.lon +
-        "&zoom=10&addressdetails=1&accept-language=de"
-    ).then((nominatim_data) => {
-      location_data.address = nominatim_data.address || {};
-      location_data.name = "?";
-      if (location_data.address.city) {
-        location_data.name = location_data.address.city;
-      } else if (location_data.address.town) {
-        location_data.name = nominatim_data.address.town;
-      } else if (location_data.address.village) {
-        location_data.name = location_data.address.village;
-      } else if (location_data.address.municipality) {
-        location_data.name = location_data.address.municipality;
-      } else if (location_data.address.county) {
-        location_data.name = location_data.address.county;
-      } else if (location_data.address.state) {
-        location_data.name = location_data.address.state;
-      }
+  if (location_data.address) return;
 
-      if (location_data.address.county) {
-        location_data.address.district = location_data.address.county;
-      } else if (location_data.name != "?") {
-        location_data.address.district = location_data.name;
-      }
-    });
+  const nominatim_data = await fetch_json(
+    "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+      location_data.lat +
+      "&lon=" +
+      location_data.lon +
+      "&zoom=10&addressdetails=1&accept-language=de"
+  );
+  
+  location_data.address = nominatim_data.address || {};
+  location_data.name = "?";
+  if (location_data.address.city) {
+    location_data.name = location_data.address.city;
+  } else if (location_data.address.town) {
+    location_data.name = nominatim_data.address.town;
+  } else if (location_data.address.village) {
+    location_data.name = location_data.address.village;
+  } else if (location_data.address.municipality) {
+    location_data.name = location_data.address.municipality;
+  } else if (location_data.address.county) {
+    location_data.name = location_data.address.county;
+  } else if (location_data.address.state) {
+    location_data.name = location_data.address.state;
+  }
+
+  if (location_data.address.county) {
+    location_data.address.district = location_data.address.county;
+  } else if (location_data.name != "?") {
+    location_data.address.district = location_data.name;
   }
 }
 
