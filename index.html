@@ -65,7 +65,11 @@ title: Wetter
 
   function show_autocomplete_results() {
     let input = search_input.value;
-    if (!input || !locations_data) return;
+    if (!input) {
+      show_lastvisited();
+      return;
+    }
+    if (!locations_data) return;
 
     const results = fuzzysort.go(input, locations_data, {
       threshold: -20000,
