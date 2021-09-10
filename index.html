@@ -102,7 +102,7 @@ title: Wetter
     let input = search_input.value;
     if (!input || input.length < 3) return;
 
-    const data = awaitfetch_json(
+    let data = await fetch_json(
       "https://nominatim.openstreetmap.org/search.php?q=" +
         input.toLowerCase().trim() +
         "&dedupe=1&accept-language=de&limit=5&format=jsonv2"
