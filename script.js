@@ -157,9 +157,6 @@ function main_routine() {
 }
 
 async function display_widgets() {
-  //metno();
-  //brightsky();
-
   daswetter();
   meteoblue_simple();
   windguru();
@@ -170,7 +167,11 @@ async function display_widgets() {
   rainviewer();
   knmi();
 
-  windy_map("waves");
+  /* windy_map();
+  windy_map("waves"); */
+
+  brightsky();
+  //metno();
 }
 
 function meteoblue() {
@@ -677,18 +678,188 @@ async function metno() {
 }
 
 async function brightsky() {
-  let brightsky_div = crel.div({ id: "brightsky", class: "" });
+  let brightsky_canvas,
+    brightsky_div = crel.div(
+      { id: "brightsky" },
+      crel.div(
+        { class: "w-full", style: { position: "relative" } },
+        (brightsky_canvas = crel.canvas({
+          class: "w-full h-full",
+        }))
+      )
+    );
   widgets_div.appendChild(brightsky_div);
 
-  const data = await fetch_json(
+  addDays = (date, days) => {
+    let new_date = new Date(date.valueOf());
+    new_date.setDate(new_date.getDate() + days);
+    return new_date;
+  };
+
+  let brightsky_base_url =
     "https://api.brightsky.dev/weather?lat=" +
-      location_data.lat +
-      "&lon=" +
-      location_data.lon +
-      "&date=" +
-      new Date().toISOString().split("T")[0]
+    location_data.lat +
+    "&lon=" +
+    location_data.lon +
+    "&date=";
+
+  var data = await fetch_json(
+    brightsky_base_url + new Date().toISOString().split("T")[0]
   );
-  console.log(data);
+  var data2 = await fetch_json(
+    brightsky_base_url + addDays(new Date(), 1).toISOString().split("T")[0]
+  );
+  var data3 = await fetch_json(
+    brightsky_base_url + addDays(new Date(), 2).toISOString().split("T")[0]
+  );
+  if (
+    data.weather[data.weather.length - 1].timestamp ==
+    data2.weather[0].timestamp
+  ) {
+    data.weather.pop();
+  }
+  data.weather.push(...data2.weather);
+
+  if (
+    data.weather[data.weather.length - 1].timestamp ==
+    data3.weather[0].timestamp
+  ) {
+    data.weather.pop();
+  }
+  data.weather.push(...data3.weather);
+
+  let data_series = {};
+  Object.keys(data.weather[0]).forEach((key) => {
+    data_series[key] = data.weather.map((x) => x[key]);
+  });
+  data_series.hours = data.weather.map((x) => new Date(x.timestamp).getHours());
+  data_series.dates = data.weather.map((x) => new Date(x.timestamp));
+
+  let dates = data.weather.map((x) => new Date(x.timestamp).getDate());
+  let dates_unique = [...new Set(dates)];
+
+  //remove trival first and last date
+  dates_unique.pop();
+  dates_unique.shift();
+
+  let annotations = dates_unique.map((x) => {
+    let index = dates.indexOf(x);
+    let reference = data.weather[index];
+    return {
+      type: "line",
+      scaleID: "x",
+      value: index + 0.5,
+      borderColor: "black",
+      label: {
+        content: new Date(reference.timestamp).toLocaleDateString("de-DE", {
+          day: "numeric",
+          month: "numeric",
+        }),
+        enabled: true,
+        rotation: "auto",
+      },
+    };
+  });
+
+  new Chart(brightsky_canvas, {
+    type: "line",
+    responsive: true,
+    maintainAspectRatio: false,
+    data: {
+      labels: data_series.timestamp,
+      datasets: [
+        {
+          label: "Temperatur",
+          data: data_series.temperature,
+          backgroundColor: "darkgray",
+          borderColor: "darkgray",
+          yAxisID: "y",
+        },
+        {
+          type: "bar",
+          label: "Niederschlag",
+          data: data_series.precipitation,
+          backgroundColor: "blue",
+          borderColor: "black",
+          yAxisID: "y1",
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
+      stacked: false,
+
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Stunde",
+          },
+          ticks: {
+            callback: function (val) {
+              return new Date(this.getLabelForValue(val)).getHours();
+            },
+          },
+        },
+        y: {
+          type: "linear",
+          display: true,
+          position: "left",
+          title: {
+            display: true,
+            text: "Temperatur",
+          },
+        },
+        y1: {
+          type: "linear",
+          display: true,
+          position: "right",
+          min: 0,
+          suggestedMax: 5,
+          title: {
+            display: true,
+            text: "Niederschlag",
+          },
+          grid: {
+            drawOnChartArea: false, // only want the grid lines for one axis to show up
+          },
+        },
+      },
+
+      plugins: {
+        tooltip: {
+          position: "nearest",
+          callbacks: {
+            title: (item) => new Date(item[0].label).toLocaleString("de-DE"),
+            label: function (context) {
+              var label = context.dataset.label || "";
+              if (label) {
+                label += ": ";
+              }
+
+              if (context.datasetIndex == 0) {
+                return label + context.formattedValue + " °C";
+              }
+              if (context.datasetIndex == 1) {
+                return label + context.formattedValue + " mm";
+              }
+              return label + context.formattedValue;
+            },
+          },
+        },
+        legend: false,
+        autocolors: false,
+        annotation: {
+          annotations,
+        },
+      },
+    },
+  });
 }
 
 async function sunrise() {
