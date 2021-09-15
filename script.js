@@ -761,6 +761,21 @@ async function brightsky() {
     };
   });
 
+  let index = data.weather.findIndex(
+    (element) => +new Date(element.timestamp) > +new Date()
+  );
+  
+  index -= 1; // the function above find the first element that is later than now
+  index += new Date().getMinutes() / 60;
+
+  annotations.push({
+    type: "line",
+    scaleID: "x",
+    borderDash: [5, 5],
+    value: index,
+    borderColor: "black",
+  });
+
   new Chart(brightsky_canvas, {
     type: "line",
     responsive: true,
