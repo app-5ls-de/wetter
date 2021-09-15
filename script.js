@@ -50,7 +50,7 @@ async function getAddress() {
       location_data.lon +
       "&zoom=10&addressdetails=1&accept-language=de"
   );
-  
+
   location_data.address = nominatim_data.address || {};
   location_data.name = "?";
   if (location_data.address.city) {
@@ -663,37 +663,35 @@ function windguru() {
   });
 }
 
-function metno() {
+async function metno() {
   let metno_div = crel.div({ id: "metno", class: "" });
   widgets_div.appendChild(metno_div);
 
-  return fetch_json(
+  const data = await fetch_json(
     "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=" +
       location_data.lat +
       "&lon=" +
       location_data.lon
-  ).then((data) => {
-    console.log(data);
-  });
+  );
+  console.log(data);
 }
 
-function brightsky() {
+async function brightsky() {
   let brightsky_div = crel.div({ id: "brightsky", class: "" });
   widgets_div.appendChild(brightsky_div);
 
-  return fetch_json(
+  const data = await fetch_json(
     "https://api.brightsky.dev/weather?lat=" +
       location_data.lat +
       "&lon=" +
       location_data.lon +
       "&date=" +
       new Date().toISOString().split("T")[0]
-  ).then((data) => {
-    console.log(data);
-  });
+  );
+  console.log(data);
 }
 
-function sunrise() {
+async function sunrise() {
   let sunrise_div = crel.div({
     id: "sunrise",
     class: "flex justify-center flex-row flex-wrap mx-auto",
@@ -729,27 +727,26 @@ function sunrise() {
     );
   }
 
-  return fetch_json(
+  const data = await fetch_json(
     "https://api.sunrise-sunset.org/json?lat=" +
       location_data.lat +
       "&lng=" +
       location_data.lon +
       "&formatted=0"
-  ).then((data) => {
-    crel(
-      sunrise_div,
-      generate_sunrise_half(
-        data.results.sunrise,
-        data.results.civil_twilight_begin,
-        "/sunrise.svg"
-      ),
-      generate_sunrise_half(
-        data.results.sunset,
-        data.results.civil_twilight_end,
-        "/sunset.svg"
-      )
-    );
-  });
+  );
+  crel(
+    sunrise_div,
+    generate_sunrise_half(
+      data.results.sunrise,
+      data.results.civil_twilight_begin,
+      "/sunrise.svg"
+    ),
+    generate_sunrise_half(
+      data.results.sunset,
+      data.results.civil_twilight_end,
+      "/sunset.svg"
+    )
+  );
 }
 
 var rainviewer_doubleClick_timer;
