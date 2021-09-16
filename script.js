@@ -156,22 +156,59 @@ function main_routine() {
   display_widgets();
 }
 
+function create_section(func, display_name) {
+  let disabled = ["knmi", "rainviewer", "windy_map", "windy_map_waves"];
+
+  let child_div = crel.div();
+  widgets_div.appendChild(child_div);
+
+  if (disabled.includes(func.name)) {
+    let collapsable_content;
+    crel(
+      child_div,
+      (collapsable_content = crel.button(
+        {
+          class:
+            "cursor-pointer mx-auto block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+          on: {
+            click: (e) => {
+              collapsable_content.remove();
+              e.stopPropagation();
+              func(child_div);
+            },
+          },
+        },
+        display_name
+      ))
+    );
+    return;
+  } else {
+    return func(child_div);
+  }
+}
+
 async function display_widgets() {
   await Promise.allSettled([daswetter(), meteoblue_simple(), windguru()]);
 
-  await Promise.allSettled([meteoblue(), dwd_trend(), brightsky()]);
-  await Promise.allSettled([dwd_warn(), sunrise()]);
+  await Promise.allSettled([
+    create_section(meteoblue, "Meteoblue Bild"),
+    create_section(dwd_trend, "10 Tage Trend"),
+    create_section(brightsky, "Temperatur"),
+  ]);
+  await Promise.allSettled([
+    dwd_warn(),
+    create_section(metno, "Wolkenbedeckung"),
+    create_section(sunrise, "Sonnenaufgang"),
+  ]);
 
-  rainviewer();
-  knmi();
-  metno();
+  create_section(rainviewer, "Regenradar");
+  create_section(knmi, "Großwetterlage");
 
-  /* windy_map();
-  windy_map("waves"); */
-
+  create_section(windy_map, "Windkarte");
+  create_section(windy_map_waves, "Wellenkarte");
 }
 
-function meteoblue() {
+function meteoblue(meteoblue_div) {
   let closest_data;
   if (location_data.meteoblue_src) {
     closest_data = location_data;
@@ -185,31 +222,30 @@ function meteoblue() {
     closest_data = closest;
   }
 
-  let meteoblue_img,
-    meteoblue_div = crel.div(
-      { id: "meteoblue", class: "" },
-      (meteoblue_img = crel.img({ alt: "meteoblue" })),
+  let meteoblue_img;
+  crel(
+    meteoblue_div,
+    { id: "meteoblue", class: "" },
+    (meteoblue_img = crel.img({ alt: "meteoblue" })),
+    crel.a(
+      {
+        href:
+          "https://www.meteoblue.com/de/wetter/woche/" +
+          closest_data.meteoblue_id,
+        target: "_blank",
+        rel: "noopener",
+        class: "before:hidden",
+      },
+      "Wetter " + closest_data.name + " - meteoblue"
+    ),
+    crel.div(
+      { class: "info -mt-4" },
       crel.a(
-        {
-          href:
-            "https://www.meteoblue.com/de/wetter/woche/" +
-            closest_data.meteoblue_id,
-          target: "_blank",
-          rel: "noopener",
-          class: "before:hidden",
-        },
-        "Wetter " + closest_data.name + " - meteoblue"
-      ),
-      crel.div(
-        { class: "info -mt-4" },
-        crel.a(
-          { href: "/meteoblue-hilfe" },
-          crel.img({ src: "/info.svg", alt: "" })
-        )
+        { href: "/meteoblue-hilfe" },
+        crel.img({ src: "/info.svg", alt: "" })
       )
-    );
-
-  widgets_div.appendChild(meteoblue_div);
+    )
+  );
 
   return new Promise((resolve, reject) => {
     meteoblue_img.addEventListener("load", resolve);
@@ -220,23 +256,23 @@ function meteoblue() {
   });
 }
 
-function knmi() {
+function knmi(knmi_div) {
   if (location_data.lat < 33.5 || location_data.lat > 67.2) return;
   if (location_data.lon < -39.1 || location_data.lon > 35.3) return;
 
-  let knmi_animation_img,
-    knmi_div = crel.div(
-      { id: "knmi", class: "" },
-      (knmi_animation_img = crel.img({ id: "animation", alt: "knmi" })),
-      crel.div(
-        { class: "info" },
-        crel.a(
-          { href: "/meteoblue-hilfe" },
-          crel.img({ src: "/info.svg", alt: "" })
-        )
+  let knmi_animation_img;
+  crel(
+    knmi_div,
+    { id: "knmi", class: "" },
+    (knmi_animation_img = crel.img({ id: "animation", alt: "knmi" })),
+    crel.div(
+      { class: "info" },
+      crel.a(
+        { href: "/meteoblue-hilfe" },
+        crel.img({ src: "/info.svg", alt: "" })
       )
-    );
-  widgets_div.appendChild(knmi_div);
+    )
+  );
 
   var knmi_baseurl =
     "https://cdn.knmi.nl/knmi/map/page/weer/waarschuwingen_verwachtingen/weerkaarten/";
@@ -319,13 +355,17 @@ function knmi() {
   });
 }
 
-function windy_map(overlay_type) {
-  if (overlay_type == "waves" && !location_data.windy_waves) return;
+function windy_map_waves(windy_map_div) {
+  return windy_map(windy_map_div, "waves");
+}
+
+function windy_map(windy_map_div, overlay_type) {
   if (overlay_type && overlay_type != "waves") return;
 
-  let windy_map_iframe = crel.iframe();
+  let windy_map_iframe = crel.iframe({ class: "w-full h-full" });
 
-  let windy_map_div = crel.div(
+  crel(
+    windy_map_div,
     {
       id: overlay_type ? "windy-map-" + overlay_type : "windy-map",
       class: "w-full h-50-screen",
@@ -351,7 +391,6 @@ function windy_map(overlay_type) {
       )
     )
   );
-  widgets_div.appendChild(windy_map_div);
 
   return new Promise((resolve, reject) => {
     crel(windy_map_iframe, {
@@ -409,7 +448,7 @@ function dwd_warn() {
   });
 }
 
-function dwd_trend() {
+function dwd_trend(dwd_trend_div) {
   let id_mapping = [
     // Stuttgart
     { lat: 48.7761, lon: 9.1775, id: "10738" },
@@ -450,23 +489,23 @@ function dwd_trend() {
   if (closest.distance > 60) return;
   let id = closest.id;
 
-  let dwd_trend_img,
-    dwd_trend_div = crel.div(
-      { id: "dwd-trend" },
-      (dwd_trend_img = crel.img({ alt: "dwd-trend" })),
-      crel.div(
-        { class: "info" },
-        crel.a(
-          {
-            href: "https://www.dwd.de/DE/leistungen/trendvorhersage_regional/legende_trend_kurz.png?__blob=normal&v=5",
-            target: "_blank",
-            rel: "noopener",
-          },
-          crel.img({ src: "/info.svg", alt: "" })
-        )
+  let dwd_trend_img;
+  crel(
+    dwd_trend_div,
+    { id: "dwd-trend" },
+    (dwd_trend_img = crel.img({ alt: "dwd-trend" })),
+    crel.div(
+      { class: "info" },
+      crel.a(
+        {
+          href: "https://www.dwd.de/DE/leistungen/trendvorhersage_regional/legende_trend_kurz.png?__blob=normal&v=5",
+          target: "_blank",
+          rel: "noopener",
+        },
+        crel.img({ src: "/info.svg", alt: "" })
       )
-    );
-  widgets_div.appendChild(dwd_trend_div);
+    )
+  );
 
   return new Promise((resolve, reject) => {
     crel(dwd_trend_img, {
@@ -620,23 +659,23 @@ function windguru() {
   });
 }
 
-async function metno() {
-  let metno_canvas,
-    metno_div = crel.div(
+async function metno(metno_div) {
+  let metno_canvas;
+  crel(
+    metno_div,
+    {
+      id: "metno",
+      class: "overflow-x-auto",
+    },
+    crel.div(
       {
-        id: "metno",
-        class: "overflow-x-auto",
+        class: "relative w-full min-w-sm",
       },
-      crel.div(
-        {
-          class: "relative w-full min-w-sm",
-        },
-        (metno_canvas = crel.canvas({
-          class: "w-full h-full",
-        }))
-      )
-    );
-  widgets_div.appendChild(metno_div);
+      (metno_canvas = crel.canvas({
+        class: "w-full h-full",
+      }))
+    )
+  );
 
   const response = await fetch_json(
     "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=" +
@@ -757,24 +796,23 @@ async function metno() {
   });
 }
 
-async function brightsky() {
-  let brightsky_canvas,
-    brightsky_div = crel.div(
+async function brightsky(brightsky_div) {
+  let brightsky_canvas;
+  crel(
+    brightsky_div,
+    {
+      id: "brightsky",
+      class: "overflow-x-auto",
+    },
+    crel.div(
       {
-        id: "brightsky",
-        class: "overflow-x-auto",
+        class: "relative w-full min-w-sm",
       },
-      crel.div(
-        {
-          class: "relative w-full min-w-sm",
-        },
-        (brightsky_canvas = crel.canvas({
-          class: "w-full h-full",
-        }))
-      )
-    );
-
-  widgets_div.appendChild(brightsky_div);
+      (brightsky_canvas = crel.canvas({
+        class: "w-full h-full",
+      }))
+    )
+  );
 
   addDays = (date, days) => {
     if (days == 0) return date;
@@ -968,12 +1006,11 @@ async function brightsky() {
   });
 }
 
-async function sunrise() {
-  let sunrise_div = crel.div({
+async function sunrise(sunrise_div) {
+  crel(sunrise_div, {
     id: "sunrise",
     class: "flex justify-center flex-row flex-wrap mx-auto",
   });
-  widgets_div.appendChild(sunrise_div);
 
   function generate_sunrise_half(first, second, svg_path) {
     return crel.div(
@@ -1027,18 +1064,16 @@ async function sunrise() {
 }
 
 var rainviewer_doubleClick_timer;
-function rainviewer() {
-  let rainviewer_map_div,
-    rainviewer_info_div,
-    rainviewer_timestamp_div,
-    rainviewer_div = crel.div(
-      { id: "rainviewer" },
-      (rainviewer_map_div = crel.div({
-        id: "rainviewer-map",
-        class: "w-full h-50-screen",
-      }))
-    );
-  widgets_div.appendChild(rainviewer_div);
+function rainviewer(rainviewer_div) {
+  let rainviewer_map_div, rainviewer_info_div, rainviewer_timestamp_div;
+  crel(
+    rainviewer_div,
+    { id: "rainviewer" },
+    (rainviewer_map_div = crel.div({
+      id: "rainviewer-map",
+      class: "w-full h-50-screen",
+    }))
+  );
 
   rainviewer_info_div = crel.div(
     {
