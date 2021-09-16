@@ -157,7 +157,13 @@ function main_routine() {
 }
 
 function create_section(func, display_name) {
-  let disabled = ["knmi", "rainviewer", "windy_map", "windy_map_waves"];
+  let disabled = [
+    "brightsky",
+    "knmi",
+    "rainviewer",
+    "windy_map",
+    "windy_map_waves",
+  ];
 
   let child_div = crel.div();
   widgets_div.appendChild(child_div);
@@ -193,7 +199,7 @@ async function display_widgets() {
   await Promise.allSettled([
     create_section(meteoblue, "Meteoblue Bild"),
     create_section(dwd_trend, "10 Tage Trend"),
-    create_section(brightsky, "Temperatur"),
+    create_section(meteogram_metno, "Meteogram"),
   ]);
 
   await Promise.allSettled([
@@ -207,6 +213,8 @@ async function display_widgets() {
 
   Promise.allSettled([create_section(windy_map, "Windkarte")]);
   Promise.allSettled([create_section(windy_map_waves, "Wellenkarte")]);
+
+  Promise.allSettled([create_section(brightsky, "Temperatur")]);
 }
 
 function meteoblue(meteoblue_div) {
@@ -687,6 +695,7 @@ async function metno(metno_div) {
 
   let data = {};
   data.time = response.properties.timeseries.map((x) => x.time);
+  data.dates = data.time.map((x) => new Date(x));
   data.precipitation_amount = response.properties.timeseries.map(
     (x) => x.data.next_1_hours?.details.precipitation_amount
   );
@@ -792,6 +801,265 @@ async function metno(metno_div) {
         },
         legend: true,
         autocolors: false,
+      },
+    },
+  });
+}
+
+async function meteogram_metno(meteogram_div) {
+  let meteogram_canvas;
+  crel(
+    meteogram_div,
+    {
+      id: "metno",
+      class: "overflow-x-auto",
+    },
+    crel.div(
+      {
+        class: "relative w-full min-w-sm",
+      },
+      (meteogram_canvas = crel.canvas({
+        class: "w-full h-full",
+      }))
+    )
+  );
+
+  const response = await fetch_json(
+    "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=" +
+      location_data.lat +
+      "&lon=" +
+      location_data.lon
+  );
+
+  let data = {};
+  data.time = response.properties.timeseries.map((x) => x.time);
+  data.dates = data.time.map((x) => new Date(x));
+  data.precipitation_amount = response.properties.timeseries.map(
+    (x) => x.data.next_1_hours?.details.precipitation_amount
+  );
+  data.symbol_code = response.properties.timeseries.map(
+    (x) => x.data.next_1_hours?.summary.symbol_code
+  );
+  data.last_hourly = response.properties.timeseries.findIndex(
+    (element) => !element.data.next_1_hours
+  );
+
+  Object.keys(response.properties.timeseries[0].data.instant.details).forEach(
+    (key) => {
+      data[key] = response.properties.timeseries.map(
+        (x) => x.data.instant.details[key]
+      );
+    }
+  );
+  //console.log(data);
+
+  /* let data_trimmed = {};
+  Object.keys(data)
+    .filter((key) => key != "last_hourly")
+    .forEach((key) => {
+      data_trimmed[key] = data[key].slice(0, data.last_hourly);
+    });
+
+  console.log(data_trimmed); */
+
+  let dates = data.dates.map((x) => x.getDate());
+  let dates_unique = [...new Set(dates)];
+
+  //remove trival first and last date
+  dates_unique.pop();
+  dates_unique.shift();
+
+  let annotations = dates_unique.map((x) => {
+    let index = dates.indexOf(x);
+    let reference_time = data.dates[index];
+    return {
+      type: "line",
+      scaleID: "x",
+      value: index - 0.5, // center in between bars
+      borderColor: "black",
+      label: {
+        content: reference_time.toLocaleDateString("de-DE", {
+          day: "numeric",
+          month: "numeric",
+        }),
+        enabled: true,
+        rotation: "auto",
+      },
+    };
+  });
+
+  new Chart(meteogram_canvas, {
+    type: "line",
+    data: {
+      labels: data.time.slice(0, data.last_hourly),
+      datasets: [
+        {
+          label: "Temperatur",
+          data: data.air_temperature.slice(0, data.last_hourly),
+          backgroundColor: "darkgray",
+          borderColor: "darkgray",
+          yAxisID: "yl2",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+          unit: "°C",
+        },
+        {
+          type: "bar",
+          label: "Niederschlag",
+          data: data.precipitation_amount.slice(0, data.last_hourly),
+          backgroundColor: "blue",
+          borderColor: "black",
+          yAxisID: "yr2",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+          unit: "mm",
+        },
+        {
+          label: "Niedrig",
+          data: data.cloud_area_fraction_low.slice(0, data.last_hourly),
+          backgroundColor: "rgba(75, 85, 99)",
+          borderColor: "rgba(75, 85, 99)",
+          yAxisID: "yl1",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+          unit: "%",
+          elements: {
+            point: {
+              radius: 0,
+            },
+          },
+        },
+        {
+          label: "Mittel",
+          data: data.cloud_area_fraction_medium.slice(0, data.last_hourly),
+          backgroundColor: "rgba(156, 163, 175)",
+          borderColor: "rgba(156, 163, 175)",
+          yAxisID: "yl1",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+          unit: "%",
+          elements: {
+            point: {
+              radius: 0,
+            },
+          },
+        },
+        {
+          label: "Hoch",
+          data: data.cloud_area_fraction_high.slice(0, data.last_hourly),
+          backgroundColor: "rgba(209, 213, 219)",
+          borderColor: "rgba(209, 213, 219)",
+          yAxisID: "yr1",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+          unit: "%",
+          elements: {
+            point: {
+              radius: 0,
+            },
+          },
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Stunde",
+          },
+          ticks: {
+            callback: function (val) {
+              return new Date(this.getLabelForValue(val)).getHours();
+            },
+          },
+        },
+        yl1: {
+          type: "linear",
+          display: true,
+          position: "left",
+          offset: false,
+          stack: "meteogram",
+          min: 0,
+          max: 100,
+          title: {
+            display: true,
+            text: "Wolkenbedeckung",
+          },
+        },
+        yr2: {
+          type: "linear",
+          display: true,
+          position: "right",
+          offset: true,
+          stack: "meteogram",
+          stackWeight: 2,
+          min: 0,
+          suggestedMax: 5,
+          grid: {
+            // only want the grid lines for one axis to show up
+            drawOnChartArea: false,
+          },
+          title: {
+            display: true,
+            text: "Niederschlag",
+          },
+        },
+        yr1: {
+          type: "linear",
+          display: true,
+          position: "right",
+          offset: false,
+          stack: "meteogram",
+          min: 0,
+          max: 100,
+          title: {
+            display: true,
+            text: "Wolkenbedeckung",
+          },
+        },
+        yl2: {
+          type: "linear",
+          display: true,
+          position: "left",
+          offset: true,
+          stack: "meteogram",
+          suggestedMax: 15,
+          stackWeight: 2,
+          title: {
+            display: true,
+            text: "Temperatur",
+          },
+        },
+      },
+
+      plugins: {
+        tooltip: {
+          position: "nearest",
+          callbacks: {
+            title: (item) => new Date(item[0].label).toLocaleString("de-DE"),
+            label: function (context) {
+              var label = context.dataset.label || "";
+              if (label) {
+                label += ": ";
+              }
+              return (
+                label + context.formattedValue + " " + context.dataset.unit
+              );
+            },
+          },
+        },
+        legend: false,
+        autocolors: false,
+        annotation: {
+          annotations,
+        },
       },
     },
   });
