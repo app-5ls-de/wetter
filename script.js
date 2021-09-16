@@ -210,10 +210,9 @@ async function display_widgets() {
   Promise.allSettled([create_section(rainviewer, "Regenradar")]);
   Promise.allSettled([create_section(knmi, "Großwetterlage")]);
 
+  Promise.allSettled([create_section(brightsky, "10 Tage Temperatur")]);
   Promise.allSettled([create_section(windy_map, "Windkarte")]);
   Promise.allSettled([create_section(windy_map_waves, "Wellenkarte")]);
-
-  Promise.allSettled([create_section(brightsky, "Temperatur")]);
 }
 
 function meteoblue(meteoblue_div) {
@@ -1073,21 +1072,59 @@ async function meteogram_metno(meteogram_div) {
 }
 
 async function brightsky(brightsky_div) {
-  let brightsky_canvas;
+  let brightsky_canvas, brightsky_button, brightsky_container;
   crel(
     brightsky_div,
     {
       id: "brightsky",
       class: "overflow-x-auto",
     },
-    crel.div(
+    (brightsky_container = crel.div(
       {
         class: "h-50-screen relative w-full min-w-sm",
       },
       (brightsky_canvas = crel.canvas({
         class: "w-full h-full",
-      }))
-    )
+      })),
+      (brightsky_button = crel.button(
+        {
+          class:
+            "right-20 top-4 absolute cursor-pointer bg-blue-500 font-bold py-2 px-4 rounded inline-block no-underline border border-solid border-transparent bg-opacity-10 bg-gray-800 text-blue-500 hover:bg-blue-500 hover:border-blue-500 hover:border-opacity-20 hover:bg-opacity-20",
+          on: {
+            click: async () => {
+              crel(brightsky_button, { disabled: true });
+              let new_data;
+              try {
+                days_loaded += 1;
+                new_data = await fetch_json(
+                  brightsky_base_url +
+                    addDays(new Date(), days_loaded).toISOString().split("T")[0]
+                );
+              } catch (error) {
+                console.error(error);
+                brightsky_button.remove();
+              }
+              crel(brightsky_container, {
+                style: { "min-width": 150 * days_loaded + "px" },
+              });
+
+              add_data([new_data]);
+
+              chart.data.labels = data_series.timestamp;
+              chart.data.datasets[0].data = data_series.temperature;
+              chart.data.datasets[1].data = data_series.precipitation;
+
+              //chart.options.plugins.annotation.annotations = annotations;
+              chart.options.plugins.annotation.annotations = [];
+
+              chart.update();
+              brightsky_button.removeAttribute("disabled");
+            },
+          },
+        },
+        "Mehr..."
+      ))
+    ))
   );
 
   addDays = (date, days) => {
@@ -1104,7 +1141,7 @@ async function brightsky(brightsky_div) {
     location_data.lon +
     "&date=";
 
-  var data_array = [
+  let data_array = [
     fetch_json(
       brightsky_base_url + addDays(new Date(), 0).toISOString().split("T")[0]
     ),
@@ -1115,10 +1152,15 @@ async function brightsky(brightsky_div) {
       brightsky_base_url + addDays(new Date(), 2).toISOString().split("T")[0]
     ),
   ];
+  let days_loaded = 2;
   data_array = await Promise.all(data_array);
 
-  var data = data_array.reduce(
-    (previous, current) => {
+  let data = { weather: [], sources: [] };
+  let data_series = {};
+  let annotations = [];
+
+  function add_data(array_of_new_data) {
+    data = array_of_new_data.reduce((previous, current) => {
       if (
         previous.weather[previous.weather.length - 1]?.timestamp ==
         current.weather[0].timestamp
@@ -1128,42 +1170,50 @@ async function brightsky(brightsky_div) {
       previous.weather.push(...current.weather);
       previous.sources.push(...current.sources);
       return previous;
-    },
-    { weather: [], sources: [] }
-  );
+    }, data);
 
-  let data_series = {};
-  Object.keys(data.weather[0]).forEach((key) => {
-    data_series[key] = data.weather.map((x) => x[key]);
-  });
-  data_series.hours = data.weather.map((x) => new Date(x.timestamp).getHours());
-  data_series.dates = data.weather.map((x) => new Date(x.timestamp));
+    data_series = {};
 
-  let dates = data.weather.map((x) => new Date(x.timestamp).getDate());
-  let dates_unique = [...new Set(dates)];
+    Object.keys(data.weather[0]).forEach((key) => {
+      data_series[key] = data.weather.map((x) => x[key]);
+    });
+    data_series.hours = data.weather.map((x) =>
+      new Date(x.timestamp).getHours()
+    );
+    data_series.dates = data.weather.map((x) => new Date(x.timestamp));
 
-  //remove trival first and last date
-  dates_unique.pop();
-  dates_unique.shift();
+    let dates = data.weather.map((x) => new Date(x.timestamp).getDate());
+    let dates_unique = [...new Set(dates)];
 
-  let annotations = dates_unique.map((x) => {
-    let index = dates.indexOf(x);
-    let reference = data.weather[index];
-    return {
-      type: "line",
-      scaleID: "x",
-      value: index - 0.5, // center in between bars
-      borderColor: "black",
-      label: {
-        content: new Date(reference.timestamp).toLocaleDateString("de-DE", {
-          day: "numeric",
-          month: "numeric",
-        }),
-        enabled: true,
-        rotation: "auto",
-      },
-    };
-  });
+    //remove trival first and last date
+    dates_unique.pop();
+    dates_unique.shift();
+
+    let new_annotations = dates_unique.map((x) => {
+      let index = dates.indexOf(x);
+      let reference = data.weather[index];
+      return {
+        type: "line",
+        identifier: true,
+        scaleID: "x",
+        value: index - 0.5, // center in between bars
+        borderColor: "black",
+        label: {
+          content: new Date(reference.timestamp).toLocaleDateString("de-DE", {
+            day: "numeric",
+            month: "numeric",
+          }),
+          enabled: true,
+          rotation: "auto",
+        },
+      };
+    });
+    annotations = annotations.filter((element) => !element.identifier);
+
+    annotations.push(...new_annotations);
+  }
+
+  add_data(data_array);
 
   let index = data.weather.findIndex(
     (element) => +new Date(element.timestamp) > +new Date()
@@ -1173,7 +1223,7 @@ async function brightsky(brightsky_div) {
   index -= 0.5; // center in between bars
   index += new Date().getMinutes() / 60;
 
-  annotations.push({
+  annotations.unshift({
     type: "line",
     scaleID: "x",
     borderDash: [5, 5],
@@ -1181,7 +1231,7 @@ async function brightsky(brightsky_div) {
     borderColor: "black",
   });
 
-  new Chart(brightsky_canvas, {
+  let chart = new Chart(brightsky_canvas, {
     type: "line",
     data: {
       labels: data_series.timestamp,
