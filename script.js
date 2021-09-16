@@ -680,9 +680,14 @@ async function metno() {
 async function brightsky() {
   let brightsky_canvas,
     brightsky_div = crel.div(
-      { id: "brightsky" },
+      {
+        id: "brightsky",
+        class: "overflow-x-auto",
+      },
       crel.div(
-        { class: "w-full", style: { position: "relative" } },
+        {
+          class: "relative w-full min-w-sm",
+        },
         (brightsky_canvas = crel.canvas({
           class: "w-full h-full",
         }))
