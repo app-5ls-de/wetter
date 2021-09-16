@@ -703,30 +703,33 @@ async function brightsky() {
     location_data.lon +
     "&date=";
 
-  var data = await fetch_json(
-    brightsky_base_url + new Date().toISOString().split("T")[0]
-  );
-  var data2 = await fetch_json(
-    brightsky_base_url + addDays(new Date(), 1).toISOString().split("T")[0]
-  );
-  var data3 = await fetch_json(
-    brightsky_base_url + addDays(new Date(), 2).toISOString().split("T")[0]
-  );
-  if (
-    data.weather[data.weather.length - 1].timestamp ==
-    data2.weather[0].timestamp
-  ) {
-    data.weather.pop();
-  }
-  data.weather.push(...data2.weather);
+  var data_array = [
+    fetch_json(
+      brightsky_base_url + addDays(new Date(), 0).toISOString().split("T")[0]
+    ),
+    fetch_json(
+      brightsky_base_url + addDays(new Date(), 1).toISOString().split("T")[0]
+    ),
+    fetch_json(
+      brightsky_base_url + addDays(new Date(), 2).toISOString().split("T")[0]
+    ),
+  ];
+  data_array = await Promise.all(data_array);
 
-  if (
-    data.weather[data.weather.length - 1].timestamp ==
-    data3.weather[0].timestamp
-  ) {
-    data.weather.pop();
-  }
-  data.weather.push(...data3.weather);
+  var data = data_array.reduce(
+    (previous, current) => {
+      if (
+        previous.weather[previous.weather.length - 1]?.timestamp ==
+        current.weather[0].timestamp
+      ) {
+        previous.weather.pop();
+      }
+      previous.weather.push(...current.weather);
+      previous.sources.push(...current.sources);
+      return previous;
+    },
+    { weather: [], sources: [] }
+  );
 
   let data_series = {};
   Object.keys(data.weather[0]).forEach((key) => {
