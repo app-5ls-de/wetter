@@ -322,30 +322,6 @@ function knmi() {
   });
 }
 
-function windy_link() {
-  let windy_div = crel.div(
-    { id: "windy-link", class: "windy-link text-center" },
-    crel.a(
-      {
-        href:
-          "https://windy.com/" +
-          location_data.lat +
-          "/" +
-          location_data.lon +
-          "/meteogram?rain," +
-          location_data.lat +
-          "," +
-          location_data.lon +
-          ",7",
-        target: "_blank",
-        rel: "noopener",
-      },
-      "Windy Meteogram (10 Tage)"
-    )
-  );
-  widgets_div.appendChild(windy_div);
-}
-
 function windy_map(overlay_type) {
   if (overlay_type == "waves" && !location_data.windy_waves) return;
   if (overlay_type && overlay_type != "waves") return;
