@@ -1,6 +1,5 @@
 [
   {
-    "accuweather": "de/ammersee/82211/minute-weather-forecast/2599630",
     "dwd_warncellid": 109188000,
     "lat": 48.0,
     "lon": 11.12,
@@ -11,7 +10,6 @@
     "windguru_uid": "wg_fwdg_243_3_1589997765794"
   },
   {
-    "accuweather": "de/böhmenkirch/89558/minute-weather-forecast/171896",
     "daswetter": "6823c1e09a17c26b7fa9bce8b601e68e",
     "dwd_warncellid": 108117000,
     "lat": 48.68,
@@ -22,7 +20,6 @@
     "name": "Böhmenkirch"
   },
   {
-    "accuweather": "de/dresden/01067/minute-weather-forecast/171239",
     "dwd_warncellid": 114612000,
     "lat": 51.05,
     "lon": 13.75,
@@ -31,7 +28,6 @@
     "name": "Dresden"
   },
   {
-    "accuweather": "de/spitzingsee/83727/minute-weather-forecast/178049",
     "dwd_warncellid": 109182000,
     "lat": 47.67,
     "lon": 11.89,
@@ -42,7 +38,6 @@
     "windguru_uid": "wg_fwdg_245930_3_1590655757107"
   },
   {
-    "accuweather": "de/eckernförde/24340/minute-weather-forecast/171578",
     "dwd_warncellid": 101058000,
     "lat": 54.47,
     "lon": 9.83,
@@ -52,7 +47,6 @@
     "windy_waves": true
   },
   {
-    "accuweather": "de/berlin/10178/minute-weather-forecast/178087",
     "dwd_warncellid": 111000000,
     "lat": 52.52,
     "lon": 13.41,
@@ -61,7 +55,6 @@
     "name": "Berlin"
   },
   {
-    "accuweather": "de/bremen/28195/minute-weather-forecast/167950",
     "dwd_warncellid": 104011000,
     "lat": 53.08,
     "lon": 8.81,
@@ -70,7 +63,6 @@
     "name": "Bremen"
   },
   {
-    "accuweather": "de/dortmund/44137/minute-weather-forecast/170370",
     "dwd_warncellid": 105913000,
     "lat": 51.51,
     "lon": 7.47,
@@ -79,7 +71,6 @@
     "name": "Dortmund"
   },
   {
-    "accuweather": "de/frankfurt/60311/minute-weather-forecast/168720",
     "dwd_warncellid": 106412000,
     "lat": 50.12,
     "lon": 8.68,
@@ -88,7 +79,6 @@
     "name": "Frankfurt am Main"
   },
   {
-    "accuweather": "de/freiburg-im-breisgau/79098/minute-weather-forecast/167209",
     "dwd_warncellid": 108311000,
     "lat": 47.99,
     "lon": 7.85,
@@ -97,7 +87,6 @@
     "name": "Freiburg im Breisgau"
   },
   {
-    "accuweather": "de/geislingen-an-der-steige/73312/minute-weather-forecast/171775",
     "dwd_warncellid": 108117000,
     "lat": 48.62,
     "lon": 9.83,
@@ -106,7 +95,6 @@
     "name": "Geislingen an der Steige"
   },
   {
-    "accuweather": "de/göttingen/37073/minute-weather-forecast/169816",
     "dwd_warncellid": 103159000,
     "lat": 51.54,
     "lon": 9.93,
@@ -115,7 +103,6 @@
     "name": "Göttingen"
   },
   {
-    "accuweather": "de/hamburg/20095/minute-weather-forecast/178556",
     "dwd_warncellid": 102000000,
     "lat": 53.55,
     "lon": 9.99,
@@ -124,7 +111,6 @@
     "name": "Hamburg"
   },
   {
-    "accuweather": "de/hanover/30159/minute-weather-forecast/169824",
     "dwd_warncellid": 103241000,
     "lat": 52.37,
     "lon": 9.73,
@@ -133,7 +119,6 @@
     "name": "Hannover"
   },
   {
-    "accuweather": "de/immenstadt/87509/weather-forecast/167621",
     "dwd_warncellid": 109780000,
     "lat": 47.56,
     "lon": 10.22,
@@ -142,7 +127,6 @@
     "name": "Immenstadt im Allgäu"
   },
   {
-    "accuweather": "de/ingolstadt/85049/minute-weather-forecast/167555",
     "dwd_warncellid": 109161000,
     "lat": 48.77,
     "lon": 11.43,
@@ -151,7 +135,6 @@
     "name": "Ingolstadt, Donau"
   },
   {
-    "accuweather": "de/landau/76829/minute-weather-forecast/174595",
     "dwd_warncellid": 107313000,
     "lat": 49.21,
     "lon": 8.11,
@@ -160,7 +143,6 @@
     "name": "Landau in der Pfalz"
   },
   {
-    "accuweather": "de/leipzig/04109/minute-weather-forecast/171240",
     "dwd_warncellid": 114713000,
     "lat": 51.34,
     "lon": 12.37,
@@ -169,7 +151,6 @@
     "name": "Leipzig"
   },
   {
-    "accuweather": "de/leutenbach/71397/weather-forecast/167298",
     "dwd_warncellid": 108119000,
     "lat": 48.89,
     "lon": 9.39,
@@ -178,7 +159,6 @@
     "name": "Leutenbach (Württemberg)"
   },
   {
-    "accuweather": "de/munich/80331/minute-weather-forecast/178086",
     "dwd_warncellid": 109162000,
     "lat": 48.14,
     "lon": 11.58,
@@ -187,7 +167,6 @@
     "name": "München"
   },
   {
-    "accuweather": "de/nuremberg/90402/weather-forecast/167559",
     "dwd_warncellid": 109564000,
     "lat": 49.45,
     "lon": 11.07,
@@ -196,7 +175,6 @@
     "name": "Nürnberg"
   },
   {
-    "accuweather": "de/rostock/18055/minute-weather-forecast/169581",
     "dwd_warncellid": 113003000,
     "lat": 54.08,
     "lon": 12.1,
@@ -205,7 +183,6 @@
     "name": "Rostock"
   },
   {
-    "accuweather": "de/senftenberg/01968/minute-weather-forecast/173217",
     "dwd_warncellid": 112066000,
     "lat": 51.52,
     "lon": 14.01,
@@ -214,7 +191,6 @@
     "name": "Senftenberg, Niederlausitz"
   },
   {
-    "accuweather": "de/stuttgart/70173/minute-weather-forecast/167220",
     "dwd_warncellid": 108111000,
     "lat": 48.78,
     "lon": 9.18,
@@ -223,7 +199,6 @@
     "name": "Stuttgart"
   },
   {
-    "accuweather": "de/ulm/89073/minute-weather-forecast/167216",
     "dwd_warncellid": 108421000,
     "lat": 48.4,
     "lon": 9.98,
@@ -232,7 +207,6 @@
     "name": "Ulm (Donau)"
   },
   {
-    "accuweather": "dk/124594/minute-weather-forecast/124594",
     "lat": 56.15,
     "lon": 10.22,
     "meteoblue_id": "Århus_dänemark_2624652",
@@ -240,7 +214,6 @@
     "name": "Aarhus"
   },
   {
-    "accuweather": "se/lund/314778/minute-weather-forecast/314778",
     "lat": 55.7,
     "lon": 13.19,
     "meteoblue_id": "lund_schweden_2693678",
@@ -248,7 +221,6 @@
     "name": "Lund"
   },
   {
-    "accuweather": "sk/michalovce/298695/minute-weather-forecast/298695",
     "lat": 48.75,
     "lon": 21.88,
     "meteoblue_id": "gro%c3%9fmichel_slowakei-%28slowakische-republik%29_724144",

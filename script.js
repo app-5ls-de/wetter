@@ -162,7 +162,7 @@ async function display_widgets() {
   windguru();
 
   await Promise.allSettled([meteoblue(), dwd_warn()]);
-  await Promise.allSettled([dwd_trend(), accuweather_link(), sunrise()]);
+  await Promise.allSettled([dwd_trend(), sunrise()]);
 
   rainviewer();
   knmi();
@@ -320,23 +320,6 @@ function knmi() {
 
     nextframe(); //show first frame
   });
-}
-
-function accuweather_link() {
-  if (!location_data.accuweather) return;
-
-  let accuweather_div = crel.div(
-    { id: "accuweather-link", class: "accuweather-link text-center" },
-    crel.a(
-      {
-        href: "https://www.accuweather.com/de/" + location_data.accuweather,
-        target: "_blank",
-        rel: "noopener",
-      },
-      "MinuteCast von Accuweather"
-    )
-  );
-  widgets_div.appendChild(accuweather_div);
 }
 
 function windy_link() {
