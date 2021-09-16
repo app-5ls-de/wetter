@@ -688,9 +688,11 @@ async function brightsky() {
         }))
       )
     );
+
   widgets_div.appendChild(brightsky_div);
 
   addDays = (date, days) => {
+    if (days == 0) return date;
     let new_date = new Date(date.valueOf());
     new_date.setDate(new_date.getDate() + days);
     return new_date;
