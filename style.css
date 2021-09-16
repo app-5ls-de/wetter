@@ -256,6 +256,7 @@
   font-size: initial;
   cursor: pointer;
   user-select: none;
+  margin-bottom: 1rem;
 }
 .leaflet-touch #rainviewer-control a,
 #rainviewer-control a {

@@ -924,6 +924,7 @@ h3 {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  margin-bottom: 1rem;
 }
 .leaflet-touch #rainviewer-control a,
 #rainviewer-control a {
