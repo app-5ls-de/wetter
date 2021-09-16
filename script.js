@@ -789,6 +789,7 @@ async function brightsky() {
           backgroundColor: "darkgray",
           borderColor: "darkgray",
           yAxisID: "y",
+          tension: 0.4,
         },
         {
           type: "bar",
