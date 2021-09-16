@@ -557,7 +557,7 @@ function daswetter() {
   widgets_div.appendChild(daswetter_div);
 
   return new Promise((resolve, reject) => {
-    crel(daswetter_div, {
+    crel(daswetter_img, {
       on: {
         load: resolve,
         error: reject,
