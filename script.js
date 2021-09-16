@@ -745,8 +745,6 @@ async function brightsky() {
 
   new Chart(brightsky_canvas, {
     type: "line",
-    responsive: true,
-    maintainAspectRatio: false,
     data: {
       labels: data_series.timestamp,
       datasets: [
@@ -756,6 +754,7 @@ async function brightsky() {
           backgroundColor: "darkgray",
           borderColor: "darkgray",
           yAxisID: "y",
+          cubicInterpolationMode: "monotone",
           tension: 0.4,
         },
         {
