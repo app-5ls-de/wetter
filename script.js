@@ -157,12 +157,10 @@ function main_routine() {
 }
 
 async function display_widgets() {
-  daswetter();
-  meteoblue_simple();
-  windguru();
+  await Promise.allSettled([daswetter(), meteoblue_simple(), windguru()]);
 
-  await Promise.allSettled([meteoblue(), dwd_warn()]);
-  await Promise.allSettled([dwd_trend(), sunrise()]);
+  await Promise.allSettled([meteoblue(), dwd_trend(), brightsky()]);
+  await Promise.allSettled([dwd_warn(), sunrise()]);
 
   rainviewer();
   knmi();
@@ -170,7 +168,6 @@ async function display_widgets() {
   /* windy_map();
   windy_map("waves"); */
 
-  brightsky();
   //metno();
 }
 
