@@ -204,7 +204,6 @@ async function display_widgets() {
 
   await Promise.allSettled([
     dwd_warn(),
-    create_section(metno, "Wolkenbedeckung"),
     create_section(sunrise, "Sonnenaufgang"),
   ]);
 
