@@ -164,11 +164,11 @@ async function display_widgets() {
 
   rainviewer();
   knmi();
+  metno();
 
   /* windy_map();
   windy_map("waves"); */
 
-  //metno();
 }
 
 function meteoblue() {
@@ -621,16 +621,140 @@ function windguru() {
 }
 
 async function metno() {
-  let metno_div = crel.div({ id: "metno", class: "" });
+  let metno_canvas,
+    metno_div = crel.div(
+      {
+        id: "metno",
+        class: "overflow-x-auto",
+      },
+      crel.div(
+        {
+          class: "relative w-full min-w-sm",
+        },
+        (metno_canvas = crel.canvas({
+          class: "w-full h-full",
+        }))
+      )
+    );
   widgets_div.appendChild(metno_div);
 
-  const data = await fetch_json(
+  const response = await fetch_json(
     "https://api.met.no/weatherapi/locationforecast/2.0/complete?lat=" +
       location_data.lat +
       "&lon=" +
       location_data.lon
   );
-  console.log(data);
+
+  let data = {};
+  data.time = response.properties.timeseries.map((x) => x.time);
+  data.precipitation_amount = response.properties.timeseries.map(
+    (x) => x.data.next_1_hours?.details.precipitation_amount
+  );
+  data.symbol_code = response.properties.timeseries.map(
+    (x) => x.data.next_1_hours?.summary.symbol_code
+  );
+  data.last_hourly = response.properties.timeseries.findIndex(
+    (element) => !element.data.next_1_hours
+  );
+
+  Object.keys(response.properties.timeseries[0].data.instant.details).forEach(
+    (key) => {
+      data[key] = response.properties.timeseries.map(
+        (x) => x.data.instant.details[key]
+      );
+    }
+  );
+
+  new Chart(metno_canvas, {
+    type: "line",
+    data: {
+      labels: data.time.slice(0, data.last_hourly),
+      datasets: [
+        {
+          label: "Niedrig",
+          data: data.cloud_area_fraction_low.slice(0, data.last_hourly),
+          backgroundColor: "rgba(75, 85, 99)",
+          borderColor: "rgba(75, 85, 99)",
+          yAxisID: "y",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+        },
+        {
+          label: "Mittel",
+          data: data.cloud_area_fraction_medium.slice(0, data.last_hourly),
+          backgroundColor: "rgba(156, 163, 175)",
+          borderColor: "rgba(156, 163, 175)",
+          yAxisID: "y",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+        },
+        {
+          label: "Hoch",
+          data: data.cloud_area_fraction_high.slice(0, data.last_hourly),
+          backgroundColor: "rgba(209, 213, 219)",
+          borderColor: "rgba(209, 213, 219)",
+          yAxisID: "y",
+          cubicInterpolationMode: "monotone",
+          tension: 0.4,
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      interaction: {
+        mode: "index",
+        intersect: false,
+      },
+      stacked: false,
+      elements: {
+        point: {
+          radius: 0,
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: "Stunde",
+          },
+          ticks: {
+            callback: function (val) {
+              return new Date(this.getLabelForValue(val)).getHours();
+            },
+          },
+        },
+        y: {
+          type: "linear",
+          display: true,
+          position: "left",
+          title: {
+            display: true,
+            text: "Wolkenbedeckung",
+          },
+        },
+      },
+
+      plugins: {
+        tooltip: {
+          position: "nearest",
+          callbacks: {
+            title: (item) => new Date(item[0].label).toLocaleString("de-DE"),
+            label: function (context) {
+              var label = context.dataset.label || "";
+              if (label) {
+                label += ": ";
+              }
+
+              return label + context.formattedValue + " %";
+            },
+          },
+        },
+        legend: true,
+        autocolors: false,
+      },
+    },
+  });
 }
 
 async function brightsky() {
