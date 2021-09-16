@@ -887,6 +887,14 @@ async function meteogram_metno(meteogram_div) {
     };
   });
 
+  annotations.push({
+    type: "line",
+    scaleID: "yr2",
+    borderWidth: 1,
+    value: 0,
+    borderColor: "lightgray",
+  });
+
   new Chart(meteogram_canvas, {
     type: "line",
     data: {
