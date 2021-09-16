@@ -748,7 +748,7 @@ async function brightsky() {
     return {
       type: "line",
       scaleID: "x",
-      value: index + 0.5,
+      value: index - 0.5, // center in between bars
       borderColor: "black",
       label: {
         content: new Date(reference.timestamp).toLocaleDateString("de-DE", {
@@ -764,8 +764,9 @@ async function brightsky() {
   let index = data.weather.findIndex(
     (element) => +new Date(element.timestamp) > +new Date()
   );
-  
+
   index -= 1; // the function above find the first element that is later than now
+  index -= 0.5; // center in between bars
   index += new Date().getMinutes() / 60;
 
   annotations.push({
