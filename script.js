@@ -181,7 +181,7 @@ function meteoblue() {
       all_location_data.filter((el) => el.meteoblue_src)
     );
     if (!closest) return;
-    if (closest.distance > 176) return; // max is "Weil am Rhein": 175km
+    if (closest.distance > 30) return;
     closest_data = closest;
   }
 
@@ -447,7 +447,7 @@ function dwd_trend() {
 
   let closest = get_closest(location_data, id_mapping);
   if (!closest) return;
-  if (closest.distance > 176) return; // max is "Weil am Rhein": 175km
+  if (closest.distance > 60) return;
   let id = closest.id;
 
   let dwd_trend_img,
