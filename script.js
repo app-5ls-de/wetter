@@ -195,17 +195,18 @@ async function display_widgets() {
     create_section(dwd_trend, "10 Tage Trend"),
     create_section(brightsky, "Temperatur"),
   ]);
+
   await Promise.allSettled([
     dwd_warn(),
     create_section(metno, "Wolkenbedeckung"),
     create_section(sunrise, "Sonnenaufgang"),
   ]);
 
-  create_section(rainviewer, "Regenradar");
-  create_section(knmi, "Großwetterlage");
+  Promise.allSettled([create_section(rainviewer, "Regenradar")]);
+  Promise.allSettled([create_section(knmi, "Großwetterlage")]);
 
-  create_section(windy_map, "Windkarte");
-  create_section(windy_map_waves, "Wellenkarte");
+  Promise.allSettled([create_section(windy_map, "Windkarte")]);
+  Promise.allSettled([create_section(windy_map_waves, "Wellenkarte")]);
 }
 
 function meteoblue(meteoblue_div) {
