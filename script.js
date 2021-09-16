@@ -677,7 +677,7 @@ async function metno(metno_div) {
     },
     crel.div(
       {
-        class: "relative w-full min-w-sm",
+        class: "h-50-screen relative w-full min-w-sm",
       },
       (metno_canvas = crel.canvas({
         class: "w-full h-full",
@@ -815,7 +815,7 @@ async function meteogram_metno(meteogram_div) {
     },
     crel.div(
       {
-        class: "relative w-full min-w-sm",
+        class: "h-50-screen relative w-full min-w-sm",
       },
       (meteogram_canvas = crel.canvas({
         class: "w-full h-full",
@@ -1074,7 +1074,7 @@ async function brightsky(brightsky_div) {
     },
     crel.div(
       {
-        class: "relative w-full min-w-sm",
+        class: "h-50-screen relative w-full min-w-sm",
       },
       (brightsky_canvas = crel.canvas({
         class: "w-full h-full",
