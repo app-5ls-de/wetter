@@ -805,21 +805,53 @@ async function metno(metno_div) {
 }
 
 async function meteogram_metno(meteogram_div) {
-  let meteogram_canvas;
+  let meteogram_canvas, meteogram_button, meteogram_container;
   crel(
     meteogram_div,
     {
       id: "metno",
       class: "overflow-x-auto",
     },
-    crel.div(
+    (meteogram_container = crel.div(
       {
         class: "h-50-screen relative w-full min-w-sm",
       },
       (meteogram_canvas = crel.canvas({
         class: "w-full h-full",
-      }))
-    )
+      })),
+      (meteogram_button = crel.button(
+        {
+          class:
+            "right-20 top-4 absolute cursor-pointer bg-blue-500 font-bold py-2 px-4 rounded inline-block no-underline border border-solid border-transparent bg-opacity-10 bg-gray-800 text-blue-500 hover:bg-blue-500 hover:border-blue-500 hover:border-opacity-20 hover:bg-opacity-20",
+          on: {
+            click: async () => {
+              meteogram_button.remove();
+
+              crel(meteogram_container, {
+                style: { "min-width": "1300px" },
+              });
+
+              chart.update();
+
+              // give chart time to animate growing to the new width
+              await new Promise((resolve) => {
+                setTimeout(resolve, 1000);
+              });
+
+              chart.data.labels = data.time;
+              chart.data.datasets[0].data = data.air_temperature;
+              chart.data.datasets[1].data = data.precipitation_amount;
+              chart.data.datasets[2].data = data.cloud_area_fraction_low;
+              chart.data.datasets[3].data = data.cloud_area_fraction_medium;
+              chart.data.datasets[4].data = data.cloud_area_fraction_high;
+
+              chart.update();
+            },
+          },
+        },
+        "Mehr..."
+      ))
+    ))
   );
 
   const response = await fetch_json(
@@ -885,13 +917,20 @@ async function meteogram_metno(meteogram_div) {
 
   annotations.push({
     type: "line",
+    scaleID: "x",
+    value: data.last_hourly + 0.5 + 0.01, // center between the bars, but move it a little to the right so that it is slightly out of the viewindow when not unfolded
+    borderColor: "darkred",
+  });
+
+  annotations.push({
+    type: "line",
     scaleID: "yr2",
     borderWidth: 1,
     value: 0,
     borderColor: "lightgray",
   });
 
-  new Chart(meteogram_canvas, {
+  let chart = new Chart(meteogram_canvas, {
     type: "line",
     data: {
       labels: data.time.slice(0, data.last_hourly + 1),
@@ -915,7 +954,7 @@ async function meteogram_metno(meteogram_div) {
           yAxisID: "yr2",
           cubicInterpolationMode: "monotone",
           tension: 0.4,
-          unit: "mm",
+          unit: "mm/h",
         },
         {
           label: "Niedrig",
