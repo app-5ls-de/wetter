@@ -52,25 +52,28 @@ async function getAddress() {
 
   location_data.address = response.features[0].properties || {};
   location_data.name = "?";
-  if (location_data.address.city) {
-    location_data.name = location_data.address.city;
-  } else if (location_data.address.town) {
-    location_data.name = response.address.town;
-  } else if (location_data.address.village) {
-    location_data.name = location_data.address.village;
-  } else if (location_data.address.municipality) {
-    location_data.name = location_data.address.municipality;
-  } else if (location_data.address.county) {
-    location_data.name = location_data.address.county;
-  } else if (location_data.address.state) {
-    location_data.name = location_data.address.state;
+
+  // use temporary variable for better readability
+  let a = location_data.address;
+  if (a.city) {
+    location_data.name = a.city;
+  } else if (a.town) {
+    location_data.name = a.town;
+  } else if (a.village) {
+    location_data.name = a.village;
+  } else if (a.municipality) {
+    location_data.name = a.municipality;
+  } else if (a.county) {
+    location_data.name = a.county;
+  } else if (a.state) {
+    location_data.name = a.state;
   }
 
-  if (!location_data.address.county) {
-    if (!location_data.address.district) {
-      location_data.address.county = location_data.address.district;
+  if (!a.county) {
+    if (!a.district) {
+      a.county = a.district;
     } else if (location_data.name != "?") {
-      location_data.address.county = location_data.name;
+      a.county = location_data.name;
     }
   }
 }
