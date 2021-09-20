@@ -832,9 +832,17 @@ async function meteogram_metno(meteogram_div) {
   let data = {};
   data.time = response.properties.timeseries.map((x) => x.time);
   data.dates = data.time.map((x) => new Date(x));
-  data.precipitation_amount = response.properties.timeseries.map(
-    (x) => x.data.next_1_hours?.details.precipitation_amount
-  );
+  data.precipitation_amount = response.properties.timeseries.map((x) => {
+    if (x.data.next_1_hours)
+      return x.data.next_1_hours.details.precipitation_amount;
+    if (x.data.next_6_hours)
+      return (
+        Math.round(
+          (x.data.next_6_hours.details.precipitation_amount / 6) * 10
+        ) / 10
+      );
+  });
+
   data.symbol_code = response.properties.timeseries.map(
     (x) => x.data.next_1_hours?.summary.symbol_code
   );
