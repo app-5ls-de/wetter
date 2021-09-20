@@ -857,22 +857,11 @@ async function meteogram_metno(meteogram_div) {
       );
     }
   );
-  //console.log(data);
 
-  /* let data_trimmed = {};
-  Object.keys(data)
-    .filter((key) => key != "last_hourly")
-    .forEach((key) => {
-      data_trimmed[key] = data[key].slice(0, data.last_hourly);
-    });
-
-  console.log(data_trimmed); */
-
-  let dates = data.dates.map((x) => x.getDate());
+  let dates = data.dates.slice(0, data.last_hourly + 1).map((x) => x.getDate());
   let dates_unique = [...new Set(dates)];
 
-  //remove trival first and last date
-  dates_unique.pop();
+  //remove trival first date
   dates_unique.shift();
 
   let annotations = dates_unique.map((x) => {
