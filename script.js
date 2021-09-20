@@ -897,11 +897,11 @@ async function meteogram_metno(meteogram_div) {
   new Chart(meteogram_canvas, {
     type: "line",
     data: {
-      labels: data.time.slice(0, data.last_hourly),
+      labels: data.time.slice(0, data.last_hourly + 1),
       datasets: [
         {
           label: "Temperatur",
-          data: data.air_temperature.slice(0, data.last_hourly),
+          data: data.air_temperature.slice(0, data.last_hourly + 1),
           backgroundColor: "darkgray",
           borderColor: "darkgray",
           yAxisID: "yl2",
@@ -912,7 +912,7 @@ async function meteogram_metno(meteogram_div) {
         {
           type: "bar",
           label: "Niederschlag",
-          data: data.precipitation_amount.slice(0, data.last_hourly),
+          data: data.precipitation_amount.slice(0, data.last_hourly + 1),
           backgroundColor: "blue",
           borderColor: "black",
           yAxisID: "yr2",
@@ -922,7 +922,7 @@ async function meteogram_metno(meteogram_div) {
         },
         {
           label: "Niedrig",
-          data: data.cloud_area_fraction_low.slice(0, data.last_hourly),
+          data: data.cloud_area_fraction_low.slice(0, data.last_hourly + 1),
           backgroundColor: "rgba(75, 85, 99)",
           borderColor: "rgba(75, 85, 99)",
           yAxisID: "yl1",
@@ -937,7 +937,7 @@ async function meteogram_metno(meteogram_div) {
         },
         {
           label: "Mittel",
-          data: data.cloud_area_fraction_medium.slice(0, data.last_hourly),
+          data: data.cloud_area_fraction_medium.slice(0, data.last_hourly + 1),
           backgroundColor: "rgba(156, 163, 175)",
           borderColor: "rgba(156, 163, 175)",
           yAxisID: "yl1",
@@ -952,7 +952,7 @@ async function meteogram_metno(meteogram_div) {
         },
         {
           label: "Hoch",
-          data: data.cloud_area_fraction_high.slice(0, data.last_hourly),
+          data: data.cloud_area_fraction_high.slice(0, data.last_hourly + 1),
           backgroundColor: "rgba(209, 213, 219)",
           borderColor: "rgba(209, 213, 219)",
           yAxisID: "yr1",
