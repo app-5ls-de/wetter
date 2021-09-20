@@ -891,6 +891,10 @@ async function meteogram_metno(meteogram_div) {
           stack: "meteogram",
           min: 0,
           max: 100,
+          ticks: {
+            stepSize: 50,
+            count: 3,
+          },
           title: {
             display: true,
             text: "Wolkenbedeckung",
@@ -922,6 +926,14 @@ async function meteogram_metno(meteogram_div) {
           stack: "meteogram",
           min: 0,
           max: 100,
+          grid: {
+            // only want the grid lines for one axis to show up
+            drawOnChartArea: false,
+          },
+          ticks: {
+            stepSize: 50,
+            count: 3,
+          },
           title: {
             display: true,
             text: "Wolkenbedeckung",
@@ -933,8 +945,12 @@ async function meteogram_metno(meteogram_div) {
           position: "left",
           offset: true,
           stack: "meteogram",
+          grace: "5%",
           suggestedMax: 15,
           stackWeight: 2,
+          ticks: {
+            stepSize: 5,
+          },
           title: {
             display: true,
             text: "Temperatur",
