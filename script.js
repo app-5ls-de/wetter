@@ -1103,6 +1103,7 @@ async function brightsky(brightsky_div) {
               } catch (error) {
                 console.error(error);
                 brightsky_button.remove();
+                return;
               }
               crel(brightsky_container, {
                 style: { "min-width": 150 * days_loaded + "px" },
