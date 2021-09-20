@@ -174,8 +174,7 @@ function create_section(func, display_name) {
       child_div,
       (collapsable_content = crel.button(
         {
-          class:
-            "cursor-pointer mx-auto block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+          class: "btn btn-blue mx-auto block",
           on: {
             click: (e) => {
               collapsable_content.remove();
@@ -684,7 +683,7 @@ async function meteogram_metno(meteogram_div) {
       (meteogram_button = crel.button(
         {
           class:
-            "right-20 top-4 absolute cursor-pointer bg-blue-500 font-bold py-2 px-4 rounded inline-block no-underline border border-solid border-transparent bg-opacity-10 bg-gray-800 text-blue-500 hover:bg-blue-500 hover:border-blue-500 hover:border-opacity-20 hover:bg-opacity-20",
+            "btn btn-blue-transparent right-20 top-4 absolute inline-block",
           on: {
             click: async () => {
               meteogram_button.remove();
@@ -987,7 +986,7 @@ async function brightsky(brightsky_div) {
       (brightsky_button = crel.button(
         {
           class:
-            "right-20 top-4 absolute cursor-pointer bg-blue-500 font-bold py-2 px-4 rounded inline-block no-underline border border-solid border-transparent bg-opacity-10 bg-gray-800 text-blue-500 hover:bg-blue-500 hover:border-blue-500 hover:border-opacity-20 hover:bg-opacity-20",
+            "btn btn-blue-transparent right-20 top-4 absolute inline-block",
           on: {
             click: async () => {
               crel(brightsky_button, { disabled: true });
