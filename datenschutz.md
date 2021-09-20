@@ -18,6 +18,7 @@ Auf dieser Webseite sind iFrames, Javascript und Bilder der nachfolgenden Seiten
 1. [brightsky](https://brightsky.dev/){:target="_blank"}
 1. [met.no](https://api.met.no/){:target="_blank"} mit [Datenschutzerklärung](https://www.met.no/en/About-us/privacy/){:target="_blank"}
 1. [meteoblue](https://www.meteoblue.com/){:target="_blank"} mit [Datenschutzerklärung](https://content.meteoblue.com/de/content/view/full/2855){:target="_blank"}
+1. [photon (komoot)](https://photon.komoot.io/){:target="_blank"} mit [Datenschutzerklärung](https://www.komoot.de/privacy){:target="_blank"}
 1. [rainviewer](https://www.rainviewer.com/){:target="_blank"} mit [Datenschutzerklärung](https://www.rainviewer.com/privacy.html){:target="_blank"}
 1. [sunrise-sunset.org](https://sunrise-sunset.org/){:target="_blank"} mit [Datenschutzerklärung](https://sunrise-sunset.org/privacy/){:target="_blank"}
 1. [windguru](https://www.windguru.cz/){:target="_blank"} mit [Datenschutzerklärung](https://www.windguru.cz/help.php?sec=privacy){:target="_blank"}

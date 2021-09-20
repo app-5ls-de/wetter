@@ -43,20 +43,19 @@ var location_data, all_location_data;
 async function getAddress() {
   if (location_data.address) return;
 
-  const nominatim_data = await fetch_json(
-    "https://nominatim.openstreetmap.org/reverse?format=json&lat=" +
+  const response = await fetch_json(
+    "https://photon.komoot.io/reverse?lang=de&lat=" +
       location_data.lat +
       "&lon=" +
-      location_data.lon +
-      "&zoom=10&addressdetails=1&accept-language=de"
+      location_data.lon
   );
 
-  location_data.address = nominatim_data.address || {};
+  location_data.address = response.features[0].properties || {};
   location_data.name = "?";
   if (location_data.address.city) {
     location_data.name = location_data.address.city;
   } else if (location_data.address.town) {
-    location_data.name = nominatim_data.address.town;
+    location_data.name = response.address.town;
   } else if (location_data.address.village) {
     location_data.name = location_data.address.village;
   } else if (location_data.address.municipality) {
@@ -67,10 +66,12 @@ async function getAddress() {
     location_data.name = location_data.address.state;
   }
 
-  if (location_data.address.county) {
-    location_data.address.district = location_data.address.county;
-  } else if (location_data.name != "?") {
-    location_data.address.district = location_data.name;
+  if (!location_data.address.county) {
+    if (!location_data.address.district) {
+      location_data.address.county = location_data.address.district;
+    } else if (location_data.name != "?") {
+      location_data.address.county = location_data.name;
+    }
   }
 }
 
@@ -1567,17 +1568,17 @@ warnWetter.loadWarnings = function (dwd_json) {
 
   getAddress()
     .then(() => {
-      let district = location_data.address.district;
-      if (!district) {
+      let county = location_data.address.county;
+      if (!county) {
         console.error("district not found");
         return;
       }
-      district = district
+      county = county
         .toLowerCase()
         .replace("landkreis", "")
         .replace("kreis", "")
         .trim();
-      let results = fuzzysort.go(district, alerts_list, {
+      let results = fuzzysort.go(county, alerts_list, {
         threshold: -20000,
         allowTypo: false,
         key: "regionName",
