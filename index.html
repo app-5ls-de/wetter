@@ -46,7 +46,7 @@ title: Wetter
   var search_input = document.getElementById("search");
   var search_liste_div = document.getElementById("search-liste");
 
-  search_input.addEventListener("input", (e) => {
+  search_input.addEventListener("input", () => {
     search();
   });
 
@@ -63,8 +63,9 @@ title: Wetter
 
   const debounce = (func, delay) => {
     let inDebounce;
-    return function (...args) {
+    return function () {
       const context = this;
+      const args = arguments;
       clearTimeout(inDebounce);
       inDebounce = setTimeout(() => func.apply(context, args), delay);
     };
@@ -74,7 +75,10 @@ title: Wetter
 
   async function _search() {
     let input = search_input.value;
-    if (!input || input.length == 0) return;
+    if (!input || input.length == 0) {
+      show_lastvisited();
+      return;
+    }
 
     let data = await fetch_json(
       "https://photon.komoot.io/api/?q=" +
@@ -83,7 +87,6 @@ title: Wetter
         // focus on south germany with low zoom
         "&lang=de&limit=5&osm_tag=place&osm_tag=:!house&osm_tag=:!locality"
     );
-    console.log(data);
 
     search_liste_div.textContent = "";
     data.features.forEach((element) => {
@@ -101,7 +104,7 @@ title: Wetter
       search_liste_div.appendChild(document.createElement("br"));
     });
 
-    if (!data || data.length == 0) {
+    if (!data || !data.features || data.features.length == 0) {
       let location_p = document.createElement("p");
       location_p.innerHTML = "kein Ergebnis";
       location_p.classList.add("font-bold");
@@ -137,11 +140,7 @@ title: Wetter
 
   show_lastvisited();
   window.addEventListener("pageshow", (event) => {
-    if (
-      event.persisted ||
-      (typeof window.performance != "undefined" &&
-        window.performance.navigation.type === 2)
-    )
+    if (event.persisted || window.performance?.navigation?.type === 2)
       show_lastvisited();
   });
   var locations_data;
