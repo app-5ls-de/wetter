@@ -14,5 +14,4 @@ title: Quellen
 1. [photon (komoot)](https://photon.komoot.io/){:target="_blank"}
 1. [rainviewer](https://www.rainviewer.com/){:target="_blank"}
 1. [sunrise-sunset.org](https://sunrise-sunset.org/){:target="_blank"}
-1. [windguru](https://www.windguru.cz/){:target="_blank"}
 1. [windy](https://www.windy.com/){:target="_blank"}

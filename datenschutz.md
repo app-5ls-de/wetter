@@ -19,7 +19,6 @@ Auf dieser Webseite sind iFrames, Javascript und Bilder der nachfolgenden Seiten
 1. [photon (komoot)](https://photon.komoot.io/){:target="_blank"} mit [Datenschutzerklärung](https://www.komoot.de/privacy){:target="_blank"}
 1. [rainviewer](https://www.rainviewer.com/){:target="_blank"} mit [Datenschutzerklärung](https://www.rainviewer.com/privacy.html){:target="_blank"}
 1. [sunrise-sunset.org](https://sunrise-sunset.org/){:target="_blank"} mit [Datenschutzerklärung](https://sunrise-sunset.org/privacy/){:target="_blank"}
-1. [windguru](https://www.windguru.cz/){:target="_blank"} mit [Datenschutzerklärung](https://www.windguru.cz/help.php?sec=privacy){:target="_blank"}
 1. [windy](https://www.windy.com/){:target="_blank"} mit [Datenschutzerklärung](https://account.windy.com/agreements/windy-privacy-policy){:target="_blank"}
 
 Diese Dienste könnten unter anderem folgende Informationen speichern und verarbeiten:
