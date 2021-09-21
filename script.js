@@ -1546,12 +1546,7 @@ function save_location() {
 
   let to_add;
   let params = new URLSearchParams(window.location.search);
-  if (params.get("location")) {
-    to_add = {
-      name: location_data.name,
-      location: location_data.name,
-    };
-  } else if (params.get("lat") && params.get("lon")) {
+  if (params.get("lat") && params.get("lon")) {
     to_add = {
       name: location_data.name,
       lat: location_data.lat,
@@ -1573,18 +1568,6 @@ function save_location() {
         to_add_strigified !=
         JSON.stringify(element, Object.keys(element).sort())
     );
-
-    lastvisited.forEach((element) => {
-      if (
-        to_add &&
-        element.name == to_add.name &&
-        to_add.lat &&
-        to_add.lon &&
-        element.location
-      ) {
-        to_add = null;
-      }
-    });
 
     if (to_add) {
       lastvisited.unshift(to_add);

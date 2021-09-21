@@ -126,9 +126,7 @@ title: Wetter
     lastvisited.forEach((element) => {
       let location_a = document.createElement("a");
       location_a.innerText = element.name;
-      if (element.location) {
-        location_a.href = "/show?location=" + element.location;
-      } else if (element.lat && element.lon) {
+      if (element.lat && element.lon) {
         location_a.href = "/show?lat=" + element.lat + "&lon=" + element.lon;
       } else {
         return;
