@@ -201,7 +201,7 @@ async function display_widgets() {
 
 async function meteoblue(meteoblue_div) {
   let closest_data;
-  let all_location_data = await fetch_json("locations.json");
+  let all_location_data = await fetch_json("/locations.json");
   if (location_data.meteoblue_src) {
     closest_data = location_data;
   } else {
