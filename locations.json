@@ -4,139 +4,119 @@
     "lon": 9.93,
     "meteoblue_id": "b%c3%b6hmenkirch_deutschland_2946950",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=B%C3%B6hmenkirch&iso2=de&lat=48.683300&lon=9.933330&asl=693&tz=Europe%2FBerlin&lang=de&sig=a28dca9c3b23be9cc8a0d454a7555590",
-    "name": "Böhmenkirch"
   },
   {
     "lat": 52.52,
     "lon": 13.41,
     "meteoblue_id": "berlin_deutschland_2950159",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Berlin&iso2=de&lat=52.524399&lon=13.410500&asl=74&tz=Europe%2FBerlin&lang=de&sig=746bd17297592ef3f64eed64e904a2d8",
-    "name": "Berlin"
   },
   {
     "lat": 51.05,
     "lon": 13.75,
     "meteoblue_id": "dresden_deutschland_2935022",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Dresden&iso2=de&lat=51.0509&lon=13.7383&asl=116&tz=Europe%2FBerlin&lang=de&sig=f59454dd4109cc83f52948c2fdeeacc6",
-    "name": "Dresden"
   },
   {
     "lat": 50.12,
     "lon": 8.68,
     "meteoblue_id": "frankfurt-am-main_deutschland_2925533",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Frankfurt+am+Main&iso2=de&lat=50.115501&lon=8.684170&asl=113&tz=Europe%2FBerlin&lang=de&sig=4277526e53a305140d6bfeab6165001f",
-    "name": "Frankfurt am Main"
   },
   {
     "lat": 48.62,
     "lon": 9.83,
     "meteoblue_id": "geislingen-an-der-steige_deutschland_2921653",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Geislingen+an+der+Steige&iso2=de&lat=48.624199&lon=9.827360&asl=426&tz=Europe%2FBerlin&lang=de&sig=fac367a37d53be296c64678ef09ac0ab",
-    "name": "Geislingen an der Steige"
   },
   {
     "lat": 48.75,
     "lon": 21.88,
     "meteoblue_id": "gro%c3%9fmichel_slowakei-%28slowakische-republik%29_724144",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Gro%C3%9Fmichel&iso2=sk&lat=48.7543&lon=21.9195&asl=111&tz=Europe%2FBratislava&lang=de&sig=cad22fffaa431635db38aad294d46c43",
-    "name": "Michalovce (Großmichel)"
   },
   {
     "lat": 53.55,
     "lon": 9.99,
     "meteoblue_id": "hamburg_deutschland_2911298",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Hamburg&iso2=de&lat=53.550701&lon=9.993020&asl=2&tz=Europe%2FBerlin&lang=de&sig=9da37d460e72ff65f429a0a21e07e00a",
-    "name": "Hamburg"
   },
   {
     "lat": 48,
     "lon": 11.18,
     "meteoblue_id": "herrsching-am-ammersee_deutschland_2905604",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Herrsching+am+Ammersee&iso2=de&lat=47.998901&lon=11.176800&asl=551&tz=Europe%2FBerlin&lang=de&sig=fffd5401d822b43d589ef032a694a313",
-    "name": "Herrsching am Ammersee"
   },
   {
     "lat": 47.56,
     "lon": 10.22,
     "meteoblue_id": "immenstadt-im-allg%c3%a4u_deutschland_2896261",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Immenstadt+im+Allg%C3%A4u&iso2=de&lat=47.56&lon=10.2139&asl=733&tz=Europe%2FBerlin&lang=de&sig=587e316f72ad991661ca270a85749995",
-    "name": "Immenstadt im Allgäu"
   },
   {
     "lat": 48.77,
     "lon": 11.43,
     "meteoblue_id": "ingolstadt_deutschland_2895992",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Ingolstadt&iso2=de&lat=48.7651&lon=11.4237&asl=379&tz=Europe%2FBerlin&lang=de&sig=a19a41572fa9657137946bd967b6f824",
-    "name": "Ingolstadt, Donau"
   },
   {
     "lat": 50.93,
     "lon": 6.95,
     "meteoblue_id": "k%c3%b6ln_deutschland_2886242",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=K%C3%B6ln&iso2=de&lat=50.9333&lon=6.95&asl=58&tz=Europe%2FBerlin&lang=de&sig=ae648ed3e0875e82818d732b31379156",
-    "name": "Köln"
   },
   {
     "lat": 49.21,
     "lon": 8.11,
     "meteoblue_id": "landau-in-der-pfalz_deutschland_2881646",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Landau+in+der+Pfalz&iso2=de&lat=49.198399&lon=8.116920&asl=144&tz=Europe%2FBerlin&lang=de&sig=0b60c1de828eabe40de97b318fff42e5",
-    "name": "Landau in der Pfalz"
   },
   {
     "lat": 55.7,
     "lon": 13.19,
     "meteoblue_id": "lund_schweden_2693678",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Lund&iso2=se&lat=55.705799&lon=13.193200&asl=51&tz=Europe%2FStockholm&lang=de&sig=ca9669498fcc1c1b6608bb9728a36b51",
-    "name": "Lund"
   },
   {
     "lat": 48.14,
     "lon": 11.58,
     "meteoblue_id": "m%c3%bcnchen_deutschland_2867714",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=M%C3%BCnchen&iso2=de&lat=48.137402&lon=11.575500&asl=524&tz=Europe%2FBerlin&lang=de&sig=a5e68ab574603119132b6c5af72550e1",
-    "name": "München"
   },
   {
     "lat": 47.67,
     "lon": 11.89,
     "meteoblue_id": "spitzingsee_deutschland_3205568",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Spitzingsee&iso2=de&lat=47.661301&lon=11.887600&asl=1089&tz=Europe%2FBerlin&lang=de&sig=2324fe8c179c06c644210dcdf795b9f4",
-    "name": "Spitzingsee"
   },
   {
     "lat": 47.38,
     "lon": 10.57,
     "meteoblue_id": "stanzach_%c3%96sterreich_2764648",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Stanzach&iso2=at&lat=47.3833&lon=10.5667&asl=961&tz=Europe%2FVienna&lang=de&sig=6a8d07c795d9f38da4dd265af6c145a1",
-    "name": "Stanzach"
   },
   {
     "lat": 47.24,
     "lon": 10.29,
     "meteoblue_id": "steeg%2c-lechtal_%c3%96sterreich_2764605",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Steeg%2C+Lechtal&iso2=at&lat=47.2439&lon=10.2944&asl=1116&tz=Europe%2FVienna&lang=de&sig=72690092615780130b752a32ed264fd5",
-    "name": "Steeg"
   },
   {
     "lat": 48.78,
     "lon": 9.18,
     "meteoblue_id": "stuttgart_deutschland_2825297",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Stuttgart&iso2=de&lat=48.782299&lon=9.177020&asl=252&tz=Europe%2FBerlin&lang=de&sig=7ae31cd04b5523e9a2244a23a80cd8d7",
-    "name": "Stuttgart"
   },
   {
     "lat": 48.4,
     "lon": 9.98,
     "meteoblue_id": "ulm_deutschland_2820256",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Ulm&iso2=de&lat=48.398399&lon=9.991550&asl=480&tz=Europe%2FBerlin&lang=de&sig=cb1bcf3809377a5a84a52273bf8c0153",
-    "name": "Ulm (Donau)"
   },
   {
     "lat": 56.15,
     "lon": 10.22,
     "meteoblue_id": "Århus_dänemark_2624652",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=%C3%85rhus&iso2=dk&lat=56.156700&lon=10.210800&asl=10&tz=Europe%2FCopenhagen&lang=de&sig=e5f20ffcd48cfbca5778b5c7b385e089",
-    "name": "Aarhus"
   }
 ]
