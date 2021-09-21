@@ -178,7 +178,7 @@ function create_section(func, display_name) {
 }
 
 async function display_widgets() {
-  await Promise.allSettled([meteoblue_simple(), windguru()]);
+  await Promise.allSettled([windguru()]);
 
   await Promise.allSettled([
     create_section(meteoblue, "Meteoblue Bild"),
@@ -512,69 +512,6 @@ function dwd_trend(dwd_trend_div) {
       "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
       id +
       ".png";
-  });
-}
-
-function meteoblue_simple() {
-  if (!(location_data.meteoblue_simple && location_data.meteoblue_id)) return;
-
-  let meteoblue_simple_iframe;
-
-  meteoblue_simple_iframe = crel.iframe({
-    frameborder: "0",
-    scrolling: "NO",
-    allowtransparency: "true",
-    sandbox:
-      "allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox",
-  });
-
-  crel(meteoblue_simple_iframe, {
-    alt: "meteoblue-simple",
-    style: {
-      width: "805px",
-      height: "623px",
-    },
-  });
-
-  let meteoblue_simple_div = crel.div(
-    {
-      id: "meteoblue-simple",
-      class:
-        "text-right border-2 border-solid border-gray-300 max-w-full overflow-x-auto",
-    },
-    meteoblue_simple_iframe,
-    crel.a(
-      {
-        href:
-          "https://www.meteoblue.com/de/wetter/woche/" +
-          location_data.meteoblue_id +
-          "?utm_source=weather_widget&utm_medium=linkus&utm_content=three&utm_campaign=Weather%2BWidget",
-        target: "_blank",
-        rel: "noopener",
-        class: "before:hidden",
-      },
-      "meteoblue"
-    )
-  );
-  widgets_div.appendChild(meteoblue_simple_div);
-
-  meteoblue_simple_div.parentNode.insertBefore(
-    crel.hr({ class: "mt-12 my-10-screen" }),
-    meteoblue_simple_div.nextSibling
-  );
-
-  return new Promise((resolve, reject) => {
-    crel(meteoblue_simple_iframe, {
-      on: {
-        load: resolve,
-        error: reject,
-      },
-    });
-
-    meteoblue_simple_iframe.src =
-      "https://www.meteoblue.com/de/wetter/widget/three/" +
-      location_data.meteoblue_id +
-      "?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=bright";
   });
 }
 
