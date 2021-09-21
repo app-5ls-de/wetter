@@ -49,7 +49,8 @@ registerRoute(
 registerRoute(
   ({ url }) =>
     url.origin.endsWith("cartocdn.com") ||
-    url.origin.endsWith("rainviewer.com"),
+    url.origin.endsWith("rainviewer.com") ||
+    url.origin == "https://photon.komoot.io",
   new NetworkOnly()
 );
 
