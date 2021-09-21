@@ -38,7 +38,7 @@ function format(number) {
   else return precise(number).toString();
 }
 
-var location_data, all_location_data;
+var location_data;
 
 async function getAddress() {
   if (location_data.address) return;
@@ -78,80 +78,61 @@ async function getAddress() {
   }
 }
 
-fetch_json("locations.json").then((fetch_location_response) => {
-  all_location_data = fetch_location_response;
-
-  let params = new URLSearchParams(window.location.search);
-  if (params.get("location")) {
-    let location_name = params.get("location");
-    for (let i = 0; i < all_location_data.length; i++) {
-      if (all_location_data[i].name == location_name) {
-        location_data = all_location_data[i];
-        main_routine();
-        break;
-      }
-    }
-    if (!location_data) {
-      localStorage.removeItem("lastvisited");
-      localStorage.removeItem("quickresume");
-      window.location.href = window.location.origin;
-    }
-  } else if (typeof params.get("gps") === "string") {
-    document.getElementById("title-info").innerText = "lädt...";
-    function geolocation_error(error) {
-      document.getElementById("title-info").innerText =
-        "Position nicht gefunden";
-      console.error(error);
-      throw "GeolocationError";
-    }
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition((location) => {
-        location_data = {
-          lat: Math.round(location.coords.latitude * 100) / 100,
-          lon: Math.round(location.coords.longitude * 100) / 100,
-        };
-        let accuracy = Math.max(
-          location.coords.accuracy,
-          distance(location_data, {
-            lat: location.coords.latitude,
-            lon: location.coords.longitude,
-          }) * 1000
-        );
-        document.getElementById("title-info").innerText = "aktueller Standort";
-        document.getElementById("title-info-small").innerText =
-          " ±" + format(accuracy) + "m";
-
-        getAddress()
-          .then(() => {
-            main_routine();
-          })
-          .catch(geolocation_error);
-      }, geolocation_error);
-    } else {
-      geolocation_error();
-    }
-  } else if (params.get("lat") && params.get("lon")) {
-    function latlon_error(error) {
-      document.getElementById("title-info").innerText = "Ort nicht gefunden";
-      console.error(error);
-      throw "LatLonError";
-    }
-    location_data = {
-      lat: Math.round(parseFloat(params.get("lat")) * 100) / 100,
-      lon: Math.round(parseFloat(params.get("lon")) * 100) / 100,
-    };
-
-    getAddress()
-      .then(() => {
-        main_routine();
-      })
-      .catch(latlon_error);
-  } else {
-    localStorage.removeItem("lastvisited");
-    localStorage.removeItem("quickresume");
-    window.location.href = window.location.origin;
+let params = new URLSearchParams(window.location.search);
+if (typeof params.get("gps") === "string") {
+  document.getElementById("title-info").innerText = "lädt...";
+  function geolocation_error(error) {
+    document.getElementById("title-info").innerText = "Position nicht gefunden";
+    console.error(error);
+    throw "GeolocationError";
   }
-});
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition((location) => {
+      location_data = {
+        lat: Math.round(location.coords.latitude * 100) / 100,
+        lon: Math.round(location.coords.longitude * 100) / 100,
+      };
+      let accuracy = Math.max(
+        location.coords.accuracy,
+        distance(location_data, {
+          lat: location.coords.latitude,
+          lon: location.coords.longitude,
+        }) * 1000
+      );
+      document.getElementById("title-info").innerText = "aktueller Standort";
+      document.getElementById("title-info-small").innerText =
+        " ±" + format(accuracy) + "m";
+
+      getAddress()
+        .then(() => {
+          main_routine();
+        })
+        .catch(geolocation_error);
+    }, geolocation_error);
+  } else {
+    geolocation_error();
+  }
+} else if (params.get("lat") && params.get("lon")) {
+  function latlon_error(error) {
+    document.getElementById("title-info").innerText = "Ort nicht gefunden";
+    console.error(error);
+    throw "LatLonError";
+  }
+  location_data = {
+    lat: Math.round(parseFloat(params.get("lat")) * 100) / 100,
+    lon: Math.round(parseFloat(params.get("lon")) * 100) / 100,
+  };
+
+  getAddress()
+    .then(() => {
+      main_routine();
+    })
+    .catch(latlon_error);
+} else {
+  localStorage.removeItem("lastvisited");
+  localStorage.removeItem("quickresume");
+  window.location.href = window.location.origin;
+}
 
 function main_routine() {
   document.getElementById("title-link").innerText = location_data.name;
@@ -218,8 +199,9 @@ async function display_widgets() {
   Promise.allSettled([create_section(windy_map_waves, "Wellenkarte")]);
 }
 
-function meteoblue(meteoblue_div) {
+async function meteoblue(meteoblue_div) {
   let closest_data;
+  let all_location_data = await fetch_json("locations.json");
   if (location_data.meteoblue_src) {
     closest_data = location_data;
   } else {
@@ -257,7 +239,7 @@ function meteoblue(meteoblue_div) {
     )
   );
 
-  return new Promise((resolve, reject) => {
+  await new Promise((resolve, reject) => {
     meteoblue_img.addEventListener("load", resolve);
     meteoblue_img.addEventListener("error", reject);
 
