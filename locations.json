@@ -4,9 +4,7 @@
     "lon": 11.12,
     "meteoblue_id": "herrsching-am-ammersee_deutschland_2905604",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Herrsching+am+Ammersee&iso2=de&lat=47.998901&lon=11.176800&asl=551&tz=Europe%2FBerlin&lang=de&sig=fffd5401d822b43d589ef032a694a313",
-    "name": "Ammersee",
-    "windguru_s": 243,
-    "windguru_uid": "wg_fwdg_243_3_1589997765794"
+    "name": "Ammersee"
   },
   {
     "lat": 48.68,
@@ -27,9 +25,7 @@
     "lon": 11.89,
     "meteoblue_id": "spitzingsee_deutschland_3205568",
     "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Spitzingsee&iso2=de&lat=47.661301&lon=11.887600&asl=1089&tz=Europe%2FBerlin&lang=de&sig=2324fe8c179c06c644210dcdf795b9f4",
-    "name": "Spitzingsee",
-    "windguru_s": 245930,
-    "windguru_uid": "wg_fwdg_245930_3_1590655757107"
+    "name": "Spitzingsee"
   },
   {
     "lat": 54.47,

@@ -178,8 +178,6 @@ function create_section(func, display_name) {
 }
 
 async function display_widgets() {
-  await Promise.allSettled([windguru()]);
-
   await Promise.allSettled([
     create_section(meteoblue, "Meteoblue Bild"),
     create_section(dwd_trend, "10 Tage Trend"),
@@ -512,55 +510,6 @@ function dwd_trend(dwd_trend_div) {
       "https://www.dwd.de/DWD/wetter/wv_allg/deutschland_trend/bilder/ecmwf_meg_" +
       id +
       ".png";
-  });
-}
-
-function windguru() {
-  if (!(location_data.windguru_uid && location_data.windguru_s)) return;
-
-  let windguru_loading_div,
-    windguru_div = crel.div(
-      { id: "windguru", class: "" },
-      (windguru_loading_div = crel.div({
-        class: "bg-gray-300 w-full",
-        style: { "min-height": "300px" },
-      })),
-      crel.div(
-        { class: "info" },
-        crel.a(
-          { href: "/windguru-hilfe.png" },
-          crel.img({ src: "/info.svg", alt: "" })
-        )
-      )
-    );
-  widgets_div.appendChild(windguru_div);
-
-  return new Promise((resolve, reject) => {
-    let windguru_reference_script = crel.script({
-      id: location_data.windguru_uid,
-    });
-    windguru_loading_div.appendChild(windguru_reference_script);
-
-    let arg = [
-      "s=" + location_data.windguru_s,
-      "m=3",
-      "uid=" + location_data.windguru_uid,
-      "wj=knots",
-      "tj=c",
-      "odh=0",
-      "doh=24",
-      "fhours=240",
-      "vt=fcst_graph",
-      "lng=de",
-    ];
-    let windguru_script = crel.script({
-      on: {
-        load: resolve,
-        error: reject,
-      },
-      src: "https://www.windguru.cz/js/widget.php?" + arg.join("&"),
-    });
-    document.body.appendChild(windguru_script);
   });
 }
 
