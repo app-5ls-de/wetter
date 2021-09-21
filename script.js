@@ -70,7 +70,7 @@ async function getAddress() {
   }
 
   if (!a.county) {
-    if (!a.district) {
+    if (a.district) {
       a.county = a.district;
     } else if (location_data.name != "?") {
       a.county = location_data.name;
