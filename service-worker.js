@@ -18,9 +18,8 @@ async function cacheKeyWillBeUsed({ request }) {
 
 registerRoute(
   ({ url }) =>
-    [
-      "https://cdn.jsdelivr.net",
-    ].includes(url.origin) ||
+    url.origin == "https://cdn.jsdelivr.net" ||
+    url.href.startsWith("https://photon.komoot.io/reverse") ||
     (url.origin == location.origin &&
       new RegExp("\\.(json|svg|png)$").test(url.pathname)),
   new CacheFirst({
