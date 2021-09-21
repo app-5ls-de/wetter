@@ -21,7 +21,7 @@ title: Wetter
     class="focus:outline-none bg-transparent w-52 text-2xl mx-8"
     id="search"
     type="text"
-    placeholder="loading..."
+    placeholder="Suche"
   />
   <button
     class="
@@ -47,11 +47,9 @@ title: Wetter
   var search_liste_div = document.getElementById("search-liste");
 
   search_input.addEventListener("input", (e) => {
-    show_autocomplete_results();
+    search();
   });
-  search_input.addEventListener("keyup", ({ key }) => {
-    if (key === "Enter") search();
-  });
+
   document.getElementById("search-button").addEventListener("click", () => {
     search();
   });
@@ -63,68 +61,42 @@ title: Wetter
     return data;
   }
 
-  function show_autocomplete_results() {
+  const debounce = (func, delay) => {
+    let inDebounce;
+    return function (...args) {
+      const context = this;
+      clearTimeout(inDebounce);
+      inDebounce = setTimeout(() => func.apply(context, args), delay);
+    };
+  };
+
+  var search = debounce(_search, 300);
+
+  async function _search() {
     let input = search_input.value;
-    if (!input) {
-      show_lastvisited();
-      return;
-    }
-    if (!locations_data) return;
-
-    const results = fuzzysort.go(input, locations_data, {
-      threshold: -20000,
-      limit: 5,
-      allowTypo: true,
-      key: "name",
-    });
-
-    search_liste_div.textContent = "";
-    results.forEach((result) => {
-      let location_a = document.createElement("a");
-      location_a.innerHTML = fuzzysort.highlight(result);
-      location_a.href = "/show?location=" + result.obj.name;
-      search_liste_div.appendChild(location_a);
-      if (result.obj.meteoblue_src)
-        search_liste_div.appendChild(document.createTextNode("*"));
-      search_liste_div.appendChild(document.createElement("br"));
-    });
-
-    if (!results || results.length == 0) {
-      let location_button = document.createElement("button");
-      location_button.classList.add(
-        "font-bold",
-        "py-2",
-        "px-4",
-        "rounded",
-        "bg-gray-200",
-        "hover:bg-gray-300"
-      );
-      location_button.innerHTML = "erweiterte Suche";
-      location_button.addEventListener("click", search);
-      search_liste_div.appendChild(location_button);
-    }
-  }
-
-  async function search() {
-    let input = search_input.value;
-    if (!input || input.length < 3) return;
+    if (!input || input.length == 0) return;
 
     let data = await fetch_json(
-      "https://nominatim.openstreetmap.org/search.php?q=" +
+      "https://photon.komoot.io/api/?q=" +
         input.toLowerCase().trim() +
-        "&dedupe=1&accept-language=de&limit=5&format=jsonv2"
+        "&lat=49&lon=11&zoom=7" +
+        // focus on south germany with low zoom
+        "&lang=de&limit=5&osm_tag=place&osm_tag=:!house&osm_tag=:!locality"
     );
-    data = data.filter((element) => element.importance > 0.2);
+    console.log(data);
 
     search_liste_div.textContent = "";
-    data.forEach((result_element) => {
+    data.features.forEach((element) => {
       let location_a = document.createElement("a");
-      location_a.innerText = result_element.display_name;
+      let p = element.properties;
+      location_a.innerText = [p.name, p.city, p.county, p.state, p.countrycode]
+        .filter((x) => x)
+        .join(", ");
       location_a.href =
         "/show?lat=" +
-        Math.round(parseFloat(result_element.lat) * 100) / 100 +
+        Math.round(parseFloat(element.geometry.coordinates[1]) * 100) / 100 +
         "&lon=" +
-        Math.round(parseFloat(result_element.lon) * 100) / 100;
+        Math.round(parseFloat(element.geometry.coordinates[0]) * 100) / 100;
       search_liste_div.appendChild(location_a);
       search_liste_div.appendChild(document.createElement("br"));
     });
@@ -173,10 +145,4 @@ title: Wetter
       show_lastvisited();
   });
   var locations_data;
-
-  fetch_json("/locations.json").then((data) => {
-    locations_data = data;
-    search_input.setAttribute("placeholder", "Suche");
-    show_autocomplete_results();
-  });
 </script>
