@@ -6,7 +6,6 @@ title: Quellen
 # Wetterquellen
 
 {:class="min-w-max mx-10-screen px-4 pt-4 pt-40 text-2xl"}
-1. [Daswetter](https://www.daswetter.com/){:target="_blank"}
 1. [Deutscher Wetterdienst](https://www.dwd.de/DE/){:target="_blank"}
 1. [KNMI](https://www.knmi.nl/){:target="_blank"}
 1. [OpenStreetMap Nominatim: OpenStreetMap contributors](https://osm.org/copyright){:target="_blank"}

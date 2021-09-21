@@ -197,7 +197,7 @@ function create_section(func, display_name) {
 }
 
 async function display_widgets() {
-  await Promise.allSettled([daswetter(), meteoblue_simple(), windguru()]);
+  await Promise.allSettled([meteoblue_simple(), windguru()]);
 
   await Promise.allSettled([
     create_section(meteoblue, "Meteoblue Bild"),
@@ -593,30 +593,6 @@ function meteoblue_simple() {
       "https://www.meteoblue.com/de/wetter/widget/three/" +
       location_data.meteoblue_id +
       "?geoloc=fixed&nocurrent=0&noforecast=0&days=7&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&layout=bright";
-  });
-}
-
-function daswetter() {
-  if (!location_data.daswetter) return;
-  let daswetter_img,
-    daswetter_div = crel.div(
-      { id: "daswetter", class: "" },
-      (daswetter_img = crel.img({ alt: "daswetter" }))
-    );
-  widgets_div.appendChild(daswetter_div);
-
-  return new Promise((resolve, reject) => {
-    crel(daswetter_img, {
-      on: {
-        load: resolve,
-        error: reject,
-      },
-    });
-
-    daswetter_img.src =
-      "https://www.daswetter.com/wimages/foto" +
-      location_data.daswetter +
-      ".png";
   });
 }
 

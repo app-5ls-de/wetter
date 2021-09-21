@@ -11,7 +11,6 @@ Diese Webseite wird gehostet auf Servern der Github Inc., 88 Colin P Kelly Jr. S
 
 Auf dieser Webseite sind iFrames, Javascript und Bilder der nachfolgenden Seiten eingebunden. Mit diesen nutzt diese Seite Dienste Dritter. Einzelheiten zu den im Zusammenhang mit den Diensten erfolgenden Datenverarbeitungen können Sie in den Datenschutzerklärungen der Dienste nachlesen.
 
-1. [Daswetter](https://www.daswetter.com/){:target="_blank"} mit [Datenschutzerklärung](https://www.daswetter.com/privacy.html){:target="_blank"}
 1. [Deutscher Wetterdienst](https://www.dwd.de/DE/){:target="_blank"} mit [Datenschutzerklärung](https://www.dwd.de/DE/service/datenschutz/datenschutz_node.html){:target="_blank"}
 1. [KNMI](https://www.knmi.nl/){:target="_blank"} mit [Datenschutzerklärung](https://www.knmi.nl/privacy){:target="_blank"}
 1. [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/){:target="_blank"} mit [Datenschutzerklärung](https://wiki.osmfoundation.org/wiki/Privacy_Policy){:target="_blank"}
