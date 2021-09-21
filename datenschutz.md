@@ -13,7 +13,6 @@ Auf dieser Webseite sind iFrames, Javascript und Bilder der nachfolgenden Seiten
 
 1. [Deutscher Wetterdienst](https://www.dwd.de/DE/){:target="_blank"} mit [Datenschutzerklärung](https://www.dwd.de/DE/service/datenschutz/datenschutz_node.html){:target="_blank"}
 1. [KNMI](https://www.knmi.nl/){:target="_blank"} mit [Datenschutzerklärung](https://www.knmi.nl/privacy){:target="_blank"}
-1. [OpenStreetMap Nominatim](https://nominatim.openstreetmap.org/){:target="_blank"} mit [Datenschutzerklärung](https://wiki.osmfoundation.org/wiki/Privacy_Policy){:target="_blank"}
 1. [brightsky](https://brightsky.dev/){:target="_blank"}
 1. [met.no](https://api.met.no/){:target="_blank"} mit [Datenschutzerklärung](https://www.met.no/en/About-us/privacy/){:target="_blank"}
 1. [meteoblue](https://www.meteoblue.com/){:target="_blank"} mit [Datenschutzerklärung](https://content.meteoblue.com/de/content/view/full/2855){:target="_blank"}

@@ -8,7 +8,6 @@ title: Quellen
 {:class="min-w-max mx-10-screen px-4 pt-4 pt-40 text-2xl"}
 1. [Deutscher Wetterdienst](https://www.dwd.de/DE/){:target="_blank"}
 1. [KNMI](https://www.knmi.nl/){:target="_blank"}
-1. [OpenStreetMap Nominatim: OpenStreetMap contributors](https://osm.org/copyright){:target="_blank"}
 1. [brightsky](https://brightsky.dev/){:target="_blank"}
 1. [met.no](https://api.met.no/){:target="_blank"}
 1. [meteoblue](https://www.meteoblue.com/){:target="_blank"}

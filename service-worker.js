@@ -20,7 +20,6 @@ registerRoute(
   ({ url }) =>
     [
       "https://cdn.jsdelivr.net",
-      "https://nominatim.openstreetmap.org",
     ].includes(url.origin) ||
     (url.origin == location.origin &&
       new RegExp("\\.(json|svg|png)$").test(url.pathname)),
