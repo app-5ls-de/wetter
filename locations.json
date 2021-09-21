@@ -1,6 +1,5 @@
 [
   {
-    "dwd_warncellid": 109188000,
     "lat": 48.0,
     "lon": 11.12,
     "meteoblue_id": "herrsching-am-ammersee_deutschland_2905604",
@@ -11,7 +10,6 @@
   },
   {
     "daswetter": "6823c1e09a17c26b7fa9bce8b601e68e",
-    "dwd_warncellid": 108117000,
     "lat": 48.68,
     "lon": 9.93,
     "meteoblue_id": "b%c3%b6hmenkirch_deutschland_2946950",
@@ -20,7 +18,6 @@
     "name": "Böhmenkirch"
   },
   {
-    "dwd_warncellid": 114612000,
     "lat": 51.05,
     "lon": 13.75,
     "meteoblue_id": "dresden_deutschland_2935022",
@@ -28,7 +25,6 @@
     "name": "Dresden"
   },
   {
-    "dwd_warncellid": 109182000,
     "lat": 47.67,
     "lon": 11.89,
     "meteoblue_id": "spitzingsee_deutschland_3205568",
@@ -38,7 +34,6 @@
     "windguru_uid": "wg_fwdg_245930_3_1590655757107"
   },
   {
-    "dwd_warncellid": 101058000,
     "lat": 54.47,
     "lon": 9.83,
     "meteoblue_id": "eckernf%c3%b6rde_deutschland_2933627",
@@ -47,7 +42,6 @@
     "windy_waves": true
   },
   {
-    "dwd_warncellid": 111000000,
     "lat": 52.52,
     "lon": 13.41,
     "meteoblue_id": "berlin_deutschland_2950159",
@@ -55,7 +49,6 @@
     "name": "Berlin"
   },
   {
-    "dwd_warncellid": 104011000,
     "lat": 53.08,
     "lon": 8.81,
     "meteoblue_id": "bremen_deutschland_2944388",
@@ -63,7 +56,6 @@
     "name": "Bremen"
   },
   {
-    "dwd_warncellid": 105913000,
     "lat": 51.51,
     "lon": 7.47,
     "meteoblue_id": "dortmund_deutschland_2935517",
@@ -71,7 +63,6 @@
     "name": "Dortmund"
   },
   {
-    "dwd_warncellid": 106412000,
     "lat": 50.12,
     "lon": 8.68,
     "meteoblue_id": "frankfurt-am-main_deutschland_2925533",
@@ -79,7 +70,6 @@
     "name": "Frankfurt am Main"
   },
   {
-    "dwd_warncellid": 108311000,
     "lat": 47.99,
     "lon": 7.85,
     "meteoblue_id": "freiburg-im-breisgau_deutschland_2925177",
@@ -87,7 +77,6 @@
     "name": "Freiburg im Breisgau"
   },
   {
-    "dwd_warncellid": 108117000,
     "lat": 48.62,
     "lon": 9.83,
     "meteoblue_id": "geislingen-an-der-steige_deutschland_2921653",
@@ -95,7 +84,6 @@
     "name": "Geislingen an der Steige"
   },
   {
-    "dwd_warncellid": 103159000,
     "lat": 51.54,
     "lon": 9.93,
     "meteoblue_id": "g%c3%b6ttingen_deutschland_2918632",
@@ -103,7 +91,6 @@
     "name": "Göttingen"
   },
   {
-    "dwd_warncellid": 102000000,
     "lat": 53.55,
     "lon": 9.99,
     "meteoblue_id": "hamburg_deutschland_2911298",
@@ -111,7 +98,6 @@
     "name": "Hamburg"
   },
   {
-    "dwd_warncellid": 103241000,
     "lat": 52.37,
     "lon": 9.73,
     "meteoblue_id": "hannover_deutschland_2910831",
@@ -119,7 +105,6 @@
     "name": "Hannover"
   },
   {
-    "dwd_warncellid": 109780000,
     "lat": 47.56,
     "lon": 10.22,
     "meteoblue_id": "immenstadt-im-allg%c3%a4u_deutschland_2896261",
@@ -127,7 +112,6 @@
     "name": "Immenstadt im Allgäu"
   },
   {
-    "dwd_warncellid": 109161000,
     "lat": 48.77,
     "lon": 11.43,
     "meteoblue_id": "ingolstadt_deutschland_2895992",
@@ -135,7 +119,6 @@
     "name": "Ingolstadt, Donau"
   },
   {
-    "dwd_warncellid": 107313000,
     "lat": 49.21,
     "lon": 8.11,
     "meteoblue_id": "landau-in-der-pfalz_deutschland_2881646",
@@ -143,7 +126,6 @@
     "name": "Landau in der Pfalz"
   },
   {
-    "dwd_warncellid": 114713000,
     "lat": 51.34,
     "lon": 12.37,
     "meteoblue_id": "leipzig_deutschland_2879139",
@@ -151,7 +133,6 @@
     "name": "Leipzig"
   },
   {
-    "dwd_warncellid": 108119000,
     "lat": 48.89,
     "lon": 9.39,
     "meteoblue_id": "leutenbach_deutschland_2878313",
@@ -159,7 +140,6 @@
     "name": "Leutenbach (Württemberg)"
   },
   {
-    "dwd_warncellid": 109162000,
     "lat": 48.14,
     "lon": 11.58,
     "meteoblue_id": "m%c3%bcnchen_deutschland_2867714",
@@ -167,7 +147,6 @@
     "name": "München"
   },
   {
-    "dwd_warncellid": 109564000,
     "lat": 49.45,
     "lon": 11.07,
     "meteoblue_id": "nürnberg_deutschland_2861650",
@@ -175,7 +154,6 @@
     "name": "Nürnberg"
   },
   {
-    "dwd_warncellid": 113003000,
     "lat": 54.08,
     "lon": 12.1,
     "meteoblue_id": "rostock_deutschland_2844588",
@@ -183,7 +161,6 @@
     "name": "Rostock"
   },
   {
-    "dwd_warncellid": 112066000,
     "lat": 51.52,
     "lon": 14.01,
     "meteoblue_id": "senftenberg_deutschland_2833073",
@@ -191,7 +168,6 @@
     "name": "Senftenberg, Niederlausitz"
   },
   {
-    "dwd_warncellid": 108111000,
     "lat": 48.78,
     "lon": 9.18,
     "meteoblue_id": "stuttgart_deutschland_2825297",
@@ -199,7 +175,6 @@
     "name": "Stuttgart"
   },
   {
-    "dwd_warncellid": 108421000,
     "lat": 48.4,
     "lon": 9.98,
     "meteoblue_id": "ulm_deutschland_2820256",

@@ -1565,9 +1565,6 @@ warnWetter.loadWarnings = function (dwd_json) {
   }
 
   let warncellids = [];
-  if (location_data.dwd_warncellid) {
-    warncellids.push(String(location_data.dwd_warncellid));
-  }
 
   getAddress()
     .then(() => {
