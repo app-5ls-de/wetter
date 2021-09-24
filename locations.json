@@ -98,20 +98,6 @@
     "name": "Spitzingsee"
   },
   {
-    "lat": 47.38,
-    "lon": 10.57,
-    "meteoblue_id": "stanzach_%c3%96sterreich_2764648",
-    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Stanzach&iso2=at&lat=47.3833&lon=10.5667&asl=961&tz=Europe%2FVienna&lang=de&sig=6a8d07c795d9f38da4dd265af6c145a1",
-    "name": "Stanzach"
-  },
-  {
-    "lat": 47.24,
-    "lon": 10.29,
-    "meteoblue_id": "steeg%2c-lechtal_%c3%96sterreich_2764605",
-    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Steeg%2C+Lechtal&iso2=at&lat=47.2439&lon=10.2944&asl=1116&tz=Europe%2FVienna&lang=de&sig=72690092615780130b752a32ed264fd5",
-    "name": "Steeg"
-  },
-  {
     "lat": 48.78,
     "lon": 9.18,
     "meteoblue_id": "stuttgart_deutschland_2825297",
