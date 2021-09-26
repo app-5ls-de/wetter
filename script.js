@@ -38,7 +38,19 @@ function format(number) {
   else return precise(number).toString();
 }
 
-var location_data;
+class Deferred {
+  constructor() {
+    this.promise = new Promise((resolve, reject) => {
+      this.reject = reject;
+      this.resolve = resolve;
+    });
+    this.then = (func) => this.promise.then(func);
+    this.catch = (func) => this.promise.catch(func);
+  }
+}
+
+var location_data,
+  dwd_warn_promise = new Deferred();
 
 async function getAddress() {
   if (location_data.address) return;
@@ -427,15 +439,11 @@ function dwd_warn(dwd_warn_div) {
   let dwd_warn_script = crel.script({ crossorigin: "anonymous" });
   document.body.appendChild(dwd_warn_script);
 
-  return new Promise((resolve, reject) => {
-    crel(dwd_warn_script, {
-      on: {
-        load: resolve,
-        error: reject,
-      },
-      src: "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
-    });
+  crel(dwd_warn_script, {
+    src: "https://www.dwd.de/DWD/warnungen/warnapp/json/warnings.json",
   });
+
+  return dwd_warn_promise;
 }
 
 function dwd_trend(dwd_trend_div) {
@@ -1385,7 +1393,17 @@ function rainviewer(rainviewer_div) {
 }
 
 warnWetter = {};
-warnWetter.loadWarnings = function (dwd_json) {
+warnWetter.loadWarnings = async (dwd_json) => {
+  try {
+    await warnWetter._loadWarnings(dwd_json);
+    dwd_warn_promise.resolve();
+  } catch (err) {
+    console.error(err);
+    dwd_warn_promise.reject(err);
+  }
+};
+
+warnWetter._loadWarnings = async function (dwd_json) {
   let alerts_list = [];
   for (const key in dwd_json.warnings) {
     if (Object.hasOwnProperty.call(dwd_json.warnings, key)) {
@@ -1409,38 +1427,32 @@ warnWetter.loadWarnings = function (dwd_json) {
   }
 
   let warncellids = [];
+  try {
+    await getAddress();
+  } catch (err) {
+    console.error(err);
+  }
 
-  getAddress()
-    .then(() => {
-      let county = location_data.address.county;
-      if (!county) {
-        console.error("district not found");
-        return;
-      }
-      county = county
-        .toLowerCase()
-        .replace("landkreis", "")
-        .replace("kreis", "")
-        .trim();
-      let results = fuzzysort.go(county, alerts_list, {
-        threshold: -20000,
-        allowTypo: false,
-        key: "regionName",
-      });
+  let county = location_data.address.county;
+  if (!county) {
+    console.error("district not found");
+    return;
+  }
+  county = county
+    .toLowerCase()
+    .replace("landkreis", "")
+    .replace("kreis", "")
+    .trim();
+  let results = fuzzysort.go(county, alerts_list, {
+    threshold: -20000,
+    allowTypo: false,
+    key: "regionName",
+  });
 
-      results.forEach((el) => {
-        warncellids.push(el.obj.id);
-      });
+  results.forEach((el) => {
+    warncellids.push(el.obj.id);
+  });
 
-      show_warnings(alerts_list, warncellids);
-    })
-    .catch((er) => {
-      console.error(er);
-      show_warnings(alerts_list, warncellids);
-    });
-};
-
-function show_warnings(alerts_list, warncellids) {
   let dwd_warn_div = warnWetter.element;
 
   let alerts = [];
@@ -1539,7 +1551,7 @@ function show_warnings(alerts_list, warncellids) {
 
     dwd_warn_div.appendChild(alert_div);
   });
-}
+};
 
 function save_location() {
   localStorage.setItem("quickresume", location.pathname + location.search);
