@@ -73,6 +73,7 @@ title: Wetter
 
   var search = debounce(_search, 300);
 
+  var limit = 5;
   async function _search() {
     let input = search_input.value;
     if (!input || input.length == 0) {
@@ -85,7 +86,9 @@ title: Wetter
         input.toLowerCase().trim() +
         "&lat=49&lon=11&zoom=7" +
         // focus on south germany with low zoom
-        "&lang=de&limit=5&osm_tag=place&osm_tag=:!house&osm_tag=:!locality"
+        "&lang=de&limit=" +
+        limit +
+        "&osm_tag=place&osm_tag=:!house&osm_tag=:!locality"
     );
 
     search_liste_div.textContent = "";
@@ -109,6 +112,20 @@ title: Wetter
       location_p.innerHTML = "kein Ergebnis";
       location_p.classList.add("font-bold");
       search_liste_div.appendChild(location_p);
+    } else {
+      let location_button_more = document.createElement("button");
+      location_button_more.innerHTML = "Mehr";
+      location_button_more.classList.add(
+        "btn",
+        "btn-blue-transparent",
+        "font-bold",
+        "mt-4"
+      );
+      location_button_more.addEventListener("click", () => {
+        limit += 5;
+        search();
+      });
+      search_liste_div.appendChild(location_button_more);
     }
   }
 
