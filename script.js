@@ -93,9 +93,9 @@ async function getAddress() {
 let params = new URLSearchParams(window.location.search);
 if (typeof params.get("gps") === "string") {
   document.getElementById("title-info").innerText = "lädt...";
-  function geolocation_error(error) {
+  function geolocation_error(err) {
     document.getElementById("title-info").innerText = "Position nicht gefunden";
-    console.error(error);
+    console.error(err);
     throw "GeolocationError";
   }
   if ("geolocation" in navigator) {
@@ -125,9 +125,9 @@ if (typeof params.get("gps") === "string") {
     geolocation_error();
   }
 } else if (params.get("lat") && params.get("lon")) {
-  function latlon_error(error) {
+  function latlon_error(err) {
     document.getElementById("title-info").innerText = "Ort nicht gefunden";
-    console.error(error);
+    console.error(err);
     throw "LatLonError";
   }
   location_data = {
@@ -869,8 +869,8 @@ async function brightsky(brightsky_div) {
                   brightsky_base_url +
                     addDays(new Date(), days_loaded).toISOString().split("T")[0]
                 );
-              } catch (error) {
-                console.error(error);
+              } catch (err) {
+                console.error(err);
                 brightsky_button.remove();
                 return;
               }
