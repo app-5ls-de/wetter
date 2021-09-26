@@ -185,7 +185,7 @@ async function display_widgets() {
 
   await Promise.allSettled([
     create_section(dwd_trend, "10 Tage Trend"),
-    dwd_warn(),
+    create_section(dwd_warn, "Wetterwarnung"),
     create_section(sunrise, "Sonnenaufgang"),
   ]);
 
@@ -421,8 +421,8 @@ function windy_map(windy_map_div, overlay_type) {
   });
 }
 
-function dwd_warn() {
-  crel(document.getElementById("dwd-warn"), { class: "" });
+function dwd_warn(dwd_warn_div) {
+  warnWetter.element = dwd_warn_div;
 
   let dwd_warn_script = crel.script({ crossorigin: "anonymous" });
   document.body.appendChild(dwd_warn_script);
@@ -1441,7 +1441,7 @@ warnWetter.loadWarnings = function (dwd_json) {
 };
 
 function show_warnings(alerts_list, warncellids) {
-  let dwd_warn_div = document.getElementById("dwd-warn");
+  let dwd_warn_div = warnWetter.element;
 
   let alerts = [];
   warncellids = [...new Set(warncellids)];
