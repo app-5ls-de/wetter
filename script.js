@@ -180,11 +180,11 @@ function create_section(func, display_name) {
 async function display_widgets() {
   await Promise.allSettled([
     create_section(meteoblue, "Meteoblue Bild"),
-    create_section(dwd_trend, "10 Tage Trend"),
     create_section(meteogram_metno, "Meteogram"),
   ]);
 
   await Promise.allSettled([
+    create_section(dwd_trend, "10 Tage Trend"),
     dwd_warn(),
     create_section(sunrise, "Sonnenaufgang"),
   ]);
