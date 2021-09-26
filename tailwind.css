@@ -514,6 +514,10 @@ h3 {
   margin-left: auto;
   margin-right: auto;
 }
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;

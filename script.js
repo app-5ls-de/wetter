@@ -1476,7 +1476,7 @@ function show_warnings(alerts_list, warncellids) {
       alert_div = crel.div(
         {
           class:
-            "lg:m-12 p-2 border-4 border-gray-400 border-solid dwd-warn-level-" +
+            "lg:m-12 my-4 p-2 border-4 border-gray-400 border-solid dwd-warn-level-" +
             alert.level,
         },
         crel.h3(alert.headline),
