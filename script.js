@@ -153,7 +153,7 @@ function main_routine() {
   display_widgets();
 }
 
-function create_section(func, display_name) {
+function create_section(func, display_name, priority) {
   let disabled = [
     "brightsky",
     "knmi",
@@ -185,28 +185,47 @@ function create_section(func, display_name) {
     );
     return;
   } else {
-    return func(child_div);
+    que.push({
+      priority,
+      run: () => func(child_div),
+    });
   }
 }
 
-async function display_widgets() {
-  await Promise.allSettled([
-    create_section(meteoblue, "Meteoblue Bild"),
-    create_section(meteogram_metno, "Meteogram"),
-  ]);
+async function run_que() {
+  que.sort((a, b) => a.priority - b.priority);
 
-  await Promise.allSettled([
-    create_section(dwd_trend, "10 Tage Trend"),
-    create_section(dwd_warn, "Wetterwarnung"),
-    create_section(sunrise, "Sonnenaufgang"),
-  ]);
+  for (const element of que) {
+    try {
+      let element_promise = element.run();
+      if (element.priority) {
+        await element_promise;
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
 
-  Promise.allSettled([create_section(rainviewer, "Regenradar")]);
-  Promise.allSettled([create_section(knmi, "Großwetterlage")]);
+let que = [];
 
-  Promise.allSettled([create_section(brightsky, "10 Tage Temperatur")]);
-  Promise.allSettled([create_section(windy_map, "Windkarte")]);
-  Promise.allSettled([create_section(windy_map_waves, "Wellenkarte")]);
+function display_widgets() {
+  create_section(dwd_warn, "Wetterwarnung", 3);
+
+  create_section(meteoblue, "Meteoblue Bild", 2);
+  create_section(meteogram_metno, "Meteogram", 1);
+
+  create_section(dwd_trend, "10 Tage Trend");
+  create_section(sunrise, "Sonnenaufgang");
+
+  create_section(rainviewer, "Regenradar");
+  create_section(knmi, "Großwetterlage");
+
+  create_section(brightsky, "10 Tage Temperatur");
+  create_section(windy_map, "Windkarte");
+  create_section(windy_map_waves, "Wellenkarte");
+
+  run_que();
 }
 
 async function meteoblue(meteoblue_div) {
