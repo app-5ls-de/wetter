@@ -6,7 +6,7 @@ const { StaleWhileRevalidate, CacheFirst, NetworkFirst, NetworkOnly } =
 const { registerRoute, setDefaultHandler } = workbox.routing;
 const { cacheNames, setCacheNameDetails } = workbox.core;
 
-setCacheNameDetails({ suffix: "v10" });
+setCacheNameDetails({ suffix: "v11" });
 cacheNames.offline = cacheNames.prefix + "-offline-" + cacheNames.suffix;
 cacheNames.network = cacheNames.prefix + "-network-" + cacheNames.suffix;
 cacheNames.stale = cacheNames.prefix + "-stale-" + cacheNames.suffix;
