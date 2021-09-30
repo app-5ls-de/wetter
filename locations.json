@@ -21,6 +21,13 @@
     "name": "Frankfurt am Main"
   },
   {
+    "lat": 47.49,
+    "lon": 11.1,
+    "meteoblue_id": "garmisch-partenkirchen_deutschland_2922530",
+    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Garmisch-Partenkirchen&iso2=de&lat=47.4921&lon=11.0958&asl=705&tz=Europe%2FBerlin&lang=de&sig=f2b26d620780e90f05eb9df071176f01",
+    "name": "Garmisch-Partenkirchen"
+  },
+  {
     "lat": 48.62,
     "lon": 9.83,
     "meteoblue_id": "geislingen-an-der-steige_deutschland_2921653",
