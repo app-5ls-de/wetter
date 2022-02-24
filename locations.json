@@ -70,6 +70,13 @@
     "name": "Ingolstadt, Donau"
   },
   {
+    "lat": 67.86,
+    "lon": 20.23,
+    "meteoblue_id": "kiruna_schweden_605155",
+    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=KILOMETER_PER_HOUR%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=kmh&precipitationamount=mm&winddirection=3char&city=Kiruna&iso2=se&lat=67.8557&lon=20.2251&asl=579&tz=Europe%2FStockholm&lang=de&sig=e02ad1f2f7a0ec8127e9c7cc65baa6bf",
+    "name": "Kiruna"
+  },
+  {
     "lat": 50.93,
     "lon": 6.95,
     "meteoblue_id": "k%c3%b6ln_deutschland_2886242",
