@@ -112,6 +112,13 @@
     "name": "Spitzingsee"
   },
   {
+    "lat": 59.33,
+    "lon": 18.07,
+    "meteoblue_id": "stockholm_schweden_2673730",
+    "meteoblue_src": "https://my.meteoblue.com/visimage/meteogram_web_hd?look=BEAUFORT%2CCELSIUS%2CMILLIMETER&apikey=5838a18e295d&temperature=C&windspeed=bft&precipitationamount=mm&winddirection=3char&city=Stockholm&iso2=se&lat=59.3294&lon=18.0687&asl=17&tz=Europe%2FStockholm&lang=de&sig=acdab748ad067f03921a03f7d201aa12",
+    "name": "Stockholm"
+  },
+  {
     "lat": 48.78,
     "lon": 9.18,
     "meteoblue_id": "stuttgart_deutschland_2825297",
