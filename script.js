@@ -52,6 +52,11 @@ function weatherConditionNameFromId(id, icon) {
 }
 
 async function openweathermap(place) {
+  const cacheID = place.lat + "," + place.lon;
+  if (localStorage.getItem(cacheID))
+    return JSON.parse(localStorage.getItem(cacheID));
+  // TODO: invalidate cache after ~1h
+
   const apiKey =
     "4fbc2ce2fc600e6" + /* if you're a bot, fuck off */ "e450dd4bbde8f28be";
   const data = await fetch_json(
@@ -62,6 +67,7 @@ async function openweathermap(place) {
       "&appid=" +
       apiKey
   );
+  localStorage.setItem(cacheID, JSON.stringify(data));
   return data;
 }
 
