@@ -3,6 +3,28 @@ const divPlacesList = crel("#places-list");
 const divSearchResults = crel("#search-results");
 const divSearchButton = crel("#search-button");
 const divSearchInput = crel("#search-input");
+const divModal = crel("#modal");
+const buttonModalOpen = crel("#modal-open");
+
+
+buttonModalOpen.addEventListener("click", () => {
+  divModal.classList.add("is-active");
+});
+
+function closeModal() {
+  divModal.classList.remove("is-active");
+  // TODO: redraw tiles on exit if changes were made
+}
+
+[crel("#modal-close"), crel("#modal-background")].forEach((el) => {
+  el.addEventListener("click", closeModal);
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal();
+  }
+});
 
 var places = []; // TODO: add user location
 
@@ -25,9 +47,10 @@ if (!places.length) {
     )
   );
   divCities.appendChild(divColumn);
-  document
-    .getElementsByClassName("js-modal-trigger")[0]
-    .classList.add("is-primary");
+  buttonModalOpen.classList.add("is-primary");
+  buttonModalOpen.addEventListener("click", () => {
+    buttonModalOpen.classList.remove("is-primary");
+  });
 }
 
 divSearchButton.addEventListener("click", () => {

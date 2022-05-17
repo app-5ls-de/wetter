@@ -50,7 +50,7 @@ a.city:hover {
   --color: #56a0ee;
 }
 
-.js-modal-trigger {
+.modal-open {
   height: 2.3rem;
   width: 2.3rem;
   border-radius: 35%;
@@ -59,11 +59,11 @@ a.city:hover {
   right: 1.2rem;
 }
 
-.js-modal-trigger.is-primary {
+.modal-open.is-primary {
   height: 10rem;
   width: 10rem;
 }
-.js-modal-trigger.is-primary .icon {
+.modal-open.is-primary .icon {
   height: 6em !important;
   width: 6em !important;
 }
