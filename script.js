@@ -56,9 +56,14 @@ function weatherConditionNameFromId(id, icon) {
 
 async function openweathermap(place) {
   const cacheID = place.lat + "," + place.lon;
-  if (localStorage.getItem(cacheID))
-    return JSON.parse(localStorage.getItem(cacheID));
-  // TODO: invalidate cache after ~1h
+  if (localStorage.getItem(cacheID)) {
+    const cachedData = JSON.parse(localStorage.getItem(cacheID));
+    const cachedTimestamp = new Date(cachedData.current.dt * 1000);
+    const diverenceInMinutes = (new Date() - cachedTimestamp) / 1000 / 60 ;
+    if (diverenceInMinutes < 30) {
+        return cachedData;
+    }
+  }
 
   const apiKey =
     "4fbc2ce2fc600e6" + /* if you're a bot, fuck off */ "e450dd4bbde8f28be";
@@ -472,7 +477,7 @@ function loadPlaces() {
 
 // Code Execution
 
-var places = [];
+var places = []; // TODO: add user location
 loadPlaces();
 
 Sortable.create(divPlacesList, {
