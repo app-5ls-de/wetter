@@ -335,8 +335,8 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
                 const place = new Place(
                   element.properties.name,
                   element.properties.countrycode,
-                  element.geometry.coordinates[0],
-                  element.geometry.coordinates[1]
+                  element.geometry.coordinates[1], // lat
+                  element.geometry.coordinates[0] // lon
                 );
 
                 places.push(place);
