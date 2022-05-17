@@ -1,0 +1,14 @@
+image: alpine/latest
+packages:
+  - npm
+secrets:
+  - 3ccf561f-8f40-49dd-9d3f-e2a9e69b5219
+environment:
+  site: weather.app.5ls.de
+tasks:
+  - install: |
+      sudo npm install --loglevel=error --global surge
+
+  - publish: |
+      . ~/.surgesecrets
+      surge $site/ $(echo https://$site | sed -e "s/\./-/g" -e "1 s/$/\.surge\.sh/")
