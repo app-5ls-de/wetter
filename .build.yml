@@ -6,6 +6,12 @@ secrets:
 environment:
   site: weather.app.5ls.de
 tasks:
+  - v2-only: |
+      cd  $site/
+      if [ "$(git rev-parse origin/v2)" != "$(git rev-parse HEAD)" ]; then
+        complete-build;
+      fi
+
   - install: |
       sudo npm install --loglevel=error --global surge
 
