@@ -74,6 +74,7 @@ async function openweathermap(place) {
 function createCityBox(place) {
   const divBox = crel.a({
     class: "box city p-0",
+    // TODO: add onclick to open detailed weather or redirect to old site temporarily
   });
   const divColumn = crel.div(
     {
@@ -101,9 +102,10 @@ function createCityBox(place) {
           {
             class: "is-size-5 has-text-grey",
           },
-          place.name
+          place.name //TODO: fix long names (https://dev.to/jankapunkt/make-text-fit-it-s-parent-size-using-javascript-m40)
         ),
         crel.sup(
+          // TODO: only show if not all places have same country code
           {
             class: "is-size-7 mb-4 is-uppercase",
           },
