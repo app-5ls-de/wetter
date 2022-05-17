@@ -6,14 +6,13 @@ const divSearchInput = crel("#search-input");
 const divModal = crel("#modal");
 const buttonModalOpen = crel("#modal-open");
 
-
 buttonModalOpen.addEventListener("click", () => {
   divModal.classList.add("is-active");
 });
 
 function closeModal() {
   divModal.classList.remove("is-active");
-  // TODO: redraw tiles on exit if changes were made
+  createAllWidgets();
 }
 
 [crel("#modal-close"), crel("#modal-background")].forEach((el) => {
@@ -75,10 +74,17 @@ Sortable.create(divPlacesList, {
   },
 });
 
-for (const place of places) {
-  createPlaceModalItem(place);
+function createAllWidgets() {
+  divPlacesList.textContent = "";
+  divCities.textContent = "";
+
+  for (const place of places) {
+    createPlaceModalItem(place);
+  }
+
+  for (const place of places) {
+    createCityBox(place);
+  }
 }
 
-for (const place of places) {
-  createCityBox(place);
-}
+createAllWidgets();
