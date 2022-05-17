@@ -1,4 +1,8 @@
 const divCities = crel("#cities");
+const divPlacesList = crel("#places-list");
+const divSearchResults = crel("#search-results");
+const divSearchButton = crel("#search-button");
+const divSearchInput = crel("#search-input");
 
 async function fetch_json(url) {
   const response = await fetch(url);
@@ -7,14 +11,13 @@ async function fetch_json(url) {
   return data;
 }
 
-function Place(name, countryCode, lat, lon) {
+function Place(name, countryCode, lat, lon, expanded = false) {
   this.name = name;
   this.countryCode = countryCode;
   this.lat = lat;
   this.lon = lon;
+  this.expanded = expanded;
 }
-
-const places = [new Place("Aarhus", "dk", 56.16, 10.21)];
 
 crel.attrMap["cssVariable"] = (element, value) => {
   for (let varName in value) {
@@ -267,6 +270,228 @@ function createCityBox(place) {
       divBox.appendChild(divChart);
     }
   });
+}
+
+const debounce = (func, delay) => {
+  let inDebounce;
+  return function () {
+    const context = this;
+    const args = arguments;
+    clearTimeout(inDebounce);
+    inDebounce = setTimeout(() => func.apply(context, args), delay);
+  };
+};
+
+const searchAndDisplay = debounce(_searchAndDisplay, 300);
+divSearchButton.addEventListener("click", () => {
+  searchAndDisplay(divSearchInput.value);
+});
+divSearchInput.addEventListener("input", () => {
+  searchAndDisplay(divSearchInput.value);
+});
+
+async function _searchAndDisplay(searchQuery, limit = 5) {
+  searchQuery = searchQuery?.trim();
+  if (!searchQuery) return;
+
+  const data = await fetch_json(
+    "https://photon.komoot.io/api/?q=" +
+      searchQuery +
+      // TODO: focus on user location with low zoom        // "&lat=49&lon=11&zoom=7" +
+      "&lang=en&limit=" +
+      limit +
+      "&osm_tag=place" // TODO: filter by layer if this pull request is accepted: https://github.com/komoot/photon/pull/667
+  );
+
+  // TODO: show distance and direction from user location
+
+  divSearchResults.textContent = "";
+
+  data.features.forEach((element) => {
+    const divBox = crel.div(
+      {
+        class: "box block level is-mobile",
+      },
+      crel.div(
+        {
+          class: "level-left",
+        },
+        crel.div(
+          {
+            class: "level-item",
+          },
+          element.properties.name + ", " + element.properties.countrycode //TODO: fix long names
+        )
+      ),
+      crel.div(
+        {
+          class: "level-right",
+        },
+        crel.button(
+          {
+            class: "button level-item is-primary",
+            on: {
+              click: () => {
+                const place = new Place(
+                  element.properties.name,
+                  element.properties.countrycode,
+                  element.geometry.coordinates[0],
+                  element.geometry.coordinates[1]
+                );
+
+                places.push(place);
+                savePlaces();
+
+                createPlaceModalItem(place);
+              },
+            },
+          },
+          crel.span(
+            {
+              class: "icon is-small",
+            },
+            crel.img({
+              class: "icon",
+              src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/add-outline.svg",
+            })
+          )
+        )
+      )
+    );
+    divSearchResults.appendChild(divBox);
+  });
+
+  if (!data.features) {
+    divSearchResults.textContent = "No results found";
+    // TODO: show error message
+  }
+
+  const divMore = crel.div("show more");
+  // searchAndDisplay(searchQuery, limit+5);
+  divSearchResults.appendChild(divMore);
+}
+
+function createPlaceModalItem(place) {
+  const getExpandedIcon = (isExpanded) =>
+    isExpanded
+      ? "https://www.svgrepo.com/show/238205/minimize.svg"
+      : "https://www.svgrepo.com/show/238207/expand.svg";
+
+  const divBox = crel.div(
+    {
+      class: "box block list-group-item level is-mobile",
+    },
+    crel.div(
+      {
+        class: "level-left",
+      },
+      crel.img({
+        class: "icon level-item handle",
+        src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/move-outline.svg",
+      })
+    ),
+    crel.div(
+      {
+        class: "level-item",
+      },
+      place.name + ", " + place.countryCode.toUpperCase() //TODO: fix long names
+    ),
+    crel.div(
+      {
+        class: "level-right",
+      },
+      crel.button(
+        {
+          class: "button level-item",
+          on: {
+            click: () => {
+              place.expanded = !place.expanded;
+              imgExpanded.src = getExpandedIcon(place.expanded);
+              savePlaces();
+            },
+          },
+        },
+        crel.span(
+          {
+            class: "icon is-small",
+          },
+          (imgExpanded = crel.img({
+            class: "icon",
+            src: getExpandedIcon(place.expanded),
+          }))
+        )
+      ),
+      crel.button(
+        {
+          class: "button level-item is-danger",
+          on: {
+            click: () => {
+              const index = places.indexOf(place);
+              places.splice(index, 1);
+              divBox.remove();
+              //savePlaces();
+            },
+          },
+        },
+        crel.span(
+          {
+            class: "icon is-small",
+          },
+          crel.img({
+            class: "icon",
+            src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/close-outline.svg",
+          })
+        )
+      )
+    )
+  );
+  divPlacesList.appendChild(divBox);
+}
+
+function savePlaces() {
+  localStorage.setItem("places", JSON.stringify(places));
+}
+
+function loadPlaces() {
+  if (localStorage.getItem("places")) {
+    const placesJSON = JSON.parse(localStorage.getItem("places")) ?? [];
+    places = placesJSON.map(
+      (place) =>
+        new Place(
+          place.name,
+          place.countryCode,
+          place.lat,
+          place.lon,
+          place.expanded
+        )
+    );
+  } else {
+    places = [];
+  }
+}
+
+// Code Execution
+
+var places = [];
+loadPlaces();
+
+Sortable.create(divPlacesList, {
+  handle: ".handle",
+  animation: 150,
+  ghostClass: "has-background-info",
+  onEnd: (e) => {
+    if (e.oldIndex == e.newIndex) return;
+
+    [places[e.oldIndex], places[e.newIndex]] = [
+      places[e.newIndex],
+      places[e.oldIndex],
+    ];
+    savePlaces();
+  },
+});
+
+for (const place of places) {
+  createPlaceModalItem(place);
 }
 
 for (const place of places) {
