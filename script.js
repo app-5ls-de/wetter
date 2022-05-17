@@ -12,6 +12,8 @@ buttonModalOpen.addEventListener("click", () => {
 
 function closeModal() {
   divModal.classList.remove("is-active");
+  divSearchResults.textContent = "";
+  divSearchInput.value = "";
   createAllWidgets();
 }
 
