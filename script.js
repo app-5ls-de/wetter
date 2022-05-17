@@ -8,6 +8,28 @@ var places = []; // TODO: add user location
 
 loadPlaces();
 
+if (!places.length) {
+  const divColumn = crel.div(
+    {
+      class: "column",
+    },
+    crel.p(
+      {
+        class: "city is-size-1 is-primary",
+      },
+      "Add city",
+      crel.img({
+        class: "arrow",
+        src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/arrow-forward-outline.svg",
+      })
+    )
+  );
+  divCities.appendChild(divColumn);
+  document
+    .getElementsByClassName("js-modal-trigger")[0]
+    .classList.add("is-primary");
+}
+
 divSearchButton.addEventListener("click", () => {
   searchAndDisplay(divSearchInput.value);
 });
