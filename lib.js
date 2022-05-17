@@ -282,12 +282,6 @@ const debounce = (func, delay) => {
 };
 
 const searchAndDisplay = debounce(_searchAndDisplay, 300);
-divSearchButton.addEventListener("click", () => {
-  searchAndDisplay(divSearchInput.value);
-});
-divSearchInput.addEventListener("input", () => {
-  searchAndDisplay(divSearchInput.value);
-});
 
 async function _searchAndDisplay(searchQuery, limit = 5) {
   searchQuery = searchQuery?.trim();
@@ -468,5 +462,3 @@ function loadPlaces() {
     places = [];
   }
 }
-
-var places = []; // TODO: add user location
