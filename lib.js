@@ -77,7 +77,9 @@ async function openweathermap(place) {
 function createCityBox(place) {
   const divBox = crel.a({
     class: "box city p-0",
-    // TODO: add onclick to open detailed weather or redirect to old site temporarily
+    href:
+      "https://wetter.app.5ls.de/show?lat=" + place.lat + "&lon=" + place.lon, // this is only temporarily
+    // TODO: add onclick to open detailed weather
   });
   const divColumn = crel.div(
     {
