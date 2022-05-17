@@ -422,7 +422,7 @@ function createPlaceModalItem(place) {
               const index = places.indexOf(place);
               places.splice(index, 1);
               divBox.remove();
-              //savePlaces();
+              savePlaces();
             },
           },
         },
