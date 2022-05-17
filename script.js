@@ -29,6 +29,8 @@ var places = []; // TODO: add user location
 
 loadPlaces();
 
+createAllWidgets();
+
 if (!places.length) {
   const divColumn = crel.div(
     {
@@ -73,18 +75,3 @@ Sortable.create(divPlacesList, {
     savePlaces();
   },
 });
-
-function createAllWidgets() {
-  divPlacesList.textContent = "";
-  divCities.textContent = "";
-
-  for (const place of places) {
-    createPlaceModalItem(place);
-  }
-
-  for (const place of places) {
-    createCityBox(place);
-  }
-}
-
-createAllWidgets();

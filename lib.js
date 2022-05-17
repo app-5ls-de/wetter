@@ -453,6 +453,19 @@ function createPlaceModalItem(place) {
   divPlacesList.appendChild(divBox);
 }
 
+function createAllWidgets() {
+  divPlacesList.textContent = "";
+  divCities.textContent = "";
+
+  for (const place of places) {
+    createPlaceModalItem(place);
+  }
+
+  for (const place of places) {
+    createCityBox(place);
+  }
+}
+
 function savePlaces() {
   localStorage.setItem("places", JSON.stringify(places));
 }
