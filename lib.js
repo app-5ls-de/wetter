@@ -359,8 +359,17 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
     // TODO: show error message
   }
 
-  const divMore = crel.div("show more");
-  // searchAndDisplay(searchQuery, limit+5);
+  const divMore = crel.button(
+    {
+      class: "button",
+      on: {
+        click: () => {
+          searchAndDisplay(searchQuery, limit + 5);
+        },
+      },
+    },
+    "show more"
+  );
   divSearchResults.appendChild(divMore);
 }
 
