@@ -50,6 +50,7 @@ function weatherConditionNameFromId(id, icon) {
 
 async function openweathermap(place) {
   const cacheID = place.lat + "," + place.lon;
+  // TODO: only cache while developing
   if (localStorage.getItem(cacheID)) {
     const cachedData = JSON.parse(localStorage.getItem(cacheID));
     const cachedTimestamp = new Date(cachedData.current.dt * 1000);
@@ -404,7 +405,7 @@ function createPlaceModalItem(place) {
       },
       crel.button(
         {
-          class: "button level-item",
+          class: "button level-item is-hidden", // TODO: implement expanded and remove is-hidden
           on: {
             click: () => {
               place.expanded = !place.expanded;
