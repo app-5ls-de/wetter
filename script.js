@@ -218,13 +218,15 @@ function createCityBox(place) {
     );
     divBlock.appendChild(divLevelTemp);
 
-    const maxPrecipitation = data.minutely.reduce(
-      (acc, cur) => Math.max(acc, cur.precipitation),
-      0
-    );
+    const maxPrecipitation =
+      data.minutely?.reduce(
+        (acc, cur) => Math.max(acc, cur.precipitation),
+        0
+      ) ?? 0;
     const maxChartPrecipitation = Math.max(maxPrecipitation, 3);
 
-    if (true || maxPrecipitation) {
+    // TODO: add whitespace if no precipitation
+    if (data.minutely /* && maxPrecipitation */) {
       const divChart = crel.div(
         {
           class: "city-minute level-item",
