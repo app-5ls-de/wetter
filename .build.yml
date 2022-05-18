@@ -2,7 +2,7 @@ image: alpine/latest
 packages:
   - npm
 secrets:
-  - 3ccf561f-8f40-49dd-9d3f-e2a9e69b5219
+  - f8cf1511-aef8-444b-ae25-e088b659bc79
 environment:
   site: weather.app.5ls.de
 tasks:
@@ -13,8 +13,9 @@ tasks:
       fi
 
   - install: |
-      sudo npm install --loglevel=error --global surge
+      sudo npm install --loglevel=error --global wrangler
 
   - publish: |
-      . ~/.surgesecrets
-      surge $site/ $(echo https://$site | sed -e "s/\./-/g" -e "1 s/$/\.surge\.sh/")
+      . ~/.cloudflaresecrets
+      rm -rf $site/.git
+      npx wrangler pages publish $site --project-name=$(echo $site | sed -e "s/\./-/g")
