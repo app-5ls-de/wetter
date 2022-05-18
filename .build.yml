@@ -17,5 +17,5 @@ tasks:
 
   - publish: |
       . ~/.cloudflaresecrets
-      rm -rf $site/.git
+      rm -rf $site/.git .build.yml
       npx wrangler pages publish $site --project-name=$(echo $site | sed -e "s/\./-/g")
