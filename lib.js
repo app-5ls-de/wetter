@@ -48,14 +48,27 @@ function weatherConditionNameFromId(id, icon) {
   }
 }
 
+const cachePrefix = "cache";
+const removeCache = () =>
+  location.hostname != "localhost"
+    ? Object.keys(localStorage).forEach((key) => {
+        if (key.startsWith(cachePrefix)) {
+          localStorage.removeItem(key);
+        }
+      })
+    : null;
+
 async function openweathermap(place) {
-  const cacheID = place.lat + "," + place.lon;
-  // TODO: only cache while developing
+  const cacheID =
+    cachePrefix + "-openweathermap-" + place.lat + "," + place.lon;
   if (localStorage.getItem(cacheID)) {
     const cachedData = JSON.parse(localStorage.getItem(cacheID));
+
+    if (location.hostname == "localhost") return cachedData;
+
     const cachedTimestamp = new Date(cachedData.current.dt * 1000);
     const diverenceInMinutes = (new Date() - cachedTimestamp) / 1000 / 60;
-    if (diverenceInMinutes < 30) {
+    if (diverenceInMinutes < 5) {
       return cachedData;
     }
   }
@@ -435,6 +448,7 @@ function createPlaceModalItem(place) {
               places.splice(index, 1);
               divBox.remove();
               savePlaces();
+              removeCache();
             },
           },
         },
