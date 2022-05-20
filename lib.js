@@ -1,3 +1,6 @@
+const debug =
+  location.hostname == "localhost" || location.hostname == "127.0.0.1";
+
 async function fetch_json(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(response.status);
@@ -50,13 +53,12 @@ function weatherConditionNameFromId(id, icon) {
 
 const cachePrefix = "cache";
 const removeCache = () =>
-  location.hostname != "localhost"
-    ? Object.keys(localStorage).forEach((key) => {
-        if (key.startsWith(cachePrefix)) {
-          localStorage.removeItem(key);
-        }
-      })
-    : null;
+  debug ||
+  Object.keys(localStorage).forEach((key) => {
+    if (key.startsWith(cachePrefix)) {
+      localStorage.removeItem(key);
+    }
+  });
 
 async function openweathermap(place) {
   const cacheID =
@@ -64,7 +66,7 @@ async function openweathermap(place) {
   if (localStorage.getItem(cacheID)) {
     const cachedData = JSON.parse(localStorage.getItem(cacheID));
 
-    if (location.hostname == "localhost") return cachedData;
+    if (debug) return cachedData;
 
     const cachedTimestamp = new Date(cachedData.current.dt * 1000);
     const diverenceInMinutes = (new Date() - cachedTimestamp) / 1000 / 60;
