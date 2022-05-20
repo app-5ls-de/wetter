@@ -150,7 +150,7 @@ function createCityBox(place) {
         style: { width: "7rem", left: "0.5rem", top: "-2rem" },
         // alternative: https://www.amcharts.com/free-animated-svg-weather-icons/
         src:
-          "https://raw.githubusercontent.com/basmilius/weather-icons/dev/production/fill/svg/" +
+          "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
           weatherCondition +
           ".svg",
         alt: weatherCondition,
@@ -165,7 +165,7 @@ function createCityBox(place) {
           transform: "rotate(" + wind_deg + "deg)",
         },
         src:
-          "https://raw.githubusercontent.com/basmilius/weather-icons/dev/production/fill/svg/wind-beaufort-" +
+          "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/wind-beaufort-" +
           beaufort +
           ".svg",
         alt: "wind-beaufort-" + beaufort,
@@ -179,7 +179,7 @@ function createCityBox(place) {
       },
       crel.img({
         class: "city-temp-icon level-item",
-        src: "https://raw.githubusercontent.com/basmilius/weather-icons/dev/production/fill/svg-static/thermometer-warmer.svg",
+        src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg-static/thermometer-warmer.svg",
       }),
       crel.div(
         {
@@ -200,7 +200,7 @@ function createCityBox(place) {
       },
       crel.img({
         class: "city-temp-icon level-item",
-        src: "https://raw.githubusercontent.com/basmilius/weather-icons/dev/production/fill/svg-static/thermometer-colder.svg",
+        src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg-static/thermometer-colder.svg",
       }),
       crel.div(
         {
