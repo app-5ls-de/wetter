@@ -6,9 +6,96 @@ const divSearchInput = crel("#search-input");
 const divModal = crel("#modal");
 const buttonModalOpen = crel("#modal-open");
 
-buttonModalOpen.addEventListener("click", () => {
-  divModal.classList.add("is-active");
-});
+function createAllWidgets() {
+  divPlacesList.textContent = "";
+  divCities.textContent = "";
+
+  for (const place of places) {
+    createPlaceModalItem(place);
+  }
+
+  for (const place of places) {
+    createCityBox(place);
+  }
+}
+
+function createPlaceModalItem(place) {
+  const getExpandedIcon = (isExpanded) =>
+    isExpanded
+      ? "https://www.svgrepo.com/show/238205/minimize.svg"
+      : "https://www.svgrepo.com/show/238207/expand.svg";
+
+  const divBox = crel.div(
+    {
+      class: "box block list-group-item level is-mobile",
+    },
+    crel.div(
+      {
+        class: "level-left",
+      },
+      crel.img({
+        class: "icon level-item handle",
+        src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/move-outline.svg",
+      })
+    ),
+    crel.div(
+      {
+        class: "level-item",
+      },
+      place.name + ", " + place.countryCode.toUpperCase() //TODO: fix long names
+    ),
+    crel.div(
+      {
+        class: "level-right",
+      },
+      crel.button(
+        {
+          class: "button level-item is-hidden", // TODO: implement expanded and remove is-hidden
+          on: {
+            click: () => {
+              place.expanded = !place.expanded;
+              imgExpanded.src = getExpandedIcon(place.expanded);
+              savePlaces();
+            },
+          },
+        },
+        crel.span(
+          {
+            class: "icon is-small",
+          },
+          (imgExpanded = crel.img({
+            class: "icon",
+            src: getExpandedIcon(place.expanded),
+          }))
+        )
+      ),
+      crel.button(
+        {
+          class: "button level-item is-danger",
+          on: {
+            click: () => {
+              const index = places.indexOf(place);
+              places.splice(index, 1);
+              divBox.remove();
+              savePlaces();
+              removeCache();
+            },
+          },
+        },
+        crel.span(
+          {
+            class: "icon is-small",
+          },
+          crel.img({
+            class: "icon",
+            src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/close-outline.svg",
+          })
+        )
+      )
+    )
+  );
+  divPlacesList.appendChild(divBox);
+}
 
 function closeModal() {
   divModal.classList.remove("is-active");
@@ -16,6 +103,12 @@ function closeModal() {
   divSearchInput.value = "";
   createAllWidgets();
 }
+
+// Code execution starts here
+
+buttonModalOpen.addEventListener("click", () => {
+  divModal.classList.add("is-active");
+});
 
 [crel("#modal-close"), crel("#modal-background")].forEach((el) => {
   el.addEventListener("click", closeModal);
@@ -26,10 +119,6 @@ document.addEventListener("keydown", (e) => {
     closeModal();
   }
 });
-
-var places = []; // TODO: add user location
-
-loadPlaces();
 
 createAllWidgets();
 

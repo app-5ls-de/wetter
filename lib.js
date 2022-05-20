@@ -391,97 +391,6 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
   divSearchResults.appendChild(divMore);
 }
 
-function createPlaceModalItem(place) {
-  const getExpandedIcon = (isExpanded) =>
-    isExpanded
-      ? "https://www.svgrepo.com/show/238205/minimize.svg"
-      : "https://www.svgrepo.com/show/238207/expand.svg";
-
-  const divBox = crel.div(
-    {
-      class: "box block list-group-item level is-mobile",
-    },
-    crel.div(
-      {
-        class: "level-left",
-      },
-      crel.img({
-        class: "icon level-item handle",
-        src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/move-outline.svg",
-      })
-    ),
-    crel.div(
-      {
-        class: "level-item",
-      },
-      place.name + ", " + place.countryCode.toUpperCase() //TODO: fix long names
-    ),
-    crel.div(
-      {
-        class: "level-right",
-      },
-      crel.button(
-        {
-          class: "button level-item is-hidden", // TODO: implement expanded and remove is-hidden
-          on: {
-            click: () => {
-              place.expanded = !place.expanded;
-              imgExpanded.src = getExpandedIcon(place.expanded);
-              savePlaces();
-            },
-          },
-        },
-        crel.span(
-          {
-            class: "icon is-small",
-          },
-          (imgExpanded = crel.img({
-            class: "icon",
-            src: getExpandedIcon(place.expanded),
-          }))
-        )
-      ),
-      crel.button(
-        {
-          class: "button level-item is-danger",
-          on: {
-            click: () => {
-              const index = places.indexOf(place);
-              places.splice(index, 1);
-              divBox.remove();
-              savePlaces();
-              removeCache();
-            },
-          },
-        },
-        crel.span(
-          {
-            class: "icon is-small",
-          },
-          crel.img({
-            class: "icon",
-            src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/close-outline.svg",
-          })
-        )
-      )
-    )
-  );
-  divPlacesList.appendChild(divBox);
-}
-
-function createAllWidgets() {
-  divPlacesList.textContent = "";
-  divCities.textContent = "";
-
-  for (const place of places) {
-    createPlaceModalItem(place);
-  }
-
-  for (const place of places) {
-    createCityBox(place);
-  }
-}
-
 function savePlaces() {
   localStorage.setItem("places", JSON.stringify(places));
 }
@@ -503,3 +412,12 @@ function loadPlaces() {
     places = [];
   }
 }
+
+function getPlaceByName(name) {
+  return places.find((place) => place.name === name);
+}
+
+// Code execution starts here
+
+var places = []; // TODO: add user location
+loadPlaces();
