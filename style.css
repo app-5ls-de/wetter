@@ -68,19 +68,20 @@ a.city:hover {
   width: 6em !important;
 }
 .arrow {
-  top: 6rem;
+  bottom: 12rem;
+  right: 12rem;
   width: 7rem;
-  position: absolute;
+  position: fixed;
   transform-origin: 50% 50%;
-  transform: rotate(60deg);
+  transform: rotate(45deg);
   animation: slide 1s ease-in-out infinite;
 }
 @keyframes slide {
   0%,
   100% {
-    transform: translate(0, 0) rotate(60deg);
+    transform: translate(0, 0) rotate(45deg);
   }
   50% {
-    transform: translate(10px, 20px) rotate(60deg);
+    transform: translate(20px, 20px) rotate(45deg);
   }
 }
