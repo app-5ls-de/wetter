@@ -59,21 +59,13 @@ const removeCache = () =>
       localStorage.removeItem(key);
     }
   });
+removeCache();
 
 async function openweathermap(place) {
   const cacheID =
     cachePrefix + "-openweathermap-" + place.lat + "," + place.lon;
-  if (localStorage.getItem(cacheID)) {
-    const cachedData = JSON.parse(localStorage.getItem(cacheID));
-
-    if (debug) return cachedData;
-
-    const cachedTimestamp = new Date(cachedData.current.dt * 1000);
-    const diverenceInMinutes = (new Date() - cachedTimestamp) / 1000 / 60;
-    if (diverenceInMinutes < 5) {
-      return cachedData;
-    }
-  }
+  if (localStorage.getItem(cacheID) && debug)
+    return JSON.parse(localStorage.getItem(cacheID));
 
   const apiKey =
     "4fbc2ce2fc600e6" + /* if you're a bot, fuck off */ "e450dd4bbde8f28be";
@@ -83,9 +75,10 @@ async function openweathermap(place) {
       "&lon=" +
       place.lon +
       "&appid=" +
-      apiKey
+      apiKey+ "&lang="+lang
   );
-  localStorage.setItem(cacheID, JSON.stringify(data));
+
+  if (debug) localStorage.setItem(cacheID, JSON.stringify(data));
   return data;
 }
 
