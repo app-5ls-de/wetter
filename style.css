@@ -85,3 +85,26 @@ a.city:hover {
     transform: translate(20px, 20px) rotate(45deg);
   }
 }
+
+.ct-series.series-solstice {
+  stroke: grey;
+  fill: grey;
+}
+
+.ct-series.series-today {
+  stroke: #f4c63d;
+  fill: #f4c63d;
+}
+
+.ct-label {
+  font-size: 1.75rem;
+  position: absolute;
+  left: -2rem;
+}
+
+/*
+Maastricht Blue (#001A26)
+Prussian Blue (#053752)
+Tangerine (#EF810E)
+Sandstorm (#E5DE44)
+*/
