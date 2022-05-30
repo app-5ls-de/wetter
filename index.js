@@ -136,7 +136,7 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
           {
             class: "level-item",
           },
-          element.properties.name + ", " + element.properties.countrycode //TODO: fix long names
+          element.properties.name + ", " + element.properties.country //TODO: fix long names
         )
       ),
       crel.div(
