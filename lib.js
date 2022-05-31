@@ -1,5 +1,12 @@
 const debug =
   location.hostname == "localhost" || location.hostname == "127.0.0.1";
+var lang = "en";
+//lang = "de";
+
+if (lang == "de") {
+  document.title = "Wetter";
+  document.getElementById("title").innerText = "Wetter";
+}
 
 async function fetch_json(url) {
   const response = await fetch(url);
@@ -75,7 +82,9 @@ async function openweathermap(place) {
       "&lon=" +
       place.lon +
       "&appid=" +
-      apiKey+ "&lang="+lang
+      apiKey +
+      "&lang=" +
+      lang
   );
 
   if (debug) localStorage.setItem(cacheID, JSON.stringify(data));

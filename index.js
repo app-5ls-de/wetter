@@ -114,7 +114,9 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
     "https://photon.komoot.io/api/?q=" +
       searchQuery +
       // TODO: focus on user location with low zoom        // "&lat=49&lon=11&zoom=7" +
-      "&lang=en&limit=" +
+      "&lang=" +
+      lang +
+      "&limit=" +
       limit +
       "&osm_tag=place" // TODO: filter by layer if this pull request is accepted: https://github.com/komoot/photon/pull/667
   );
@@ -178,7 +180,8 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
   });
 
   if (!data.features) {
-    divSearchResults.textContent = "No results found";
+    divSearchResults.textContent =
+      lang == "de" ? "Keine Ergebnisse gefunden" : "No results found";
     // TODO: show error message
   }
 
@@ -191,7 +194,8 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
         },
       },
     },
-    "show more"
+
+    lang == "de" ? "mehr anzeigen" : "show more"
   );
   divSearchResults.appendChild(divMore);
 }
@@ -398,6 +402,12 @@ function createCityBox(place) {
 
 // Code execution
 
+
+if (lang == "de") {
+  divModal.getElementsByClassName("title")[0].textContent = "Wetter";
+  divSearchInput.placeholder = "Suchen um hinzuzufügen";
+}
+
 buttonModalOpen.addEventListener("click", () => {
   divModal.classList.add("is-active");
 });
@@ -423,7 +433,7 @@ if (!places.length) {
       {
         class: "city is-size-1 is-primary",
       },
-      "Add city",
+      lang == "de" ? "Stadt hinzufügen" : "Add city",
       crel.img({
         class: "arrow",
         src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/arrow-forward-outline.svg",

@@ -60,7 +60,7 @@ function createSunPathSection() {
         labelInterpolationFnc: (seconds, index) =>
           new Date(
             new Date().setHours(0, 0, 0, 0) + seconds * 1000
-          ).toLocaleTimeString("de", {
+          ).toLocaleTimeString(lang == "de" ? "de" : "default", {
             hour: "2-digit",
             minute: "2-digit",
           }),
