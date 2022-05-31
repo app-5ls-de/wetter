@@ -128,13 +128,15 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
                   element.properties.name,
                   element.properties.countrycode,
                   element.geometry.coordinates[1], // lat
-                  element.geometry.coordinates[0] // lon
+                  element.geometry.coordinates[0] //  lon
                 );
 
                 places.push(place);
                 savePlaces();
 
                 createPlaceModalItem(place);
+                divSearchResults.textContent = "";
+                divSearchInput.value = "";
               },
             },
           },
@@ -375,7 +377,6 @@ function createCityBox(place) {
 }
 
 // Code execution
-
 
 if (lang == "de") {
   divModal.getElementsByClassName("title")[0].textContent = "Wetter";
