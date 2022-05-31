@@ -57,11 +57,11 @@ function createSunPathSection() {
       high: Math.PI / 2,
       axisX: {
         type: Chartist.FixedScaleAxis,
-        labelInterpolationFnc: (seconds, index) =>
+        labelInterpolationFnc: (seconds) =>
           new Date(
             new Date().setHours(0, 0, 0, 0) + seconds * 1000
-          ).toLocaleTimeString(lang == "de" ? "de" : "default", {
-            hour: "2-digit",
+          ).toLocaleTimeString(["en-GB", "de"], {
+            hour: "numeric",
             minute: "2-digit",
           }),
         ticks: [

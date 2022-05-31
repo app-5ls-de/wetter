@@ -100,6 +100,7 @@ a.city:hover {
   font-size: 1.75rem;
   position: absolute;
   left: -2rem;
+  white-space: nowrap;
 }
 
 /*
