@@ -1,7 +1,8 @@
 const debug =
   location.hostname == "localhost" || location.hostname == "127.0.0.1";
 var lang = "en";
-//lang = "de";
+const language = navigator.language || navigator.userLanguage || "en";
+if (language.startsWith("de")) lang = "de";
 
 if (lang == "de") {
   document.title = "Wetter";
