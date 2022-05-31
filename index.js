@@ -20,11 +20,6 @@ function createAllWidgets() {
 }
 
 function createPlaceModalItem(place) {
-  const getExpandedIcon = (isExpanded) =>
-    isExpanded
-      ? "https://www.svgrepo.com/show/238205/minimize.svg"
-      : "https://www.svgrepo.com/show/238207/expand.svg";
-
   const divBox = crel.div(
     {
       class: "box block list-group-item level is-mobile",
@@ -48,27 +43,6 @@ function createPlaceModalItem(place) {
       {
         class: "level-right",
       },
-      crel.button(
-        {
-          class: "button level-item is-hidden", // TODO: implement expanded and remove is-hidden
-          on: {
-            click: () => {
-              place.expanded = !place.expanded;
-              imgExpanded.src = getExpandedIcon(place.expanded);
-              savePlaces();
-            },
-          },
-        },
-        crel.span(
-          {
-            class: "icon is-small",
-          },
-          (imgExpanded = crel.img({
-            class: "icon",
-            src: getExpandedIcon(place.expanded),
-          }))
-        )
-      ),
       crel.button(
         {
           class: "button level-item is-danger",

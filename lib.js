@@ -15,12 +15,11 @@ async function fetch_json(url) {
   return data;
 }
 
-function Place(name, countryCode, lat, lon, expanded = false) {
+function Place(name, countryCode, lat, lon) {
   this.name = name;
   this.countryCode = countryCode;
   this.lat = lat;
   this.lon = lon;
-  this.expanded = expanded;
 }
 
 crel.attrMap["cssVariable"] = (element, value) => {
@@ -109,14 +108,7 @@ function loadPlaces() {
   if (localStorage.getItem("places")) {
     const placesJSON = JSON.parse(localStorage.getItem("places")) ?? [];
     places = placesJSON.map(
-      (place) =>
-        new Place(
-          place.name,
-          place.countryCode,
-          place.lat,
-          place.lon,
-          place.expanded
-        )
+      (place) => new Place(place.name, place.countryCode, place.lat, place.lon)
     );
   } else {
     places = [];
