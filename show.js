@@ -163,5 +163,6 @@ if (!place) {
   // TODO: use user location
   location.href = "index.html";
 }
+document.title = place.name + " - " + document.title;
 
 createSunPathSection();
