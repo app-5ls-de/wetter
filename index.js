@@ -137,7 +137,7 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
   });
 
   if (!data.features) {
-    divSearchResults.textContent =
+    divSearchResults.innerText =
       lang == "de" ? "Keine Ergebnisse gefunden" : "No results found";
     // TODO: show error message
   }
@@ -294,7 +294,7 @@ function createCityBox(place) {
 // Code execution
 
 if (lang == "de") {
-  divModal.getElementsByClassName("title")[0].textContent = "Wetter";
+  divModal.getElementsByClassName("title")[0].innerText = "Wetter";
   divSearchInput.placeholder = "Suchen um hinzuzufügen";
 }
 
@@ -346,6 +346,7 @@ Sortable.create(divPlacesList, {
   onEnd: (e) => {
     if (e.oldIndex == e.newIndex) return;
 
+    // swap places at oldIndex and newIndex
     [places[e.oldIndex], places[e.newIndex]] = [
       places[e.newIndex],
       places[e.oldIndex],
