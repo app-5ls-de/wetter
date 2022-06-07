@@ -109,3 +109,10 @@ Prussian Blue (#053752)
 Tangerine (#EF810E)
 Sandstorm (#E5DE44)
 */
+
+#last-update {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 0;
+}

@@ -112,7 +112,32 @@ function getPlaceByName(name) {
   return places.find((place) => place.name === name);
 }
 
+var lastUpdateTime;
+const divLastUpdate = dom("#last-update");
+function showLastUpdate() {
+  if (divLastUpdate)
+    Visibility.every(10 * relativeTime.UNITS.second, () => {
+      if (lastUpdateTime) {
+        const relativeUpdateTime = relativeTime(lastUpdateTime, {
+          minimalUnit: "minute",
+          showNow: false,
+        });
+
+        if (relativeUpdateTime) {
+          divLastUpdate.innerText =
+            lang == "de"
+              ? relativeUpdateTime + " aktualisiert"
+              : "updated " + relativeUpdateTime;
+        } else {
+          divLastUpdate.innerText = "";
+        }
+      }
+    });
+}
+
 // Code execution
 
 var places = []; // TODO: add user location
 loadPlaces();
+
+showLastUpdate();
