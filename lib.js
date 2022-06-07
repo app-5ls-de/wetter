@@ -23,14 +23,6 @@ function Place(name, countryCode, lat, lon) {
   this.lon = lon;
 }
 
-crel.attrMap["cssVariable"] = (element, value) => {
-  for (let varName in value) {
-    if (Object.hasOwnProperty.call(value, varName)) {
-      element.style.setProperty("--" + varName, value[varName]);
-    }
-  }
-};
-
 const msToBeaufort = (ms) => Math.round(Math.cbrt(Math.pow(ms / 0.836, 2)));
 
 function weatherConditionNameFromId(id, icon) {

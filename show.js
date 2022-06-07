@@ -1,13 +1,9 @@
-const divMain = crel("#main");
+const divMain = dom("#main");
 
 function createSunPathSection() {
-  const section = crel.section(
-    {
-      class: "section",
-    },
-    (divChart = crel.div({
-      class: "ct-chart ct-perfect-fourth",
-    }))
+  const section = dom.section(
+    ".section",
+    (divChart = dom.div(".ct-chart ct-perfect-fourth"))
   );
 
   const altitudesToday = solarAltitude().map(({ altitude, seconds }) => ({

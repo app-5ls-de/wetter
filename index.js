@@ -1,10 +1,10 @@
-const divCities = crel("#cities");
-const divPlacesList = crel("#places-list");
-const divSearchResults = crel("#search-results");
-const divSearchButton = crel("#search-button");
-const divSearchInput = crel("#search-input");
-const divModal = crel("#modal");
-const buttonModalOpen = crel("#modal-open");
+const divCities = dom("#cities");
+const divPlacesList = dom("#places-list");
+const divSearchResults = dom("#search-results");
+const divSearchButton = dom("#search-button");
+const divSearchInput = dom("#search-input");
+const divModal = dom("#modal");
+const buttonModalOpen = dom("#modal-open");
 
 function createAllWidgets() {
   divPlacesList.textContent = "";
@@ -20,32 +20,23 @@ function createAllWidgets() {
 }
 
 function createPlaceModalItem(place) {
-  const divBox = crel.div(
-    {
-      class: "box block list-group-item level is-mobile",
-    },
-    crel.div(
-      {
-        class: "level-left",
-      },
-      crel.img({
-        class: "icon level-item handle",
+  const divBox = dom.div(
+    ".box block list-group-item level is-mobile",
+    dom.div(
+      ".level-left",
+      dom.img(".icon level-item handle", {
         src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/move-outline.svg",
       })
     ),
-    crel.div(
-      {
-        class: "level-item",
-      },
-      place.name + ", " + place.countryCode.toUpperCase() //TODO: fix long names
+    dom.div(
+      ".level-item",
+      dom.textNode(place.name + ", " + place.countryCode.toUpperCase()) //TODO: fix long names
     ),
-    crel.div(
-      {
-        class: "level-right",
-      },
-      crel.button(
+    dom.div(
+      ".level-right",
+      dom.button(
+        ".button level-item is-danger",
         {
-          class: "button level-item is-danger",
           on: {
             click: () => {
               const index = places.indexOf(place);
@@ -56,12 +47,9 @@ function createPlaceModalItem(place) {
             },
           },
         },
-        crel.span(
-          {
-            class: "icon is-small",
-          },
-          crel.img({
-            class: "icon",
+        dom.span(
+          ".icon is-small",
+          dom.img(".icon", {
             src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/close-outline.svg",
           })
         )
@@ -100,28 +88,22 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
   divSearchResults.textContent = "";
 
   data.features.forEach((element) => {
-    const divBox = crel.div(
-      {
-        class: "box block level is-mobile",
-      },
-      crel.div(
-        {
-          class: "level-left",
-        },
-        crel.div(
-          {
-            class: "level-item",
-          },
-          element.properties.name + ", " + element.properties.country //TODO: fix long names
+    const divBox = dom.div(
+      ".box block level is-mobile",
+      dom.div(
+        ".level-left",
+        dom.div(
+          ".level-item",
+          dom.textNode(
+            element.properties.name + ", " + element.properties.country
+          ) //TODO: fix long names
         )
       ),
-      crel.div(
-        {
-          class: "level-right",
-        },
-        crel.button(
+      dom.div(
+        ".level-right",
+        dom.button(
+          ".button level-item is-primary",
           {
-            class: "button level-item is-primary",
             on: {
               click: () => {
                 const place = new Place(
@@ -140,12 +122,9 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
               },
             },
           },
-          crel.span(
-            {
-              class: "icon is-small",
-            },
-            crel.img({
-              class: "icon",
+          dom.span(
+            ".icon is-small",
+            dom.img(".icon", {
               src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/add-outline.svg",
             })
           )
@@ -161,62 +140,45 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
     // TODO: show error message
   }
 
-  const divMore = crel.button(
+  const divMore = dom.button(
+    ".button",
     {
-      class: "button",
       on: {
         click: () => {
           searchAndDisplay(searchQuery, limit + 5);
         },
       },
     },
-
-    lang == "de" ? "mehr anzeigen" : "show more"
+    dom.textNode(lang == "de" ? "mehr anzeigen" : "show more")
   );
   divSearchResults.appendChild(divMore);
 }
 
 function createCityBox(place) {
-  const divBox = crel.a({
-    class: "box city p-0",
+  const divBox = dom.a(".box city p-0", {
     href: debug
       ? "/show?place=" + place.name
       : "https://wetter.app.5ls.de/show?lat=" + place.lat + "&lon=" + place.lon,
   });
-  const divColumn = crel.div(
-    {
-      class: "column is-one-quarter",
-    },
-    divBox
-  );
+  const divColumn = dom.div(".column is-one-quarter", divBox);
   divCities.appendChild(divColumn);
 
   openweathermap(place).then((data) => {
-    const divBlock = crel.div({
-      class: "block pl-3 pr-3 m-0",
-    });
+    const divBlock = dom.div(".block pl-3 pr-3 m-0");
     divBox.appendChild(divBlock);
 
-    const divLevelName = crel.div(
-      {
-        class: "level pt-3 pb-3",
-      },
-      crel.h2(
-        {
-          class: "city-name level-item",
-        },
-        crel.span(
-          {
-            class: "is-size-5 has-text-grey",
-          },
-          place.name //TODO: fix long names (https://dev.to/jankapunkt/make-text-fit-it-s-parent-size-using-javascript-m40)
+    const divLevelName = dom.div(
+      ".level pt-3 pb-3",
+      dom.h2(
+        ".city-name level-item",
+        dom.span(
+          ".is-size-5 has-text-grey",
+          dom.textNode(place.name) //TODO: fix long names (https://dev.to/jankapunkt/make-text-fit-it-s-parent-size-using-javascript-m40)
         ),
-        crel.sup(
+        dom.sup(
           // TODO: only show if not all places have same country code
-          {
-            class: "is-size-7 mb-4 is-uppercase",
-          },
-          place.countryCode
+          ".is-size-7 mb-4 is-uppercase",
+          dom.textNode(place.countryCode)
         )
       )
     );
@@ -228,12 +190,9 @@ function createCityBox(place) {
       data.current.weather[0].icon
     );
     const wind_deg = data.current.wind_deg + (180 % 360);
-    const divLevelIcons2 = crel.div(
-      {
-        class: "level city-icons is-relative",
-      },
-      crel.img({
-        class: "city-icon2 level-item",
+    const divLevelIcons2 = dom.div(
+      ".level city-icons is-relative",
+      dom.img(".city-icon2 level-item", {
         style: { width: "7rem", left: "0.5rem", top: "-2rem" },
         // alternative: https://www.amcharts.com/free-animated-svg-weather-icons/
         src:
@@ -242,8 +201,7 @@ function createCityBox(place) {
           ".svg",
         alt: weatherCondition,
       }),
-      crel.img({
-        class: "city-icon2 level-item",
+      dom.img(".city-icon2 level-item", {
         style: {
           width: "4rem",
           right: 0,
@@ -260,70 +218,36 @@ function createCityBox(place) {
     );
     divBlock.appendChild(divLevelIcons2);
 
-    const divLevelTempDay = crel.div(
-      {
-        class: "level-item mb-0 mr-0 is-size-3 level",
-      },
-      crel.img({
-        class: "city-temp-icon level-item",
+    const divLevelTempDay = dom.div(
+      ".level-item mb-0 mr-0 is-size-3 level",
+      dom.img(".city-temp-icon level-item", {
         src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg-static/thermometer-warmer.svg",
       }),
-      crel.div(
-        {
-          class: "city-temp has-text-weight-bold level-item",
-        },
-        data.daily[0].temp.day.toFixed(0),
-        crel.div(
-          {
-            class: "city-temp-celsius mb-4 has-text-grey",
-          },
-          "°C"
-        )
+      dom.div(
+        ".city-temp has-text-weight-bold level-item",
+        dom.textNode(data.daily[0].temp.day.toFixed(0)),
+        dom.div(".city-temp-celsius mb-4 has-text-grey", "°C")
       )
     );
-    const divLevelTempNight = crel.div(
-      {
-        class: "level-item mb-0 mr-0 is-size-3 level",
-      },
-      crel.img({
-        class: "city-temp-icon level-item",
+    const divLevelTempNight = dom.div(
+      ".level-item mb-0 mr-0 is-size-3 level",
+      dom.img(".city-temp-icon level-item", {
         src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg-static/thermometer-colder.svg",
       }),
-      crel.div(
-        {
-          class: "city-temp has-text-weight-bold level-item",
-        },
-        data.daily[0].temp.night.toFixed(0),
-        crel.div(
-          {
-            class: "city-temp-celsius mb-4 has-text-grey",
-          },
-          "°C"
-        )
+      dom.div(
+        ".city-temp has-text-weight-bold level-item",
+        dom.textNode(data.daily[0].temp.night.toFixed(0)),
+        dom.div(".city-temp-celsius mb-4 has-text-grey", "°C")
       )
     );
-    const divLevelTemp = crel.div(
-      {
-        class: "level is-mobile",
-      },
-      crel.div(
-        {
-          class: "city-temp level-item is-size-1 has-text-weight-bold",
-        },
-        data.current.temp.toFixed(0),
-        crel.div(
-          {
-            class: "city-temp-celsius mb-4 has-text-grey",
-          },
-          "°C"
-        )
+    const divLevelTemp = dom.div(
+      ".level is-mobile",
+      dom.div(
+        ".city-temp level-item is-size-1 has-text-weight-bold",
+        dom.textNode(data.current.temp.toFixed(0)),
+        dom.div(".city-temp-celsius mb-4 has-text-grey", "°C")
       ),
-      crel.div(
-        {
-          class: "level-right",
-        },
-        crel.div(divLevelTempDay, divLevelTempNight)
-      )
+      dom.div(".level-right", dom.div(divLevelTempDay, divLevelTempNight))
     );
     divBlock.appendChild(divLevelTemp);
 
@@ -336,36 +260,25 @@ function createCityBox(place) {
 
     // TODO: add whitespace if no precipitation
     if (data.minutely /* && maxPrecipitation */) {
-      const divChart = crel.div(
-        {
-          class: "city-minute level-item",
-        },
-        crel.table(
-          {
-            class: "charts-css column",
-          },
-          (tbodyChart = crel.tbody({
-            class: "charts-css column",
-          }))
+      const divChart = dom.div(
+        ".city-minute level-item",
+        dom.table(
+          ".charts-css column",
+          (tbodyChart = dom.tbody(".charts-css column"))
         )
       );
       for (let i = 0; i < data.minutely.length; i++) {
         const size = data.minutely[i].precipitation / maxChartPrecipitation;
 
-        const tr = crel.tr(
+        const tr = dom.tr(
           size
-            ? crel.td(
+            ? dom.td(
                 {
                   cssVariable: {
                     size: size.toFixed(2),
                   },
                 },
-                crel.span(
-                  {
-                    class: "tooltip",
-                  },
-                  "in " + i + "min"
-                )
+                dom.span(".tooltip", "in " + i + "min")
               )
             : undefined
         );
@@ -387,7 +300,7 @@ buttonModalOpen.addEventListener("click", () => {
   divModal.classList.add("is-active");
 });
 
-[crel("#modal-close"), crel("#modal-background")].forEach((el) => {
+[dom("#modal-close"), dom("#modal-background")].forEach((el) => {
   el.addEventListener("click", closeModal);
 });
 
@@ -400,17 +313,12 @@ document.addEventListener("keydown", (e) => {
 createAllWidgets();
 
 if (!places.length) {
-  const divColumn = crel.div(
-    {
-      class: "column",
-    },
-    crel.p(
-      {
-        class: "city is-size-1 is-primary",
-      },
+  const divColumn = dom.div(
+    ".column",
+    dom.p(
+      ".city is-size-1 is-primary",
       lang == "de" ? "Stadt hinzufügen" : "Add city",
-      crel.img({
-        class: "arrow",
+      dom.img(".arrow", {
         src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/arrow-forward-outline.svg",
       })
     )
