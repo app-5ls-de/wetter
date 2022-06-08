@@ -135,6 +135,11 @@ function showLastUpdate() {
     });
 }
 
+function updateLastUpdate() {
+  lastUpdateTime = new Date();
+  showLastUpdate();
+}
+
 // Code execution
 
 var places = []; // TODO: add user location

@@ -18,7 +18,7 @@ function createAllWidgets() {
     createCityBox(place);
   }
 
-  lastUpdateTime = new Date();
+  updateLastUpdate();
 }
 
 function createPlaceModalItem(place) {
