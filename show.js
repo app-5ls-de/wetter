@@ -154,6 +154,27 @@ function getSolsticeDays(year = new Date(), lat = place.lat, lon = place.lon) {
   };
 }
 
+async function createEcmwfSection_plume() {
+  const data = await fetch_json(
+    "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_meteogram/?epsgram=classical_plume&lon=" +
+      place.lon +
+      "&lat=" +
+      place.lat
+  );
+
+  const section = dom.section(
+    ".section",
+    dom.div(
+      { style: { overflow: "hidden", width: "fit-content" } },
+      dom.img({
+        src: data.data.link.href,
+        style: { margin: "-13% -8% -55% -8%" },
+      })
+    )
+  );
+
+  divMain.appendChild(section);
+}
 // Code execution starts here
 
 const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
@@ -166,3 +187,5 @@ if (!place) {
 document.title = place.name + " - " + document.title;
 
 createSunPathSection();
+
+createEcmwfSection_plume();
