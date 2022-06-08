@@ -175,6 +175,29 @@ async function createEcmwfSection_plume() {
 
   divMain.appendChild(section);
 }
+
+async function createEcmwfSection_meteogram() {
+  const data = await fetch_json(
+    "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_ptype_meteogram/?lon=" +
+      place.lon +
+      "&lat=" +
+      place.lat
+  );
+
+  const section = dom.section(
+    ".section",
+    dom.div(
+      { style: { overflow: "hidden", width: "fit-content" } },
+      dom.img({
+        src: data.data.link.href,
+        style: { margin: "-16% -12% -16%" },
+      })
+    )
+  );
+
+  divMain.appendChild(section);
+}
+
 // Code execution starts here
 
 const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
@@ -188,4 +211,5 @@ document.title = place.name + " - " + document.title;
 
 createSunPathSection();
 
+createEcmwfSection_meteogram();
 createEcmwfSection_plume();
