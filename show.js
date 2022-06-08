@@ -208,6 +208,7 @@ if (!place) {
   location.href = "index.html";
 }
 document.title = place.name + " - " + document.title;
+document.getElementById("title").innerText = place.name;
 
 createSunPathSection();
 
