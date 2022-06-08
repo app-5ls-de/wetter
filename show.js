@@ -210,6 +210,7 @@ if (!place) {
 document.title = place.name + " - " + document.title;
 document.getElementById("title").innerText = place.name;
 
+const dataOpenweathermap = openweathermap(place);
 createSunPathSection();
 
 createEcmwfSection_meteogram();
