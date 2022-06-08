@@ -186,12 +186,10 @@ function createCityBox(place) {
     );
     divBlock.appendChild(divLevelName);
 
-    const beaufort = msToBeaufort(data.current.wind_speed);
     const weatherCondition = weatherConditionNameFromId(
       data.current.weather[0].id,
       data.current.weather[0].icon
     );
-    const wind_deg = data.current.wind_deg + (180 % 360);
     const divLevelIcons2 = dom.div(
       ".level city-icons is-relative",
       dom.img(".city-icon2 level-item", {
@@ -203,20 +201,20 @@ function createCityBox(place) {
           ".svg",
         alt: weatherCondition,
       }),
-      dom.img(".city-icon2 level-item", {
-        style: {
-          width: "4rem",
-          right: 0,
-          top: "-1rem",
-          "transform-origin": "50% 50%",
-          transform: "rotate(" + wind_deg + "deg)",
-        },
-        src:
-          "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/wind-beaufort-" +
-          beaufort +
-          ".svg",
-        alt: "wind-beaufort-" + beaufort,
-      })
+      dom(
+        getWindIcon(
+          msToBeaufort(data.current.wind_speed),
+          data.current.wind_deg + 180
+        ),
+        ".city-icon2 level-item",
+        {
+          style: {
+            width: "4rem",
+            right: 0,
+            top: "-1rem",
+          },
+        }
+      )
     );
     divBlock.appendChild(divLevelIcons2);
 

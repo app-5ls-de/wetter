@@ -140,6 +140,19 @@ function updateLastUpdate() {
   showLastUpdate();
 }
 
+const getWindIcon = (beaufort, wind_deg) =>
+  dom.img({
+    style: {
+      "transform-origin": "50% 50%",
+      transform: "rotate(" + (wind_deg % 360) + "deg)",
+    },
+    src:
+      "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/wind-beaufort-" +
+      beaufort +
+      ".svg",
+    alt: "wind-beaufort-" + beaufort,
+  });
+
 // Code execution
 
 var places = []; // TODO: add user location
