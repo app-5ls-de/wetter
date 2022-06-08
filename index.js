@@ -157,11 +157,7 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
 }
 
 function createCityBox(place) {
-  const divBox = dom.a(".box city p-0", {
-    href: debug
-      ? "/show?place=" + place.name
-      : "https://wetter.app.5ls.de/show?lat=" + place.lat + "&lon=" + place.lon,
-  });
+  const divBox = dom.a(".box city p-0", { href: "/show?place=" + place.name });
   const divColumn = dom.div(".column is-one-quarter", divBox);
   divCities.appendChild(divColumn);
 
