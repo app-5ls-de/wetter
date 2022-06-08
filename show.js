@@ -198,6 +198,143 @@ async function createEcmwfSection_meteogram() {
   divMain.appendChild(section);
 }
 
+function createDaysSection() {
+  const section = dom.section(".section");
+
+  divMain.appendChild(section);
+
+  dataOpenweathermap.then((data) => {
+    let [minimalTemp, maximalTemp] = data.daily.reduce(
+      ([min, max], { temp }) => [
+        Math.min(min, temp.day, temp.night), // ...Object.values(temp) for all values
+        Math.max(max, temp.day, temp.night),
+      ],
+      [Infinity, -Infinity]
+    );
+    minimalTemp = minimalTemp - (maximalTemp - minimalTemp) * 0.2;
+    maximalTemp = maximalTemp + (maximalTemp - minimalTemp) * 0.2;
+    const tempScale = maximalTemp - minimalTemp;
+    console.log(minimalTemp, maximalTemp, tempScale);
+
+    for (const dayData of data.daily) {
+      console.log(dayData);
+
+      const date = new Date(dayData.dt * 1000);
+      const dayString = date.getDate();
+      const weekdayString = date.toLocaleDateString([], { weekday: "short" });
+
+      const leftPercentage = Math.round(
+        ((dayData.temp.night - minimalTemp) / tempScale) * 100
+      );
+      const widthPercentage = Math.round(
+        ((dayData.temp.day - dayData.temp.night) / tempScale) * 100
+      );
+      const rightPercentage = 100 - widthPercentage - leftPercentage;
+
+      const divDay = dom.div(
+        ".level m-0",
+        dom.div(
+          ".level-left",
+          dom.div(
+            ".level-item is-centered is-flex is-flex-direction-column",
+            { style: { width: "3rem" } },
+            dom.div(".has-text-grey", weekdayString),
+            dom.div(".has-text-weight-bold", dayString.toString())
+          ),
+          dom.img(".level-item", {
+            style: { width: "4rem" },
+            src:
+              "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+              weatherConditionNameFromId(
+                dayData.weather[0].id,
+                dayData.weather[0].icon
+              ) +
+              ".svg",
+          })
+        ),
+        dom.div(
+          ".level m-0",
+
+          dom(
+            getWindIcon(
+              msToBeaufort(data.current.wind_speed),
+              data.current.wind_deg + 180
+            ),
+            ".level-item",
+            { style: { width: "3rem" } }
+          ),
+          dom.img(".level-item", {
+            style: { width: "3rem" },
+            src:
+              "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
+              Math.round(dayData.uvi) +
+              ".svg",
+          }),
+          dom.div(
+            ".level-item is-centered is-flex is-flex-direction-column",
+            dom.img(".level-item", {
+              style: { height: "3rem", margin: "-15px" },
+              src: dayData.rain
+                ? "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/raindrop" +
+                  (dayData.rain > 1 ? "s" : "") + // TODO: improve rain amount cut-off and document it
+                  ".svg"
+                : "",
+            }),
+            dom.div(
+              ".level-item has-text-grey ml-auto", // has-text-right is-block
+              { style: { width: "3rem" } },
+              dayData.pop && (dayData.pop * 100).toFixed(0) + "%"
+            )
+          )
+        ),
+        dom.div(
+          ".level-right",
+          { style: { width: "50%" } },
+          dom.div(
+            ".tempRange level m-0",
+            { style: { width: "100%", position: "relative" } },
+            dom.span(
+              ".level-item m-0 is-block has-text-right px-1",
+              { style: { position: "absolute", width: leftPercentage + "%" } },
+              dom.textNode(Math.round(dayData.temp.night) + "°C")
+            ),
+            dom.div(".bar has-background-grey-dark", {
+              style: {
+                marginLeft: leftPercentage + "%",
+                width: widthPercentage + "%",
+                height: "1rem",
+                borderRadius: "1rem",
+              },
+            }),
+            dom.span(
+              ".level-item m-0 is-block has-text-left px-1",
+              {
+                style: {
+                  position: "absolute",
+                  right: "0",
+                  width: rightPercentage + "%",
+                },
+              },
+              dom.textNode(Math.round(dayData.temp.day) + "°C")
+            )
+          ),
+
+          dom.img(".level-item p-1 is-hidden", {
+            style: { width: "2rem" },
+            src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg",
+          })
+          /* dom.img(".level-item", {
+            style: { width: "1.2rem" } ,
+            src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-up-outline.svg",
+          }) */
+        )
+      );
+      section.appendChild(divDay);
+      section.appendChild(dom.hr(".my-1", { style: { height: "1px" } }));
+    }
+  });
+}
+
 // Code execution starts here
 
 const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
@@ -211,6 +348,9 @@ document.title = place.name + " - " + document.title;
 document.getElementById("title").innerText = place.name;
 
 const dataOpenweathermap = openweathermap(place);
+
+createDaysSection();
+
 createSunPathSection();
 
 createEcmwfSection_meteogram();
