@@ -198,27 +198,30 @@ async function createEcmwfSection_meteogram() {
   divMain.appendChild(section);
 }
 
+const addPaddingRange = ([min, max], paddingFactor) => [
+  min - (max - min) * paddingFactor,
+  max + (max - min) * paddingFactor,
+];
+
 function createDaysSection() {
   const section = dom.section(".section");
 
   divMain.appendChild(section);
 
   dataOpenweathermap.then((data) => {
-    let [minimalTemp, maximalTemp] = data.daily.reduce(
-      ([min, max], { temp }) => [
-        Math.min(min, temp.day, temp.night), // ...Object.values(temp) for all values
-        Math.max(max, temp.day, temp.night),
-      ],
-      [Infinity, -Infinity]
+    const [minimalTemp, maximalTemp] = addPaddingRange(
+      data.daily.reduce(
+        ([min, max], { temp }) => [
+          Math.min(min, ...Object.values(temp)),
+          Math.max(max, ...Object.values(temp)),
+        ],
+        [Infinity, -Infinity]
+      ),
+      0.2
     );
-    minimalTemp = minimalTemp - (maximalTemp - minimalTemp) * 0.2;
-    maximalTemp = maximalTemp + (maximalTemp - minimalTemp) * 0.2;
     const tempScale = maximalTemp - minimalTemp;
-    console.log(minimalTemp, maximalTemp, tempScale);
 
     for (const dayData of data.daily) {
-      console.log(dayData);
-
       const date = new Date(dayData.dt * 1000);
       const dayString = date.getDate();
       const weekdayString = date.toLocaleDateString([], { weekday: "short" });
