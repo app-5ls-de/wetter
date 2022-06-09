@@ -235,6 +235,13 @@ function createDaysSection() {
       );
       const rightPercentage = 100 - widthPercentage - leftPercentage;
 
+      const leftExtremePercentage = Math.round(
+        ((dayData.temp.min - minimalTemp) / tempScale) * 100
+      );
+      const widthExtremePercentage = Math.round(
+        ((dayData.temp.max - dayData.temp.min) / tempScale) * 100
+      );
+
       const divDay = dom.div(
         ".level m-0",
         dom.div(
@@ -258,7 +265,6 @@ function createDaysSection() {
         ),
         dom.div(
           ".level m-0",
-
           dom(
             getWindIcon(
               msToBeaufort(data.current.wind_speed),
@@ -297,19 +303,30 @@ function createDaysSection() {
           dom.div(
             ".tempRange level m-0",
             { style: { width: "100%", position: "relative" } },
+            dom.div(".has-background-grey-lighter", {
+              style: {
+                marginLeft: leftExtremePercentage + "%",
+                width: widthExtremePercentage + "%",
+                height: "0.1rem",
+                borderRadius: "0.1rem",
+                position: "absolute",
+              },
+            }),
             dom.span(
               ".level-item m-0 is-block has-text-right px-1",
               { style: { position: "absolute", width: leftPercentage + "%" } },
               dom.textNode(Math.round(dayData.temp.night) + "°C")
             ),
-            dom.div(".bar has-background-grey-dark", {
+            dom.div(".has-background-grey-dark", {
               style: {
                 marginLeft: leftPercentage + "%",
                 width: widthPercentage + "%",
                 height: "1rem",
                 borderRadius: "1rem",
+                position: "absolute",
               },
             }),
+
             dom.span(
               ".level-item m-0 is-block has-text-left px-1",
               {
