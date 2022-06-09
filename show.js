@@ -156,6 +156,8 @@ function getSolsticeDays(year = new Date(), lat = place.lat, lon = place.lon) {
 }
 
 async function createEcmwfSection_plume() {
+  // TODO: show the two ecmwf meteograms side by side on desktop
+
   const data = await fetch_json(
     "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_meteogram/?epsgram=classical_plume&lon=" +
       place.lon +
