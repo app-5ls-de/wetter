@@ -247,6 +247,8 @@ function createCityBox(place) {
     );
     divBlock.appendChild(divLevelTemp);
 
+    // TODO: use new charting library for precipitation
+
     const maxPrecipitation =
       data.minutely?.reduce(
         (acc, cur) => Math.max(acc, cur.precipitation),
