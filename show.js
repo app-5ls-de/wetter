@@ -397,6 +397,182 @@ function createMeteoblueSection() {
 }
 
 
+function createForecastHourlySection() {
+  // TODO: show clouds from openMeteo as bar chart with gradient
+
+  const divChart = dom.div();
+  const section = dom.section(".section", divChart);
+
+  divMain.appendChild(section);
+
+  dataOpenweathermap.then((data) => {
+    const rainData = data.hourly.map((hour) => ({
+      x: hour.dt * 1000,
+      y: hour.rain?.["1h"],
+    }));
+    const rainRange = [
+      0,
+      Math.max(...rainData.map((hour) => (hour.y || 0) * 1.2), 5),
+    ];
+
+    const tempData = data.hourly.map((hour) => ({
+      x: hour.dt * 1000,
+      y: hour.temp,
+    }));
+    const tempRange = addPaddingRange(
+      tempData.reduce(
+        ([min, max], { y }) => [Math.min(min, y), Math.max(max, y)],
+        [Infinity, -Infinity]
+      ),
+      0.2
+    );
+
+    const dates = [
+      ...new Set(
+        data.hourly.map((hour) =>
+          new Date(hour.dt * 1000).setHours(12, 0, 0, 0)
+        )
+      ),
+    ];
+
+    const annotationsXaxis = [
+      // yellow background to indicate daytime
+      ...dates.map((date) => {
+        const { sunrise, sunset } = SunCalc.getTimes(
+          new Date(date),
+          place.lat,
+          place.lon
+        );
+        return {
+          x: +sunrise,
+          x2: +sunset,
+          fillColor: "#e8ec68",
+        };
+      }),
+
+      // show date on the top of each day
+      ...dates
+        .map((date) => ({
+          x: new Date(date).setHours(12, 0, 0, 0),
+          borderColor: "rgba(0,0,0,0);",
+          label: {
+            borderColor: "white",
+            orientation: "horizontal",
+            text:
+              new Date(date).toLocaleDateString([], { weekday: "short" }) +
+              " " +
+              new Date(date).getDate(),
+          },
+        }))
+        .filter(
+          // dont show date if is not in the visible range
+          (annotation) =>
+            annotation.x > tempData[0].x &&
+            annotation.x < tempData[tempData.length - 1].x
+        ),
+    ];
+
+    var options = {
+      chart: {
+        type: "line",
+        toolbar: {
+          show: false,
+        },
+        zoom: {
+          enabled: false,
+        },
+        animations: {
+          enabled: false,
+        },
+      },
+      colors: ["black", "#2c87c7"],
+      series: [
+        {
+          name: "temperature",
+          type: "line",
+          data: tempData,
+        },
+        {
+          name: "rain",
+          type: "column",
+          data: rainData,
+        },
+      ],
+      stroke: {
+        //curve: 'smooth',
+      },
+      annotations: {
+        position: "back",
+        xaxis: annotationsXaxis,
+      },
+      xaxis: {
+        type: "datetime",
+        tickAmount: tempData.length / 2,
+        labels: {
+          /**
+           * Allows users to apply a custom formatter function to x-axis labels.
+           *
+           * @param { String } value - The default value generated
+           * @param { Number } timestamp - In a datetime series, this is the raw timestamp
+           * @param { object } contains dateFormatter for datetime x-axis
+           */
+          formatter: function (value, timestamp, opts) {
+            //return value
+            return new Date(timestamp).getHours();
+          },
+        },
+      },
+      yaxis: [
+        {
+          seriesName: "temperature",
+          forceNiceScale: true,
+          min: tempRange[0],
+          max: tempRange[1],
+          /* axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+          }, */
+          title: {
+            text: "Temperature (°C)",
+          },
+        },
+        {
+          opposite: true,
+          seriesName: "rain",
+          forceNiceScale: true,
+          min: rainRange[0],
+          max: rainRange[1],
+          /* axisTicks: {
+            show: true,
+          },
+          axisBorder: {
+            show: true,
+          }, */
+          title: {
+            text: "Rain  (mm/h)",
+          },
+        },
+      ],
+      tooltip: {
+        shared: false,
+        intersect: true,
+        x: {
+          show: false,
+        },
+      },
+      legend: {
+        show: false,
+      },
+    };
+
+    var chart = new ApexCharts(divChart, options);
+
+    chart.render();
+  });
+}
+
 function createCurrentSection() {
   // TODO: first section should be a summary of the current weather (icon, temperature, wind, uvindex and graph of precipitation in next 60 minutes)
 
@@ -543,6 +719,7 @@ const dataOpenweathermap = openweathermap(place);
 createCurrentSection();
 
 createDaysSection();
+createForecastHourlySection();
 
 if (!debug) createMeteoblueSection();
 
