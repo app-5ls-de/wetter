@@ -229,8 +229,9 @@ function createDaysSection() {
       const leftPercentage = Math.round(
         ((dayData.temp.night - minimalTemp) / tempScale) * 100
       );
-      const widthPercentage = Math.round(
-        ((dayData.temp.day - dayData.temp.night) / tempScale) * 100
+      const widthPercentage = Math.max(
+        Math.round(((dayData.temp.day - dayData.temp.night) / tempScale) * 100),
+        1 // min width is 1% to avoid 0% width
       );
       const rightPercentage = 100 - widthPercentage - leftPercentage;
 
