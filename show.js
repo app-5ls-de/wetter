@@ -396,6 +396,136 @@ function createMeteoblueSection() {
   divMain.appendChild(section);
 }
 
+
+function createCurrentSection() {
+  // TODO: first section should be a summary of the current weather (icon, temperature, wind, uvindex and graph of precipitation in next 60 minutes)
+
+  const section = dom.section(".section");
+  divMain.appendChild(section);
+
+  dataOpenweathermap.then((data) => {
+    const weatherCondition = weatherConditionNameFromId(
+      data.current.weather[0].id,
+      data.current.weather[0].icon
+    );
+
+    const { parallacticAngle: moonParallacticAngle } = SunCalc.getMoonPosition(
+      new Date(),
+      place.lat,
+      place.lon
+    );
+    const moonIllumination = SunCalc.getMoonIllumination(new Date());
+    const zenithAngle = moonIllumination.angle - moonParallacticAngle;
+
+    let moonNames = [
+      "moon-new",
+      "moon-waxing-crescent",
+      "moon-first-quarter",
+      "moon-waxing-gibbous",
+      "moon-full",
+      "moon-waning-gibbous",
+      "moon-last-quarter",
+      "moon-waning-crescent",
+    ];
+
+    const getMoonNameFromPhase = (phase) =>
+      moonNames[
+        Math.floor(
+          ((phase + 1 / (moonNames.length * 2)) % 1) * moonNames.length
+        )
+      ];
+
+    const moonName = getMoonNameFromPhase(moonIllumination.phase);
+
+    const rotationAngle =
+      (zenithAngle * 180) / Math.PI +
+      (moonIllumination.phase < 0.5 ? 1 : -1) * 90*3/4; // add constant angle to take the rotation of the svg into account
+
+    const divChart = dom.div();
+    const divCurrent = dom.div(
+      ".level",
+
+      dom.div(
+        ".level-left",
+        dom.img(".level-item", {
+          style: { width: "7rem" },
+          src:
+            "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+            weatherCondition +
+            ".svg",
+        }),
+        dom.div(
+          ".city-temp level-item is-size-1 has-text-weight-bold",
+          dom.textNode(data.current.temp.toFixed(0)),
+          dom.div(".city-temp-celsius mb-4 has-text-grey", "°C")
+        ),
+
+        dom.div(
+          ".is-flex is-flex-direction-column",
+          dom(
+            getWindIcon(
+              msToBeaufort(data.current.wind_speed),
+              data.current.wind_deg + 180
+            ),
+            ".city-icon2 level-item",
+            {
+              style: {
+                width: "4rem",
+                right: 0,
+                top: "-1rem",
+              },
+            }
+          ),
+          dom.img(".level-item", {
+            style: { width: "3rem" },
+            src:
+              "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
+              Math.round(data.current.uvi) +
+              ".svg",
+          }),
+          dom.img(".level-item", {
+            style: {
+              width: "6rem",
+              "transform-origin": "50% 50%",
+              transform: "rotate(" + rotationAngle + "deg)",
+            },
+            src:
+              "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+              moonName +
+              ".svg",
+          })
+        )
+      ),
+
+      dom.div(
+        ".is-flex is-flex-direction-column",
+
+        dom.div(
+          ".level",
+          dom.div(".level-item", dom.textNode(data.current.humidity + "%")),
+          dom.img(".level-item", {
+            style: { width: "3rem" },
+            src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/humidity.svg",
+          })
+        ),
+
+        dom.div(
+          ".level",
+          dom.div(".level-item", dom.textNode(data.current.pressure + "hBar")),
+          dom.img(".level-item", {
+            style: { width: "3rem" },
+            src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/barometer.svg",
+          })
+        )
+      ),
+
+      dom.div(".level-right", divChart)
+    );
+
+    section.appendChild(divCurrent);
+  });
+}
+
 // Code execution starts here
 
 const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
@@ -409,6 +539,8 @@ document.title = place.name + " - " + document.title;
 document.getElementById("title").innerText = place.name;
 
 const dataOpenweathermap = openweathermap(place);
+
+createCurrentSection();
 
 createDaysSection();
 
