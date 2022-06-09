@@ -186,7 +186,7 @@ function createCityBox(place) {
       data.current.weather[0].id,
       data.current.weather[0].icon
     );
-    const divLevelIcons2 = dom.div(
+    const divLevelIcons = dom.div(
       ".level city-icons is-relative",
       dom.img(".city-icon2 level-item", {
         style: { width: "7rem", left: "0.5rem", top: "-2rem" },
@@ -212,7 +212,7 @@ function createCityBox(place) {
         }
       )
     );
-    divBlock.appendChild(divLevelIcons2);
+    divBlock.appendChild(divLevelIcons);
 
     const divLevelTempDay = dom.div(
       ".level-item mb-0 mr-0 is-size-3 level",
