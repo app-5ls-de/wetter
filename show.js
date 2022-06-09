@@ -359,6 +359,43 @@ function createDaysSection() {
   });
 }
 
+function createMeteoblueSection() {
+  // TODO: don't show if no rain today (use data from openweathermap)
+
+  const section = dom.section(
+    ".section",
+    dom.iframe({
+      src:
+        "https://www.meteoblue.com/en/weather/maps/widget/?windAnimation=1&gust=0&satellite=0&cloudsAndPrecipitation=0&cloudsAndPrecipitation=1&temperature=0&temperature=1&sunshine=0&extremeForecastIndex=0&extremeForecastIndex=1&geoloc=fixed&tempunit=C&windunit=bft&lengthunit=metric&zoom=6&autowidth=auto#coords=7/" +
+        place.lat +
+        "/" +
+        place.lon +
+        "&map=cloudsAndPrecipitation~hourly~auto~sfc~windAnimationOverlay",
+      frameborder: "0",
+      scrolling: "no",
+      allowtransparency: "true",
+      sandbox:
+        "allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox allow-downloads",
+      style: {
+        width: "100%",
+        height: "720px",
+      },
+    }),
+    dom.div(
+      dom.a(
+        {
+          href: "https://www.meteoblue.com/en/weather/maps/?utm_source=weather_widget&utm_medium=linkus&utm_content=map&utm_campaign=Weather%2BWidget",
+          target: "_blank",
+          rel: "noopener",
+        },
+        "meteoblue"
+      )
+    )
+  );
+
+  divMain.appendChild(section);
+}
+
 // Code execution starts here
 
 const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
@@ -374,6 +411,8 @@ document.getElementById("title").innerText = place.name;
 const dataOpenweathermap = openweathermap(place);
 
 createDaysSection();
+
+if (!debug) createMeteoblueSection();
 
 createSunPathSection();
 
