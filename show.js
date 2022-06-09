@@ -1,10 +1,11 @@
 const divMain = dom("#main");
 
 function createSunPathSection() {
-  const section = dom.section(
-    ".section",
-    (divChart = dom.div(".ct-chart ct-perfect-fourth"))
-  );
+  // TODO: move graph to the right on desktop and show sunrise and sunset on left as in old version
+  // TODO: use new charting library
+
+  const divChart = dom.div(".ct-chart ct-perfect-fourth");
+  const section = dom.section(".section", divChart);
 
   const altitudesToday = solarAltitude().map(({ altitude, seconds }) => ({
     x: seconds,
