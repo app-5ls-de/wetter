@@ -414,6 +414,15 @@ createDaysSection();
 
 if (!debug) createMeteoblueSection();
 
+divMain.appendChild(
+  dom.section(
+    ".section",
+    dom.hr(".has-background-grey my-6", {
+      style: { borderRadius: "0.2rem", height: "0.2rem" },
+    })
+  )
+);
+
 createSunPathSection();
 
 createEcmwfSection_meteogram();
