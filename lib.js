@@ -83,6 +83,54 @@ async function openweathermap(place) {
   return data;
 }
 
+async function openweathermapForecast(place) {
+  const cacheID =
+    cachePrefix + "-openweathermapforecast-" + place.lat + "," + place.lon;
+  if (localStorage.getItem(cacheID) && debug)
+    return JSON.parse(localStorage.getItem(cacheID));
+
+  const apiKey =
+    "4fbc2ce2fc600e6" + /* if you're a bot, fuck off */ "e450dd4bbde8f28be";
+  const data = await fetch_json(
+    "https://api.openweathermap.org/data/2.5/forecast?units=metric&lang=en&lat=" +
+      place.lat +
+      "&lon=" +
+      place.lon +
+      "&appid=" +
+      apiKey +
+      "&lang=" +
+      lang
+  );
+
+  if (debug) localStorage.setItem(cacheID, JSON.stringify(data));
+  return data;
+}
+
+async function openMeteoClouds(place) {
+  const cacheID =
+    cachePrefix + "-openMeteoClouds-" + place.lat + "," + place.lon;
+  if (localStorage.getItem(cacheID) && debug)
+    return JSON.parse(localStorage.getItem(cacheID));
+
+  const data = await fetch_json(
+    "https://api.open-meteo.com/v1/forecast?latitude=" +
+      place.lat +
+      "&longitude=" +
+      place.lon +
+      "&hourly=cloudcover_low,cloudcover_mid,cloudcover_high&windspeed_unit=ms&timeformat=unixtime"
+  );
+
+  if (debug) localStorage.setItem(cacheID, JSON.stringify(data));
+  return data;
+}
+
+const mostCommon = (arr) =>
+  Array.from(
+    arr
+      .reduce((acc, val) => acc.set(val, (acc.get(val) || 0) + 1), new Map())
+      .entries()
+  ).reduce((a, b) => (a[1] > b[1] ? a : b))[0];
+
 const debounce = (func, delay) => {
   let inDebounce;
   return function () {
