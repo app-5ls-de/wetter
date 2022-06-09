@@ -425,5 +425,8 @@ divMain.appendChild(
 
 createSunPathSection();
 
-createEcmwfSection_meteogram();
-createEcmwfSection_plume();
+// TODO: comment code better
+
+if (!debug) createEcmwfSection_meteogram();
+if (!debug) createEcmwfSection_plume();
+
