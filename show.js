@@ -412,20 +412,21 @@ function createForecastHourlySection() {
     }));
     const rainRange = [
       0,
-      Math.max(...rainData.map((hour) => (hour.y || 0) * 1.2), 5),
+      Math.ceil(Math.max(...rainData.map((hour) => (hour.y || 0) * 1.2), 5)),
     ];
 
     const tempData = data.hourly.map((hour) => ({
       x: hour.dt * 1000,
       y: hour.temp,
     }));
-    const tempRange = addPaddingRange(
+    let tempRange = addPaddingRange(
       tempData.reduce(
         ([min, max], { y }) => [Math.min(min, y), Math.max(max, y)],
         [Infinity, -Infinity]
       ),
       0.2
     );
+    tempRange = [Math.floor(tempRange[0]), Math.ceil(tempRange[1])];
 
     const dates = [
       ...new Set(
@@ -525,7 +526,7 @@ function createForecastHourlySection() {
       yaxis: [
         {
           seriesName: "temperature",
-          forceNiceScale: true,
+          //forceNiceScale: true,
           min: tempRange[0],
           max: tempRange[1],
           /* axisTicks: {
@@ -541,7 +542,7 @@ function createForecastHourlySection() {
         {
           opposite: true,
           seriesName: "rain",
-          forceNiceScale: true,
+          //forceNiceScale: true,
           min: rainRange[0],
           max: rainRange[1],
           /* axisTicks: {
@@ -738,4 +739,3 @@ createSunPathSection();
 
 if (!debug) createEcmwfSection_meteogram();
 if (!debug) createEcmwfSection_plume();
-
