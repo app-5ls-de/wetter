@@ -568,7 +568,10 @@ function createForecastHourlySection() {
       },
     };
 
-    var chart = new ApexCharts(divChart, options);
+    const chart = new ApexCharts(divChart, options);
+    // TODO: show clouds from openMeteo as bar chart with gradient
+    // TODO: show temperature at extremes as annotations
+    // TODO: color gradient as fill for temperature to imporve readability/intuitiveness
 
     chart.render();
   });
