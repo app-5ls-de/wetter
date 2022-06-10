@@ -396,6 +396,9 @@ function createMeteoblueSection() {
   divMain.appendChild(section);
 }
 
+const mapRange = (x, [in_min, in_max], [out_min, out_max]) =>
+  ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
+
 
 function createForecastHourlySection() {
   // TODO: show clouds from openMeteo as bar chart with gradient
@@ -473,9 +476,82 @@ function createForecastHourlySection() {
         ),
     ];
 
-    var options = {
+    const colorstemp = [
+      [48, "#aa354d"], // and above
+      [46, "#c44579"],
+      [44, "#de58a3"],
+      [42, "#f16bce"],
+      [40, "#f45081"],
+      [38, "#f54937"],
+      [36, "#f63f37"],
+      [34, "#f97239"],
+      [32, "#fa853a"],
+      [30, "#f9a53b"],
+      [28, "#fdbd3d"],
+      [26, "#fdd53e"],
+      [24, "#f9e53e"],
+      [22, "#fcec3f"],
+      [20, "#def3b4"],
+      [18, "#beea5a"],
+      [16, "#94d959"],
+      [14, "#63b456"],
+      [12, "#3a8e54"],
+      [10, "#54957d"],
+      [8, "#4ec696"],
+      [6, "#5dd46f"],
+      [4, "#68e976"],
+      [2, "#65ec97"], // 0 to 2
+      [0, "#b3eef9"], // -2 to 0
+      [-2, "#99e6f9"],
+      [-4, "#74d5fb"],
+      [-6, "#69c1f8"],
+      [-8, "#5da3f1"],
+      [-10, "#5080e8"],
+      [-12, "#4b65df"],
+      [-14, "#5163d9"],
+      [-16, "#8268e0"],
+      [-18, "#a66ee8"],
+      [-20, "#c372e9"],
+      [-22, "#db71e4"],
+      [-24, "#b75cb9"],
+      [-26, "#964da0"],
+      [-28, "#783f87"],
+      [-30, "#5e3b71"],
+      [-32, "#5e3b71"],
+
+      [-35, "#556891"],
+      [-40, "#517a9f"],
+      [-45, "#4d8cac"],
+      [-50, "#499eb9"],
+      [-55, "#44b1c7"],
+      [-60, "#40c4d5"],
+      [-65, "#3fd7e2"],
+      [-70, "#49ecf1"],
+      [-75, "#50f9fb"], // and below
+    ];
+
+    let colorStops = colorstemp.map(([temperature, color]) => ({
+      offset: mapRange(temperature, tempRange, [100, 0]),
+      color,
+      opacity: 1,
+    }));
+
+    let maxOffsetBelowZero = colorStops
+      .filter((a) => a.offset < 0)
+      .reduce((max, { offset }) => Math.max(max, offset), -Infinity);
+    let minOffsetAboveOneHundred = colorStops
+      .filter((a) => a.offset > 100)
+      .reduce((min, { offset }) => Math.min(min, offset), Infinity);
+    colorStops = colorStops
+      .filter(
+        (a) =>
+          a.offset >= maxOffsetBelowZero && a.offset <= minOffsetAboveOneHundred
+      )
+      .sort((a, b) => a.offset - b.offset); // it will not work if not sorted
+
+    const options = {
       chart: {
-        type: "line",
+        type: "area",
         toolbar: {
           show: false,
         },
@@ -486,11 +562,25 @@ function createForecastHourlySection() {
           enabled: false,
         },
       },
+      plotOptions: {
+        area: {
+          fillTo: "end",
+        },
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.7,
+          opacityTo: 0.9,
+          colorStops: colorStops,
+        },
+      },
       colors: ["black", "#2c87c7"],
       series: [
         {
           name: "temperature",
-          type: "line",
+          type: "area",
           data: tempData,
         },
         {
@@ -500,7 +590,7 @@ function createForecastHourlySection() {
         },
       ],
       stroke: {
-        //curve: 'smooth',
+        curve: "straight",
       },
       annotations: {
         position: "back",
