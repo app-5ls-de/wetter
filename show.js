@@ -608,6 +608,7 @@ function createCurrentSection() {
     const getMoonNameFromPhase = (phase) =>
       moonNames[
         Math.floor(
+          //TODO: use Math.round and don't add 1 / (moonNames.length * 2) to get same result
           ((phase + 1 / (moonNames.length * 2)) % 1) * moonNames.length
         )
       ];
@@ -616,7 +617,7 @@ function createCurrentSection() {
 
     const rotationAngle =
       (zenithAngle * 180) / Math.PI +
-      (moonIllumination.phase < 0.5 ? 1 : -1) * 90*3/4; // add constant angle to take the rotation of the svg into account
+      ((moonIllumination.phase < 0.5 ? 1 : -1) * 90 * 3) / 4; // add constant angle to take the rotation of the svg into account
 
     const divChart = dom.div();
     const divCurrent = dom.div(
