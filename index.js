@@ -195,7 +195,6 @@ function createCityBox(place) {
           "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
           weatherCondition +
           ".svg",
-        alt: weatherCondition,
       }),
       dom(
         getWindIcon(

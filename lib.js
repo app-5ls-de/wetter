@@ -198,7 +198,6 @@ const getWindIcon = (beaufort, wind_deg) =>
       "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/wind-beaufort-" +
       beaufort +
       ".svg",
-    alt: "wind-beaufort-" + beaufort,
   });
 
 // Code execution
