@@ -401,8 +401,6 @@ const mapRange = (x, [in_min, in_max], [out_min, out_max]) =>
 
 
 function createForecastHourlySection() {
-  // TODO: show clouds from openMeteo as bar chart with gradient
-
   const divChart = dom.div();
   const section = dom.section(".section", divChart);
 
@@ -562,13 +560,16 @@ function createForecastHourlySection() {
           enabled: false,
         },
       },
+      dataLabels: {
+        enabled: false,
+      },
       plotOptions: {
         area: {
           fillTo: "end",
         },
       },
       fill: {
-        type: "gradient",
+        type: ["gradient", "solid"],
         gradient: {
           shadeIntensity: 1,
           opacityFrom: 0.7,
@@ -576,7 +577,7 @@ function createForecastHourlySection() {
           colorStops: colorStops,
         },
       },
-      colors: ["black", "#2c87c7"],
+      colors: ["#4a4a4a", "#2c87c7"],
       series: [
         {
           name: "temperature",
@@ -601,14 +602,11 @@ function createForecastHourlySection() {
         tickAmount: tempData.length / 2,
         labels: {
           /**
-           * Allows users to apply a custom formatter function to x-axis labels.
-           *
            * @param { String } value - The default value generated
            * @param { Number } timestamp - In a datetime series, this is the raw timestamp
            * @param { object } contains dateFormatter for datetime x-axis
            */
           formatter: function (value, timestamp, opts) {
-            //return value
             return new Date(timestamp).getHours();
           },
         },
@@ -616,15 +614,8 @@ function createForecastHourlySection() {
       yaxis: [
         {
           seriesName: "temperature",
-          //forceNiceScale: true,
           min: tempRange[0],
           max: tempRange[1],
-          /* axisTicks: {
-            show: true,
-          },
-          axisBorder: {
-            show: true,
-          }, */
           title: {
             text: "Temperature (°C)",
           },
@@ -632,15 +623,8 @@ function createForecastHourlySection() {
         {
           opposite: true,
           seriesName: "rain",
-          //forceNiceScale: true,
           min: rainRange[0],
           max: rainRange[1],
-          /* axisTicks: {
-            show: true,
-          },
-          axisBorder: {
-            show: true,
-          }, */
           title: {
             text: "Rain  (mm/h)",
           },
@@ -661,7 +645,6 @@ function createForecastHourlySection() {
     const chart = new ApexCharts(divChart, options);
     // TODO: show clouds from openMeteo as bar chart with gradient
     // TODO: show temperature at extremes as annotations
-    // TODO: color gradient as fill for temperature to imporve readability/intuitiveness
 
     chart.render();
   });
