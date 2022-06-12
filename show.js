@@ -429,6 +429,7 @@ function createForecastHourlySection() {
         0,
         Math.ceil(Math.max(...rainData.map((hour) => (hour.y || 0) * 1.2), 5)),
       ];
+      const rainSpan = rainRange[1] - rainRange[0];
 
       const tempData = openweathermapData.hourly.map((hour) => ({
         x: hour.dt * 1000,
@@ -442,6 +443,7 @@ function createForecastHourlySection() {
         0.2
       );
       tempRange = [Math.floor(tempRange[0]), Math.ceil(tempRange[1])];
+      const tempSpan = tempRange[1] - tempRange[0];
 
       const index_start = openMeteoData.hourly.time.findIndex(
         (dt) => dt * 1000 >= rainData[0].x
@@ -570,7 +572,7 @@ function createForecastHourlySection() {
       const maxOffsetBelowZero = colorStops
         .filter((a) => a.offset < 0)
         .reduce((max, { offset }) => Math.max(max, offset), -Infinity);
-        const minOffsetAboveOneHundred = colorStops
+      const minOffsetAboveOneHundred = colorStops
         .filter((a) => a.offset > 100)
         .reduce((min, { offset }) => Math.min(min, offset), Infinity);
       colorStops = colorStops
@@ -581,7 +583,7 @@ function createForecastHourlySection() {
         )
         .sort((a, b) => a.offset - b.offset); // it will not work if not sorted
 
-      const options = {
+      const chartTemp = new ApexCharts(divChartTemp, {
         chart: {
           type: "area",
           toolbar: {
@@ -603,7 +605,7 @@ function createForecastHourlySection() {
           },
         },
         fill: {
-          type: ["gradient", "solid"],
+          type: "gradient",
           gradient: {
             shadeIntensity: 1,
             opacityFrom: 0.7,
@@ -611,16 +613,93 @@ function createForecastHourlySection() {
             colorStops: colorStops,
           },
         },
-        colors: ["#4a4a4a", "#2c87c7"],
+        colors: ["#4a4a4a"],
         series: [
           {
             name: "temperature",
             type: "area",
             data: tempData,
           },
+        ],
+        stroke: {
+          curve: "straight",
+        },
+        annotations: {
+          position: "back",
+          xaxis: annotationsXaxis,
+        },
+        xaxis: {
+          type: "datetime",
+          tickAmount: tempData.length / 2,
+          labels: {
+            formatter: (value, timestamp) => new Date(timestamp).getHours(),
+          },
+        },
+        yaxis: {
+          seriesName: "temperature",
+          min: tempRange[0],
+          max: tempRange[1],
+          // between 10 and 20 ticks; if span is bewteen 5 and 40 it will depend on the span and be nicely divisible
+          tickAmount:
+            tempSpan >= 10
+              ? tempSpan <= 20
+                ? tempSpan
+                : Math.min(tempSpan / 2, 20)
+              : Math.max(tempSpan * 2, 10),
+          labels: {
+            formatter: (value, timestamp) => Math.round(value * 10) / 10,
+          },
+          title: {
+            text: "Temperature (°C)",
+          },
+        },
+        tooltip: {
+          shared: false,
+          intersect: true,
+          x: {
+            show: false,
+          },
+        },
+        legend: {
+          show: false,
+        },
+      });
+      setTimeout(() => {
+        chartTemp.render();
+      }, 0);
+      // TODO: show clouds from openMeteo as bar chart with gradient
+      // TODO: show temperature at extremes as annotations
+
+      const chartRain = new ApexCharts(divChartRain, {
+        chart: {
+          type: "bar",
+          toolbar: {
+            show: false,
+          },
+          zoom: {
+            enabled: false,
+          },
+          animations: {
+            enabled: false,
+          },
+        },
+        aspectRatio: 1.61 * 2,
+        dataLabels: {
+          enabled: false,
+        },
+        plotOptions: {
+          area: {
+            fillTo: "end",
+          },
+        },
+        fill: {
+          type: ["solid"],
+        },
+        colors: ["#2c87c7"],
+        series: [
           {
             name: "rain",
-            type: "column",
+            type: "bar",
             data: rainData,
           },
         ],
@@ -635,30 +714,23 @@ function createForecastHourlySection() {
           type: "datetime",
           tickAmount: tempData.length / 2,
           labels: {
-            /**
-             * @param { String } value - The default value generated
-             * @param { Number } timestamp - In a datetime series, this is the raw timestamp
-             * @param { object } contains dateFormatter for datetime x-axis
-             */
-            formatter: function (value, timestamp, opts) {
-              return new Date(timestamp).getHours();
-            },
+            formatter: (value, timestamp) => new Date(timestamp).getHours(),
           },
         },
         yaxis: [
           {
-            seriesName: "temperature",
-            min: tempRange[0],
-            max: tempRange[1],
-            title: {
-              text: "Temperature (°C)",
-            },
-          },
-          {
-            opposite: true,
-            seriesName: "rain",
             min: rainRange[0],
             max: rainRange[1],
+            // between 4 and 8 ticks; if span is bewteen 2 and 16 it will depend on the span and be nicely divisible
+            tickAmount:
+              rainSpan >= 4
+                ? rainSpan <= 8
+                  ? rainSpan
+                  : Math.min(rainSpan / 2, 8)
+                : Math.max(rainSpan * 2, 4),
+            labels: {
+              formatter: (value, timestamp) => Math.round(value * 10) / 10,
+            },
             title: {
               text: "Rain  (mm/h)",
             },
@@ -674,13 +746,8 @@ function createForecastHourlySection() {
         legend: {
           show: false,
         },
-      };
-
-      const chart = new ApexCharts(divChartTemp, options);
-      // TODO: show clouds from openMeteo as bar chart with gradient
-      // TODO: show temperature at extremes as annotations
-
-      chart.render();
+      });
+      chartRain.render();
     }
   );
 }
