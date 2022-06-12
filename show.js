@@ -211,7 +211,7 @@ function createDaysSection() {
 
   divMain.appendChild(section);
 
-  dataOpenweathermap.then((data) => {
+  promiseOpenweathermap.then((data) => {
     const [minimalTemp, maximalTemp] = addPaddingRange(
       data.daily.reduce(
         ([min, max], { temp }) => [
@@ -417,7 +417,7 @@ function createForecastHourlySection() {
 
   divMain.appendChild(section);
 
-  Promise.allSettled([dataOpenweathermap, dataOpenMeteo]).then(
+  Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
     ([openweathermapData, openMeteoData]) => {
       //console.log(openweathermapData, openMeteoData);
 
@@ -691,7 +691,7 @@ function createCurrentSection() {
   const section = dom.section(".section");
   divMain.appendChild(section);
 
-  dataOpenweathermap.then((data) => {
+  promiseOpenweathermap.then((data) => {
     const weatherCondition = weatherConditionNameFromId(
       data.current.weather[0].id,
       data.current.weather[0].icon
@@ -827,8 +827,8 @@ if (!place) {
 document.title = place.name + " - " + document.title;
 document.getElementById("title").innerText = place.name;
 
-const dataOpenweathermap = openweathermap(place);
-const dataOpenMeteo = openMeteo(place);
+const promiseOpenweathermap = openweathermap(place);
+const promiseOpenMeteo = openMeteo(place);
 
 createCurrentSection();
 
