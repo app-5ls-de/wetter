@@ -402,16 +402,37 @@ const mapRange = (x, [in_min, in_max], [out_min, out_max]) =>
 
 function createForecastHourlySection() {
   const divChartTemp = dom.div();
+
+  const divChartRain = dom.div();
+  const divCloudsText = dom.p(
+    {
+      style: {
+        writingMode: "tb-rl",
+        fontFamily: "Helvetica, Arial, sans-serif",
+        fontSize: "11px",
+        fontWeight: "900",
+        whiteSpace: "nowrap",
+        position: "absolute",
+        top: "50%",
+        transform: "translateY(-50%) scale(-1, -1)",
+      },
+    },
+    "Cloudcover"
+  );
   const divChartCloudsHigh = dom.div();
   const divChartCloudsMid = dom.div();
   const divChartCloudsLow = dom.div();
-  const divChartRain = dom.div();
+  const divClouds = dom.div(
+    { style: { position: "relative" } },
+    divCloudsText,
+    divChartCloudsHigh,
+    divChartCloudsMid,
+    divChartCloudsLow
+  );
   const section = dom.section(
     ".section",
     divChartTemp,
-    divChartCloudsHigh,
-    divChartCloudsMid,
-    divChartCloudsLow,
+    divClouds,
     divChartRain
   );
 
@@ -419,7 +440,6 @@ function createForecastHourlySection() {
 
   Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
     ([openweathermapData, openMeteoData]) => {
-
       const rainData = openweathermapData.hourly.map((hour) => ({
         x: hour.dt * 1000,
         y: hour.rain?.["1h"],
