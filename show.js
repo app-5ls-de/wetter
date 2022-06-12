@@ -419,7 +419,6 @@ function createForecastHourlySection() {
 
   Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
     ([openweathermapData, openMeteoData]) => {
-      //console.log(openweathermapData, openMeteoData);
 
       const rainData = openweathermapData.hourly.map((hour) => ({
         x: hour.dt * 1000,
@@ -455,11 +454,11 @@ function createForecastHourlySection() {
         index_start,
         index_stop + 1
       );
-      const cloudsMidRange = openMeteoData.hourly.cloudcover_mid.slice(
+      const cloudsMidData = openMeteoData.hourly.cloudcover_mid.slice(
         index_start,
         index_stop + 1
       );
-      const cloudsLowRange = openMeteoData.hourly.cloudcover_low.slice(
+      const cloudsLowData = openMeteoData.hourly.cloudcover_low.slice(
         index_start,
         index_stop + 1
       );
@@ -748,6 +747,77 @@ function createForecastHourlySection() {
         },
       });
       chartRain.render();
+
+      const backgroundGradientCloudsHigh =
+        "linear-gradient(90deg, " +
+        cloudsHighData
+          .map(
+            (value, i, arr) =>
+              "hsl(0deg 0% " +
+              mapRange(value, [0, 100], [100, 31]).toFixed(1) +
+              "%) " +
+              ((i / arr.length) * 100).toFixed(1) +
+              "%"
+          )
+          .join(", ") +
+        ")";
+      dom(divChartCloudsHigh, {
+        style: {
+          height: "2rem",
+          marginLeft: "2.5rem",
+          marginRight: "0.5rem",
+          marginBottom: "0.5rem",
+          borderRadius: "0.7rem",
+          background: backgroundGradientCloudsHigh,
+        },
+      });
+
+      const backgroundGradientCloudsMid =
+        "linear-gradient(90deg, " +
+        cloudsMidData
+          .map(
+            (value, i, arr) =>
+              "hsl(0deg 0% " +
+              mapRange(value, [0, 100], [100, 31]).toFixed(1) +
+              "%) " +
+              ((i / arr.length) * 100).toFixed(1) +
+              "%"
+          )
+          .join(", ") +
+        ")";
+      dom(divChartCloudsMid, {
+        style: {
+          height: "2rem",
+          marginLeft: "2.5rem",
+          marginRight: "0.5rem",
+          marginBottom: "0.5rem",
+          borderRadius: "0.7rem",
+          background: backgroundGradientCloudsMid,
+        },
+      });
+
+      const backgroundGradientCloudsLow =
+        "linear-gradient(90deg, " +
+        cloudsLowData
+          .map(
+            (value, i, arr) =>
+              "hsl(0deg 0% " +
+              mapRange(value, [0, 100], [100, 31]).toFixed(1) +
+              "%) " +
+              ((i / arr.length) * 100).toFixed(1) +
+              "%"
+          )
+          .join(", ") +
+        ")";
+      dom(divChartCloudsLow, {
+        style: {
+          height: "2rem",
+          marginLeft: "2.5rem",
+          marginRight: "0.5rem",
+          borderRadius: "0.7rem",
+          background: backgroundGradientCloudsLow,
+        },
+      });
     }
   );
 }
