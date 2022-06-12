@@ -768,13 +768,29 @@ function createForecastHourlySection() {
       });
       chartRain.render();
 
+      function convertCloudValue(value) {
+        // simple mapping
+        /* return mapRange(value, [0, 100], [100, 31]); */
+
+        // mapping with one step
+        if (value < 10) return 100;
+        else return mapRange(value, [10, 100], [100, 31]);
+
+        // mapping onto steps
+        /* if (value < 10) return 100;
+        else if (value < 25) return 85;
+        else if (value < 50) return 60;
+        else if (value < 75) return 44;
+        else return 31; */
+      }
+
       const backgroundGradientCloudsHigh =
         "linear-gradient(90deg, " +
         cloudsHighData
           .map(
             (value, i, arr) =>
               "hsl(0deg 0% " +
-              mapRange(value, [0, 100], [100, 31]).toFixed(1) +
+              convertCloudValue(value).toFixed(1) +
               "%) " +
               ((i / arr.length) * 100).toFixed(1) +
               "%"
@@ -798,7 +814,7 @@ function createForecastHourlySection() {
           .map(
             (value, i, arr) =>
               "hsl(0deg 0% " +
-              mapRange(value, [0, 100], [100, 31]).toFixed(1) +
+              convertCloudValue(value).toFixed(1) +
               "%) " +
               ((i / arr.length) * 100).toFixed(1) +
               "%"
@@ -822,7 +838,7 @@ function createForecastHourlySection() {
           .map(
             (value, i, arr) =>
               "hsl(0deg 0% " +
-              mapRange(value, [0, 100], [100, 31]).toFixed(1) +
+              convertCloudValue(value).toFixed(1) +
               "%) " +
               ((i / arr.length) * 100).toFixed(1) +
               "%"
