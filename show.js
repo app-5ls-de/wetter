@@ -567,10 +567,10 @@ function createForecastHourlySection() {
         opacity: 1,
       }));
 
-      let maxOffsetBelowZero = colorStops
+      const maxOffsetBelowZero = colorStops
         .filter((a) => a.offset < 0)
         .reduce((max, { offset }) => Math.max(max, offset), -Infinity);
-      let minOffsetAboveOneHundred = colorStops
+        const minOffsetAboveOneHundred = colorStops
         .filter((a) => a.offset > 100)
         .reduce((min, { offset }) => Math.min(min, offset), Infinity);
       colorStops = colorStops
@@ -705,7 +705,7 @@ function createCurrentSection() {
     const moonIllumination = SunCalc.getMoonIllumination(new Date());
     const zenithAngle = moonIllumination.angle - moonParallacticAngle;
 
-    let moonNames = [
+    const moonNames = [
       "moon-new",
       "moon-waxing-crescent",
       "moon-first-quarter",
