@@ -1022,6 +1022,7 @@ function createCurrentSection() {
 }
 
 // Code execution starts here
+updateLastUpdate();
 
 const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
 // TODO: name is not unique
