@@ -106,18 +106,33 @@ async function openweathermapForecast(place) {
   return data;
 }
 
-async function openMeteoClouds(place) {
+const openMeteoUseTimezone = async (place, openweathermapPromise) =>
+  openMeteo(place, (await openweathermapPromise).timezone);
+
+async function openMeteo(place, timezoneForDaily) {
   const cacheID =
-    cachePrefix + "-openMeteoClouds-" + place.lat + "," + place.lon;
+    cachePrefix +
+    "-openMeteo-" +
+    (timezoneForDaily ? "daily-" : "") +
+    place.lat +
+    "," +
+    place.lon;
   if (localStorage.getItem(cacheID) && debug)
     return JSON.parse(localStorage.getItem(cacheID));
 
+  const timezone = timezoneForDaily || "Europe/London";
   const data = await fetch_json(
-    "https://api.open-meteo.com/v1/forecast?latitude=" +
+    "https://api.open-meteo.com/v1/forecast?windspeed_unit=ms&timeformat=unixtime&latitude=" +
       place.lat +
       "&longitude=" +
       place.lon +
-      "&hourly=cloudcover_low,cloudcover_mid,cloudcover_high&windspeed_unit=ms&timeformat=unixtime"
+      "&hourly=temperature_2m,precipitation,weathercode,cloudcover_low,cloudcover_mid,cloudcover_high" + // ,snow_depth
+      // daily weather is only available if timezone is set
+      (timezoneForDaily
+        ? "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_hours"
+        : "") +
+      "&past_days=1&timezone=" +
+      timezone
   );
 
   if (debug) localStorage.setItem(cacheID, JSON.stringify(data));
