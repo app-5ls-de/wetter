@@ -879,6 +879,39 @@ function createCurrentSection() {
     );
 
     section.appendChild(divCurrent);
+
+    const precipitation = data.minutely?.map((minute) => minute.precipitation);
+    if (data.minutely) {
+      const maxPrecipitation = Math.max(...precipitation, 4);
+      const options = {
+        series: [
+          {
+            data: precipitation,
+          },
+        ],
+        chart: {
+          type: "bar",
+          sparkline: {
+            enabled: true,
+          },
+        },
+        plotOptions: {
+          bar: {
+            borderRadius: 1,
+            columnWidth: "100%",
+          },
+        },
+        yaxis: {
+          max: maxPrecipitation,
+          min: 0,
+        },
+        tooltip: {
+          enabled: false,
+        },
+      };
+      const chart = new ApexCharts(divChart, options);
+      chart.render();
+    }
   });
 }
 
