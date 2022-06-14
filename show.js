@@ -429,12 +429,402 @@ function createForecastHourlySection() {
     divChartCloudsMid,
     divChartCloudsLow
   );
-  const section = dom.section(
-    ".section",
-    divChartTemp,
-    divClouds,
-    divChartRain
+
+  let tempRange = addPaddingRange(
+    tempData.reduce(
+      ([min, max], { y }) => [Math.min(min, y), Math.max(max, y)],
+      [Infinity, -Infinity]
+    ),
+    0.2
   );
+  tempRange = [Math.floor(tempRange[0]), Math.ceil(tempRange[1])];
+  const tempSpan = tempRange[1] - tempRange[0];
+
+  const rainRange = [
+    0,
+    Math.ceil(Math.max(...rainData.map((hour) => (hour.y || 0) * 1.2), 5)),
+  ];
+  const rainSpan = rainRange[1] - rainRange[0];
+
+  const dates = [
+    ...new Set(tempData.map(({ x }) => new Date(x).setHours(12, 0, 0, 0))),
+  ];
+
+  const annotationsXaxis = [
+    // yellow background to indicate daytime
+    ...dates.map((date) => {
+      const { sunrise, sunset } = SunCalc.getTimes(
+        new Date(date),
+        place.lat,
+        place.lon
+      );
+      return {
+        x: +sunrise,
+        x2: +sunset,
+        fillColor: "#e8ec68",
+      };
+    }),
+
+    // show date on the top of each day
+    ...dates
+      .map((date) => ({
+        x: new Date(date).setHours(12, 0, 0, 0),
+        borderColor: "rgba(0,0,0,0);",
+        label: {
+          borderColor: "white",
+          orientation: "horizontal",
+          text:
+            new Date(date).toLocaleDateString([], { weekday: "short" }) +
+            " " +
+            new Date(date).getDate(),
+        },
+      }))
+      .filter(
+        // dont show date if is not in the visible range
+        (annotation) =>
+          annotation.x > tempData[0].x &&
+          annotation.x < tempData[tempData.length - 1].x
+      ),
+  ];
+
+  const colorstemp = [
+    [48, "#aa354d"], // and above
+    [46, "#c44579"],
+    [44, "#de58a3"],
+    [42, "#f16bce"],
+    [40, "#f45081"],
+    [38, "#f54937"],
+    [36, "#f63f37"],
+    [34, "#f97239"],
+    [32, "#fa853a"],
+    [30, "#f9a53b"],
+    [28, "#fdbd3d"],
+    [26, "#fdd53e"],
+    [24, "#f9e53e"],
+    [22, "#fcec3f"],
+    [20, "#def3b4"],
+    [18, "#beea5a"],
+    [16, "#94d959"],
+    [14, "#63b456"],
+    [12, "#3a8e54"],
+    [10, "#54957d"],
+    [8, "#4ec696"],
+    [6, "#5dd46f"],
+    [4, "#68e976"],
+    [2, "#65ec97"], // 0 to 2
+    [0, "#b3eef9"], // -2 to 0
+    [-2, "#99e6f9"],
+    [-4, "#74d5fb"],
+    [-6, "#69c1f8"],
+    [-8, "#5da3f1"],
+    [-10, "#5080e8"],
+    [-12, "#4b65df"],
+    [-14, "#5163d9"],
+    [-16, "#8268e0"],
+    [-18, "#a66ee8"],
+    [-20, "#c372e9"],
+    [-22, "#db71e4"],
+    [-24, "#b75cb9"],
+    [-26, "#964da0"],
+    [-28, "#783f87"],
+    [-30, "#5e3b71"],
+    [-32, "#5e3b71"],
+
+    [-35, "#556891"],
+    [-40, "#517a9f"],
+    [-45, "#4d8cac"],
+    [-50, "#499eb9"],
+    [-55, "#44b1c7"],
+    [-60, "#40c4d5"],
+    [-65, "#3fd7e2"],
+    [-70, "#49ecf1"],
+    [-75, "#50f9fb"], // and below
+  ];
+
+  let colorStops = colorstemp.map(([temperature, color]) => ({
+    offset: mapRange(temperature, tempRange, [100, 0]),
+    color,
+    opacity: 1,
+  }));
+
+  const maxOffsetBelowZero = colorStops
+    .filter((a) => a.offset < 0)
+    .reduce((max, { offset }) => Math.max(max, offset), -Infinity);
+  const minOffsetAboveOneHundred = colorStops
+    .filter((a) => a.offset > 100)
+    .reduce((min, { offset }) => Math.min(min, offset), Infinity);
+  colorStops = colorStops
+    .filter(
+      (a) =>
+        a.offset >= maxOffsetBelowZero && a.offset <= minOffsetAboveOneHundred
+    )
+    .sort((a, b) => a.offset - b.offset); // it will not work if not sorted
+
+  const chartTemp = new ApexCharts(divChartTemp, {
+    chart: {
+      type: "area",
+      toolbar: {
+        show: false,
+      },
+      zoom: {
+        enabled: false,
+      },
+      animations: {
+        enabled: false,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    plotOptions: {
+      area: {
+        fillTo: "end",
+      },
+    },
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.7,
+        opacityTo: 0.9,
+        colorStops: colorStops,
+      },
+    },
+    colors: ["#4a4a4a"],
+    series: [
+      {
+        name: "temperature",
+        type: "area",
+        data: tempData,
+      },
+    ],
+    stroke: {
+      curve: "straight",
+    },
+    annotations: {
+      position: "back",
+      xaxis: annotationsXaxis,
+    },
+    xaxis: {
+      type: "datetime",
+      tickAmount: tempData.length / 2,
+      labels: {
+        formatter: (value, timestamp) => new Date(timestamp).getHours(),
+      },
+    },
+    yaxis: {
+      seriesName: "temperature",
+      min: tempRange[0],
+      max: tempRange[1],
+      // between 10 and 20 ticks; if span is bewteen 5 and 40 it will depend on the span and be nicely divisible
+      tickAmount:
+        tempSpan >= 10
+          ? tempSpan <= 20
+            ? tempSpan
+            : Math.min(tempSpan / 2, 20)
+          : Math.max(tempSpan * 2, 10),
+      labels: {
+        formatter: (value, timestamp) => Math.round(value * 10) / 10,
+      },
+      title: {
+        text: "Temperature (°C)",
+      },
+    },
+    tooltip: {
+      shared: false,
+      intersect: true,
+      x: {
+        show: false,
+      },
+    },
+    legend: {
+      show: false,
+    },
+  });
+
+  // TODO: show temperature at extremes as annotations
+
+  const chartRain = new ApexCharts(divChartRain, {
+    chart: {
+      type: "bar",
+      toolbar: {
+        show: false,
+      },
+      zoom: {
+        enabled: false,
+      },
+      animations: {
+        enabled: false,
+      },
+    },
+    aspectRatio: 1.61 * 2,
+    dataLabels: {
+      enabled: false,
+    },
+    plotOptions: {
+      area: {
+        fillTo: "end",
+      },
+    },
+    fill: {
+      type: ["solid"],
+    },
+    colors: ["#2c87c7"],
+    series: [
+      {
+        name: "rain",
+        type: "bar",
+        data: rainData,
+      },
+    ],
+    stroke: {
+      curve: "straight",
+    },
+    annotations: {
+      position: "back",
+      xaxis: annotationsXaxis,
+    },
+    xaxis: {
+      type: "datetime",
+      tickAmount: tempData.length / 2,
+      labels: {
+        formatter: (value, timestamp) => new Date(timestamp).getHours(),
+      },
+    },
+    yaxis: [
+      {
+        min: rainRange[0],
+        max: rainRange[1],
+        // between 4 and 8 ticks; if span is bewteen 2 and 16 it will depend on the span and be nicely divisible
+        tickAmount:
+          rainSpan >= 4
+            ? rainSpan <= 8
+              ? rainSpan
+              : Math.min(rainSpan / 2, 8)
+            : Math.max(rainSpan * 2, 4),
+        labels: {
+          formatter: (value, timestamp) => Math.round(value * 10) / 10,
+        },
+        title: {
+          text: "Rain  (mm/h)",
+        },
+      },
+    ],
+    tooltip: {
+      shared: false,
+      intersect: true,
+      x: {
+        show: false,
+      },
+    },
+    legend: {
+      show: false,
+    },
+  });
+
+  function convertCloudValue(value) {
+    // simple mapping
+    /* return mapRange(value, [0, 100], [100, 31]); */
+
+    // mapping with one step
+    if (value < 10) return 100;
+    else return mapRange(value, [10, 100], [100, 31]);
+
+    // mapping onto steps
+    /* if (value < 10) return 100;
+    else if (value < 25) return 85;
+    else if (value < 50) return 60;
+    else if (value < 75) return 44;
+    else return 31; */
+  }
+
+  const backgroundGradientCloudsHigh =
+    "linear-gradient(90deg, " +
+    cloudsHighData
+      .map(
+        (value, i, arr) =>
+          "hsl(0deg 0% " +
+          convertCloudValue(value).toFixed(1) +
+          "%) " +
+          ((i / arr.length) * 100).toFixed(1) +
+          "%"
+      )
+      .join(", ") +
+    ")";
+  dom(divChartCloudsHigh, {
+    style: {
+      height: "2rem",
+      marginLeft: "2.5rem",
+      marginRight: "0.5rem",
+      marginBottom: "0.5rem",
+      borderRadius: "0.7rem",
+      background: backgroundGradientCloudsHigh,
+    },
+  });
+
+  const backgroundGradientCloudsMid =
+    "linear-gradient(90deg, " +
+    cloudsMidData
+      .map(
+        (value, i, arr) =>
+          "hsl(0deg 0% " +
+          convertCloudValue(value).toFixed(1) +
+          "%) " +
+          ((i / arr.length) * 100).toFixed(1) +
+          "%"
+      )
+      .join(", ") +
+    ")";
+  dom(divChartCloudsMid, {
+    style: {
+      height: "2rem",
+      marginLeft: "2.5rem",
+      marginRight: "0.5rem",
+      marginBottom: "0.5rem",
+      borderRadius: "0.7rem",
+      background: backgroundGradientCloudsMid,
+    },
+  });
+
+  const backgroundGradientCloudsLow =
+    "linear-gradient(90deg, " +
+    cloudsLowData
+      .map(
+        (value, i, arr) =>
+          "hsl(0deg 0% " +
+          convertCloudValue(value).toFixed(1) +
+          "%) " +
+          ((i / arr.length) * 100).toFixed(1) +
+          "%"
+      )
+      .join(", ") +
+    ")";
+  dom(divChartCloudsLow, {
+    style: {
+      height: "2rem",
+      marginLeft: "2.5rem",
+      marginRight: "0.5rem",
+      borderRadius: "0.7rem",
+      background: backgroundGradientCloudsLow,
+    },
+  });
+
+  return {
+    elements: [divChartTemp, divClouds, divChartRain],
+    render: () => {
+      chartTemp.render();
+      chartRain.render();
+    },
+    destroy: () => {
+      chartTemp.destroy();
+      chartRain.destroy();
+    },
+  };
+}
+
+
+function createForecastHourlySection() {
+  const section = dom.section(".section");
 
   divMain.appendChild(section);
 
@@ -444,25 +834,11 @@ function createForecastHourlySection() {
         x: hour.dt * 1000,
         y: hour.rain?.["1h"],
       }));
-      const rainRange = [
-        0,
-        Math.ceil(Math.max(...rainData.map((hour) => (hour.y || 0) * 1.2), 5)),
-      ];
-      const rainSpan = rainRange[1] - rainRange[0];
 
       const tempData = openweathermapData.hourly.map((hour) => ({
         x: hour.dt * 1000,
         y: hour.temp,
       }));
-      let tempRange = addPaddingRange(
-        tempData.reduce(
-          ([min, max], { y }) => [Math.min(min, y), Math.max(max, y)],
-          [Infinity, -Infinity]
-        ),
-        0.2
-      );
-      tempRange = [Math.floor(tempRange[0]), Math.ceil(tempRange[1])];
-      const tempSpan = tempRange[1] - tempRange[0];
 
       const index_start = openMeteoData.hourly.time.findIndex(
         (dt) => dt * 1000 >= rainData[0].x
@@ -470,6 +846,7 @@ function createForecastHourlySection() {
       const index_stop = openMeteoData.hourly.time.findIndex(
         (dt) => dt * 1000 >= rainData[rainData.length - 1].x
       );
+
       const cloudsHighData = openMeteoData.hourly.cloudcover_high.slice(
         index_start,
         index_stop + 1
@@ -483,377 +860,15 @@ function createForecastHourlySection() {
         index_stop + 1
       );
 
-      const dates = [
-        ...new Set(
-          openweathermapData.hourly.map((hour) =>
-            new Date(hour.dt * 1000).setHours(12, 0, 0, 0)
-          )
-        ),
-      ];
-
-      const annotationsXaxis = [
-        // yellow background to indicate daytime
-        ...dates.map((date) => {
-          const { sunrise, sunset } = SunCalc.getTimes(
-            new Date(date),
-            place.lat,
-            place.lon
-          );
-          return {
-            x: +sunrise,
-            x2: +sunset,
-            fillColor: "#e8ec68",
-          };
-        }),
-
-        // show date on the top of each day
-        ...dates
-          .map((date) => ({
-            x: new Date(date).setHours(12, 0, 0, 0),
-            borderColor: "rgba(0,0,0,0);",
-            label: {
-              borderColor: "white",
-              orientation: "horizontal",
-              text:
-                new Date(date).toLocaleDateString([], { weekday: "short" }) +
-                " " +
-                new Date(date).getDate(),
-            },
-          }))
-          .filter(
-            // dont show date if is not in the visible range
-            (annotation) =>
-              annotation.x > tempData[0].x &&
-              annotation.x < tempData[tempData.length - 1].x
-          ),
-      ];
-
-      const colorstemp = [
-        [48, "#aa354d"], // and above
-        [46, "#c44579"],
-        [44, "#de58a3"],
-        [42, "#f16bce"],
-        [40, "#f45081"],
-        [38, "#f54937"],
-        [36, "#f63f37"],
-        [34, "#f97239"],
-        [32, "#fa853a"],
-        [30, "#f9a53b"],
-        [28, "#fdbd3d"],
-        [26, "#fdd53e"],
-        [24, "#f9e53e"],
-        [22, "#fcec3f"],
-        [20, "#def3b4"],
-        [18, "#beea5a"],
-        [16, "#94d959"],
-        [14, "#63b456"],
-        [12, "#3a8e54"],
-        [10, "#54957d"],
-        [8, "#4ec696"],
-        [6, "#5dd46f"],
-        [4, "#68e976"],
-        [2, "#65ec97"], // 0 to 2
-        [0, "#b3eef9"], // -2 to 0
-        [-2, "#99e6f9"],
-        [-4, "#74d5fb"],
-        [-6, "#69c1f8"],
-        [-8, "#5da3f1"],
-        [-10, "#5080e8"],
-        [-12, "#4b65df"],
-        [-14, "#5163d9"],
-        [-16, "#8268e0"],
-        [-18, "#a66ee8"],
-        [-20, "#c372e9"],
-        [-22, "#db71e4"],
-        [-24, "#b75cb9"],
-        [-26, "#964da0"],
-        [-28, "#783f87"],
-        [-30, "#5e3b71"],
-        [-32, "#5e3b71"],
-
-        [-35, "#556891"],
-        [-40, "#517a9f"],
-        [-45, "#4d8cac"],
-        [-50, "#499eb9"],
-        [-55, "#44b1c7"],
-        [-60, "#40c4d5"],
-        [-65, "#3fd7e2"],
-        [-70, "#49ecf1"],
-        [-75, "#50f9fb"], // and below
-      ];
-
-      let colorStops = colorstemp.map(([temperature, color]) => ({
-        offset: mapRange(temperature, tempRange, [100, 0]),
-        color,
-        opacity: 1,
-      }));
-
-      const maxOffsetBelowZero = colorStops
-        .filter((a) => a.offset < 0)
-        .reduce((max, { offset }) => Math.max(max, offset), -Infinity);
-      const minOffsetAboveOneHundred = colorStops
-        .filter((a) => a.offset > 100)
-        .reduce((min, { offset }) => Math.min(min, offset), Infinity);
-      colorStops = colorStops
-        .filter(
-          (a) =>
-            a.offset >= maxOffsetBelowZero &&
-            a.offset <= minOffsetAboveOneHundred
-        )
-        .sort((a, b) => a.offset - b.offset); // it will not work if not sorted
-
-      const chartTemp = new ApexCharts(divChartTemp, {
-        chart: {
-          type: "area",
-          toolbar: {
-            show: false,
-          },
-          zoom: {
-            enabled: false,
-          },
-          animations: {
-            enabled: false,
-          },
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        plotOptions: {
-          area: {
-            fillTo: "end",
-          },
-        },
-        fill: {
-          type: "gradient",
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.7,
-            opacityTo: 0.9,
-            colorStops: colorStops,
-          },
-        },
-        colors: ["#4a4a4a"],
-        series: [
-          {
-            name: "temperature",
-            type: "area",
-            data: tempData,
-          },
-        ],
-        stroke: {
-          curve: "straight",
-        },
-        annotations: {
-          position: "back",
-          xaxis: annotationsXaxis,
-        },
-        xaxis: {
-          type: "datetime",
-          tickAmount: tempData.length / 2,
-          labels: {
-            formatter: (value, timestamp) => new Date(timestamp).getHours(),
-          },
-        },
-        yaxis: {
-          seriesName: "temperature",
-          min: tempRange[0],
-          max: tempRange[1],
-          // between 10 and 20 ticks; if span is bewteen 5 and 40 it will depend on the span and be nicely divisible
-          tickAmount:
-            tempSpan >= 10
-              ? tempSpan <= 20
-                ? tempSpan
-                : Math.min(tempSpan / 2, 20)
-              : Math.max(tempSpan * 2, 10),
-          labels: {
-            formatter: (value, timestamp) => Math.round(value * 10) / 10,
-          },
-          title: {
-            text: "Temperature (°C)",
-          },
-        },
-        tooltip: {
-          shared: false,
-          intersect: true,
-          x: {
-            show: false,
-          },
-        },
-        legend: {
-          show: false,
-        },
-      });
-      setTimeout(() => {
-        chartTemp.render();
-      }, 0);
-      // TODO: show clouds from openMeteo as bar chart with gradient
-      // TODO: show temperature at extremes as annotations
-
-      const chartRain = new ApexCharts(divChartRain, {
-        chart: {
-          type: "bar",
-          toolbar: {
-            show: false,
-          },
-          zoom: {
-            enabled: false,
-          },
-          animations: {
-            enabled: false,
-          },
-        },
-        aspectRatio: 1.61 * 2,
-        dataLabels: {
-          enabled: false,
-        },
-        plotOptions: {
-          area: {
-            fillTo: "end",
-          },
-        },
-        fill: {
-          type: ["solid"],
-        },
-        colors: ["#2c87c7"],
-        series: [
-          {
-            name: "rain",
-            type: "bar",
-            data: rainData,
-          },
-        ],
-        stroke: {
-          curve: "straight",
-        },
-        annotations: {
-          position: "back",
-          xaxis: annotationsXaxis,
-        },
-        xaxis: {
-          type: "datetime",
-          tickAmount: tempData.length / 2,
-          labels: {
-            formatter: (value, timestamp) => new Date(timestamp).getHours(),
-          },
-        },
-        yaxis: [
-          {
-            min: rainRange[0],
-            max: rainRange[1],
-            // between 4 and 8 ticks; if span is bewteen 2 and 16 it will depend on the span and be nicely divisible
-            tickAmount:
-              rainSpan >= 4
-                ? rainSpan <= 8
-                  ? rainSpan
-                  : Math.min(rainSpan / 2, 8)
-                : Math.max(rainSpan * 2, 4),
-            labels: {
-              formatter: (value, timestamp) => Math.round(value * 10) / 10,
-            },
-            title: {
-              text: "Rain  (mm/h)",
-            },
-          },
-        ],
-        tooltip: {
-          shared: false,
-          intersect: true,
-          x: {
-            show: false,
-          },
-        },
-        legend: {
-          show: false,
-        },
-      });
-      chartRain.render();
-
-      function convertCloudValue(value) {
-        // simple mapping
-        /* return mapRange(value, [0, 100], [100, 31]); */
-
-        // mapping with one step
-        if (value < 10) return 100;
-        else return mapRange(value, [10, 100], [100, 31]);
-
-        // mapping onto steps
-        /* if (value < 10) return 100;
-        else if (value < 25) return 85;
-        else if (value < 50) return 60;
-        else if (value < 75) return 44;
-        else return 31; */
-      }
-
-      const backgroundGradientCloudsHigh =
-        "linear-gradient(90deg, " +
-        cloudsHighData
-          .map(
-            (value, i, arr) =>
-              "hsl(0deg 0% " +
-              convertCloudValue(value).toFixed(1) +
-              "%) " +
-              ((i / arr.length) * 100).toFixed(1) +
-              "%"
-          )
-          .join(", ") +
-        ")";
-      dom(divChartCloudsHigh, {
-        style: {
-          height: "2rem",
-          marginLeft: "2.5rem",
-          marginRight: "0.5rem",
-          marginBottom: "0.5rem",
-          borderRadius: "0.7rem",
-          background: backgroundGradientCloudsHigh,
-        },
-      });
-
-      const backgroundGradientCloudsMid =
-        "linear-gradient(90deg, " +
-        cloudsMidData
-          .map(
-            (value, i, arr) =>
-              "hsl(0deg 0% " +
-              convertCloudValue(value).toFixed(1) +
-              "%) " +
-              ((i / arr.length) * 100).toFixed(1) +
-              "%"
-          )
-          .join(", ") +
-        ")";
-      dom(divChartCloudsMid, {
-        style: {
-          height: "2rem",
-          marginLeft: "2.5rem",
-          marginRight: "0.5rem",
-          marginBottom: "0.5rem",
-          borderRadius: "0.7rem",
-          background: backgroundGradientCloudsMid,
-        },
-      });
-
-      const backgroundGradientCloudsLow =
-        "linear-gradient(90deg, " +
-        cloudsLowData
-          .map(
-            (value, i, arr) =>
-              "hsl(0deg 0% " +
-              convertCloudValue(value).toFixed(1) +
-              "%) " +
-              ((i / arr.length) * 100).toFixed(1) +
-              "%"
-          )
-          .join(", ") +
-        ")";
-      dom(divChartCloudsLow, {
-        style: {
-          height: "2rem",
-          marginLeft: "2.5rem",
-          marginRight: "0.5rem",
-          borderRadius: "0.7rem",
-          background: backgroundGradientCloudsLow,
-        },
-      });
+      const charts = multiChart(
+        tempData,
+        cloudsHighData,
+        cloudsMidData,
+        cloudsLowData,
+        rainData
+      );
+      dom(section, charts.elements);
+      charts.render();
     }
   );
 }
