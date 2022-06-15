@@ -239,6 +239,7 @@ function createDaysSection() {
             .slice()
             .reverse()
             .findIndex((dt) => new Date(dt * 1000).getDate() == dayString);
+        const hasMoreData = index_stop - index_start < 24;
 
         const rainData = zip(
           openMeteoData.hourly.precipitation,
@@ -249,6 +250,9 @@ function createDaysSection() {
             x: time * 1000,
             y: value,
           }));
+        const maxRain = hasMoreData
+          ? Math.max(...rainData.map(({ y }) => y))
+          : dayData.rain;
 
         const tempData = zip(
           openMeteoData.hourly.temperature_2m,
@@ -323,37 +327,36 @@ function createDaysSection() {
 
         let expanded = false;
         let charts;
-        const imgExpand =
-          index_stop - index_start < 24
-            ? null
-            : dom.img(".level-item p-1", {
-                style: { width: "2rem" },
-                src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg",
-                on: {
-                  click: () => {
-                    expanded = !expanded;
-                    if (expanded) {
-                      imgExpand.src =
-                        "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-up-outline.svg";
-                      charts = multiChart(
-                        tempData,
-                        cloudsHighData,
-                        cloudsMidData,
-                        cloudsLowData,
-                        rainData
-                      );
-                      dom(divCharts, ".box", charts.elements);
-                      charts.render();
-                    } else {
-                      imgExpand.src =
-                        "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg";
-                      charts.destroy();
-                      divCharts.innerText = "";
-                      divCharts.className = "";
-                    }
-                  },
+        const imgExpand = hasMoreData
+          ? null
+          : dom.img(".level-item p-1", {
+              style: { width: "2rem" },
+              src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg",
+              on: {
+                click: () => {
+                  expanded = !expanded;
+                  if (expanded) {
+                    imgExpand.src =
+                      "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-up-outline.svg";
+                    charts = multiChart(
+                      tempData,
+                      cloudsHighData,
+                      cloudsMidData,
+                      cloudsLowData,
+                      rainData
+                    );
+                    dom(divCharts, ".box", charts.elements);
+                    charts.render();
+                  } else {
+                    imgExpand.src =
+                      "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg";
+                    charts.destroy();
+                    divCharts.innerText = "";
+                    divCharts.className = "";
+                  }
                 },
-              });
+              },
+            });
         const divCharts = dom.div();
 
         const divDay = dom.div(
@@ -398,11 +401,12 @@ function createDaysSection() {
               ".level-item is-centered is-flex is-flex-direction-column",
               dom.img(".level-item", {
                 style: { height: "3rem", margin: "-15px" },
-                src: dayData.rain
-                  ? "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/raindrop" +
-                    (dayData.rain > 1 ? "s" : "") + // TODO: improve rain amount cut-off and document it
-                    ".svg"
-                  : "",
+                src:
+                  maxRain > 1
+                    ? "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/raindrop" +
+                      (maxRain > 2 ? "s" : "") + // TODO: improve rain amount cut-off and document it
+                      ".svg"
+                    : "",
               }),
               dom.div(
                 ".level-item has-text-grey ml-auto", // has-text-right is-block
