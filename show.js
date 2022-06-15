@@ -230,24 +230,6 @@ function createDaysSection() {
         const dayString = date.getDate();
         const weekdayString = date.toLocaleDateString([], { weekday: "short" });
 
-        const leftPercentage = Math.round(
-          ((dayData.temp.night - minimalTemp) / tempScale) * 100
-        );
-        const widthPercentage = Math.max(
-          Math.round(
-            ((dayData.temp.day - dayData.temp.night) / tempScale) * 100
-          ),
-          1 // min width is 1% to avoid 0% width
-        );
-        const rightPercentage = 100 - widthPercentage - leftPercentage;
-
-        const leftExtremePercentage = Math.round(
-          ((dayData.temp.min - minimalTemp) / tempScale) * 100
-        );
-        const widthExtremePercentage = Math.round(
-          ((dayData.temp.max - dayData.temp.min) / tempScale) * 100
-        );
-
         const index_start = openMeteoData.hourly.time.findIndex(
           (dt) => new Date(dt * 1000).getDate() == dayString
         );
@@ -277,6 +259,54 @@ function createDaysSection() {
             x: time * 1000,
             y: value,
           }));
+
+        const temperaturesOfTheDay = {
+          morn: mean(
+            tempData
+              .filter(({ x }) => Math.abs(new Date(x).getHours() - 7) <= 2)
+              .map(({ y }) => y)
+          ),
+          day: mean(
+            tempData
+              .filter(({ x }) => Math.abs(new Date(x).getHours() - 13) <= 2)
+              .map(({ y }) => y)
+          ),
+          eve: mean(
+            tempData
+              .filter(({ x }) => Math.abs(new Date(x).getHours() - 21) <= 2)
+              .map(({ y }) => y)
+          ),
+          night: mean(
+            tempData
+              .filter(
+                ({ x }) =>
+                  Math.abs(new Date(x).getHours() - 1) <= 2 ||
+                  Math.abs(new Date(x).getHours() - 1 - 24) <= 2
+              )
+              .map(({ y }) => y)
+          ),
+        };
+
+        const highTemp = temperaturesOfTheDay.day || dayData.temp.day;
+        const lowTemp =
+          Math.min(temperaturesOfTheDay.morn, temperaturesOfTheDay.eve) ||
+          Math.min(dayData.temp.eve, dayData.temp.morn);
+
+        const leftPercentage = Math.round(
+          ((lowTemp - minimalTemp) / tempScale) * 100
+        );
+        const widthPercentage = Math.max(
+          Math.round(((highTemp - lowTemp) / tempScale) * 100),
+          1 // min width is 1% to avoid 0% width
+        );
+        const rightPercentage = 100 - widthPercentage - leftPercentage;
+
+        const leftExtremePercentage = Math.round(
+          ((dayData.temp.min - minimalTemp) / tempScale) * 100
+        );
+        const widthExtremePercentage = Math.round(
+          ((dayData.temp.max - dayData.temp.min) / tempScale) * 100
+        );
 
         const cloudsHighData = openMeteoData.hourly.cloudcover_high.slice(
           index_start,
@@ -401,7 +431,7 @@ function createDaysSection() {
                 {
                   style: { position: "absolute", width: leftPercentage + "%" },
                 },
-                dom.textNode(Math.round(dayData.temp.night) + "°C")
+                dom.textNode(Math.round(lowTemp) + "°C")
               ),
               dom.div(".has-background-grey-dark", {
                 style: {
@@ -422,7 +452,7 @@ function createDaysSection() {
                     width: rightPercentage + "%",
                   },
                 },
-                dom.textNode(Math.round(dayData.temp.day) + "°C")
+                dom.textNode(Math.round(highTemp) + "°C")
               )
             ),
             imgExpand
@@ -475,7 +505,6 @@ function createMeteoblueSection() {
 
 const mapRange = (x, [in_min, in_max], [out_min, out_max]) =>
   ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
-
 
 function multiChart(
   tempData,
