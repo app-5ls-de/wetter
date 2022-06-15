@@ -598,6 +598,12 @@ function multiChart(
       ),
   ];
 
+  annotationsXaxis.push({
+    x: +new Date(),
+    borderColor: "red",
+    strokeDashArray: 0,
+  });
+
   const colorstemp = [
     [48, "#aa354d"], // and above
     [46, "#c44579"],
