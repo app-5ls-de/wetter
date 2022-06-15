@@ -155,11 +155,11 @@ function getSolsticeDays(year = new Date(), lat = place.lat, lon = place.lon) {
   };
 }
 
-async function createEcmwfSection_plume() {
+async function createEcmwfSection_ENS() {
   // TODO: show the two ecmwf meteograms side by side on desktop
 
   const data = await fetch_json(
-    "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_meteogram/?epsgram=classical_plume&lon=" +
+    "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_meteogram/?lon=" +
       place.lon +
       "&lat=" +
       place.lat
@@ -168,10 +168,10 @@ async function createEcmwfSection_plume() {
   const section = dom.section(
     ".section",
     dom.div(
-      { style: { overflow: "hidden", width: "fit-content" } },
+      { style: { overflow: "hidden", width: "fit-content", margin: "auto" } },
       dom.img({
         src: data.data.link.href,
-        style: { margin: "-13% -8% -55% -8%" },
+        style: { marginTop: "-3%", marginBottom: "-31%" },
       })
     )
   );
@@ -179,7 +179,7 @@ async function createEcmwfSection_plume() {
   divMain.appendChild(section);
 }
 
-async function createEcmwfSection_meteogram() {
+async function createEcmwfSection_rain() {
   const data = await fetch_json(
     "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_ptype_meteogram/?lon=" +
       place.lon +
@@ -190,10 +190,10 @@ async function createEcmwfSection_meteogram() {
   const section = dom.section(
     ".section",
     dom.div(
-      { style: { overflow: "hidden", width: "fit-content" } },
+      { style: { overflow: "hidden", width: "fit-content", margin: "auto" } },
       dom.img({
         src: data.data.link.href,
-        style: { margin: "-16% -12% -16%" },
+        style: { marginTop: "-10%", marginBottom: "-17%" },
       })
     )
   );
@@ -1194,5 +1194,5 @@ createSunPathSection();
 
 // TODO: comment code better
 
-if (!debug) createEcmwfSection_meteogram();
-if (!debug) createEcmwfSection_plume();
+if (!debug) createEcmwfSection_ENS();
+if (!debug) createEcmwfSection_rain();
