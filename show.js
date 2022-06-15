@@ -598,11 +598,16 @@ function multiChart(
       ),
   ];
 
-  annotationsXaxis.push({
-    x: +new Date(),
-    borderColor: "red",
-    strokeDashArray: 0,
-  });
+  if (
+    new Date() > tempData[1].x &&
+    new Date() < tempData[tempData.length - 2].x
+  )
+    // if "now" is in the visible range and not at the borders
+    annotationsXaxis.push({
+      x: +new Date(),
+      borderColor: "red",
+      strokeDashArray: 0,
+    });
 
   const colorstemp = [
     [48, "#aa354d"], // and above
