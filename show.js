@@ -1196,5 +1196,5 @@ createSunPathSection();
 
 // TODO: comment code better
 
-if (!debug) createEcmwfSection_ENS();
 if (!debug) createEcmwfSection_rain();
+if (!debug) createEcmwfSection_ENS();
