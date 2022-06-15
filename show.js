@@ -211,152 +211,229 @@ function createDaysSection() {
 
   divMain.appendChild(section);
 
-  promiseOpenweathermap.then((data) => {
-    const [minimalTemp, maximalTemp] = addPaddingRange(
-      data.daily.reduce(
-        ([min, max], { temp }) => [
-          Math.min(min, ...Object.values(temp)),
-          Math.max(max, ...Object.values(temp)),
-        ],
-        [Infinity, -Infinity]
-      ),
-      0.2
-    );
-    const tempScale = maximalTemp - minimalTemp;
-
-    for (const dayData of data.daily) {
-      const date = new Date(dayData.dt * 1000);
-      const dayString = date.getDate();
-      const weekdayString = date.toLocaleDateString([], { weekday: "short" });
-
-      const leftPercentage = Math.round(
-        ((dayData.temp.night - minimalTemp) / tempScale) * 100
-      );
-      const widthPercentage = Math.max(
-        Math.round(((dayData.temp.day - dayData.temp.night) / tempScale) * 100),
-        1 // min width is 1% to avoid 0% width
-      );
-      const rightPercentage = 100 - widthPercentage - leftPercentage;
-
-      const leftExtremePercentage = Math.round(
-        ((dayData.temp.min - minimalTemp) / tempScale) * 100
-      );
-      const widthExtremePercentage = Math.round(
-        ((dayData.temp.max - dayData.temp.min) / tempScale) * 100
-      );
-
-      const divDay = dom.div(
-        ".level m-0",
-        dom.div(
-          ".level-left",
-          dom.div(
-            ".level-item is-centered is-flex is-flex-direction-column",
-            { style: { width: "3rem" } },
-            dom.div(".has-text-grey", weekdayString),
-            dom.div(".has-text-weight-bold", dayString.toString())
-          ),
-          dom.img(".level-item", {
-            style: { width: "4rem" },
-            src:
-              "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
-              weatherConditionNameFromId(
-                dayData.weather[0].id,
-                dayData.weather[0].icon
-              ) +
-              ".svg",
-          })
+  Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
+    ([openweathermapData, openMeteoData]) => {
+      const [minimalTemp, maximalTemp] = addPaddingRange(
+        openweathermapData.daily.reduce(
+          ([min, max], { temp }) => [
+            Math.min(min, ...Object.values(temp)),
+            Math.max(max, ...Object.values(temp)),
+          ],
+          [Infinity, -Infinity]
         ),
-        dom.div(
-          ".level m-0",
-          dom(
-            getWindIcon(
-              msToBeaufort(data.current.wind_speed),
-              data.current.wind_deg + 180
-            ),
-            ".level-item",
-            { style: { width: "3rem" } }
+        0.2
+      );
+      const tempScale = maximalTemp - minimalTemp;
+
+      for (const dayData of openweathermapData.daily) {
+        const date = new Date(dayData.dt * 1000);
+        const dayString = date.getDate();
+        const weekdayString = date.toLocaleDateString([], { weekday: "short" });
+
+        const leftPercentage = Math.round(
+          ((dayData.temp.night - minimalTemp) / tempScale) * 100
+        );
+        const widthPercentage = Math.max(
+          Math.round(
+            ((dayData.temp.day - dayData.temp.night) / tempScale) * 100
           ),
-          dom.img(".level-item", {
-            style: { width: "3rem" },
-            src:
-              "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
-              Math.max(Math.round(dayData.uvi), 1) +
-              ".svg",
-          }),
+          1 // min width is 1% to avoid 0% width
+        );
+        const rightPercentage = 100 - widthPercentage - leftPercentage;
+
+        const leftExtremePercentage = Math.round(
+          ((dayData.temp.min - minimalTemp) / tempScale) * 100
+        );
+        const widthExtremePercentage = Math.round(
+          ((dayData.temp.max - dayData.temp.min) / tempScale) * 100
+        );
+
+        const index_start = openMeteoData.hourly.time.findIndex(
+          (dt) => new Date(dt * 1000).getDate() == dayString
+        );
+        const index_stop =
+          openMeteoData.hourly.time.length -
+          openMeteoData.hourly.time
+            .slice()
+            .reverse()
+            .findIndex((dt) => new Date(dt * 1000).getDate() == dayString);
+
+        const rainData = zip(
+          openMeteoData.hourly.precipitation,
+          openMeteoData.hourly.time
+        )
+          .slice(index_start, index_stop + 1)
+          .map(([value, time]) => ({
+            x: time * 1000,
+            y: value,
+          }));
+
+        const tempData = zip(
+          openMeteoData.hourly.temperature_2m,
+          openMeteoData.hourly.time
+        )
+          .slice(index_start, index_stop + 1)
+          .map(([value, time]) => ({
+            x: time * 1000,
+            y: value,
+          }));
+
+        const cloudsHighData = openMeteoData.hourly.cloudcover_high.slice(
+          index_start,
+          index_stop + 1
+        );
+        const cloudsMidData = openMeteoData.hourly.cloudcover_mid.slice(
+          index_start,
+          index_stop + 1
+        );
+        const cloudsLowData = openMeteoData.hourly.cloudcover_low.slice(
+          index_start,
+          index_stop + 1
+        );
+
+        let expanded = false;
+        let charts;
+        const imgExpand =
+          index_stop - index_start < 24
+            ? null
+            : dom.img(".level-item p-1", {
+                style: { width: "2rem" },
+                src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg",
+                on: {
+                  click: () => {
+                    expanded = !expanded;
+                    if (expanded) {
+                      imgExpand.src =
+                        "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-up-outline.svg";
+                      charts = multiChart(
+                        tempData,
+                        cloudsHighData,
+                        cloudsMidData,
+                        cloudsLowData,
+                        rainData
+                      );
+                      dom(divCharts, ".box", charts.elements);
+                      charts.render();
+                    } else {
+                      imgExpand.src =
+                        "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg";
+                      charts.destroy();
+                      divCharts.innerText = "";
+                      divCharts.className = "";
+                    }
+                  },
+                },
+              });
+        const divCharts = dom.div();
+
+        const divDay = dom.div(
+          ".level is-mobile m-0",
           dom.div(
-            ".level-item is-centered is-flex is-flex-direction-column",
+            ".level-left",
+            dom.div(
+              ".level-item is-centered is-flex is-flex-direction-column",
+              { style: { width: "3rem" } },
+              dom.div(".has-text-grey", weekdayString),
+              dom.div(".has-text-weight-bold", dayString.toString())
+            ),
             dom.img(".level-item", {
-              style: { height: "3rem", margin: "-15px" },
-              src: dayData.rain
-                ? "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/raindrop" +
-                  (dayData.rain > 1 ? "s" : "") + // TODO: improve rain amount cut-off and document it
-                  ".svg"
-                : "",
+              style: { width: "4rem" },
+              src:
+                "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+                weatherConditionNameFromId(
+                  dayData.weather[0].id,
+                  dayData.weather[0].icon
+                ) +
+                ".svg",
+            })
+          ),
+          dom.div(
+            ".level is-mobile m-0",
+            dom(
+              getWindIcon(
+                msToBeaufort(openweathermapData.current.wind_speed),
+                openweathermapData.current.wind_deg + 180
+              ),
+              ".level-item",
+              { style: { width: "3rem" } }
+            ),
+            dom.img(".level-item", {
+              style: { width: "3rem" },
+              src:
+                "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
+                Math.max(Math.round(dayData.uvi), 1) +
+                ".svg",
             }),
             dom.div(
-              ".level-item has-text-grey ml-auto", // has-text-right is-block
-              { style: { width: "3rem" } },
-              dayData.pop && (dayData.pop * 100).toFixed(0) + "%"
-            )
-          )
-        ),
-        dom.div(
-          ".level-right",
-          { style: { width: "50%" } },
-          dom.div(
-            ".tempRange level m-0",
-            { style: { width: "100%", position: "relative" } },
-            dom.div(".has-background-grey-lighter", {
-              style: {
-                marginLeft: leftExtremePercentage + "%",
-                width: widthExtremePercentage + "%",
-                height: "0.1rem",
-                borderRadius: "0.1rem",
-                position: "absolute",
-              },
-            }),
-            dom.span(
-              ".level-item m-0 is-block has-text-right px-1",
-              { style: { position: "absolute", width: leftPercentage + "%" } },
-              dom.textNode(Math.round(dayData.temp.night) + "°C")
-            ),
-            dom.div(".has-background-grey-dark", {
-              style: {
-                marginLeft: leftPercentage + "%",
-                width: widthPercentage + "%",
-                height: "1rem",
-                borderRadius: "1rem",
-                position: "absolute",
-              },
-            }),
-
-            dom.span(
-              ".level-item m-0 is-block has-text-left px-1",
-              {
-                style: {
-                  position: "absolute",
-                  right: "0",
-                  width: rightPercentage + "%",
-                },
-              },
-              dom.textNode(Math.round(dayData.temp.day) + "°C")
+              ".level-item is-centered is-flex is-flex-direction-column",
+              dom.img(".level-item", {
+                style: { height: "3rem", margin: "-15px" },
+                src: dayData.rain
+                  ? "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/raindrop" +
+                    (dayData.rain > 1 ? "s" : "") + // TODO: improve rain amount cut-off and document it
+                    ".svg"
+                  : "",
+              }),
+              dom.div(
+                ".level-item has-text-grey ml-auto", // has-text-right is-block
+                { style: { width: "3rem" } },
+                dayData.pop && (dayData.pop * 100).toFixed(0) + "%"
+              )
             )
           ),
+          dom.div(
+            ".level-right",
+            { style: { width: "50%" } },
+            dom.div(
+              ".tempRange level m-0",
+              { style: { width: "100%", position: "relative" } },
+              dom.div(".has-background-grey-lighter", {
+                style: {
+                  marginLeft: leftExtremePercentage + "%",
+                  width: widthExtremePercentage + "%",
+                  height: "0.1rem",
+                  borderRadius: "0.1rem",
+                  position: "absolute",
+                },
+              }),
+              dom.span(
+                ".level-item m-0 is-block has-text-right px-1",
+                {
+                  style: { position: "absolute", width: leftPercentage + "%" },
+                },
+                dom.textNode(Math.round(dayData.temp.night) + "°C")
+              ),
+              dom.div(".has-background-grey-dark", {
+                style: {
+                  marginLeft: leftPercentage + "%",
+                  width: widthPercentage + "%",
+                  height: "1rem",
+                  borderRadius: "1rem",
+                  position: "absolute",
+                },
+              }),
 
-          dom.img(".level-item p-1 is-hidden", {
-            style: { width: "2rem" },
-            src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg",
-          })
-          /* dom.img(".level-item", {
-            style: { width: "1.2rem" } ,
-            src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-up-outline.svg",
-          }) */
-        )
-      );
-      section.appendChild(divDay);
-      section.appendChild(dom.hr(".my-1", { style: { height: "1px" } }));
+              dom.span(
+                ".level-item m-0 is-block has-text-left px-1",
+                {
+                  style: {
+                    position: "absolute",
+                    right: "0",
+                    width: rightPercentage + "%",
+                  },
+                },
+                dom.textNode(Math.round(dayData.temp.day) + "°C")
+              )
+            ),
+            imgExpand
+          )
+        );
+        section.appendChild(divDay);
+        section.appendChild(divCharts);
+        section.appendChild(dom.hr(".my-1", { style: { height: "1px" } }));
+      }
     }
-  });
+  );
 }
 
 function createMeteoblueSection() {
@@ -408,7 +485,6 @@ function multiChart(
   rainData
 ) {
   const divChartTemp = dom.div();
-
   const divChartRain = dom.div();
   const divCloudsText = dom.p(
     {
@@ -613,7 +689,8 @@ function multiChart(
     },
     xaxis: {
       type: "datetime",
-      tickAmount: tempData.length / 2,
+      tickAmount:
+        tempData.length == 25 ? tempData.length - 1 : tempData.length / 2,
       labels: {
         formatter: (value, timestamp) => new Date(timestamp).getHours(),
       },
@@ -692,7 +769,8 @@ function multiChart(
     },
     xaxis: {
       type: "datetime",
-      tickAmount: tempData.length / 2,
+      tickAmount:
+        rainData.length == 25 ? rainData.length - 1 : rainData.length / 2,
       labels: {
         formatter: (value, timestamp) => new Date(timestamp).getHours(),
       },
@@ -920,7 +998,7 @@ function createCurrentSection() {
 
     const divChart = dom.div();
     const divCurrent = dom.div(
-      ".level",
+      ".level is-mobile",
 
       dom.div(
         ".level-left",

@@ -146,6 +146,11 @@ const mostCommon = (arr) =>
       .entries()
   ).reduce((a, b) => (a[1] > b[1] ? a : b))[0];
 
+const zip = (...arr) =>
+  Array(Math.max(...arr.map((a) => a.length)))
+    .fill()
+    .map((_, i) => arr.map((a) => a[i]));
+
 const debounce = (func, delay) => {
   let inDebounce;
   return function () {
@@ -178,7 +183,7 @@ function getPlaceByName(name) {
 var lastUpdateTime;
 const divLastUpdate = dom("#last-update");
 function showLastUpdate() {
-  if (divLastUpdate)
+  if (divLastUpdate) {
     Visibility.every(10 * relativeTime.UNITS.second, () => {
       if (lastUpdateTime) {
         const relativeUpdateTime = relativeTime(lastUpdateTime, {
@@ -196,6 +201,7 @@ function showLastUpdate() {
         }
       }
     });
+  }
 }
 
 function updateLastUpdate() {
