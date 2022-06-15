@@ -400,7 +400,13 @@ const mapRange = (x, [in_min, in_max], [out_min, out_max]) =>
   ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
 
 
-function createForecastHourlySection() {
+function multiChart(
+  tempData,
+  cloudsHighData,
+  cloudsMidData,
+  cloudsLowData,
+  rainData
+) {
   const divChartTemp = dom.div();
 
   const divChartRain = dom.div();
@@ -821,7 +827,6 @@ function createForecastHourlySection() {
     },
   };
 }
-
 
 function createForecastHourlySection() {
   const section = dom.section(".section");
