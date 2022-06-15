@@ -557,7 +557,7 @@ function multiChart(
 
   const rainRange = [
     0,
-    Math.ceil(Math.max(...rainData.map((hour) => (hour.y || 0) * 1.2), 5)),
+    Math.ceil(Math.max(...rainData.map(({ y }) => (y || 0) * 1.2), 5)),
   ];
   const rainSpan = rainRange[1] - rainRange[0];
 
@@ -771,84 +771,86 @@ function multiChart(
 
   // TODO: show temperature at extremes as annotations
 
-  const chartRain = new ApexCharts(divChartRain, {
-    chart: {
-      type: "bar",
-      toolbar: {
-        show: false,
-      },
-      zoom: {
-        enabled: false,
-      },
-      animations: {
-        enabled: false,
-      },
-    },
-    aspectRatio: 1.61 * 2,
-    dataLabels: {
-      enabled: false,
-    },
-    plotOptions: {
-      area: {
-        fillTo: "end",
-      },
-    },
-    fill: {
-      type: ["solid"],
-    },
-    colors: ["#2c87c7"],
-    series: [
-      {
-        name: "rain",
-        type: "bar",
-        data: rainData,
-      },
-    ],
-    stroke: {
-      curve: "straight",
-    },
-    annotations: {
-      position: "back",
-      xaxis: annotationsXaxis,
-    },
-    xaxis: {
-      type: "datetime",
-      tickAmount:
-        rainData.length == 25 ? rainData.length - 1 : rainData.length / 2,
-      labels: {
-        formatter: (value, timestamp) => new Date(timestamp).getHours(),
-      },
-    },
-    yaxis: [
-      {
-        min: rainRange[0],
-        max: rainRange[1],
-        // between 4 and 8 ticks; if span is bewteen 2 and 16 it will depend on the span and be nicely divisible
-        tickAmount:
-          rainSpan >= 4
-            ? rainSpan <= 8
-              ? rainSpan
-              : Math.min(rainSpan / 2, 8)
-            : Math.max(rainSpan * 2, 4),
-        labels: {
-          formatter: (value, timestamp) => Math.round(value * 10) / 10,
+  const chartRain = !(Math.max(...rainData.map(({ y }) => y)) > 0)
+    ? { render: () => {}, destroy: () => {} }
+    : new ApexCharts(divChartRain, {
+        chart: {
+          type: "bar",
+          toolbar: {
+            show: false,
+          },
+          zoom: {
+            enabled: false,
+          },
+          animations: {
+            enabled: false,
+          },
         },
-        title: {
-          text: "Rain  (mm/h)",
+        aspectRatio: 1.61 * 2,
+        dataLabels: {
+          enabled: false,
         },
-      },
-    ],
-    tooltip: {
-      shared: false,
-      intersect: true,
-      x: {
-        show: false,
-      },
-    },
-    legend: {
-      show: false,
-    },
-  });
+        plotOptions: {
+          area: {
+            fillTo: "end",
+          },
+        },
+        fill: {
+          type: ["solid"],
+        },
+        colors: ["#2c87c7"],
+        series: [
+          {
+            name: "rain",
+            type: "bar",
+            data: rainData,
+          },
+        ],
+        stroke: {
+          curve: "straight",
+        },
+        annotations: {
+          position: "back",
+          xaxis: annotationsXaxis,
+        },
+        xaxis: {
+          type: "datetime",
+          tickAmount:
+            rainData.length == 25 ? rainData.length - 1 : rainData.length / 2,
+          labels: {
+            formatter: (value, timestamp) => new Date(timestamp).getHours(),
+          },
+        },
+        yaxis: [
+          {
+            min: rainRange[0],
+            max: rainRange[1],
+            // between 4 and 8 ticks; if span is bewteen 2 and 16 it will depend on the span and be nicely divisible
+            tickAmount:
+              rainSpan >= 4
+                ? rainSpan <= 8
+                  ? rainSpan
+                  : Math.min(rainSpan / 2, 8)
+                : Math.max(rainSpan * 2, 4),
+            labels: {
+              formatter: (value, timestamp) => Math.round(value * 10) / 10,
+            },
+            title: {
+              text: "Rain  (mm/h)",
+            },
+          },
+        ],
+        tooltip: {
+          shared: false,
+          intersect: true,
+          x: {
+            show: false,
+          },
+        },
+        legend: {
+          show: false,
+        },
+      });
 
   function convertCloudValue(value) {
     // simple mapping
