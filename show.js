@@ -327,36 +327,36 @@ function createDaysSection() {
 
         let expanded = false;
         let charts;
-        const imgExpand = hasMoreData
+        const imgExpand = dom.img({
+          style: { width: "2rem", transition: "all .3s ease-in-out" },
+          src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg",
+          on: {
+            click: () => {
+              expanded = !expanded;
+              if (expanded) {
+                dom(imgExpand, ".flip");
+                charts = multiChart(
+                  tempData,
+                  cloudsHighData,
+                  cloudsMidData,
+                  cloudsLowData,
+                  rainData
+                );
+                dom(divCharts, ".box", charts.elements);
+                charts.render();
+              } else {
+                charts.destroy();
+                divCharts.innerText = "";
+                divCharts.className = "";
+
+                imgExpand.className = "";
+              }
+            },
+          },
+        });
+        const btnExpand = hasMoreData
           ? null
-          : dom.img(".level-item p-1", {
-              style: { width: "2rem" },
-              src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg",
-              on: {
-                click: () => {
-                  expanded = !expanded;
-                  if (expanded) {
-                    imgExpand.src =
-                      "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-up-outline.svg";
-                    charts = multiChart(
-                      tempData,
-                      cloudsHighData,
-                      cloudsMidData,
-                      cloudsLowData,
-                      rainData
-                    );
-                    dom(divCharts, ".box", charts.elements);
-                    charts.render();
-                  } else {
-                    imgExpand.src =
-                      "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-down-outline.svg";
-                    charts.destroy();
-                    divCharts.innerText = "";
-                    divCharts.className = "";
-                  }
-                },
-              },
-            });
+          : dom.button(".level-item p-1 button is-white", imgExpand);
         const divCharts = dom.div();
 
         const divDay = dom.div(
@@ -459,7 +459,7 @@ function createDaysSection() {
                 dom.textNode(Math.round(highTemp) + "°C")
               )
             ),
-            imgExpand
+            btnExpand
           )
         );
         section.appendChild(divDay);

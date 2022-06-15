@@ -116,3 +116,7 @@ Sandstorm (#E5DE44)
   width: 100%;
   padding: 0;
 }
+
+.flip {
+  transform: scaleY(-1);
+}
