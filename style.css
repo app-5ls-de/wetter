@@ -133,8 +133,13 @@ Sandstorm (#E5DE44)
   left: -6px;
 }
 
+.ecmwf {
+  display: block;
+}
+
 .ecmwf > .level-item {
   margin: auto;
+  width: 100%;
 }
 
 .ecmwf > .level-item > canvas {
@@ -152,13 +157,16 @@ Sandstorm (#E5DE44)
 
 @media screen and (min-width: 769px) {
   /* tablet */
+}
+@media screen and (min-width: 1024px) {
+  /* desktop */
 
   .ecmwf > .level-item {
     width: 50%;
   }
-}
-@media screen and (min-width: 1024px) {
-  /* desktop */
+  .ecmwf {
+    display: flex;
+  }
 }
 @media screen and (min-width: 1216px) {
   /* widescreen */
