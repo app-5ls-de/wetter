@@ -120,3 +120,42 @@ Sandstorm (#E5DE44)
 .flip {
   transform: scaleY(-1);
 }
+
+
+@media screen and (max-width: 768px) {
+  /* mobile */
+}
+
+@media screen and (min-width: 769px) {
+  /* tablet */
+}
+@media screen and (min-width: 1024px) {
+  /* desktop */
+}
+@media screen and (min-width: 1216px) {
+  /* widescreen */
+}
+@media screen and (min-width: 1408px) {
+  /* fullhd */
+}
+
+@media screen and (min-width: 769px) and (max-width: 1023px) {
+  /* tablet-only */
+}
+@media screen and (min-width: 1024px) and (max-width: 1215px) {
+  /* desktop-only */
+}
+@media screen and (min-width: 1216px) and (max-width: 1407px) {
+  /* widescreen-only */
+}
+
+
+@media screen and (max-width: 1023px) {
+  /* touch */
+}
+@media screen and  (max-width: 1215px) {
+  /* until-widescreen */
+}
+@media screen and  (max-width: 1407px) {
+  /* until-fullhd */
+}
