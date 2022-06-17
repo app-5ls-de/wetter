@@ -517,29 +517,28 @@ function multiChart(
   cloudsLowData,
   rainData
 ) {
+  // TODO: show wind data and rain in one combined chart
+
   const divChartTemp = dom.div();
-  const divChartRain = dom.div();
-  const divCloudsText = dom.p(
-    {
-      style: {
-        writingMode: "tb-rl",
-        fontFamily: "Helvetica, Arial, sans-serif",
-        fontSize: "11px",
-        fontWeight: "900",
-        whiteSpace: "nowrap",
-        position: "absolute",
-        top: "50%",
-        transform: "translateY(-50%) scale(-1, -1)",
-      },
-    },
-    "Cloudcover"
+  const divTemp = dom.div(
+    { style: { position: "relative" } },
+    dom.p(".chart-label", "Temperature (°C)"),
+    divChartTemp
   );
+
+  const divChartRain = dom.div();
+  const divRain = dom.div(
+    { style: { position: "relative" } },
+    dom.p(".chart-label", "Rain  (mm/h)"),
+    divChartRain
+  );
+
   const divChartCloudsHigh = dom.div();
   const divChartCloudsMid = dom.div();
   const divChartCloudsLow = dom.div();
   const divClouds = dom.div(
     { style: { position: "relative" } },
-    divCloudsText,
+    dom.p(".chart-label", "Cloudcover"),
     divChartCloudsHigh,
     divChartCloudsMid,
     divChartCloudsLow
@@ -753,9 +752,6 @@ function multiChart(
       labels: {
         formatter: (value, timestamp) => Math.round(value * 10) / 10,
       },
-      title: {
-        text: "Temperature (°C)",
-      },
     },
     tooltip: {
       shared: false,
@@ -771,86 +767,87 @@ function multiChart(
 
   // TODO: show temperature at extremes as annotations
 
-  const chartRain = !(Math.max(...rainData.map(({ y }) => y)) > 0)
-    ? { render: () => {}, destroy: () => {} }
-    : new ApexCharts(divChartRain, {
-        chart: {
-          type: "bar",
-          toolbar: {
-            show: false,
-          },
-          zoom: {
-            enabled: false,
-          },
-          animations: {
-            enabled: false,
-          },
-        },
-        aspectRatio: 1.61 * 2,
-        dataLabels: {
-          enabled: false,
-        },
-        plotOptions: {
-          area: {
-            fillTo: "end",
-          },
-        },
-        fill: {
-          type: ["solid"],
-        },
-        colors: ["#2c87c7"],
-        series: [
-          {
-            name: "rain",
-            type: "bar",
-            data: rainData,
-          },
-        ],
-        stroke: {
-          curve: "straight",
-        },
-        annotations: {
-          position: "back",
-          xaxis: annotationsXaxis,
-        },
-        xaxis: {
-          type: "datetime",
-          tickAmount:
-            rainData.length == 25 ? rainData.length - 1 : rainData.length / 2,
-          labels: {
-            formatter: (value, timestamp) => new Date(timestamp).getHours(),
-          },
-        },
-        yaxis: [
-          {
-            min: rainRange[0],
-            max: rainRange[1],
-            // between 4 and 8 ticks; if span is bewteen 2 and 16 it will depend on the span and be nicely divisible
-            tickAmount:
-              rainSpan >= 4
-                ? rainSpan <= 8
-                  ? rainSpan
-                  : Math.min(rainSpan / 2, 8)
-                : Math.max(rainSpan * 2, 4),
-            labels: {
-              formatter: (value, timestamp) => Math.round(value * 10) / 10,
-            },
-            title: {
-              text: "Rain  (mm/h)",
-            },
-          },
-        ],
-        tooltip: {
-          shared: false,
-          intersect: true,
-          x: {
-            show: false,
-          },
-        },
-        legend: {
+  let chartRain;
+  if (!(Math.max(...rainData.map(({ y }) => y)) > 0)) {
+    chartRain = { render: () => {}, destroy: () => {} };
+    divRain.innerText = ""; // if no rain data, don't show the chart
+  } else {
+    chartRain = new ApexCharts(divChartRain, {
+      chart: {
+        type: "bar",
+        toolbar: {
           show: false,
         },
-      });
+        zoom: {
+          enabled: false,
+        },
+        animations: {
+          enabled: false,
+        },
+      },
+      aspectRatio: 1.61 * 2,
+      dataLabels: {
+        enabled: false,
+      },
+      plotOptions: {
+        area: {
+          fillTo: "end",
+        },
+      },
+      fill: {
+        type: ["solid"],
+      },
+      colors: ["#2c87c7"],
+      series: [
+        {
+          name: "rain",
+          type: "bar",
+          data: rainData,
+        },
+      ],
+      stroke: {
+        curve: "straight",
+      },
+      annotations: {
+        position: "back",
+        xaxis: annotationsXaxis,
+      },
+      xaxis: {
+        type: "datetime",
+        tickAmount:
+          rainData.length == 25 ? rainData.length - 1 : rainData.length / 2,
+        labels: {
+          formatter: (value, timestamp) => new Date(timestamp).getHours(),
+        },
+      },
+      yaxis: [
+        {
+          min: rainRange[0],
+          max: rainRange[1],
+          // between 4 and 8 ticks; if span is bewteen 2 and 16 it will depend on the span and be nicely divisible
+          tickAmount:
+            rainSpan >= 4
+              ? rainSpan <= 8
+                ? rainSpan
+                : Math.min(rainSpan / 2, 8)
+              : Math.max(rainSpan * 2, 4),
+          labels: {
+            formatter: (value, timestamp) => Math.round(value * 10) / 10,
+          },
+        },
+      ],
+      tooltip: {
+        shared: false,
+        intersect: true,
+        x: {
+          show: false,
+        },
+      },
+      legend: {
+        show: false,
+      },
+    });
+  }
 
   function convertCloudValue(value) {
     // simple mapping
@@ -940,7 +937,7 @@ function multiChart(
   });
 
   return {
-    elements: [divChartTemp, divClouds, divChartRain],
+    elements: [divTemp, divClouds, divRain],
     render: () => {
       chartTemp.render();
       chartRain.render();

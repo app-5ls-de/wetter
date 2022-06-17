@@ -121,9 +121,24 @@ Sandstorm (#E5DE44)
   transform: scaleY(-1);
 }
 
+.chart-label {
+  writing-mode: tb-rl;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  white-space: nowrap;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) scale(-1, -1);
+  left: -6px;
+}
 
 @media screen and (max-width: 768px) {
   /* mobile */
+
+  .chart-label {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 769px) {
