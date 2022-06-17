@@ -133,6 +133,15 @@ Sandstorm (#E5DE44)
   left: -6px;
 }
 
+.ecmwf > .level-item {
+  margin: auto;
+}
+
+.ecmwf > .level-item > canvas {
+  max-width: 100%;
+  padding: 1rem;
+}
+
 @media screen and (max-width: 768px) {
   /* mobile */
 
@@ -143,6 +152,10 @@ Sandstorm (#E5DE44)
 
 @media screen and (min-width: 769px) {
   /* tablet */
+
+  .ecmwf > .level-item {
+    width: 50%;
+  }
 }
 @media screen and (min-width: 1024px) {
   /* desktop */
@@ -164,13 +177,12 @@ Sandstorm (#E5DE44)
   /* widescreen-only */
 }
 
-
 @media screen and (max-width: 1023px) {
   /* touch */
 }
-@media screen and  (max-width: 1215px) {
+@media screen and (max-width: 1215px) {
   /* until-widescreen */
 }
-@media screen and  (max-width: 1407px) {
+@media screen and (max-width: 1407px) {
   /* until-fullhd */
 }

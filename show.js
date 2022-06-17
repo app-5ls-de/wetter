@@ -155,50 +155,76 @@ function getSolsticeDays(year = new Date(), lat = place.lat, lon = place.lon) {
   };
 }
 
-async function createEcmwfSection_ENS() {
-  // TODO: show the two ecmwf meteograms side by side on desktop
+async function createEcmwfSection() {
+  const [data_ENS, data_rain] = await Promise.all([
+    fetch_json(
+      "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_meteogram/?lon=" +
+        place.lon +
+        "&lat=" +
+        place.lat
+    ),
+    fetch_json(
+      "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_ptype_meteogram/?lon=" +
+        place.lon +
+        "&lat=" +
+        place.lat
+    ),
+  ]);
 
-  const data = await fetch_json(
-    "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_meteogram/?lon=" +
-      place.lon +
-      "&lat=" +
-      place.lat
-  );
-
+  const canvas_ENS = dom.canvas();
+  const canvas_rain = dom.canvas();
   const section = dom.section(
-    ".section",
-    dom.div(
-      { style: { overflow: "hidden", width: "fit-content", margin: "auto" } },
-      dom.img({
-        src: data.data.link.href,
-        style: { marginTop: "-3%", marginBottom: "-31%" },
-      })
-    )
+    ".section level ecmwf",
+    dom.div(".level-item", canvas_rain),
+    dom.div(".level-item", canvas_ENS)
   );
-
   divMain.appendChild(section);
-}
 
-async function createEcmwfSection_rain() {
-  const data = await fetch_json(
-    "https://apps.ecmwf.int/webapps/opencharts-api/v1/products/opencharts_ptype_meteogram/?lon=" +
-      place.lon +
-      "&lat=" +
-      place.lat
+  const loadImage = (src) =>
+    new Promise((resolve, reject) => {
+      const image = new Image();
+      image.onload = () => resolve(image);
+      image.onerror = () => reject(new Error());
+      image.src = src;
+    });
+
+  const [image_rain, image_ENS] = await Promise.all([
+    loadImage(data_rain.data.link.href),
+    loadImage(data_ENS.data.link.href),
+  ]);
+
+  const crop_rain = { left: 273 - 10, top: 207, right: 308 - 10, bottom: 332 };
+  const crop_ENS = { left: 83, top: 19, right: 102, bottom: 211 };
+
+  canvas_rain.width = image_rain.width - crop_rain.left - crop_rain.right;
+  canvas_rain.height = image_rain.height - crop_rain.top - crop_rain.bottom;
+  const ctx_rain = canvas_rain.getContext("2d");
+  canvas_ENS.width = image_ENS.width - crop_ENS.left - crop_ENS.right;
+  canvas_ENS.height = image_ENS.height - crop_ENS.top - crop_ENS.bottom;
+  const ctx_ENS = canvas_ENS.getContext("2d");
+
+  ctx_rain.drawImage(
+    image_rain,
+    crop_rain.left,
+    crop_rain.top,
+    canvas_rain.width,
+    canvas_rain.height,
+    0,
+    0,
+    canvas_rain.width,
+    canvas_rain.height
   );
-
-  const section = dom.section(
-    ".section",
-    dom.div(
-      { style: { overflow: "hidden", width: "fit-content", margin: "auto" } },
-      dom.img({
-        src: data.data.link.href,
-        style: { marginTop: "-10%", marginBottom: "-17%" },
-      })
-    )
+  ctx_ENS.drawImage(
+    image_ENS,
+    crop_ENS.left,
+    crop_ENS.top,
+    canvas_ENS.width,
+    canvas_ENS.height,
+    0,
+    0,
+    canvas_ENS.width,
+    canvas_ENS.height
   );
-
-  divMain.appendChild(section);
 }
 
 const addPaddingRange = ([min, max], paddingFactor) => [
@@ -1193,5 +1219,4 @@ createSunPathSection();
 
 // TODO: comment code better
 
-if (!debug) createEcmwfSection_rain();
-if (!debug) createEcmwfSection_ENS();
+if (!debug) createEcmwfSection();
