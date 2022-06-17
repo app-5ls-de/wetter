@@ -126,7 +126,7 @@ async function openMeteo(place, timezoneForDaily) {
       place.lat +
       "&longitude=" +
       place.lon +
-      "&hourly=temperature_2m,precipitation,weathercode,cloudcover_low,cloudcover_mid,cloudcover_high" + // ,snow_depth
+      "&hourly=temperature_2m,precipitation,weathercode,cloudcover_low,cloudcover_mid,cloudcover_high,windspeed_10m,winddirection_10m,snow_depth" +
       // daily weather is only available if timezone is set
       (timezoneForDaily
         ? "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_hours"
