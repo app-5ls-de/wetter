@@ -239,7 +239,7 @@ function createDaysSection() {
 
   Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
     ([openweathermapData, openMeteoData]) => {
-      const [minimalTemp, maximalTemp] = addPaddingRange(
+      const [minimalTempRange, maximalTempRange] = addPaddingRange(
         openweathermapData.daily.reduce(
           ([min, max], { temp }) => [
             Math.min(min, ...Object.values(temp)),
@@ -249,7 +249,7 @@ function createDaysSection() {
         ),
         0.2
       );
-      const tempScale = maximalTemp - minimalTemp;
+      const tempScale = maximalTempRange - minimalTempRange;
 
       for (const dayData of openweathermapData.daily) {
         const date = new Date(dayData.dt * 1000);
@@ -315,6 +315,8 @@ function createDaysSection() {
               )
               .map(({ y }) => y)
           ),
+          min: Math.min(...tempData.map(({ y }) => y)) || dayData.temp.min,
+          max: Math.max(...tempData.map(({ y }) => y)) || dayData.temp.max,
         };
 
         const highTemp = temperaturesOfTheDay.day || dayData.temp.day;
@@ -323,7 +325,7 @@ function createDaysSection() {
           Math.min(dayData.temp.eve, dayData.temp.morn);
 
         const leftPercentage = Math.round(
-          ((lowTemp - minimalTemp) / tempScale) * 100
+          ((lowTemp - minimalTempRange) / tempScale) * 100
         );
         const widthPercentage = Math.max(
           Math.round(((highTemp - lowTemp) / tempScale) * 100),
@@ -332,10 +334,11 @@ function createDaysSection() {
         const rightPercentage = 100 - widthPercentage - leftPercentage;
 
         const leftExtremePercentage = Math.round(
-          ((dayData.temp.min - minimalTemp) / tempScale) * 100
+          ((temperaturesOfTheDay.min - minimalTempRange) / tempScale) * 100
         );
         const widthExtremePercentage = Math.round(
-          ((dayData.temp.max - dayData.temp.min) / tempScale) * 100
+          ((temperaturesOfTheDay.max - temperaturesOfTheDay.min) / tempScale) *
+            100
         );
 
         const cloudsHighData = openMeteoData.hourly.cloudcover_high.slice(
