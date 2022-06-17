@@ -448,7 +448,7 @@ function createDaysSection() {
             ".level-right",
             { style: { width: "50%" } },
             dom.div(
-              ".tempRange level m-0",
+              ".tempRange level m-0 is-mobile",
               { style: { width: "100%", position: "relative" } },
               dom.div(".has-background-grey-lighter", {
                 style: {
