@@ -385,71 +385,85 @@ function createDaysSection() {
         });
         const btnExpand = hasMoreData
           ? null
-          : dom.button(".level-item p-1 button is-white", imgExpand);
+          : dom.button(
+              ".level-item level-right is-narrow p-1 button is-white",
+              imgExpand
+            );
         const divCharts = dom.div();
 
         const divDay = dom.div(
-          ".level is-mobile m-0",
+          ".level m-0",
           dom.div(
-            ".level-left",
+            ".level-left level is-mobile my-0",
             dom.div(
-              ".level-item is-centered is-flex is-flex-direction-column",
-              { style: { width: "3rem" } },
-              dom.div(".has-text-grey", weekdayString),
-              dom.div(".has-text-weight-bold", dayString.toString())
-            ),
-            dom.img(".level-item", {
-              style: { width: "4rem" },
-              src:
-                "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
-                weatherConditionNameFromId(
-                  dayData.weather[0].id,
-                  dayData.weather[0].icon
-                ) +
-                ".svg",
-            })
-          ),
-          dom.div(
-            ".level is-mobile m-0",
-            dom(
-              getWindIcon(
-                msToBeaufort(openweathermapData.current.wind_speed),
-                openweathermapData.current.wind_deg + 180
+              ".level-left",
+              { style: { marginRight: "3rem" } },
+              dom.div(
+                ".level-item is-centered is-flex is-flex-direction-column",
+                { style: { width: "3rem" } },
+                dom.div(".has-text-grey", weekdayString),
+                dom.div(".has-text-weight-bold", dayString.toString())
               ),
-              ".level-item",
-              { style: { width: "3rem" } }
-            ),
-            dom.img(".level-item", {
-              style: { width: "3rem" },
-              src:
-                "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
-                Math.max(Math.round(dayData.uvi), 1) +
-                ".svg",
-            }),
-            dom.div(
-              ".level-item is-centered is-flex is-flex-direction-column",
               dom.img(".level-item", {
-                style: { height: "3rem", margin: "-15px" },
+                style: { width: "4rem" },
                 src:
-                  maxRain > 1
-                    ? "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/raindrop" +
-                      (maxRain > 2 ? "s" : "") + // TODO: improve rain amount cut-off and document it
-                      ".svg"
-                    : "",
+                  "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+                  weatherConditionNameFromId(
+                    dayData.weather[0].id,
+                    dayData.weather[0].icon
+                  ) +
+                  ".svg",
+              })
+            ),
+            dom.div(
+              ".level-right is-mobile my-0",
+              { style: { margin: "auto" } },
+              dom(
+                getWindIcon(
+                  msToBeaufort(openweathermapData.current.wind_speed),
+                  openweathermapData.current.wind_deg + 180
+                ),
+                ".level-item",
+                { style: { width: "3rem" } }
+              ),
+              dom.img(".level-item", {
+                style: { width: "3rem" },
+                src:
+                  "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
+                  Math.max(Math.round(dayData.uvi), 1) +
+                  ".svg",
               }),
               dom.div(
-                ".level-item has-text-grey ml-auto", // has-text-right is-block
-                { style: { width: "3rem" } },
-                dayData.pop && (dayData.pop * 100).toFixed(0) + "%"
+                ".level-item is-centered is-flex is-flex-direction-column",
+                dom.img(".level-item", {
+                  style: { height: "3rem", margin: "-15px" },
+                  src:
+                    maxRain > 1
+                      ? "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/raindrop" +
+                        (maxRain > 2 ? "s" : "") + // TODO: improve rain amount cut-off and document it
+                        ".svg"
+                      : "",
+                }),
+                dom.div(
+                  ".level-item has-text-grey ml-auto", // has-text-right is-block
+                  { style: { width: "3rem" } },
+                  dayData.pop && (dayData.pop * 100).toFixed(0) + "%"
+                )
               )
             )
           ),
           dom.div(
-            ".level-right",
-            { style: { width: "50%" } },
+            ".level-right level my-0 is-mobile",
+            { style: { flexGrow: 1 } },
             dom.div(
-              ".tempRange level m-0 is-mobile",
-              { style: { width: "100%", position: "relative" } },
+              ".tempRange level-left level my-0 is-mobile",
+              {
+                style: {
+                  position: "relative",
+                  flexGrow: 1,
+                  marginRight: "2rem",
+                },
+              },
               dom.div(".has-background-grey-lighter", {
                 style: {
                   marginLeft: leftExtremePercentage + "%",
@@ -460,7 +474,7 @@ function createDaysSection() {
                 },
               }),
               dom.span(
-                ".level-item m-0 is-block has-text-right px-1",
+                ".level-item my-0 is-block has-text-right px-1",
                 {
                   style: { position: "absolute", width: leftPercentage + "%" },
                 },
