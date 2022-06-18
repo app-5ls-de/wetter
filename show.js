@@ -1218,19 +1218,21 @@ createCurrentSection();
 createDaysSection();
 createForecastHourlySection();
 
-if (!debug) createMeteoblueSection();
+Promise.allSettled([promiseOpenweathermap, promiseOpenMeteo]).then(() => {
+  if (!debug) createMeteoblueSection();
 
-divMain.appendChild(
-  dom.section(
-    ".section",
-    dom.hr(".has-background-grey my-6", {
-      style: { borderRadius: "0.2rem", height: "0.2rem" },
-    })
-  )
-);
+  divMain.appendChild(
+    dom.section(
+      ".section",
+      dom.hr(".has-background-grey my-6", {
+        style: { borderRadius: "0.2rem", height: "0.2rem" },
+      })
+    )
+  );
 
-createSunPathSection();
+  createSunPathSection();
+
+  if (!debug) createEcmwfSection();
+});
 
 // TODO: comment code better
-
-if (!debug) createEcmwfSection();
