@@ -1248,9 +1248,9 @@ function createCurrentSection() {
     section.appendChild(divCurrent);
 
     const precipitation = data.minutely?.map((minute) => minute.precipitation);
-    if (data.minutely) {
+    if ((precipitation, Math.max(...precipitation))) {
       const maxPrecipitation = Math.max(...precipitation, 4);
-      const options = {
+      const chart = new ApexCharts(divChart, {
         series: [
           {
             data: precipitation,
@@ -1275,8 +1275,7 @@ function createCurrentSection() {
         tooltip: {
           enabled: false,
         },
-      };
-      const chart = new ApexCharts(divChart, options);
+      });
       chart.render();
     }
   });
