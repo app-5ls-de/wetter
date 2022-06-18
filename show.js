@@ -2,15 +2,17 @@ const divMain = dom("#main");
 
 function createSunPathSection() {
   // TODO: move graph to the right on desktop and show sunrise and sunset on left as in old version
-  // TODO: use new charting library
 
-  const divChart = dom.div(".ct-chart ct-perfect-fourth");
+  const divChart = dom.div();
   const section = dom.section(".section", divChart);
+  divMain.appendChild(section);
 
-  const altitudesToday = solarAltitude().map(({ altitude, seconds }) => ({
-    x: seconds,
-    y: altitude,
-  }));
+  const altitudesToday = solarAltitude().map(
+    ({ altitude, seconds }) => ({
+      x: seconds,
+      y: altitude,
+    })
+  );
 
   const sunTimes = SunCalc.getTimes(new Date(), place.lat, place.lon);
   const { summerSolstice, winterSolstice } = getSolsticeDays();
@@ -28,70 +30,142 @@ function createSunPathSection() {
     })
   );
 
-  new Chartist.Line(
-    divChart,
-    {
-      series: [
+  const colors = [
+    [3.2, "#fa853a"], // and above
+    [3.0, "#f9a53b"],
+    [2.8, "#fdbd3d"],
+    [2.6, "#fdd53e"],
+    [2.4, "#f9e53e"],
+    [2.2, "#fcec3f"],
+    [2.0, "#def3b4"],
+    [1.8, "#beea5a"],
+    [1.6, "#94d959"],
+    [1.4, "#63b456"],
+    [1.2, "#3a8e54"],
+    [1.0, "#54957d"],
+    [0.8, "#4ec696"],
+    [0.6, "#5dd46f"],
+    [0.4, "#68e976"],
+    [0.2, "#65ec97"], // 0 to .2
+    [0, "#b3eef9"], // -.2 to 0
+    [-0.2, "#99e6f9"],
+    [-0.4, "#74d5fb"],
+    [-0.6, "#69c1f8"],
+    [-0.8, "#5da3f1"],
+    [-1.0, "#5080e8"],
+    [-1.2, "#4b65df"],
+    [-1.4, "#5163d9"],
+    [-1.6, "#8268e0"],
+    [-1.8, "#a66ee8"],
+    [-2.0, "#c372e9"],
+    [-2.2, "#db71e4"],
+    [-2.4, "#b75cb9"],
+    [-2.6, "#964da0"],
+    [-2.8, "#783f87"],
+    [-3.0, "#5e3b71"],
+    [-3.2, "#5e3b71"], // and below
+  ];
+  const colorStops = colors.map(([angle, color]) => ({
+    offset: mapRange(angle, [-Math.PI / 2, Math.PI / 2], [100, 0]),
+    color,
+    opacity: 1,
+  }));
+
+  const chart = new ApexCharts(divChart, {
+    chart: {
+      type: "area",
+      toolbar: {
+        show: false,
+      },
+      zoom: {
+        enabled: false,
+      },
+      animations: {
+        enabled: false,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    colors: ["grey", "grey", "#4a4a4a"],
+    series: [
+      {
+        name: "summerSolstice",
+        type: "line",
+        data: altitudesSummerSolstice,
+      },
+      {
+        name: "winterSolstice",
+        type: "line",
+        data: altitudesWinterSolstice,
+      },
+      {
+        name: "today",
+        type: "area",
+        data: altitudesToday,
+      },
+    ],
+    stroke: {
+      curve: "straight",
+    },
+    fill: {
+      type: ["solid", "solid", "gradient"],
+      gradient: {
+        colorStops: colorStops,
+      },
+    },
+    annotations: {
+      position: "back",
+      xaxis: [
         {
-          name: "summerSolstice",
-          className: "series-solstice",
-          data: altitudesSummerSolstice,
-        },
-        {
-          name: "winterSolstice",
-          className: "series-solstice",
-          data: altitudesWinterSolstice,
-        },
-        {
-          name: "today",
-          className: "series-today",
-          data: altitudesToday,
+          x: getSecondsOfDay(new Date()),
+          borderColor: "red",
+          strokeDashArray: 0,
         },
       ],
     },
-    {
-      low: -Math.PI / 2,
-      high: Math.PI / 2,
-      axisX: {
-        type: Chartist.FixedScaleAxis,
-        labelInterpolationFnc: (seconds) =>
-          new Date(
-            new Date().setHours(0, 0, 0, 0) + seconds * 1000
-          ).toLocaleTimeString(["en-GB", "de"], {
-            hour: "numeric",
-            minute: "2-digit",
-          }),
-        ticks: [
-          getSecondsOfDay(sunTimes.sunrise),
-          getSecondsOfDay(sunTimes.solarNoon),
-          getSecondsOfDay(sunTimes.sunset),
-          getSecondsOfDay(sunTimes.nadir),
-        ].filter((x) => x), // remove invalid dates
+    xaxis: {
+      show: false,
+      type: "numeric",
+      labels: {
+        show: false,
       },
-      axisY: {
-        showLabel: false,
-        low: -Math.PI / 2,
-        high: Math.PI / 2,
-        type: Chartist.FixedScaleAxis,
-        ticks: [0],
+      axisTicks: {
+        show: false,
       },
-      lineSmooth: Chartist.Interpolation.monotoneCubic(),
-      showPoint: false,
-      series: {
-        summerSolstice: {
-          //showArea: true,
-        },
-        winterSolstice: {
-          //showArea: true,
-        },
-        today: {
-          showArea: true,
-        },
+      axisBorder: {
+        show: false,
       },
-    }
-  );
-
-  divMain.appendChild(section);
+    },
+    grid: {
+      show: false,
+    },
+    yaxis: {
+      show: false,
+      min: -Math.PI / 2,
+      max: Math.PI / 2,
+      labels: {
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      axisBorder: {
+        show: false,
+      },
+    },
+    tooltip: {
+      shared: false,
+      intersect: true,
+      x: {
+        show: false,
+      },
+    },
+    legend: {
+      show: false,
+    },
+  });
+  chart.render();
 }
 
 const addMinutes = (date, minutes) =>
@@ -752,9 +826,6 @@ function multiChart(
     fill: {
       type: "gradient",
       gradient: {
-        shadeIntensity: 1,
-        opacityFrom: 0.7,
-        opacityTo: 0.9,
         colorStops: colorStops,
       },
     },
