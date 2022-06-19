@@ -1,18 +1,18 @@
 const divMain = dom("#main");
+// TODO: sort all function in a more logical way
 
 function createSunPathSection() {
-  // TODO: move graph to the right on desktop and show sunrise and sunset on left as in old version
+  // TODO: move graph to the right on desktop and show sunrise and sunset (+golden hour maybe) on left as in old version
+  // TODO: Fix color gradientcenter on zero
 
   const divChart = dom.div();
   const section = dom.section(".section", divChart);
   divMain.appendChild(section);
 
-  const altitudesToday = solarAltitude().map(
-    ({ altitude, seconds }) => ({
-      x: seconds,
-      y: altitude,
-    })
-  );
+  const altitudesToday = solarAltitude().map(({ altitude, seconds }) => ({
+    x: seconds,
+    y: altitude,
+  }));
 
   const sunTimes = SunCalc.getTimes(new Date(), place.lat, place.lon);
   const { summerSolstice, winterSolstice } = getSolsticeDays();
@@ -1087,7 +1087,9 @@ function createForecastHourlySection() {
 }
 
 function createCurrentSection() {
-  // TODO: first section should be a summary of the current weather (icon, temperature, wind, uvindex and graph of precipitation in next 60 minutes)
+  // TODO: fix chart size
+  // TODO: fix too large padding
+  // TODO: add minimalistic xaxis (0min,60min)
 
   const section = dom.section(".section");
   divMain.appendChild(section);
@@ -1276,6 +1278,8 @@ createDaysSection();
 createForecastHourlySection();
 
 Promise.allSettled([promiseOpenweathermap, promiseOpenMeteo]).then(() => {
+  // TODO: add rainviewer rain radar map
+  // TODO: load rain radar map only if rain in next 60min
   if (!debug) createMeteoblueSection();
 
   divMain.appendChild(
@@ -1288,6 +1292,8 @@ Promise.allSettled([promiseOpenweathermap, promiseOpenMeteo]).then(() => {
   );
 
   createSunPathSection();
+
+  // TODO: add meteoblue images to make transition from v1 easier
 
   if (!debug) createEcmwfSection();
 });
