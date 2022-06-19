@@ -3,7 +3,6 @@ const divMain = dom("#main");
 
 function createSunPathSection() {
   // TODO: move graph to the right on desktop and show sunrise and sunset (+golden hour maybe) on left as in old version
-  // TODO: Fix color gradientcenter on zero
 
   const divChart = dom.div();
   const section = dom.section(".section", divChart);
@@ -30,16 +29,21 @@ function createSunPathSection() {
     })
   );
 
+  const range = altitudesToday.reduce(
+    ([min, max], { y }) => [Math.min(min, y), Math.max(max, y)],
+    [Infinity, -Infinity]
+  );
+
   const colors = [
-    [10, "#ffdb70"], // and above
-    [0, "#dcaa34"], // -5 to 0
-    [-5, "#7e9dcf"], // -10 to -5
-    [-10, "#5572a1"],
-    [-15, "#374358"],
-    [-20, "#191919"], // and below
+    [8, "#ffdb70"],
+    [3, "#dcaa34"],
+    [-3, "#7e9dcf"],
+    [-8, "#5572a1"],
+    [-11, "#374358"],
+    [-15, "#191919"],
   ];
   const colorStops = colors.map(([angle, color]) => ({
-    offset: mapRange(angle, [-90, 90], [100, 0]),
+    offset: mapRange(angle * (Math.PI / 180), range, [100, 0]),
     color,
     opacity: 1,
   }));
@@ -608,6 +612,7 @@ function multiChart(
   rainData
 ) {
   // TODO: show wind data and rain in one combined chart
+  // TODO: fix color gradient: use true range of data not max-min of axis
 
   const divChartTemp = dom.div();
   const divTemp = dom.div(
