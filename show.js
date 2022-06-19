@@ -1136,93 +1136,94 @@ function createCurrentSection() {
     const divChart = dom.div();
     const divCurrent = dom.div(
       ".level",
-
       dom.div(
-        ".level-left",
+        ".level-left level",
+        { style: { maxWidth: "50%", margin: "auto" } },
         dom.div(
           ".level-item level is-mobile",
+          dom.img(".level-item", {
+            style: { width: "7rem" },
+            src:
+              "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+              weatherCondition +
+              ".svg",
+          }),
           dom.div(
-            ".level-item level is-mobile",
+            ".city-temp level-item is-size-1 has-text-weight-bold",
+            dom.textNode(data.current.temp.toFixed(0)),
+            dom.div(".city-temp-celsius mb-4 has-text-grey", "°C")
+          )
+        ),
+
+        dom.div(
+          ".level-item is-flex is-flex-direction-column",
+
+          dom.div(
+            ".level is-mobile my-0",
+            dom(
+              getWindIcon(
+                msToBeaufort(data.current.wind_speed),
+                data.current.wind_deg + 180
+              ),
+              ".city-icon2 level-item",
+              {
+                style: {
+                  width: "4rem",
+                  right: 0,
+                  top: "-1rem",
+                },
+              }
+            ),
             dom.img(".level-item", {
-              style: { width: "7rem" },
+              style: { width: "3rem" },
               src:
-                "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
-                weatherCondition +
+                "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
+                Math.max(Math.round(data.current.uvi), 1) +
                 ".svg",
             }),
-            dom.div(
-              ".city-temp level-item is-size-1 has-text-weight-bold",
-              dom.textNode(data.current.temp.toFixed(0)),
-              dom.div(".city-temp-celsius mb-4 has-text-grey", "°C")
-            )
+            dom.img(".level-item", {
+              style: {
+                width: "6rem",
+                "transform-origin": "50% 50%",
+                transform: "rotate(" + rotationAngle + "deg)",
+              },
+              src:
+                "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+                moonName +
+                ".svg",
+            })
           ),
 
           dom.div(
-            ".is-flex is-flex-direction-column",
+            ".level is-mobile",
+            { style: { width: "min-content", margin: "auto" } },
+            dom.div(".level-item", dom.textNode(data.current.humidity + "%")),
+            dom.img(".level-item", {
+              style: { height: "3rem" },
+              src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/humidity.svg",
+            })
+          ),
 
+          dom.div(
+            ".level is-mobile",
+            { style: { width: "min-content", margin: "auto" } },
             dom.div(
-              ".level is-mobile my-0",
-              dom(
-                getWindIcon(
-                  msToBeaufort(data.current.wind_speed),
-                  data.current.wind_deg + 180
-                ),
-                ".city-icon2 level-item",
-                {
-                  style: {
-                    width: "4rem",
-                    right: 0,
-                    top: "-1rem",
-                  },
-                }
-              ),
-              dom.img(".level-item", {
-                style: { width: "3rem" },
-                src:
-                  "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
-                  Math.max(Math.round(data.current.uvi), 1) +
-                  ".svg",
-              }),
-              dom.img(".level-item", {
-                style: {
-                  width: "6rem",
-                  "transform-origin": "50% 50%",
-                  transform: "rotate(" + rotationAngle + "deg)",
-                },
-                src:
-                  "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
-                  moonName +
-                  ".svg",
-              })
+              ".level-item",
+              dom.textNode(data.current.pressure + "hBar")
             ),
-
-            dom.div(
-              ".level is-mobile",
-              { style: { width: "min-content", margin: "auto" } },
-              dom.div(".level-item", dom.textNode(data.current.humidity + "%")),
-              dom.img(".level-item", {
-                style: { height: "3rem" },
-                src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/humidity.svg",
-              })
-            ),
-
-            dom.div(
-              ".level is-mobile",
-              { style: { width: "min-content", margin: "auto" } },
-              dom.div(
-                ".level-item",
-                dom.textNode(data.current.pressure + "hBar")
-              ),
-              dom.img(".level-item", {
-                style: { height: "3rem" },
-                src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/barometer.svg",
-              })
-            )
+            dom.img(".level-item", {
+              style: { height: "3rem" },
+              src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/barometer.svg",
+            })
           )
         )
       ),
 
-      dom.div(".level-right", divChart)
+      dom.div(
+        ".level-right",
+        { style: { maxWidth: "50%", margin: "auto" } },
+        divChart
+      )
     );
 
     section.appendChild(divCurrent);
