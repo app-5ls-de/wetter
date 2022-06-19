@@ -1239,9 +1239,19 @@ function createCurrentSection() {
         ],
         chart: {
           type: "bar",
-          sparkline: {
-            enabled: true,
+          toolbar: {
+            show: false,
           },
+          zoom: {
+            enabled: false,
+          },
+          animations: {
+            enabled: false,
+          },
+        },
+        //aspectRatio: 1.61 * 2,
+        dataLabels: {
+          enabled: false,
         },
         plotOptions: {
           bar: {
@@ -1249,12 +1259,42 @@ function createCurrentSection() {
             columnWidth: "100%",
           },
         },
+        grid: {
+          show: false,
+        },
+        xaxis: {
+          show: false,
+          type: "numeric",
+          labels: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+        },
         yaxis: {
-          max: maxPrecipitation,
+          show: false,
           min: 0,
+          max: maxPrecipitation,
+          labels: {
+            show: false,
+          },
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+          },
         },
         tooltip: {
-          enabled: false,
+          shared: false,
+          intersect: true,
+          x: {
+            show: false,
+          },
+        },
+        legend: {
+          show: false,
         },
       });
       chart.render();
