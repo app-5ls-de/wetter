@@ -275,7 +275,7 @@ function createCityBox(place) {
                     size: size.toFixed(2),
                   },
                 },
-                dom.span(".tooltip", "in " + i + "min (mm/h)")
+                dom.span(".tooltip", "in " + i + "min")
               )
             : undefined
         );
