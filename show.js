@@ -471,8 +471,8 @@ function createDaysSection() {
               { style: { margin: "auto" } },
               dom(
                 getWindIcon(
-                  msToBeaufort(openweathermapData.current.wind_speed),
-                  openweathermapData.current.wind_deg + 180
+                  msToBeaufort(dayData.wind_speed),
+                  dayData.wind_deg + 180
                 ),
                 ".level-item",
                 { style: { width: "3rem" } }
