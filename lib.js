@@ -16,11 +16,12 @@ async function fetch_json(url) {
   return data;
 }
 
-function Place(name, countryCode, lat, lon) {
+function Place(name, countryCode, lat, lon, isGeolocation = false) {
   this.name = name;
   this.countryCode = countryCode;
   this.lat = lat;
   this.lon = lon;
+  this.isGeolocation = isGeolocation;
 }
 
 const msToBeaufort = (ms) => Math.round(Math.cbrt(Math.pow(ms / 0.836, 2)));
@@ -221,6 +222,29 @@ const getWindIcon = (beaufort, wind_deg) =>
       "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/wind-beaufort-" +
       beaufort +
       ".svg",
+  });
+
+const formatMeter = (number) =>
+  Math.abs(number) >= 1000
+    ? Number.parseFloat((number / 1000).toPrecision(2)) + "km"
+    : Number.parseFloat(number.toPrecision(2)) + "m";
+
+const getGeolocation = () =>
+  new Promise((resolve, reject) => {
+    if (!navigator.geolocation) reject("Geolocation not supported");
+    navigator.geolocation.getCurrentPosition(
+      (position) =>
+        resolve(
+          new Place(
+            lang == "de" ? "Deine Position" : "Your position",
+            "±" + formatMeter(Math.max(position.coords.accuracy, 1100)), // coordinates rounded to second decimal are accurate to 1.1km
+            Math.round(position.coords.latitude * 100) / 100,
+            Math.round(position.coords.longitude * 100) / 100,
+            true
+          )
+        ),
+      reject
+    );
   });
 
 // Code execution
