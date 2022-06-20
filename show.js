@@ -316,7 +316,7 @@ function createDaysSection() {
             .slice()
             .reverse()
             .findIndex((dt) => new Date(dt * 1000).getDate() == dayString);
-        const hasMoreData = index_stop - index_start < 24;
+        const hasMoreData = index_stop - index_start >= 24;
 
         const rainData = zip(
           openMeteoData.hourly.precipitation,
@@ -435,11 +435,11 @@ function createDaysSection() {
           },
         });
         const btnExpand = hasMoreData
-          ? null
-          : dom.button(
+          ? dom.button(
               ".level-item level-right is-narrow p-1 button is-white",
               imgExpand
-            );
+            )
+          : null;
         const divCharts = dom.div();
 
         const divDay = dom.div(
