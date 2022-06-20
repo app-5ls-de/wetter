@@ -17,5 +17,4 @@ tasks:
 
   - publish: |
       . ~/.surgesecrets
-      sed -i -e "s/\./-/g" -e "1 s/$/\.surge\.sh/" CNAME
-      surge --project $site
+      surge --project $site --domain $(echo $site | sed -e "s/\./-/g" -e "1 s/$/\.surge\.sh/")
