@@ -1315,8 +1315,18 @@ if (!place) {
 document.title = place.name + " - " + document.title;
 document.getElementById("title").innerText = place.name;
 
-const promiseOpenweathermap = openweathermap(place);
-const promiseOpenMeteo = openMeteo(place);
+  promiseOpenMeteo.then((data) => {
+    if (!place.elevation) {
+      place.elevation = data.elevation;
+      savePlaces();
+    }
+  });
+  promiseOpenweathermap.then((data) => {
+    if (!place.timezone) {
+      place.timezone = data.timezone;
+      savePlaces();
+    }
+  });
 
 createCurrentSection();
 
