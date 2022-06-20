@@ -13,10 +13,9 @@ tasks:
       fi
 
   - install: |
-      sudo npm install --loglevel=error --global surge
+      sudo npm install --loglevel=error --no-audit --progress=false --global surge
 
   - publish: |
       . ~/.surgesecrets
-      cd $site/_site/
       sed -i -e "s/\./-/g" -e "1 s/$/\.surge\.sh/" CNAME
-      surge --project .
+      surge --project $site
