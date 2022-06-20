@@ -286,8 +286,7 @@ function createCityBox(place) {
   });
 }
 
-// Code execution
-
+// Code execution starts here
 if (lang == "de") {
   divModal.getElementsByClassName("title")[0].innerText = "Wetter";
   divSearchInput.placeholder = "Suchen um hinzuzufügen";
@@ -306,8 +305,6 @@ document.addEventListener("keydown", (e) => {
     closeModal();
   }
 });
-
-createAllWidgets();
 
 if (!places.length) {
   const divColumn = dom.div(
@@ -349,3 +346,8 @@ Sortable.create(divPlacesList, {
     savePlaces();
   },
 });
+
+async function main() {
+  createAllWidgets();
+}
+main();

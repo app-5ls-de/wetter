@@ -1308,12 +1308,17 @@ updateLastUpdate();
 const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
 // TODO: name is not unique
 
-if (!place) {
-  // TODO: use user location
-  location.href = "index.html";
-}
 document.title = place.name + " - " + document.title;
 document.getElementById("title").innerText = place.name;
+
+const promiseOpenweathermap = openweathermap(place);
+const promiseOpenMeteo = openMeteo(place);
+
+async function main() {
+  if (!place) {
+    // TODO: use user location
+    location.href = "index.html";
+  }
 
   promiseOpenMeteo.then((data) => {
     if (!place.elevation) {
@@ -1328,12 +1333,11 @@ document.getElementById("title").innerText = place.name;
     }
   });
 
-createCurrentSection();
+  createCurrentSection();
 
-createDaysSection();
-createForecastHourlySection();
+  createDaysSection();
+  createForecastHourlySection();
 
-Promise.allSettled([promiseOpenweathermap, promiseOpenMeteo]).then(() => {
   // TODO: add rainviewer rain radar map
   // TODO: load rain radar map only if rain in next 60min
   if (!debug) createMeteoblueSection();
@@ -1351,7 +1355,9 @@ Promise.allSettled([promiseOpenweathermap, promiseOpenMeteo]).then(() => {
 
   // TODO: add meteoblue images to make transition from v1 easier
 
+  await Promise.allSettled([promiseOpenweathermap, promiseOpenMeteo]);
   if (!debug) createEcmwfSection();
-});
 
-// TODO: comment code better
+  // TODO: comment code better
+}
+main();
