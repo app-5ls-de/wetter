@@ -16,18 +16,18 @@ function createSunPathSection() {
   const sunTimes = SunCalc.getTimes(new Date(), place.lat, place.lon);
   const { summerSolstice, winterSolstice } = getSolsticeDays();
 
-  const altitudesSummerSolstice = solarAltitude(summerSolstice).map(
-    ({ altitude, seconds }) => ({
-      x: seconds,
-      y: altitude,
-    })
-  );
-  const altitudesWinterSolstice = solarAltitude(winterSolstice).map(
-    ({ altitude, seconds }) => ({
-      x: seconds,
-      y: altitude,
-    })
-  );
+  const altitudesSummerSolstice = summerSolstice
+    ? solarAltitude(summerSolstice).map(({ altitude, seconds }) => ({
+        x: seconds,
+        y: altitude,
+      }))
+    : [];
+  const altitudesWinterSolstice = winterSolstice
+    ? solarAltitude(winterSolstice).map(({ altitude, seconds }) => ({
+        x: seconds,
+        y: altitude,
+      }))
+    : [];
 
   const range = altitudesToday.reduce(
     ([min, max], { y }) => [Math.min(min, y), Math.max(max, y)],
@@ -199,6 +199,9 @@ function getSolsticeDays(year = new Date(), lat = place.lat, lon = place.lon) {
 
     addDays(loop, 1);
   }
+
+  // this doesn't work for point in the Tropical circles
+  if (lat < 24) summerSolsticeDay = null;
 
   return {
     summerSolstice: summerSolsticeDay,
