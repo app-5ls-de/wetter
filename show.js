@@ -963,76 +963,24 @@ function multiChart(
     else return 31; */
   }
 
-  const backgroundGradientCloudsHigh =
-    "linear-gradient(90deg, " +
-    cloudsHighData
-      .map(
-        (value, i, arr) =>
-          "hsl(0deg 0% " +
-          convertCloudValue(value).toFixed(1) +
-          "%) " +
-          ((i / arr.length) * 100).toFixed(1) +
-          "%"
-      )
-      .join(", ") +
-    ")";
-  dom(divChartCloudsHigh, {
-    style: {
-      height: "2rem",
-      marginLeft: "2.5rem",
-      marginRight: "0.5rem",
-      marginBottom: "0.5rem",
-      borderRadius: "0.7rem",
-      background: backgroundGradientCloudsHigh,
-    },
-  });
-
-  const backgroundGradientCloudsMid =
-    "linear-gradient(90deg, " +
-    cloudsMidData
-      .map(
-        (value, i, arr) =>
-          "hsl(0deg 0% " +
-          convertCloudValue(value).toFixed(1) +
-          "%) " +
-          ((i / arr.length) * 100).toFixed(1) +
-          "%"
-      )
-      .join(", ") +
-    ")";
-  dom(divChartCloudsMid, {
-    style: {
-      height: "2rem",
-      marginLeft: "2.5rem",
-      marginRight: "0.5rem",
-      marginBottom: "0.5rem",
-      borderRadius: "0.7rem",
-      background: backgroundGradientCloudsMid,
-    },
-  });
-
-  const backgroundGradientCloudsLow =
-    "linear-gradient(90deg, " +
-    cloudsLowData
-      .map(
-        (value, i, arr) =>
-          "hsl(0deg 0% " +
-          convertCloudValue(value).toFixed(1) +
-          "%) " +
-          ((i / arr.length) * 100).toFixed(1) +
-          "%"
-      )
-      .join(", ") +
-    ")";
-  dom(divChartCloudsLow, {
-    style: {
-      height: "2rem",
-      marginLeft: "2.5rem",
-      marginRight: "0.5rem",
-      borderRadius: "0.7rem",
-      background: backgroundGradientCloudsLow,
-    },
-  });
+  barChart(
+    cloudsHighData.map(
+      (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
+    ),
+    divChartCloudsHigh
+  );
+  barChart(
+    cloudsMidData.map(
+      (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
+    ),
+    divChartCloudsMid
+  );
+  barChart(
+    cloudsLowData.map(
+      (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
+    ),
+    divChartCloudsLow
+  );
 
   return {
     elements: [divTemp, divClouds, divRain],
@@ -1045,6 +993,29 @@ function multiChart(
       chartRain.destroy();
     },
   };
+}
+
+function barChart(data, div = dom.div()) {
+  const backgroundGradient =
+    "linear-gradient(90deg, " +
+    data
+      .map(
+        (value, i, arr) =>
+          value + " " + ((i / arr.length) * 100).toFixed(1) + "%"
+      )
+      .join(", ") +
+    ")";
+  dom(div, {
+    style: {
+      height: "2rem",
+      marginLeft: "2.5rem",
+      marginRight: "0.5rem",
+      marginBottom: "0.5rem",
+      borderRadius: "0.7rem",
+      background: backgroundGradient,
+    },
+  });
+  return div;
 }
 
 function createForecastHourlySection() {
