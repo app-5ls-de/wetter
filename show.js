@@ -1332,6 +1332,10 @@ async function main() {
   createCurrentSection();
 
   createDaysSection();
+  divMain.appendChild(
+    dom.section(".section", dom.h2(".subtitle is-2", "Next 48h"))
+  );
+
   createForecastHourlySection();
 
   // TODO: add rainviewer rain radar map
