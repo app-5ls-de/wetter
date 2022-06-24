@@ -1295,20 +1295,30 @@ function createCurrentSection() {
 // Code execution starts here
 updateLastUpdate();
 
-const place = getPlaceByName(new URL(location.href).searchParams.get("place"));
+var place;
 // TODO: name is not unique
 
-document.title = place.name + " - " + document.title;
-document.getElementById("title").innerText = place.name;
-
-const promiseOpenweathermap = openweathermap(place);
-const promiseOpenMeteo = openMeteo(place);
+const promiseOpenweathermap = new Deferred();
+const promiseOpenMeteo = new Deferred();
 
 async function main() {
+  const URLplaceParameter = new URL(location.href).searchParams.get("place");
+  place = getPlaceByName(URLplaceParameter);
   if (!place) {
-    // TODO: use user location
-    location.href = "index.html";
+    if (URLplaceParameter) location.href = "/";
+
+    try {
+      place = await getGeolocation();
+    } catch (e) {
+      location.href = "/";
+    }
   }
+
+  document.title = place.name + " - " + document.title;
+  document.getElementById("title").innerText = place.name;
+
+  promiseOpenweathermap.setPromise(openweathermap(place));
+  promiseOpenMeteo.setPromise(openMeteo(place));
 
   promiseOpenMeteo.then((data) => {
     if (!place.elevation) {
