@@ -1049,14 +1049,33 @@ function createForecastHourlySection() {
         compact: true,
       }
     );
+    const divUV = dom.div();
     dom(
       section,
       charts.elements,
       dom.div(
         { style: { position: "relative" } },
-        dom.p(".chart-label", "UV")
+        dom.p(".chart-label", "UV"),
+        divUV
       )
     );
+
+    const uvColor = (uv) =>
+      uv < 3
+        ? "rgba(0,0,0,0)" //"#449512"
+        : uv < 6
+        ? "#f7e53d"
+        : uv < 8
+        ? "#f75c38"
+        : uv < 11
+        ? "#d9362f"
+        : "#6e5cc8";
+
+    barChart(
+      openweathermapData.hourly.map((hour) => uvColor(hour.uvi)),
+      divUV
+    );
+
     charts.render();
   });
 }
