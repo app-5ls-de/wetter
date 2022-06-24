@@ -1031,49 +1031,34 @@ function createForecastHourlySection() {
 
   divMain.appendChild(section);
 
-  Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
-    ([openweathermapData, openMeteoData]) => {
-      const rainData = openweathermapData.hourly.map((hour) => ({
-        x: hour.dt * 1000,
-        y: hour.rain?.["1h"],
-      }));
+  promiseOpenweathermap.then((openweathermapData) => {
+    const feelslikeTempData = openweathermapData.hourly.map((hour) => ({
+      x: hour.dt * 1000,
+      y: hour.feels_like,
+    }));
 
-      const tempData = openweathermapData.hourly.map((hour) => ({
-        x: hour.dt * 1000,
-        y: hour.temp,
-      }));
+    const cloudData = openweathermapData.hourly.map((hour) => hour.clouds);
 
-      const index_start = openMeteoData.hourly.time.findIndex(
-        (dt) => dt * 1000 >= rainData[0].x
-      );
-      const index_stop = openMeteoData.hourly.time.findIndex(
-        (dt) => dt * 1000 >= rainData[rainData.length - 1].x
-      );
-
-      const cloudsHighData = openMeteoData.hourly.cloudcover_high.slice(
-        index_start,
-        index_stop + 1
-      );
-      const cloudsMidData = openMeteoData.hourly.cloudcover_mid.slice(
-        index_start,
-        index_stop + 1
-      );
-      const cloudsLowData = openMeteoData.hourly.cloudcover_low.slice(
-        index_start,
-        index_stop + 1
-      );
-
-      const charts = multiChart(
-        tempData,
-        cloudsHighData,
-        cloudsMidData,
-        cloudsLowData,
-        rainData
-      );
-      dom(section, charts.elements);
-      charts.render();
-    }
-  );
+    const charts = multiChart(
+      feelslikeTempData,
+      cloudData,
+      null,
+      null,
+      [], // no rain
+      {
+        compact: true,
+      }
+    );
+    dom(
+      section,
+      charts.elements,
+      dom.div(
+        { style: { position: "relative" } },
+        dom.p(".chart-label", "UV")
+      )
+    );
+    charts.render();
+  });
 }
 
 function createCurrentSection() {
