@@ -6,6 +6,14 @@ const divSearchInput = dom("#search-input");
 const divModal = dom("#modal");
 const buttonModalOpen = dom("#modal-open");
 
+var settings = Object.assign(
+  {
+    // default values
+    showLocation: true,
+  },
+  JSON.parse(localStorage.getItem("settings"))
+);
+
 function createAllWidgets() {
   divPlacesList.textContent = "";
   divCities.textContent = "";
@@ -66,6 +74,8 @@ function closeModal() {
   divSearchResults.textContent = "";
   divSearchInput.value = "";
   createAllWidgets();
+
+  localStorage.setItem("settings", JSON.stringify(settings));
 }
 
 const searchAndDisplay = debounce(_searchAndDisplay, 300);
