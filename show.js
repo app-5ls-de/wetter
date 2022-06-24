@@ -676,28 +676,31 @@ function multiChart(
         fillColor: "#e8ec68",
       };
     }),
-
-    // show date on the top of each day
-    ...dates
-      .map((date) => ({
-        x: new Date(date).setHours(12, 0, 0, 0),
-        borderColor: "rgba(0,0,0,0);",
-        label: {
-          borderColor: "white",
-          orientation: "horizontal",
-          text:
-            new Date(date).toLocaleDateString([], { weekday: "short" }) +
-            " " +
-            new Date(date).getDate(),
-        },
-      }))
-      .filter(
-        // dont show date if is not in the visible range
-        (annotation) =>
-          annotation.x > tempData[0].x &&
-          annotation.x < tempData[tempData.length - 1].x
-      ),
   ];
+
+  if (dates.length > 2)
+    annotationsXaxis.push(
+      // show date on the top of each day
+      ...dates
+        .map((date) => ({
+          x: new Date(date).setHours(12, 0, 0, 0),
+          borderColor: "rgba(0,0,0,0);",
+          label: {
+            borderColor: "white",
+            orientation: "horizontal",
+            text:
+              new Date(date).toLocaleDateString([], { weekday: "short" }) +
+              " " +
+              new Date(date).getDate(),
+          },
+        }))
+        .filter(
+          // dont show date if is not in the visible range
+          (annotation) =>
+            annotation.x > tempData[0].x &&
+            annotation.x < tempData[tempData.length - 1].x
+        )
+    );
 
   if (
     new Date() > tempData[1].x &&
