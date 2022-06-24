@@ -36,6 +36,19 @@ function Place(
   this.isGeolocation = isGeolocation;
   this.options = { name, countryCode, timezone, elevation, isGeolocation };
 }
+
+class Deferred {
+  constructor() {
+    this.promise = new Promise((resolve, reject) => {
+      this.reject = reject;
+      this.resolve = resolve;
+    });
+    this.then = (func) => this.promise.then(func);
+    this.catch = (func) => this.promise.catch(func);
+    this.finally = (func) => this.promise.finally(func);
+    this.setPromise = (promise) =>
+      promise.then(this.resolve).catch(this.reject);
+  }
 }
 
 const msToBeaufort = (ms) => Math.round(Math.cbrt(Math.pow(ms / 0.836, 2)));
