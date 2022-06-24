@@ -1253,17 +1253,18 @@ function createCurrentSection() {
           show: false,
           min: 0,
           max: maxPrecipitation,
-          labels: {
+          /* labels: {
             show: false,
-          },
-          axisTicks: {
+          }, */
+          /*  axisTicks: {
             show: false,
-          },
+          }, */
           axisBorder: {
             show: false,
           },
         },
         tooltip: {
+          show: false,
           shared: false,
           intersect: true,
           x: {
