@@ -11,6 +11,10 @@
     />
     <link
       rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma-switch@2.0.4/dist/css/bulma-switch.min.css"
+    />
+    <link
+      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"
     />
     <link rel="stylesheet" href="/style.css" />
@@ -43,6 +47,19 @@
 
       <div class="modal-content">
         <div class="box">
+          <section class="section">
+            <h1 class="title">Settings</h1>
+            <div class="block container">
+              <div class="field">
+                <input
+                  id="switch-geolocation"
+                  type="checkbox"
+                  class="switch is-rounded is-outlined"
+                />
+                <label for="switch-geolocation">show current postion</label>
+              </div>
+            </div>
+          </section>
           <section class="section">
             <h1 class="title">Cities</h1>
             <div class="block list-group" id="places-list"></div>

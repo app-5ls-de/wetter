@@ -359,6 +359,20 @@ Sortable.create(divPlacesList, {
   },
 });
 
+dom(
+  "#switch-geolocation",
+  (thisEl) => {
+    thisEl.checked = settings.showLocation;
+  },
+  {
+    on: {
+      change: function () {
+        settings.showLocation = this.checked;
+        localStorage.setItem("settings", JSON.stringify(settings));
+      },
+    },
+  }
+);
 async function main() {
   createAllWidgets();
 }
