@@ -179,7 +179,10 @@ const debounce = (func, delay) => {
 };
 
 function savePlaces() {
-  localStorage.setItem("places", JSON.stringify(places));
+  localStorage.setItem(
+    "places",
+    JSON.stringify(places.filter((place) => !place.isGeolocation))
+  );
 }
 
 Place.prototype.toJSON = function () {
@@ -194,9 +197,20 @@ Place.prototype.toJSON = function () {
 function loadPlaces() {
   if (localStorage.getItem("places")) {
     const placesJSON = JSON.parse(localStorage.getItem("places")) ?? [];
-    places = placesJSON.map(
-      (place) => new Place(place.lat, place.lon, place.name, place.options)
-    );
+    places = placesJSON
+      .filter(
+        (place) =>
+          typeof place.lat === "number" &&
+          isFinite(place.lat) &&
+          typeof place.lon === "number" &&
+          isFinite(place.lon) &&
+          typeof place.name === "string" &&
+          place.name.length > 0 &&
+          typeof place.options === "object"
+      )
+      .map(
+        (place) => new Place(place.lat, place.lon, place.name, place.options)
+      );
   } else {
     places = [];
   }
