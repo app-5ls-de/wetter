@@ -612,7 +612,8 @@ function multiChart(
   cloudsHighData,
   cloudsMidData,
   cloudsLowData,
-  rainData
+  rainData,
+  { compact = false } = {}
 ) {
   // TODO: show wind data and rain in one combined chart
   // TODO: fix color gradient: use true range of data not max-min of axis
@@ -620,7 +621,10 @@ function multiChart(
   const divChartTemp = dom.div();
   const divTemp = dom.div(
     { style: { position: "relative" } },
-    dom.p(".chart-label", "Temperature (°C)"),
+    dom.p(
+      ".chart-label",
+      (compact ? "Feels-like Temperature" : "Temperature") + " (°C)"
+    ),
     divChartTemp
   );
 
@@ -636,7 +640,7 @@ function multiChart(
   const divChartCloudsLow = dom.div();
   const divClouds = dom.div(
     { style: { position: "relative" } },
-    dom.p(".chart-label", "Cloudcover"),
+    dom.p(".chart-label", cloudsLowData ? "Cloudcover" : "Clouds"),
     divChartCloudsHigh,
     divChartCloudsMid,
     divChartCloudsLow
@@ -799,6 +803,7 @@ function multiChart(
         enabled: false,
       },
     },
+    aspectRatio: compact ? 1.61 * 2 : 1.61,
     dataLabels: {
       enabled: false,
     },
@@ -963,24 +968,27 @@ function multiChart(
     else return 31; */
   }
 
-  barChart(
-    cloudsHighData.map(
-      (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
-    ),
-    divChartCloudsHigh
-  );
-  barChart(
-    cloudsMidData.map(
-      (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
-    ),
-    divChartCloudsMid
-  );
-  barChart(
-    cloudsLowData.map(
-      (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
-    ),
-    divChartCloudsLow
-  );
+  if (cloudsHighData)
+    barChart(
+      cloudsHighData.map(
+        (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
+      ),
+      divChartCloudsHigh
+    );
+  if (cloudsMidData)
+    barChart(
+      cloudsMidData.map(
+        (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
+      ),
+      divChartCloudsMid
+    );
+  if (cloudsLowData)
+    barChart(
+      cloudsLowData.map(
+        (value) => "hsl(0deg 0% " + convertCloudValue(value).toFixed(1) + "%) "
+      ),
+      divChartCloudsLow
+    );
 
   return {
     elements: [divTemp, divClouds, divRain],
