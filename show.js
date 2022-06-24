@@ -1320,18 +1320,14 @@ async function main() {
   promiseOpenweathermap.setPromise(openweathermap(place));
   promiseOpenMeteo.setPromise(openMeteo(place));
 
-  promiseOpenMeteo.then((data) => {
-    if (!place.elevation) {
-      place.elevation = data.elevation;
+  Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
+    ([openweathermapData, openMeteoData]) => {
+      if (!place.timezone) place.timezone = openweathermapData.timezone;
+      if (!place.elevation) place.elevation = openMeteoData.elevation;
+
       savePlaces();
     }
-  });
-  promiseOpenweathermap.then((data) => {
-    if (!place.timezone) {
-      place.timezone = data.timezone;
-      savePlaces();
-    }
-  });
+  );
 
   createCurrentSection();
 
