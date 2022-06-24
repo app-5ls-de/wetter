@@ -14,9 +14,19 @@ var settings = Object.assign(
   JSON.parse(localStorage.getItem("settings"))
 );
 
-function createAllWidgets() {
+async function createAllWidgets() {
   divPlacesList.textContent = "";
   divCities.textContent = "";
+
+  if (settings.showLocation) {
+    try {
+      const location = await getGeolocation();
+      createCityBox(location);
+    } catch (e) {
+      settings.showLocation = false;
+      localStorage.setItem("settings", JSON.stringify(settings));
+    }
+  }
 
   for (const place of places) {
     createPlaceModalItem(place);
@@ -169,7 +179,9 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
 }
 
 function createCityBox(place) {
-  const divBox = dom.a(".box city p-0", { href: "/show?place=" + place.name });
+  const divBox = dom.a(".box city p-0", {
+    href: "/show" + (place.isGeolocation ? "" : "?place=" + place.name),
+  });
   const divColumn = dom.div(".column is-one-quarter", divBox);
   divCities.appendChild(divColumn);
 
@@ -187,7 +199,7 @@ function createCityBox(place) {
         ),
         dom.sup(
           // TODO: only show if not all places have same country code
-          ".is-size-7 mb-4 is-uppercase",
+          ".is-size-7 mb-4",
           dom.textNode(place.countryCode)
         )
       )
