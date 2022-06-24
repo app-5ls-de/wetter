@@ -16,12 +16,26 @@ async function fetch_json(url) {
   return data;
 }
 
-function Place(name, countryCode, lat, lon, isGeolocation = false) {
+function Place(
+  lat,
+  lon,
+  name,
+  {
+    countryCode = "",
+    timezone = "Europe/Berlin",
+    elevation = 0,
+    isGeolocation = false,
+  } = {}
+) {
   this.name = name;
   this.countryCode = countryCode;
   this.lat = lat;
   this.lon = lon;
+  this.timezone = timezone;
+  this.elevation = elevation;
   this.isGeolocation = isGeolocation;
+  this.options = { name, countryCode, timezone, elevation, isGeolocation };
+}
 }
 
 const msToBeaufort = (ms) => Math.round(Math.cbrt(Math.pow(ms / 0.836, 2)));
@@ -168,11 +182,20 @@ function savePlaces() {
   localStorage.setItem("places", JSON.stringify(places));
 }
 
+Place.prototype.toJSON = function () {
+  return {
+    lat: this.lat,
+    lon: this.lon,
+    name: this.name,
+    options: this.options,
+  };
+};
+
 function loadPlaces() {
   if (localStorage.getItem("places")) {
     const placesJSON = JSON.parse(localStorage.getItem("places")) ?? [];
     places = placesJSON.map(
-      (place) => new Place(place.name, place.countryCode, place.lat, place.lon)
+      (place) => new Place(place.lat, place.lon, place.name, place.options)
     );
   } else {
     places = [];
@@ -236,11 +259,14 @@ const getGeolocation = () =>
       (position) =>
         resolve(
           new Place(
-            lang == "de" ? "Deine Position" : "Your position",
-            "±" + formatMeter(Math.max(position.coords.accuracy, 1100)), // coordinates rounded to second decimal are accurate to 1.1km
             Math.round(position.coords.latitude * 100) / 100,
             Math.round(position.coords.longitude * 100) / 100,
-            true
+            lang == "de" ? "Deine Position" : "Your position",
+            {
+              countryCode:
+                "±" + formatMeter(Math.max(position.coords.accuracy, 1000)), // coordinates rounded to second decimal are accurate to 1.1km
+              isGeolocation: true,
+            }
           )
         ),
       reject

@@ -119,10 +119,12 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
             on: {
               click: () => {
                 const place = new Place(
-                  element.properties.name,
-                  element.properties.countrycode,
                   element.geometry.coordinates[1], // lat
-                  element.geometry.coordinates[0] //  lon
+                  element.geometry.coordinates[0], //  lon
+                  element.properties.name,
+                  {
+                    countryCode: element.properties.countrycode.toUpperCase(),
+                  }
                 );
 
                 places.push(place);
