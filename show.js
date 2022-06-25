@@ -440,12 +440,11 @@ function createDaysSection() {
             },
           },
         });
-        const btnExpand = hasMoreData
-          ? dom.button(
-              ".level-item level-right is-narrow p-1 button is-white",
-              imgExpand
-            )
-          : null;
+        const btnExpand = dom.button(
+          ".level-item level-right is-narrow p-1 button is-white",
+          hasMoreData ? null : ".is-invisible", // hide button, but keep the space
+          imgExpand
+        );
         const divCharts = dom.div();
 
         const divDay = dom.div(
