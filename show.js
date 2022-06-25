@@ -1315,13 +1315,12 @@ function createCurrentSection() {
 updateLastUpdate();
 
 var place;
-// TODO: name is not unique
 
 const promiseOpenweathermap = new Deferred();
 const promiseOpenMeteo = new Deferred();
 
 async function main() {
-  const URLplaceParameter = new URL(location.href).searchParams.get("place");
+  const URLplaceParameter = new URL(location.href).searchParams.get("place"); // TODO: name is not unique
   place = getPlaceByName(URLplaceParameter);
   if (!place) {
     if (URLplaceParameter) location.href = "/";
