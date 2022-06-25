@@ -198,8 +198,9 @@ function createCityBox(place) {
           ".is-size-5 has-text-grey",
           dom.textNode(place.name) //TODO: fix long names (https://dev.to/jankapunkt/make-text-fit-it-s-parent-size-using-javascript-m40)
         ),
-        (place.isGeolocation ||
-          new Set(places.map((p) => p.countryCode)).size > 1) && // only show if not all places have same country code
+        place.countryCode &&
+          (place.isGeolocation ||
+            new Set(places.map((p) => p.countryCode)).size > 1) && // only show if not all places have same country code
           dom.sup(".is-size-7 mb-4", dom.textNode(place.countryCode))
       )
     );

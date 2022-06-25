@@ -291,7 +291,9 @@ const getGeolocation = () =>
             lang == "de" ? "Deine Position" : "Your position",
             {
               countryCode:
-                "±" + formatMeter(Math.max(position.coords.accuracy, 1000)), // coordinates rounded to second decimal are accurate to 1.1km
+                position.coords.accuracy < 1000
+                  ? ""
+                  : "±" + formatMeter(Math.max(position.coords.accuracy, 1000)), // coordinates rounded to second decimal are accurate to 1.1km
               isGeolocation: true,
             }
           )
