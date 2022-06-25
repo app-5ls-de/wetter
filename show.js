@@ -617,6 +617,7 @@ function multiChart(
   rainData,
   { compact = false } = {}
 ) {
+  // TODO: show half of the labels if screen is too small
   // TODO: show wind data and rain in one combined chart
   // TODO: fix color gradient: use true range of data not max-min of axis
 
