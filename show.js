@@ -869,6 +869,14 @@ function multiChart(
     legend: {
       show: false,
     },
+    responsive: [
+      {
+        breakpoint: 768,
+        options: {
+          aspectRatio: 1.61,
+        },
+      },
+    ],
   });
 
   // TODO: show temperature at extremes as annotations
@@ -952,6 +960,14 @@ function multiChart(
       legend: {
         show: false,
       },
+      responsive: [
+        {
+          breakpoint: 768,
+          options: {
+            aspectRatio: 1.61,
+          },
+        },
+      ],
     });
   }
 
