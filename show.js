@@ -1,4 +1,7 @@
 const divMain = dom("#main");
+
+const settings = JSON.parse(localStorage.getItem("settings"));
+
 // TODO: sort all function in a more logical way
 
 function createSunPathSection() {
@@ -1340,7 +1343,6 @@ async function main() {
 
   // TODO: add rainviewer rain radar map
   // TODO: load rain radar map only if rain in next 60min
-  if (!debug) createMeteoblueSection();
 
   divMain.appendChild(
     dom.section(
@@ -1355,8 +1357,8 @@ async function main() {
 
   // TODO: add meteoblue images to make transition from v1 easier
 
-  await Promise.allSettled([promiseOpenweathermap, promiseOpenMeteo]);
-  if (!debug) createEcmwfSection();
+  if (settings.showBandwidthHeavyWidgets) createMeteoblueSection();
+  if (settings.showBandwidthHeavyWidgets) createEcmwfSection();
 
   // TODO: comment code better
 }

@@ -10,6 +10,7 @@ var settings = Object.assign(
   {
     // default values
     showLocation: true,
+    showBandwidthHeavyWidgets: window.innerWidth > 768, // simple way to detect if user is on a mobile device, this does't need to be accurate
   },
   JSON.parse(localStorage.getItem("settings"))
 );
@@ -385,6 +386,22 @@ dom(
     },
   }
 );
+
+dom(
+  "#switch-bandwidthHeavy",
+  (thisEl) => {
+    thisEl.checked = settings.showBandwidthHeavyWidgets;
+  },
+  {
+    on: {
+      change: function () {
+        settings.showBandwidthHeavyWidgets = this.checked;
+        localStorage.setItem("settings", JSON.stringify(settings));
+      },
+    },
+  }
+);
+
 async function main() {
   createAllWidgets();
 }
