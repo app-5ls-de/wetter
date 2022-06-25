@@ -195,8 +195,15 @@ function createCityBox(place) {
       dom.h2(
         ".city-name level-item",
         dom.span(
-          ".is-size-5 has-text-grey",
-          dom.textNode(place.name) //TODO: fix long names (https://dev.to/jankapunkt/make-text-fit-it-s-parent-size-using-javascript-m40)
+          ".has-text-grey",
+          place.name.length < 20
+            ? ".is-size-5"
+            : place.name.length < 25
+            ? ".is-size-6"
+            : ".is-size-7",
+          dom.textNode(
+            place.name.length < 29 ? place.name : place.name.slice(0, 29) + "…"
+          )
         ),
         place.countryCode &&
           (place.isGeolocation ||
