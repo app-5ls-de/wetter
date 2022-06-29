@@ -227,6 +227,11 @@ function createCityBox(place) {
           weatherCondition +
           ".svg",
       }),
+      data.alerts?.length &&
+        dom.img(".city-icon2 level-item", {
+          style: { width: "3rem", left: "50%", transform: "translateX(-50%)" },
+          src: "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/code-yellow.svg",
+        }),
       dom(
         getWindIcon(
           msToBeaufort(data.current.wind_speed),
