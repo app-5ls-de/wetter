@@ -486,7 +486,7 @@ function createDaysSection() {
                 style: { width: "3rem" },
                 src:
                   "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
-                  Math.max(Math.round(dayData.uvi), 1) +
+                  Math.min(Math.max(Math.round(dayData.uvi), 1), 11) +
                   ".svg",
               }),
               dom.div(
@@ -1186,7 +1186,7 @@ function createCurrentSection() {
               style: { width: "3rem" },
               src:
                 "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/uv-index-" +
-                Math.max(Math.round(data.current.uvi), 1) +
+                Math.min(Math.max(Math.round(data.current.uvi), 1), 11) +
                 ".svg",
             }),
             dom.img(".level-item", {
