@@ -138,16 +138,6 @@ const openMeteoUseTimezone = async (place, openweathermapPromise) =>
   openMeteo(place, (await openweathermapPromise).timezone);
 
 async function openMeteo(place, timezoneForDaily) {
-  const cacheID =
-    cachePrefix +
-    "-openMeteo-" +
-    (timezoneForDaily ? "daily-" : "") +
-    place.lat +
-    "," +
-    place.lon;
-  if (localStorage.getItem(cacheID) && debug)
-    return JSON.parse(localStorage.getItem(cacheID));
-
   const timezone = timezoneForDaily || "Europe/London";
   const data = await fetch_json(
     "https://api.open-meteo.com/v1/forecast?windspeed_unit=ms&timeformat=unixtime&latitude=" +
@@ -164,7 +154,6 @@ async function openMeteo(place, timezoneForDaily) {
       "&current_weather=true"
   );
 
-  if (debug) localStorage.setItem(cacheID, JSON.stringify(data));
   return data;
 }
 
