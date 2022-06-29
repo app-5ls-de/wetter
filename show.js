@@ -1340,6 +1340,12 @@ async function main() {
 
   Promise.all([promiseOpenweathermap, promiseOpenMeteo]).then(
     ([openweathermapData, openMeteoData]) => {
+      updateLastUpdateIfOlder(new Date(openweathermapData.current.dt * 1000));
+      const openMeteoUpdateTime = openMeteoData.current_weather.time * 1000;
+      if (new Date() - openMeteoUpdateTime > 11 * relativeTime.UNITS.minute)
+        // openMeteo date it is only updated every 10min and the current section uses openweathermap anyway
+        updateLastUpdateIfOlder(new Date(openMeteoUpdateTime));
+
       if (!place.timezone) place.timezone = openweathermapData.timezone;
       if (!place.elevation) place.elevation = openMeteoData.elevation;
 

@@ -187,6 +187,7 @@ function createCityBox(place) {
   divCities.appendChild(divColumn);
 
   openweathermap(place).then((data) => {
+    updateLastUpdateIfOlder(new Date(data.current.dt * 1000));
     const divBlock = dom.div(".block pl-3 pr-3 m-0");
     divBox.appendChild(divBlock);
 

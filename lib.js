@@ -160,7 +160,8 @@ async function openMeteo(place, timezoneForDaily) {
         ? "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_hours"
         : "") +
       "&past_days=1&timezone=" +
-      timezone
+      timezone +
+      "&current_weather=true"
   );
 
   if (debug) localStorage.setItem(cacheID, JSON.stringify(data));
@@ -257,8 +258,16 @@ function showLastUpdate() {
   }
 }
 
-function updateLastUpdate() {
-  lastUpdateTime = new Date();
+function updateLastUpdate(updateTime = new Date()) {
+  if (!lastUpdateTime || updateTime > lastUpdateTime)
+    // only update if newer
+    lastUpdateTime = updateTime;
+  showLastUpdate();
+}
+function updateLastUpdateIfOlder(updateTime = new Date()) {
+  if (!lastUpdateTime || updateTime < lastUpdateTime)
+    // only update if older
+    lastUpdateTime = updateTime;
   showLastUpdate();
 }
 
