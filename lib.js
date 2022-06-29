@@ -134,28 +134,17 @@ async function openweathermapForecast(place) {
   return data;
 }
 
-const openMeteoUseTimezone = async (place, openweathermapPromise) =>
-  openMeteo(place, (await openweathermapPromise).timezone);
-
-async function openMeteo(place, timezoneForDaily) {
-  const timezone = timezoneForDaily || "Europe/London";
-  const data = await fetch_json(
+const openMeteo = (place) =>
+  fetch_json(
     "https://api.open-meteo.com/v1/forecast?windspeed_unit=ms&timeformat=unixtime&latitude=" +
       place.lat +
       "&longitude=" +
       place.lon +
       "&hourly=temperature_2m,precipitation,weathercode,cloudcover_low,cloudcover_mid,cloudcover_high,windspeed_10m,winddirection_10m,snow_depth" +
-      // daily weather is only available if timezone is set
-      (timezoneForDaily
-        ? "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_hours"
-        : "") +
-      "&past_days=1&timezone=" +
-      timezone +
+      "&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_hours&past_days=1&timezone=" +
+      place.timezone +
       "&current_weather=true"
   );
-
-  return data;
-}
 
 const mostCommon = (arr) =>
   Array.from(
