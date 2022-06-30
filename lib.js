@@ -37,6 +37,21 @@ function Place(
   this.options = { name, countryCode, timezone, elevation, isGeolocation };
 }
 
+function distance(place1, place2) {
+  const deg2rad = (deg) => deg * (Math.PI / 180);
+  const rEarth = 6371000; // radius of the earth in meter
+  const dLat = deg2rad(place2.lat - place1.lat);
+  const dLon = deg2rad(place2.lon - place1.lon);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.sin(dLon / 2) ** 2 *
+      Math.cos(deg2rad(place1.lat)) *
+      Math.cos(deg2rad(place2.lat));
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  const distance = rEarth * c;
+  return distance;
+}
+
 class Deferred {
   constructor() {
     this.promise = new Promise((resolve, reject) => {
