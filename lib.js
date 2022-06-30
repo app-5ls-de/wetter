@@ -25,6 +25,7 @@ function Place(
     timezone = "Europe/Berlin",
     elevation = 0,
     isGeolocation = false,
+    accuracy = 0,
   } = {}
 ) {
   this.name = name;
@@ -34,6 +35,7 @@ function Place(
   this.timezone = timezone;
   this.elevation = elevation;
   this.isGeolocation = isGeolocation;
+  this.accuracy = accuracy;
   this.options = { name, countryCode, timezone, elevation, isGeolocation };
 }
 
@@ -284,24 +286,26 @@ const formatMeter = (number) =>
 const getGeolocation = () =>
   new Promise((resolve, reject) => {
     if (!navigator.geolocation) reject("Geolocation not supported");
-    navigator.geolocation.getCurrentPosition(
-      (position) =>
-        resolve(
-          new Place(
-            Math.round(position.coords.latitude * 100) / 100,
-            Math.round(position.coords.longitude * 100) / 100,
-            lang == "de" ? "Deine Position" : "Your position",
-            {
-              countryCode:
-                position.coords.accuracy < 500
-                  ? ""
-                  : "±" + formatMeter(Math.max(position.coords.accuracy, 500)), // coordinates rounded to second decimal are accurate to 1.1km/2
-              isGeolocation: true,
-            }
-          )
-        ),
-      reject
-    );
+    navigator.geolocation.getCurrentPosition((position) => {
+      const roundedLat = Math.round(position.coords.latitude * 100) / 100;
+      const roundedLon = Math.round(position.coords.longitude * 100) / 100;
+      // coordinates rounded to second decimal are accurate to 1.1km/2
+      const accuracy = Math.max(
+        position.coords.accuracy,
+        distance(
+          { lat: roundedLat, lon: roundedLon },
+          { lat: position.coords.latitude, lon: position.coords.longitude }
+        )
+      );
+      resolve(
+        new Place(
+          roundedLat,
+          roundedLon,
+          lang == "de" ? "Deine Position" : "Your position",
+          { isGeolocation: true, accuracy }
+        )
+      );
+    }, reject);
   });
 
 // Code execution
