@@ -1326,6 +1326,176 @@ function createCurrentSection() {
   });
 }
 
+
+// TODO: unique id for each section
+
+function createAlertsSection() {
+  const section = dom.section(".section");
+  divMain.appendChild(section);
+
+  const formatShortDate = (date) =>
+    // check if it date is on the same day
+    [
+      date.toLocaleString("de-DE", { month: "short", day: "numeric" }),
+      // also check date minus one millisecond (midnight would count as next day otherwise)
+      new Date(+date - 1).toLocaleString("de-DE", {
+        month: "short",
+        day: "numeric",
+      }),
+    ].includes(
+      new Date().toLocaleString("de-DE", { month: "short", day: "numeric" })
+    )
+      ? date.toLocaleString("de-DE", {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      : date.toLocaleString("de-DE", {
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+
+  promiseOpenweathermap.then((data) => {
+    if (!data.alerts?.length) {
+      dom(section, ".is-hidden");
+      return;
+    }
+
+    data.alerts.forEach((alert) => {
+      const startDate = new Date(alert.start * 1000);
+      const endDate = new Date(alert.end * 1000);
+      const eventName = alert.event.toLowerCase();
+      const colorClass = eventName.includes("info")
+        ? ".is-dark"
+        : ["extreme", "severe", "schwer", "very heavy", "heftig"].some((a) =>
+            eventName.includes(a)
+          )
+        ? ".is-danger"
+        : ".is-warning";
+      // TODO: color of warning symbols on idex.html in same color
+
+      const alertIconsMap = {
+        Wind: ["windsock"],
+        Thunderstorm: ["wind-alert", "lightning-bolt"],
+        Flood: ["tide-high"],
+        Rain: ["raindrop-measure"],
+      };
+
+      dom(
+        section,
+        dom.article(
+          ".message",
+          colorClass,
+          dom.div(
+            ".message-header has-text",
+            dom.div(
+              ".level is-mobile",
+              { style: { width: "100%", flexWrap: "wrap" } },
+              dom.div(
+                ".level-item level-left",
+                { style: { hiteSpace: "break-spaces", maxWidth: "100%" } },
+                dom.textNode(alert.event)
+              ),
+              dom.div(
+                ".level-item level-right",
+                dom.textNode(formatShortDate(startDate)),
+                dom.div(
+                  ".is-inline has-text-grey mx-1",
+                  " (",
+                  dom.textNode(
+                    relativeTime(startDate, { options: { style: "short" } })
+                  ),
+                  ") "
+                ),
+                " ➔ ",
+                dom.textNode(formatShortDate(endDate)),
+                dom.div(
+                  ".is-inline has-text-grey mx-1",
+                  " (",
+                  dom.textNode(
+                    relativeTime(endDate, { options: { style: "short" } })
+                  ),
+                  ") "
+                )
+              )
+            )
+          ),
+          dom.div(
+            ".message-body",
+            dom.div(".block", alert.description),
+            dom.div(
+              ".level",
+              dom.div(
+                ".level-left",
+                dom.div(".level-item has-text-grey", alert.sender_name),
+
+                dom.div(
+                  ".level-item ml-5",
+                  { height: "1.5rem" },
+                  alert.tags.map((tag) =>
+                    alertIconsMap[tag].map((icon) =>
+                      dom.img({
+                        style: { height: "4rem" },
+                        src:
+                          "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+                          icon +
+                          ".svg",
+                      })
+                    )
+                  )
+                )
+              ),
+
+              dom.div(
+                ".level-left",
+                dom.div(
+                  ".tags",
+                  alert.tags.map((tag) =>
+                    dom.span(".tag is-rounded", colorClass, dom.textNode(tag))
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    });
+
+    if (data.alerts.length > 0 && false)
+      dom(
+        section,
+        dom.nav(
+          ".pagination is-centered is-rounded is-small",
+          {
+            role: "navigation",
+          },
+          dom.a(
+            ".pagination-previous",
+            //"Previous",
+            dom.img({
+              style: { height: "1rem" },
+              src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-back-outline.svg",
+            })
+          ),
+          dom.a(
+            ".pagination-next",
+            //"Next page",
+            dom.img({
+              style: { height: "1rem" },
+              src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-forward-outline.svg",
+            })
+          ),
+          dom.ul(
+            ".pagination-list",
+            dom.li(dom.a(".pagination-link is-current", "1")),
+            dom.li(dom.a(".pagination-link", "2"))
+          )
+        )
+      );
+  });
+}
+
 // Code execution starts here
 updateLastUpdate();
 
@@ -1369,6 +1539,7 @@ async function main() {
   );
 
   createCurrentSection();
+  createAlertsSection();
 
   createDaysSection();
   divMain.appendChild(
