@@ -1331,6 +1331,29 @@ function createCurrentSection() {
 
 // TODO: unique id for each section
 
+function createWindySection() {
+  divMain.appendChild(
+    dom.section(
+      ".section",
+      dom.iframe({
+        style: { width: "100%", height: "50vh" },
+        src:
+          "https://embed.windy.com/embed2.html?lat=" +
+          place.lat +
+          "&lon=" +
+          place.lon +
+          "&detailLat=" +
+          place.lat +
+          "&detailLon=" +
+          place.lon +
+          "&width=650&height=450" +
+          "&zoom=4&level=surface&overlay=temp&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=true&type=map&location=coordinates&detail=&metricWind=bft&metricTemp=%C2%B0C&radarRange=-1",
+        frameborder: "0",
+      })
+    )
+  );
+}
+
 function createAlertsSection() {
   const section = dom.section(".section");
   divMain.appendChild(section);
@@ -1587,6 +1610,7 @@ async function main() {
   );
 
   createSunPathSection();
+  if (settings.showBandwidthHeavyWidgets) createWindySection();
 
   // TODO: add meteoblue images to make transition from v1 easier
 
