@@ -312,7 +312,6 @@ function createDaysSection() {
       )
     ),
   ]).then(([openweathermapData, openMeteoData]) => {
-    console.log(openweathermapData, openMeteoData);
     const [minimalTempRange, maximalTempRange] = addPaddingRange(
       openweathermapData.daily.reduce(
         ([min, max], { temp }) => [
