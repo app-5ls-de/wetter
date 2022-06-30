@@ -1612,9 +1612,8 @@ async function main() {
   createSunPathSection();
   if (settings.showBandwidthHeavyWidgets) createWindySection();
 
-  // TODO: add meteoblue images to make transition from v1 easier
-
-  if (settings.showBandwidthHeavyWidgets) createMeteoblueSection();
+  // dont show Meteoblue untill it works on mobile
+  //if (settings.showBandwidthHeavyWidgets) createMeteoblueSection();
   if (settings.showBandwidthHeavyWidgets) createEcmwfSection();
 
   // TODO: comment code better
