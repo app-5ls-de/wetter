@@ -298,7 +298,7 @@ function createDaysSection() {
     promiseOpenweathermap,
     new Promise((resolve, reject) =>
       // show openweathermap even if openMeteo is not available
-      promiseOpenMeteo.then(resolve).catch(
+      promiseOpenMeteo.then(resolve).catch(() =>
         resolve({
           hourly: {
             time: [],
