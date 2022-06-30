@@ -1254,6 +1254,8 @@ function createCurrentSection() {
     const precipitation = data.minutely?.map((minute) => minute.precipitation);
     if (precipitation && Math.max(...precipitation)) {
       const maxPrecipitation = Math.max(...precipitation, 4);
+
+      //TODO: use same chart style as on index.html
       const chart = new ApexCharts(divChart, {
         series: [
           {
