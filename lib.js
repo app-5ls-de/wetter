@@ -280,8 +280,8 @@ const getWindIcon = (beaufort, wind_deg) =>
 
 const formatMeter = (number) =>
   Math.abs(number) >= 1000
-    ? Number.parseFloat((number / 1000).toPrecision(2)) + "km"
-    : Number.parseFloat(number.toPrecision(2)) + "m";
+    ? Number.parseFloat((number / 1000).toPrecision(1)) + "km"
+    : Number.parseFloat(number.toPrecision(1)) + "m";
 
 const getGeolocation = () =>
   new Promise((resolve, reject) => {

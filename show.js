@@ -1518,7 +1518,31 @@ async function main() {
   }
 
   document.title = place.name + " - " + document.title;
-  document.getElementById("title").innerText = place.name;
+
+  dom(
+    "#title",
+    (thisEl) => (thisEl.innerText = ""),
+    dom.textNode(place.name),
+    place.isGeolocation &&
+      dom.sup(
+        ".is-size-6 mx-3 mb-4 has-text-grey",
+        dom.textNode("±" + formatMeter(place.accuracy))
+      )
+  );
+
+  if (place.isGeolocation)
+    fetch_json(
+      "https://nominatim.openstreetmap.org/reverse.php?lat=" +
+        place.lat +
+        "&lon=" +
+        place.lon +
+        "&zoom=10&format=jsonv2"
+    ).then((data) => {
+      dom(
+        dom("#title").parentElement.parentElement, // select section containg the title
+        dom.div(".subtitle", dom.textNode(data.display_name))
+      );
+    });
 
   promiseOpenweathermap.setPromise(openweathermap(place));
   promiseOpenMeteo.setPromise(openMeteo(place));
