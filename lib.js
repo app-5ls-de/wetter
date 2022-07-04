@@ -95,6 +95,21 @@ function weatherConditionNameFromId(id, icon) {
   }
 }
 
+function getSeverety(alert) {
+  const eventName = alert.event.toLowerCase();
+
+  if (eventName.includes("info")) return 0;
+
+  if (
+    ["extreme", "severe", "schwer", "very heavy", "heftig"].some((a) =>
+      alert.event.toLowerCase().includes(a)
+    )
+  )
+    return 2;
+
+  return 1;
+}
+
 const cachePrefix = "cache";
 const removeCache = () =>
   debug ||

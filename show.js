@@ -1380,24 +1380,20 @@ function createAlertsSection() {
           hour: "2-digit",
           minute: "2-digit",
         });
+  const getSeverityColorClass = (severity) =>
+    [".is-dark", ".is-warning", ".is-danger"][severity];
 
   promiseOpenweathermap.then((data) => {
     if (!data.alerts?.length) {
       dom(section, ".is-hidden");
       return;
     }
+    const alerts = data.alerts.sort((a, b) => getSeverety(b) - getSeverety(a));
 
-    data.alerts.forEach((alert) => {
+    function alertMessage(alert) {
       const startDate = new Date(alert.start * 1000);
       const endDate = new Date(alert.end * 1000);
-      const eventName = alert.event.toLowerCase();
-      const colorClass = eventName.includes("info")
-        ? ".is-dark"
-        : ["extreme", "severe", "schwer", "very heavy", "heftig"].some((a) =>
-            eventName.includes(a)
-          )
-        ? ".is-danger"
-        : ".is-warning";
+      const colorClass = getSeverityColorClass(getSeverety(alert));
       // TODO: color of warning symbols on idex.html in same color
 
       const alertIconsMap = {
@@ -1407,87 +1403,154 @@ function createAlertsSection() {
         Rain: ["raindrop-measure"],
       };
 
-      dom(
-        section,
-        dom.article(
-          ".message",
-          colorClass,
+      return dom.article(
+        ".message",
+        colorClass,
+        dom.div(
+          ".message-header has-text",
           dom.div(
-            ".message-header has-text",
+            ".level is-mobile",
+            { style: { width: "100%", flexWrap: "wrap" } },
             dom.div(
-              ".level is-mobile",
-              { style: { width: "100%", flexWrap: "wrap" } },
+              ".level-item level-left",
+              { style: { hiteSpace: "break-spaces", maxWidth: "100%" } },
+              dom.textNode(alert.event)
+            ),
+            dom.div(
+              ".level-item level-right",
+              dom.textNode(formatShortDate(startDate)),
               dom.div(
-                ".level-item level-left",
-                { style: { hiteSpace: "break-spaces", maxWidth: "100%" } },
-                dom.textNode(alert.event)
-              ),
-              dom.div(
-                ".level-item level-right",
-                dom.textNode(formatShortDate(startDate)),
-                dom.div(
-                  ".is-inline has-text-grey mx-1",
-                  " (",
-                  dom.textNode(
-                    relativeTime(startDate, { options: { style: "short" } })
-                  ),
-                  ") "
+                ".is-inline has-text-grey mx-1",
+                " (",
+                dom.textNode(
+                  relativeTime(startDate, { options: { style: "short" } })
                 ),
-                " ➔ ",
-                dom.textNode(formatShortDate(endDate)),
-                dom.div(
-                  ".is-inline has-text-grey mx-1",
-                  " (",
-                  dom.textNode(
-                    relativeTime(endDate, { options: { style: "short" } })
-                  ),
-                  ") "
-                )
+                ") "
+              ),
+              " ➔ ",
+              dom.textNode(formatShortDate(endDate)),
+              dom.div(
+                ".is-inline has-text-grey mx-1",
+                " (",
+                dom.textNode(
+                  relativeTime(endDate, { options: { style: "short" } })
+                ),
+                ") "
               )
             )
-          ),
+          )
+        ),
+        dom.div(
+          ".message-body",
+          dom.div(".block", alert.description),
           dom.div(
-            ".message-body",
-            dom.div(".block", alert.description),
+            ".level",
             dom.div(
-              ".level",
-              dom.div(
-                ".level-left",
-                dom.div(".level-item has-text-grey", alert.sender_name),
+              ".level-left",
+              dom.div(".level-item has-text-grey", alert.sender_name),
 
-                dom.div(
-                  ".level-item ml-5",
-                  { height: "1.5rem" },
-                  alert.tags.map((tag) =>
-                    alertIconsMap[tag].map((icon) =>
-                      dom.img({
-                        style: { height: "4rem" },
-                        src:
-                          "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
-                          icon +
-                          ".svg",
-                      })
-                    )
+              dom.div(
+                ".level-item ml-5",
+                { height: "1.5rem" },
+                alert.tags.map((tag) =>
+                  alertIconsMap[tag].map((icon) =>
+                    dom.img({
+                      style: { height: "4rem" },
+                      src:
+                        "https://cdn.jsdelivr.net/gh/basmilius/weather-icons@dev/production/fill/svg/" +
+                        icon +
+                        ".svg",
+                    })
                   )
                 )
-              ),
+              )
+            ),
 
+            dom.div(
+              ".level-left",
               dom.div(
-                ".level-left",
-                dom.div(
-                  ".tags",
-                  alert.tags.map((tag) =>
-                    dom.span(".tag is-rounded", colorClass, dom.textNode(tag))
-                  )
+                ".tags",
+                alert.tags.map((tag) =>
+                  dom.span(".tag is-rounded", colorClass, dom.textNode(tag))
                 )
               )
             )
           )
         )
       );
-    });
+    }
 
-    if (data.alerts.length > 0 && false)
+    if (alerts.length <= 2) {
+      alerts.forEach((alert) => {
+        dom(section, alertMessage(alert));
+      });
+    } else {
+      let current = 0;
+      const paginationLinks = alerts.map((item, index) =>
+        dom.a(
+          getSeverityColorClass(getSeverety(item)),
+          ".pagination-link",
+          {
+            on: {
+              click: () => {
+                updateCurrentPage(index);
+              },
+            },
+          },
+          index.toString()
+        )
+      );
+      const previousLink = dom.a(
+        ".pagination-previous",
+        {
+          on: {
+            click: () => {
+              previousLink.getAttribute("disabled") ??
+                updateCurrentPage(current - 1);
+            },
+          },
+        },
+        dom.img({
+          style: { height: "1rem" },
+          src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-back-outline.svg",
+        })
+      );
+      const nextLink = dom.a(
+        ".pagination-next",
+        {
+          on: {
+            click: () => {
+              nextLink.getAttribute("disabled") ??
+                updateCurrentPage(current + 1);
+            },
+          },
+        },
+        dom.img({
+          style: { height: "1rem" },
+          src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-forward-outline.svg",
+        })
+      );
+      const alertDiv = dom.div();
+
+      const updateCurrentPage = (newIndex) => {
+        current = Math.max(0, Math.min(alerts.length - 1, newIndex));
+
+        if (current === 0) previousLink.setAttribute("disabled", "true");
+        else previousLink.removeAttribute("disabled");
+
+        if (current === alerts.length - 1)
+          nextLink.setAttribute("disabled", "true");
+        else nextLink.removeAttribute("disabled");
+
+        paginationLinks.forEach((item, index) => {
+          item.classList.remove("is-current");
+          current === index && item.classList.add("is-current");
+        });
+
+        alertDiv.replaceChildren(alertMessage(alerts[current]));
+      };
+      updateCurrentPage(current);
+
       dom(
         section,
         dom.nav(
@@ -1495,31 +1558,19 @@ function createAlertsSection() {
           {
             role: "navigation",
           },
-          dom.a(
-            ".pagination-previous",
-            //"Previous",
-            dom.img({
-              style: { height: "1rem" },
-              src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-back-outline.svg",
-            })
-          ),
-          dom.a(
-            ".pagination-next",
-            //"Next page",
-            dom.img({
-              style: { height: "1rem" },
-              src: "https://cdn.jsdelivr.net/npm/ionicons@6.0.1/dist/svg/chevron-forward-outline.svg",
-            })
-          ),
+          previousLink,
+          nextLink,
           dom.ul(
             ".pagination-list",
-            dom.li(dom.a(".pagination-link is-current", "1")),
-            dom.li(dom.a(".pagination-link", "2"))
+            paginationLinks.map((item) => dom.li(item))
           )
-        )
+        ),
+        alertDiv
       );
+    }
   });
 }
+
 
 // Code execution starts here
 updateLastUpdate();
