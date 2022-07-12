@@ -211,6 +211,7 @@ function createCityBox(place) {
             place.name.length < 29 ? place.name : place.name.slice(0, 29) + "…"
           )
         ),
+        // TODO: use bulma labels
         place.isGeolocation
           ? dom.sup(
               ".is-size-7 mb-4",
