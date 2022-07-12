@@ -211,7 +211,14 @@ function createCityBox(place) {
             place.name.length < 29 ? place.name : place.name.slice(0, 29) + "…"
           )
         ),
+        place.isGeolocation
+          ? dom.sup(
+              ".is-size-7 mb-4",
               dom.textNode("±" + formatMeter(place.accuracy))
+            )
+          : place.countryCode &&
+              new Set(places.map((p) => p.countryCode)).size > 1 && // only show if not all places have same country code
+              dom.sup(".is-size-7 mb-4", dom.textNode(place.countryCode))
       )
     );
     divBlock.appendChild(divLevelName);
