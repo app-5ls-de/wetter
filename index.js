@@ -182,8 +182,13 @@ async function _searchAndDisplay(searchQuery, limit = 5) {
 function createCityBox(place) {
   const divBox = dom.a(".box city p-0", {
     href: "/show" + (place.isGeolocation ? "" : "?place=" + place.name),
+    style: { minWidth: "300px" },
   });
-  const divColumn = dom.div(".column is-one-quarter", divBox);
+  const divColumn = dom.div(
+    ".column",
+    { style: { maxWidth: "400px" } },
+    divBox
+  );
   divCities.appendChild(divColumn);
 
   openweathermap(place).then((data) => {

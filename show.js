@@ -1243,11 +1243,7 @@ function createCurrentSection() {
         )
       ),
 
-      dom.div(
-        ".level-right",
-        { style: { maxWidth: "50%", margin: "auto" } },
-        divChart
-      )
+      dom.div(".level-right", { style: { margin: "auto" } }, divChart)
     );
 
     section.appendChild(divCurrent);
