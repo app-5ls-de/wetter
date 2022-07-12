@@ -1152,6 +1152,7 @@ function createCurrentSection() {
 
     const moonName = getMoonNameFromPhase(moonIllumination.phase);
 
+    // TODO: fix rotationAngle calculation
     const rotationAngle =
       (zenithAngle * 180) / Math.PI +
       (moonIllumination.phase < 0.5 ? 1 : -1) * (90 * (3 / 4)); // add constant angle to take the rotation of the svg into account
@@ -1500,6 +1501,7 @@ function createAlertsSection() {
           index.toString()
         )
       );
+      // TODO: swipe gesture
       const previousLink = dom.a(
         ".pagination-previous",
         {
@@ -1616,7 +1618,7 @@ async function main() {
     ).then((data) => {
       dom(
         dom("#title").parentElement.parentElement, // select section containg the title
-        dom.div(".subtitle", dom.textNode(data.display_name))
+        dom.div(".subtitle", dom.textNode(data.display_name)) // TODO: Fix sometimes display_name is too long
       );
     });
 
